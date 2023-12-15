@@ -1,5 +1,4 @@
 import express from 'express';
-
 import UserDAO from '../DAO/UserDAO.js';
 
 const userRouter = express.Router();
@@ -11,6 +10,11 @@ userRouter.post('/users', async (req, res) => {
     const newUser = await userDAO.create(user);
     res.json(newUser);
 });
+
+userRouter.get('/users', async (req, res)=>{
+    const users = await userDAO.findAll();
+    res.json(users);
+})
 
 
 

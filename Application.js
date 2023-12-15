@@ -1,11 +1,13 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import UserDAO from './DAO/UserDAO.js';
-import User from './Models/User.js';
+import userRouter from './Routes/UserRouter.js';
 
 
 const application = express();
 mongoose.connect('mongodb://localhost:27017/ProxiMap');
+
+
+application.use(userRouter);
 
 
 
