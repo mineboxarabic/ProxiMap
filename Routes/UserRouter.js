@@ -1,21 +1,18 @@
 import express from 'express';
-import UserDAO from '../DAO/UserDAO.js';
+import createUser from '../Controllers/User/CreateUser.js';
+import updateUser from '../Controllers/User/UpdateUser.js';
+import deleteUser from '../Controllers/User/DeleteUser.js';
+import getUser from '../Controllers/User/ReadUser.js';
+import readUsers from '../Controllers/User/ReadUsers.js';
 
 const userRouter = express.Router();
 
-const userDAO = new UserDAO();
+userRouter.get('/users', readUsers);
+userRouter.get('/users/:id', getUser);
 
-userRouter.post('/users', async (req, res) => {
-    const user = req.body;
-    const newUser = await userDAO.create(user);
-    res.json(newUser);
-});
+userRouter.post('/users', createUser);
 
-userRouter.get('/users', async (req, res)=>{
-    const users = await userDAO.findAll();
-    res.json(users);
-})
-
-
+userRouter.put('/users/:id', updateUser);
+userRouter.delete('/users/:id', deleteUser);
 
 export default userRouter;

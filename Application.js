@@ -4,9 +4,9 @@ import userRouter from './Routes/UserRouter.js';
 
 
 const application = express();
-mongoose.connect('mongodb://localhost:27017/ProxiMap');
+mongoose.connect('mongodb://localhost:27016/ProxiMap');
 
-
+application.use(express.json());
 application.use(userRouter);
 
 

@@ -1,6 +1,6 @@
 import Service from "../Models/Service.js";
 
-class UserDAO {
+class ServiceDAO {
     async create(user) {
         const newUser = new Service(user);
         return await newUser.save();
@@ -24,4 +24,4 @@ class UserDAO {
 
 } 
 
-export default UserDAO;
+export default ServiceDAO;
