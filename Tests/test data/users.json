@@ -1,0 +1,12 @@
+[
+    {"_id": "xt61y8vcfwubbf7wppae1u1s", "username": "Alice", "email": "alice@example.com", "password": "password123", "role": "Staff", "profile": {"bio": "Bio of Alice", "profilePicture": "alice.jpg"},"created_at": "2019-01-01T00:00:00.000Z"},
+    {"_id": "034b0sjj6q4uehq84ymh6829", "username": "Bob", "email": "bob@example.com", "password": "password123", "role": "Staff", "profile": {"bio": "Bio of Bob", "profilePicture": "bob.jpg"},"created_at": "2019-01-01T00:00:00.000Z"},
+    {"_id": "6rdsmb9bdrwran2lhhjgzbmt", "username": "Charlie", "email": "charlie@example.com", "password": "password123", "role": "User", "profile": {"bio": "Bio of Charlie", "profilePicture": "charlie.jpg"},"created_at": "2019-01-01T00:00:00.000Z"},
+    {"_id": "wzrshecfqzby061mwx1l6m2k", "username": "David", "email": "david@example.com", "password": "password123", "role": "User", "profile": {"bio": "Bio of David", "profilePicture": "david.jpg"},"created_at": "2019-01-01T00:00:00.000Z"},
+    {"_id": "fx1oilk48b92jby8e3duuzus", "username": "Eve", "email": "eve@example.com", "password": "password123", "role": "Staff", "profile": {"bio": "Bio of Eve", "profilePicture": "eve.jpg"},"created_at": "2019-01-01T00:00:00.000Z"},
+    {"_id": "vz6n98d7feb6trxck50kk9ai", "username": "Frank", "email": "frank@example.com", "password": "password123", "role": "Partner", "profile": {"bio": "Bio of Frank", "profilePicture": "frank.jpg"},"created_at": "2019-01-01T00:00:00.000Z"},
+    {"_id": "s30uh2lgu6eejcce7ff82jl6", "username": "Grace", "email": "grace@example.com", "password": "password123", "role": "Admin", "profile": {"bio": "Bio of Grace", "profilePicture": "grace.jpg"},"created_at": "2019-01-01T00:00:00.000Z"},
+    {"_id": "gpcnsrmxnlemnric6krpahhz", "username": "Hannah", "email": "hannah@example.com", "password": "password123", "role": "Staff", "profile": {"bio": "Bio of Hannah", "profilePicture": "hannah.jpg"},"created_at": "2019-01-01T00:00:00.000Z"},
+    {"_id": "xjn2gzj8ea37dou1dcjnxphj", "username": "Ivan", "email": "ivan@example.com", "password": "password123", "role": "Partner", "profile": {"bio": "Bio of Ivan", "profilePicture": "ivan.jpg"},"created_at": "2019-01-01T00:00:00.000Z"},
+    {"_id": "3anofzppscgvgaenmm35y7zw", "username": "Judy", "email": "judy@example.com", "password": "password123", "role": "Admin", "profile": {"bio": "Bio of Judy", "profilePicture": "judy.jpg"},"created_at": "2019-01-01T00:00:00.000Z"}
+]

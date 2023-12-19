@@ -4,7 +4,13 @@ import userRouter from './Routes/UserRouter.js';
 
 
 const application = express();
-mongoose.connect('mongodb://localhost:27016/ProxiMap');
+mongoose.connect('mongodb://localhost:27017/ProxiMap').then(() => {
+    console.log('Connected to database');
+}
+).catch((err) => {
+    console.log('Error connecting to database: ' + err);
+}
+);
 
 application.use(express.json());
 application.use(userRouter);

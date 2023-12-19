@@ -1,0 +1,12 @@
+[
+    {"_id": "ksfq2n2ayjnmjlkwlwupwrgk", "name": "Electronics", "description": "Description for Electronics"},
+    {"_id": "o116n95eplss83c1amor501o", "name": "Carpentry", "description": "Description for Carpentry"},
+    {"_id": "oa3sbgyyh11n588qzohrzccd", "name": "Plumbing", "description": "Description for Plumbing"},
+    {"_id": "173d4rbmarhn0f7gv5x8gxvo", "name": "Education", "description": "Description for Education"},
+    {"_id": "56sozjjlvo70glxqycdcodbu", "name": "Healthcare", "description": "Description for Healthcare"},
+    {"_id": "yrvzctn5ercv2pq57o83h9lt", "name": "Gardening", "description": "Description for Gardening"},
+    {"_id": "imxefrss2y584qfiyvbelh21", "name": "Cooking", "description": "Description for Cooking"},
+    {"_id": "btjybwhgp3p1ange7loau03p", "name": "Automotive", "description": "Description for Automotive"},
+    {"_id": "t3gepq24j46uwycso7jn3ho9", "name": "Art & Design", "description": "Description for Art & Design"},
+    {"_id": "5boro2kubf0kfrx62kb8e60c", "name": "Fitness", "description": "Description for Fitness"}
+]

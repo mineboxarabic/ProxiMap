@@ -1,0 +1,12 @@
+[
+    {"_id": "z9z27rmt418a4kfh4ux4w45o", "partnerId": "3anofzppscgvgaenmm35y7zw", "categoryId": "imxefrss2y584qfiyvbelh21", "name": "Device Repair", "description": "Description for Device Repair", "price": 275, "availability": true},
+    {"_id": "e6dix2h9magrjuzpxgfdmcfe", "partnerId": "034b0sjj6q4uehq84ymh6829", "categoryId": "ksfq2n2ayjnmjlkwlwupwrgk", "name": "Wood Crafting", "description": "Description for Wood Crafting", "price": 90, "availability": true},
+    {"_id": "42gd5ijyckgfur54kb6zeyqg", "partnerId": "wzrshecfqzby061mwx1l6m2k", "categoryId": "t3gepq24j46uwycso7jn3ho9", "name": "Leak Fixing", "description": "Description for Leak Fixing", "price": 446, "availability": false},
+    {"_id": "u0zijnw8brzai61p12jzgyci", "partnerId": "fx1oilk48b92jby8e3duuzus", "categoryId": "imxefrss2y584qfiyvbelh21", "name": "Tutoring Sessions", "description": "Description for Tutoring Sessions", "price": 436, "availability": false},
+    {"_id": "79jjnts97pjzssqpqw2fly7q", "partnerId": "6rdsmb9bdrwran2lhhjgzbmt", "categoryId": "t3gepq24j46uwycso7jn3ho9", "name": "Medical Consultation", "description": "Description for Medical Consultation", "price": 69, "availability": false},
+    {"_id": "r1blhq6t4dbzunmy1lckfvp6", "partnerId": "fx1oilk48b92jby8e3duuzus", "categoryId": "5boro2kubf0kfrx62kb8e60c", "name": "Lawn Care", "description": "Description for Lawn Care", "price": 351, "availability": false},
+    {"_id": "85tw0h8n1dgmuncmbkmjzpy5", "partnerId": "xjn2gzj8ea37dou1dcjnxphj", "categoryId": "btjybwhgp3p1ange7loau03p", "name": "Culinary Classes", "description": "Description for Culinary Classes", "price": 289, "availability": true},
+    {"_id": "mwnwqj34dd8fpars8bnbmwem", "partnerId": "xjn2gzj8ea37dou1dcjnxphj", "categoryId": "btjybwhgp3p1ange7loau03p", "name": "Car Maintenance", "description": "Description for Car Maintenance", "price": 422, "availability": false},
+    {"_id": "y3knhvm4sxrpu0ya0xytqw05", "partnerId": "wzrshecfqzby061mwx1l6m2k", "categoryId": "oa3sbgyyh11n588qzohrzccd", "name": "Graphic Design", "description": "Description for Graphic Design", "price": 69, "availability": false},
+    {"_id": "pqi8a8nt05ybzkuwbnki9ggw", "partnerId": "034b0sjj6q4uehq84ymh6829", "categoryId": "imxefrss2y584qfiyvbelh21", "name": "Personal Training", "description": "Description for Personal Training", "price": 497, "availability": true}
+]
