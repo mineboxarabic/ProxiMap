@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const serviceSchema = new mongoose.Schema({
     partnerId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    categoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'ServiceCategory' },
+    categoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
     name: String,
     description: String,
     price: Number,
@@ -11,6 +11,6 @@ const serviceSchema = new mongoose.Schema({
       ref: 'Rating'
     }]
   });
-  
+
 const Service = mongoose.model('Service', serviceSchema);
 export default Service;
