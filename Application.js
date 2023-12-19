@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import userRouter from './Routes/UserRouter.js';
 import serviceRouter from './Routes/ServiceRouter.js';
+import { body } from 'express-validator';
 
 const application = express();
 mongoose.connect('mongodb://localhost:27016/ProxiMap').then(() => {

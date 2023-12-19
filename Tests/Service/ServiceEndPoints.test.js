@@ -49,15 +49,18 @@ describe("Service CRUD functions (NO ENDPOINTS TESTING) ",  () => {
 
     test("Create a new service", async () => {
         const response = await axios.post(baseUrl,{
-            body : req.body
+            "partnerId": "60b0f7c5b5f3f63a9c4c9d7a",
+            "categoryId": "60b0f7c5b5f3f63a9c4c9d7a",
+            "name": "Service Name",
+            "description": "Service Description",
+            "price": 100,
+            "availability": true,
+            "ratings": []
         }).catch((err)=>{
-            console.log("err",err);
+            console.log("Error:", err.response ? err.response.data : err);
         })
-
+        expect(response).toBeDefined();
         expect(response.status).toBe(201)
-        
-
-
         
     });
 
