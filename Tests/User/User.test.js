@@ -4,10 +4,13 @@ import mongoose from "mongoose";
 import readUser from "../../Controllers/User/ReadUser";
 import updateUser from "../../Controllers/User/UpdateUser";
 import deleteUser from "../../Controllers/User/DeleteUser";
+import dotenv from "dotenv";
+dotenv.config();
 const randomEmail = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 let userId = "";
+
 beforeAll(() => {
-    mongoose.connect('mongodb://localhost:27017/ProxiMap').then(() => {
+    mongoose.connect(process.env.MONGODB_URI).then(() => {
         console.log('Connected to database');
     }
     ).catch((err) => {

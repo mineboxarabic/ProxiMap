@@ -1,19 +1,16 @@
 import UserDAO from "../../DAO/UserDAO.js";
-import isUserValid from "../../Utilities/isUserValid.js";
+import ValidateRes from "../../Utilities/ValidateRes.js";
 
 const updateUser = async (req, res) => {
     const userDAO = new UserDAO();
     const id = req.params.id;
-    //TODO:check the id is valid or not
+
 
     const user = req.body;
 
-    //Check if the string of name and email and password are valid
-    const isValid = isUserValid(user);
-    if(isValid.error){
-        res.status(400).json(isValid.error);
-        return;
-    }
+   
+    const valid = ValidateRes(req);
+    if(valid != true) return res.status(400).json(valid);
 
     //Check if the user exists or not
     const userExists = await userDAO.findById(id);
@@ -22,6 +19,8 @@ const updateUser = async (req, res) => {
         res.status(404).json({error: "User not found"});
         return;
     }
+
+    //TODO:Check the email if the email exists or not
 
 
     //Update the user

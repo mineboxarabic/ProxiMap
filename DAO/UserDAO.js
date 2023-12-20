@@ -1,5 +1,5 @@
 import User from "../Models/User.js";
-import isUserValid from "../Utilities/isUserValid.js";
+
 //Allowed characters are letters and numbers and @ and _ and - 
 
 class UserDAO {
@@ -7,7 +7,7 @@ class UserDAO {
         const newUser = new User(user);
         
         const result = await newUser.save().catch((err) => {
-            //Console log the error in red 
+
             console.log('\x1b[31m%s\x1b[0m', "Database Error: " + err);
             return {error: err};
         });
@@ -16,12 +16,7 @@ class UserDAO {
     }
     //Read
     async findById(id) {
-
-        //return await User.findById(id);
-        
         const user = await User.findById(id).catch((err) => { 
-            //console.log('\x1b[31m%s\x1b[0m', "Database Error: " + err);
-            
             return {error: err};
         });
         return user;
@@ -44,6 +39,14 @@ class UserDAO {
 
     async findAll() {
         return await User.find();
+    }
+
+    async findByUserNameAndPassword(username, password) {
+        return await User.findOne({ username: username, password: password });
+    }
+
+    async findByEmail(email){
+        return await User.findOne({email: email});
     }
 
 }

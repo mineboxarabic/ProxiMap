@@ -1,8 +1,18 @@
 import ServiceDAO from "../../DAO/ServiceDAO.js";
+import ValidateRes from "../../Utilities/ValidateRes.js";
+
 
 const createService = async (req, res) => {
+
+
+
+
+
     const serviceDAO = new ServiceDAO();
     const service = req.body;
+
+    const valid = ValidateRes(req, res);
+    if(valid != true) return res.status(400).json(valid);
 
     const newService = await serviceDAO.create(service);
 
@@ -13,4 +23,5 @@ const createService = async (req, res) => {
     }
 };
 
+  
 export default createService;

@@ -1,15 +1,13 @@
 import UserDAO from "../../DAO/UserDAO.js";
-import isUserValid from "../../Utilities/isUserValid.js";
+import ValidateRes from "../../Utilities/ValidateRes.js";
 const createUser = async (req, res) => {
     //TODO:Create a function to check if the user is valid or not
 
     const userDAO = new UserDAO();
     const user = req.body;
-  
-    if(isUserValid(user).error){
-        res.status(400).json(isUserValid(user));
-        return;
-    }
+    console.log(user);
+    const valid = ValidateRes(req);
+    if(valid != true) return res.status(400).json(valid);
 
     const newUser = await userDAO.create(user);
 

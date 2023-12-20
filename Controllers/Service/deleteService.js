@@ -1,8 +1,16 @@
+import { validationResult } from "express-validator";
 import ServiceDAO from "../../DAO/ServiceDAO.js";
+import ValidateRes from "../../Utilities/ValidateRes.js";
 
 const deleteService = async (req, res) => {
+ 
     const serviceDAO = new ServiceDAO();
     const id = req.params.id;
+
+    const valid = ValidateRes(req, res);
+    if(valid != true) return res.status(400).json(valid);
+
+
 
     const result = await serviceDAO.deleteById(id);
 

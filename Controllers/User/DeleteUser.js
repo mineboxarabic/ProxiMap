@@ -1,15 +1,15 @@
 import UserDAO from "../../DAO/UserDAO.js";
-import isIdValid from "../../Utilities/isIdValid.js";
+import ValidateRes from "../../Utilities/ValidateRes.js";
 const deleteUser = async (req, res) => {
 
     const userDAO = new UserDAO();
     const id = req.params.id;
-    //Check if the id is valid
-    if(!isIdValid(id)){res.status(404).json({error: "Invalid ID"});return;}
+    
+    const valid = ValidateRes(req);
+    if(valid != true) return res.status(400).json(valid);
 
     const user = await userDAO.deleteById(id);
 
-    //Check if the user exists or not
     if(!user){
         res.status(404).json({error: "User not found"});
     }

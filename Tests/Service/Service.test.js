@@ -5,9 +5,11 @@ import readService from "../../Controllers/Service/readService";
 import updateService from "../../Controllers/Service/updateService";
 import deleteService from "../../Controllers/Service/deleteService";
 let serviceId = '';
+import dotenv from "dotenv";
+dotenv.config();
 
 beforeAll(()=>{
-    mongoose.connect('mongodb://localhost:27016/ProxiMap').then(() => {
+    mongoose.connect(process.env.MONGODB_URI).then(() => {
        // console.log('Connected to database');
     }
     ).catch((err) => {
