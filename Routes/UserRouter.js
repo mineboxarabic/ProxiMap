@@ -5,7 +5,7 @@ import deleteUser from '../Controllers/User/DeleteUser.js';
 import getUser from '../Controllers/User/ReadUser.js';
 import readUsers from '../Controllers/User/ReadUsers.js';
 import checkId from '../Utilities/CheckMongoId.js';
-import checkUser from '../Utilities/User/checkUser.js';
+import checkUser from '../Utilities/User/CheckUser.js';
 
 const userRouter = express.Router();
 
