@@ -5,7 +5,7 @@ import deleteToken from '../Controllers/Token/DeleteToken.js';
 import getToken from '../Controllers/Token/ReadToken.js';
 import readTokens from '../Controllers/Token/ReadTokens.js';
 import checkId from '../Utilities/CheckMongoId.js';
-import checkToken from '../Utilities/Token/checkToken.js';
+import checkToken from '../Utilities/Token/CheckToken.js';
 import UserDAO from '../DAO/UserDAO.js';
 import TokenDAO from '../DAO/TokenDAO.js';
 
