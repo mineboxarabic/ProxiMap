@@ -39,7 +39,7 @@ ProxiMap is an interactive service map application designed to connect users wit
 - Set up your MongoDB database and obtain your connection string.
 - Configure your OAuth credentials for authentication.
 - Update the `.env` files in both frontend and backend directories with your specific credentials.
-
+- To change the configuration of the application authrisation routes you should go to ./config/AuthConfig.js and change the configuration of the routes.
 ## Running the Application
 
 1. **Start the Backend Server**

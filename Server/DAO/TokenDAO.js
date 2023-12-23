@@ -24,6 +24,17 @@ class TokenDAO {
         });
     }
 
+    async delete(id){
+        return await Token.findByIdAndDelete(id).catch((err) => {
+            return null;
+        });
+    }
+    async deleteByUserId(userId) {
+        const tokens = await Token.find({userId: userId.toString()});
+        return await Token.deleteMany({userId: userId}).catch((err) => {
+            return null;
+        });
+    }
     async deleteById(id) {
         return await Token.findByIdAndDelete(id).catch((err) => {
             return null;
@@ -33,6 +44,14 @@ class TokenDAO {
 
     async findAll() {
         return await Token.find();
+    }
+
+    async findByToken(token){
+        return await Token.findOne({token: token});
+    }
+
+    async findByUserIdAndToken(token, userId){
+        return await Token.find({token: token, userId: userId});
     }
 
 }

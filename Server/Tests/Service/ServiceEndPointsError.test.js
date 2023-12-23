@@ -4,20 +4,24 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const baseUrl = process.env.BASE_URL + 'services';
-let serviceId = '';
 
-beforeAll(() => {
-    mongoose.connect(process.env.MONGODB_URI)
-        .then(() => console.log('Connected to database'))
-        .catch(err => console.log('Error connecting to database: ' + err));
+// Improved handling of async operations in beforeAll and afterAll
+beforeAll(async () => {
+    try {
+        await mongoose.connect(process.env.MONGODB_URI);
+        console.log('Connected to database');
+    } catch (err) {
+        console.error('Error connecting to database: ' + err);
+        throw err; // Ensure proper error handling
+    }
 });
 
-afterAll(() => {
-    mongoose.disconnect();
+afterAll(async () => {
+    await mongoose.disconnect();
+    console.log('Disconnected from database');
 });
 
 describe("Service CRUD functions - Error Check Tests", () => {
-
     // Invalid Data Template
     const invalidService = {
         partnerId: "invalidId",
@@ -30,31 +34,28 @@ describe("Service CRUD functions - Error Check Tests", () => {
     };
 
     test("Create a new service with invalid data", async () => {
-        const response = await axios.post(baseUrl, invalidService).catch(err => {
+        await axios.post(baseUrl, invalidService).catch(err => {
             expect(err.response).toBeDefined();
             expect(err.response.status).toBe(400);
-            return;
         });
     });
 
     test("Read a service with invalid ID", async () => {
-        const response = await axios.get(baseUrl + '/invalidId').catch(err => {
-            console.log(err.response.data);
+        await axios.get(baseUrl + '/invalidId').catch(err => {
             expect(err.response).toBeDefined();
             expect(err.response.status).toBe(400);
         });
     });
 
     test("Update a service with invalid ID", async () => {
-        const response = await axios.put(baseUrl + '/invalidId', invalidService).catch(err => {
-            //console.error(err.response.data);
+        await axios.put(baseUrl + '/invalidId', invalidService).catch(err => {
             expect(err.response).toBeDefined();
             expect(err.response.status).toBe(400);
         });
     });
 
     test("Delete service with invalid ID", async () => {
-        const response = await axios.delete(baseUrl + '/invalidId').catch(err => {
+        await axios.delete(baseUrl + '/invalidId').catch(err => {
             expect(err.response).toBeDefined();
             expect(err.response.status).toBe(400);
         });

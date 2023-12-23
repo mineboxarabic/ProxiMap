@@ -6,7 +6,7 @@ import { body } from 'express-validator';
 import dotenv from 'dotenv';
 import tokenRouter from './Routes/TokenRouter.js';
 import cookieParser from 'cookie-parser';
-import authenticationRouter from './Routes/AuthenticationRoutes.js';
+import authenticationRouter from './Routes/AuthRoutes.js';
 dotenv.config();
 
 const application = express();
