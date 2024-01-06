@@ -3,9 +3,13 @@ import dotenv from "dotenv";
 import TokenDAO from "../DAO/TokenDAO.js";
 dotenv.config();
 
+
+//Verify if the token is valid and not expired
 const verifyToken = (token) => {
     return JWT.verify(token, process.env.ACCESS_TOKEN);
 };
+
+//Generate a new token
 export const generateToken = (user) => {
     return JWT.sign({
     _id: user._id,
@@ -16,10 +20,12 @@ export const generateToken = (user) => {
 };
 
 
+//Generate a new refresh token
 export const refreshToken = (refreshToken) => {
 
     let accessToken = null;
     JWT.verify(refreshToken, process.env.REFRESH_TOKEN, (err, user) => {
+        //if the refresh token is valid, generate a new token
         if (!err) {
             accessToken = generateToken(user);
         }
@@ -29,6 +35,7 @@ export const refreshToken = (refreshToken) => {
 }
 
 
+//Verify if the user is authenticated by checking the token of the user
 const authenticateUser = (req, res, next) =>{
     const token = req.cookies.accessToken;
     if(!token){
@@ -41,7 +48,6 @@ const authenticateUser = (req, res, next) =>{
     }
     catch(err) {
         // Check if the error is due to token expiry and you have a refresh token
-        //console.log("fjjjjjj",req.cookies.refreshToken);
         if (err.name == 'TokenExpiredError' && req.cookies.refreshToken) {
             try {
                 console.log("It's finished");

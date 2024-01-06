@@ -7,6 +7,8 @@ import dotenv from 'dotenv';
 import tokenRouter from './Routes/TokenRouter.js';
 import cookieParser from 'cookie-parser';
 import authenticationRouter from './Routes/AuthRoutes.js';
+import cors from 'cors';
+
 dotenv.config();
 
 const application = express();
@@ -20,12 +22,14 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
 
 application.use(express.json());
 application.use(cookieParser());
+//Allow CORS
+application.use(cors());
 application.use(userRouter);
 application.use(serviceRouter);
 application.use(tokenRouter);
 application.use(authenticationRouter)
 console.log(process.env.BASE_URL);
-
+//Type this in the terminal to create an infinite JWT token:
 
 application.listen(3001, () => {
     console.log('Application running on port 3001');
