@@ -13,6 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import useCurrentUser from '../utilities/useCurrentUser';
+import { Link } from 'react-router-dom';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -22,6 +23,13 @@ function Header() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const currentUser = useCurrentUser();
   const isLogged = currentUser !== null;
+
+  const handleClickOnLogin = () => {
+    //Go to login page
+    
+
+
+  }
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -119,7 +127,7 @@ function Header() {
           </Typography>
 
           {
-            isLogged &&
+            isLogged ?
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
@@ -130,10 +138,16 @@ function Header() {
                 {page}
               </Button>
             ))}
+          </Box>:
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          {/*Here it's empty cus i just want the flex grow to be on */}
           </Box>
             }
             
-          <Box sx={{ flexGrow: 0 }}>
+         { 
+         isLogged ?
+         
+         <Box sx={{ flexGrow: 0 }}>
             
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -162,7 +176,16 @@ function Header() {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Box>:
+
+        <Box sx={{ flexGrow: 0 }}>
+            <Link to='/login'>
+              <Button variant="contained">Log In</Button>
+            </Link>
+
+        </Box>
+          
+        }
         </Toolbar>
       </Container>
     </AppBar>

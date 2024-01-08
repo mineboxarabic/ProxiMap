@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon Application.js",
+    "start": "node Application.js",
     "test": "supertest",
     "dbMongo": "docker run -d -p 27017:27017 -v ./data:/data/db mongo",
     "CRUDTest": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles User.test.js",

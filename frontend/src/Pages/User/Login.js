@@ -16,10 +16,7 @@ const LogIn = () =>
             email: email,
             password: password,
         }).then((response)=>{
-           // console.log(response);
-    
-          // console.log(response.data);
-            
+
     
             Cookies.set('accessToken', response.data.accessToken);
             Cookies.set('user', response.data.user);

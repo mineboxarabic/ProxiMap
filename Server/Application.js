@@ -16,6 +16,7 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
     console.log('Connected to database');
 }
 ).catch((err) => {
+    console.log("the URI is " + process.env.MONGODB_URI);
     console.log('Error connecting to database: ' + err);
 }
 );

@@ -9,7 +9,15 @@ const Register = async (req, res) => {
         const userDAO = new UserDAO();
         const user = await userDAO.create({ username, password: hashedPassword, email });
 
-        
+        if(user.error){
+            //If the error is that the email is already in use
+            if(user.error.code === 11000){
+                res.status(409).json({message: "Email already in use"});
+                return;
+            }
+            res.status(400).json({message: user.error.message});
+            return;
+        }
 
         res.status(200).json(user);
     }catch(err){
