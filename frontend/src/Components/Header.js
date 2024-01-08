@@ -12,8 +12,9 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import useCurrentUser from '../utilities/useCurrentUser';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import useAuth from '../Hooks/useAuth';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -21,15 +22,14 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const currentUser = useCurrentUser();
-  const isLogged = currentUser !== null;
+  const {auth,setAuth} = useAuth();
+  const isLogged = auth?.user ? true : false;
 
-  const handleClickOnLogin = () => {
-    //Go to login page
-    
-
-
-  }
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    setAuth({})
+    navigate('/login', { replace: true });
+  };
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -129,15 +129,30 @@ function Header() {
           {
             isLogged ?
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+         
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
+                key={"Home"}
+                onClick={()=>{ navigate('/home', { replace: true });}}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                Home
               </Button>
-            ))}
+          
+              <Button
+                key={"About"}
+                onClick={()=>{ navigate('/about', { replace: true });}}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                About
+              </Button>
+
+              <Button
+                key={"viewusers"}
+                onClick={()=>{ navigate('/admin/viewusers', { replace: true });}}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                View users
+              </Button>
           </Box>:
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
           {/*Here it's empty cus i just want the flex grow to be on */}
@@ -171,9 +186,17 @@ function Header() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
+
+                setting === 'Logout' ?
+                <MenuItem key={setting} onClick={handleLogout}>
+                  <Typography textAlign="center">{setting}</Typography>
+                </MenuItem>:
+
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
+
+                
               ))}
             </Menu>
           </Box>:
