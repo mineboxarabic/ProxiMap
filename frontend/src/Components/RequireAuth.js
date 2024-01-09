@@ -6,11 +6,11 @@ const RequireAuth = ({allowedRoles}) => {
     const {auth} = useAuth();
     const location = useLocation();
     useEffect(() => {
-        console.log('RequireAuth', auth);
+        console.log('RequireAuth', auth?.user?.role);
     }
     , [auth])
     return (
-        auth?.role?.some(role => allowedRoles?.includes(role))
+        auth?.user?.role.includes(allowedRoles)
         ? <Outlet /> : 
             auth?.user ? 
             <Navigate to="/unautherized" state={{ from: location.pathname }} replace={true} /> :

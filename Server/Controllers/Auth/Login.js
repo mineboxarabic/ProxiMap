@@ -23,28 +23,35 @@ const LogIn = async (req, res) => {
 
         const accessToken = generateToken(user);
 
-        const tokenDAO = new TokenDAO();
-        tokenDAO.create({ token: accessToken, userId: user._id });
 
         const refreshToken = JWT.sign({
             _id: user._id,
             username: user.username,
             email: user.email,
             role: user.role
-        }, process.env.REFRESH_TOKEN, { expiresIn: '7d' });
+        }, process.env.REFRESH_TOKEN, { expiresIn: '1d' });
         
-      
+        const tokenDAO = new TokenDAO();
+        tokenDAO.create({ token: refreshToken, userId: user._id });
+
         const userDTO = new UserDTO(user.username, user.email, user.role);
 
         return res.cookie("accessToken", accessToken, {
             httpOnly: true,
-            maxAge: 15 * 60 * 1000 // 15 minutes
+            maxAge: 15 * 60 * 1000 // 15 minutes,
+            ,
+            sameSite: 'none',
+            secure: true
+
         }).cookie("refreshToken", refreshToken, {
             httpOnly: true,
             maxAge: 15 * 60 * 1000 // 15 minutes
+            ,
+            sameSite: 'none',
+            secure: true
         })
         .status(200)
-        .json({ message: "Logged in successfully 😊 👌", accessToken, refreshToken,user:JSON.stringify(userDTO.getUser()) });
+        .json({ message: "Logged in successfully 😊 👌", accessToken,user:JSON.stringify(userDTO.getUser()) });
     } catch (error) {
         // Handle errors
         return res.status(500).json({ message: "Something went wrong" });

@@ -39,13 +39,13 @@ const LogIn = () =>
                     password: password
                 }
             );
+            console.log(response.data);
             const accessToken = response?.data?.accessToken;
             const user = response?.data?.user;
-            Cookies.set('token', accessToken);
-            Cookies.set('user', user);
+            
+            const userObj = JSON.parse(user);
 
-
-            setAuth({token: accessToken, user:user})
+            setAuth({token: accessToken, user:userObj})
             
             navigate(from, { replace: true });
         }

@@ -24,7 +24,11 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
 application.use(express.json());
 application.use(cookieParser());
 //Allow CORS
-application.use(cors());
+const corsOptions = {
+    credentials: true,
+    origin: '*'
+}
+application.use(cors(corsOptions));
 application.use(userRouter);
 application.use(serviceRouter);
 application.use(tokenRouter);

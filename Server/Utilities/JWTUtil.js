@@ -16,7 +16,7 @@ export const generateToken = (user) => {
         username: user.username,
         email: user.email,
         role: user.role
-    }, process.env.ACCESS_TOKEN, { expiresIn: '5s' });
+    }, process.env.ACCESS_TOKEN, { expiresIn: '15s' });
 };
 
 

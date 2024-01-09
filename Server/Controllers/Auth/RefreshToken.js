@@ -3,25 +3,33 @@ import { generateToken } from "../../Utilities/JWTUtil.js";
 import JWT from "jsonwebtoken";
 
 const RefreshToken = async (req, res) => {
-    const accessToken = req.cookies.accessToken;
-    const refreshToken = req.body.token;
-    if (!refreshToken) {
-        return res.status(401).json({ message: "You are not authenticated" });
-    }
+    const cookie = req.cookies;
+    console.log(cookie);
+    if (!cookie?.refreshToken) return res.status(401).json({ message: "You are not authenticated" });
 
-    const tokenDAO = new TokenDAO();
-    const token = await tokenDAO.findByToken(accessToken);
-    if (!token) {
+    const refreshToken = cookie.refreshToken;
+
+
+
+    const decoded = JWT.verify(refreshToken, process.env.REFRESH_TOKEN);
+    if (!decoded) {
         return res.status(403).json({ message: "Refresh token is not valid" });
     }
 
-    try {
-        const decoded = JWT.verify(refreshToken, process.env.REFRESH_TOKEN);
-        const accessToken = generateToken(decoded);
-        return res.status(200).json({ accessToken });
-    } catch (error) {
-        return res.status(401).json({ message: "You are not authenticated" });
-    }
+    const newAccessToken = generateToken(decoded);
+
+    tokenDAO.create({ token: newAccessToken, userId: decoded._id });
+
+    return res.cookie("accessToken", newAccessToken, {
+        httpOnly: true,
+        maxAge: 15 * 60 * 1000 // 15 minutes
+    }).status(200).json({ message: "Token refreshed successfully" });
+
+
+
+
+
+
 }
 
 export default RefreshToken;
