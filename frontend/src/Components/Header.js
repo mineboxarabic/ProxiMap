@@ -15,7 +15,8 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import useAuth from '../Hooks/useAuth';
-
+import {axiosPrivate} from '../api/axios';
+import useLogout from '../Hooks/useLogout';
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -26,8 +27,9 @@ function Header() {
   const isLogged = auth?.user ? true : false;
 
   const navigate = useNavigate();
-  const handleLogout = () => {
-    setAuth({})
+  const logout = useLogout();
+  const handleLogout =async () => {
+    await logout();
     navigate('/login', { replace: true });
   };
   const handleOpenNavMenu = (event) => {

@@ -23,6 +23,7 @@ function App() {
   return (
     <Routes>
       <Route path='/' element={<MainLayout />} >
+      <Route element={<PersistLogin />}>
         {/* Public Routes */}
         <Route path='/login' element={<LogIn />} />
         <Route path='/register' element={<Register />} />
@@ -31,17 +32,18 @@ function App() {
 
 
         {/* Private Routes */}
-        <Route element={<PersistLogin />}>
+
 
           <Route element={<RequireAuth allowedRoles={[ADMIN]} />}>
             <Route path='/admin/viewusers' element={<ViewUsers />} />
           </Route>
 
-        </Route>
         {/* Catch all */}
         <Route path='/*' element={<NotFound />} />
         <Route path='/unautherized' element={<UnAutherized />} />
       </Route>
+      </Route>
+
     </Routes>
   );
 }

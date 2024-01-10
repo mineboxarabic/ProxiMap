@@ -1,24 +1,26 @@
-import { Alert, Box, Button, Container, TextField } from '@mui/material';
+import { Alert, Box, Button, Checkbox, Container, TextField } from '@mui/material';
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import '../../Style/Login.scss';
 import useAuth from '../../Hooks/useAuth';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
+import {FormGroup, FormControlLabel} from '@mui/material';
+import useLocalStorage from '../../Hooks/useLocalStorage';
 const LogIn = () =>
 {
     //This ref is to get 
     const emailRef = useRef();
     const errorRef = useRef();
 
-    const {auth,setAuth} = useAuth();
+    const {setAuth, persist, setPersist} = useAuth();
 
     const navigate = useNavigate();
     const location = useLocation();
     const from = location?.state?.from?.pathname || { pathname: '/home' };
 
 
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useLocalStorage('email','');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
@@ -27,6 +29,14 @@ const LogIn = () =>
     }
     ,[email, password])
 
+
+
+    const togglePersist = () => {
+        setPersist(prev => !prev);
+    }
+    useEffect(() => { 
+        localStorage.setItem('persist', persist);
+    }, [persist])
 
     const handleSubmit = async (e) =>
     {
@@ -111,6 +121,17 @@ const LogIn = () =>
                         >
                             Sign In
                         </Button>
+
+                        {/*DO you trust this devise?*/}
+                        <FormGroup>
+                            <FormControlLabel control={<Checkbox
+                                inputProps={{ 'aria-label': 'controlled' }}
+                                onChange={togglePersist}
+                                defaultValue={persist}
+                            />} label="Remember me?" />
+                        </FormGroup>
+
+
                     </form>
                 </Box>
             </Container>
