@@ -5,22 +5,21 @@ import useAuth from "./useAuth";
 const useRefreshToken = () => {
     const { setAuth} = useAuth();
     const refresh = async () => {
-        const response = await axios.post('/refresh', {
-            //Allow the cookie to be sent from the browser
+        const response = await axios.post('/refresh', {}, {
             withCredentials: true,
-
         });
-        console.log(response.data);
-        
+
 
         setAuth(prev => {
-            console.log('prev', JSON.stringify(prev));
-            console.log('response', JSON.stringify(response.data.accessToken));
+            console.log('prev',prev);
             return {
                 ...prev,
-                token: response.data.accessToken,
+                user : response.data.user,
+                accessToken: response.data.accessToken,
             }
         })
+
+        console.log('auth after refresh', response.data.accessToken);
 
         return response.data.accessToken;
 

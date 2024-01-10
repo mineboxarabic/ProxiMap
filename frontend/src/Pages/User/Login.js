@@ -37,15 +37,18 @@ const LogIn = () =>
                 {
                     email: email,
                     password: password
+                },
+                {
+                    withCredentials: true,
                 }
             );
             console.log(response.data);
             const accessToken = response?.data?.accessToken;
             const user = response?.data?.user;
             
-            const userObj = JSON.parse(user);
 
-            setAuth({token: accessToken, user:userObj})
+
+            setAuth({ accessToken, user})
             
             navigate(from, { replace: true });
         }

@@ -10,6 +10,7 @@ import LogIn from '../Controllers/Auth/Login.js';
 import Register from '../Controllers/Auth/Register.js';
 import RefreshToken from '../Controllers/Auth/RefreshToken.js';
 import LogOut from '../Controllers/Auth/Logout.js';
+import UserDTO from '../DTO/User.js';
 
 dotenv.config();
 const authenticationRouter = express.Router();
@@ -29,5 +30,57 @@ authenticationRouter.get('/cookie', async (req, res) => {
         cookies: req.cookies
     })
 })
+
+authenticationRouter.post('/test', async (req, res) => {
+
+      // Extract user data from request
+      const userDAO = new UserDAO();
+      const { email, password } = {email:'mineboxarabic@gmail.com',password:'Zaqwe123'};
+  
+      try {
+          const user = await userDAO.findByEmail(email)        
+          if (!user) {
+              return res.status(401).json({ message: "Invalid credentials" });
+          }
+          const validPassword = await bcrypt.compare(password, user.password);
+          if(!validPassword){
+              return res.status(401).json({ message: "Invalid credentials" });
+          }
+  
+          const accessToken = generateToken(user);
+          console.log(validPassword);
+  
+  
+          const refreshToken = JWT.sign({
+              _id: user._id,
+              username: user.username,
+              email: user.email,
+              role: user.role
+          }, process.env.REFRESH_TOKEN, { expiresIn: '1d' });
+          
+          const tokenDAO = new TokenDAO();
+          tokenDAO.create({ token: refreshToken, userId: user._id });
+  
+          const userDTO = new UserDTO(user.username, user.email, user.role);
+  
+
+          res.cookie("refreshToken", 'fa', {
+              httpOnly: true,
+             
+          });
+          res.cookie("testx", "testx", {
+              httpOnly: true,
+              maxAge: 15 * 60 * 1000 
+          })
+          return res.status(200).json({ message: "Logged in successfully 😊 👌", accessToken,refreshToken,user:JSON.stringify(userDTO.getUser()) });
+      } catch (error) {
+          // Handle errors
+          return res.status(500).json({ message: "Something went wrong" });
+      }
+
+}
+)
+
+
 
 export default authenticationRouter;

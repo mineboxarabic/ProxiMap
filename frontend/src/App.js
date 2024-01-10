@@ -12,6 +12,7 @@ import NotFound from './Pages/Error/NotFound';
 import ViewUsers from './Pages/Admin/ViewUsers';
 
 import RequireAuth from './Components/RequireAuth';
+import PersistLogin from './Components/PersistLogin';
 const ADMIN = 'Admin';
 const USER = 'User';
 const Partner = 'Partner';
@@ -30,8 +31,12 @@ function App() {
 
 
         {/* Private Routes */}
-        <Route element={<RequireAuth allowedRoles={[ADMIN]} />}>
-          <Route path='/admin/viewusers' element={<ViewUsers />} />
+        <Route element={<PersistLogin />}>
+
+          <Route element={<RequireAuth allowedRoles={[ADMIN]} />}>
+            <Route path='/admin/viewusers' element={<ViewUsers />} />
+          </Route>
+
         </Route>
         {/* Catch all */}
         <Route path='/*' element={<NotFound />} />

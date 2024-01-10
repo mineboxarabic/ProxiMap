@@ -6,6 +6,7 @@ dotenv.config();
 
 //Verify if the token is valid and not expired
 const verifyToken = (token) => {
+    
     return JWT.verify(token, process.env.ACCESS_TOKEN);
 };
 
@@ -21,45 +22,69 @@ export const generateToken = (user) => {
 
 
 //Generate a new refresh token
-export const refreshToken = (refreshToken) => {
+export const refreshToken = (token) => {
 
-    let accessToken = null;
-    JWT.verify(refreshToken, process.env.REFRESH_TOKEN, (err, user) => {
-        //if the refresh token is valid, generate a new token
-        if (!err) {
-            accessToken = generateToken(user);
+    let newToken = '';
+    JWT.verify(token, process.env.REFRESH_TOKEN, (err, decoded) => {
+        if(err){
+            throw new Error("Invalid token");
         }
+        newToken = JWT.sign({
+            _id: decoded._id,
+            username: decoded.username,
+            email: decoded.email,
+            role: decoded.role
+        }, process.env.ACCESS_TOKEN, { expiresIn: '15s' });
     });
-
     return accessToken;
 }
 
 
 //Verify if the user is authenticated by checking the token of the user
 const authenticateUser = (req, res, next) =>{
-    const token = req.cookies.accessToken;
-    if(!token){
-        return res.status(401).json({message: 'Access denied'});
+    const accessToken = req?.cookies?.accessToken;
+    const refreshToken = req?.cookies?.refreshToken;
+    if(!accessToken && !refreshToken){
+        return res.status(403).json({message: 'You are not authenticated'});
     }
+    const user = JWT.verify(refreshToken, process.env.REFRESH_TOKEN);
+
+    if(!user){
+        return res.status(403).json({message: 'Refresh token is not valid'});
+    }
+
     try{
-        const decoded = verifyToken(token);
+        const decoded = verifyToken(accessToken);
         req.user = decoded;
         next();
     }
     catch(err) {
         // Check if the error is due to token expiry and you have a refresh token
-        if (err.name == 'TokenExpiredError' && req.cookies.refreshToken) {
+        if (err.name == 'TokenExpiredError') {
             try {
+
+
                 console.log("It's finished");
-                const newToken = refreshToken(req.cookies.refreshToken); // Implement this
-                res.cookie('accessToken', newToken, { httpOnly: true }); // Set new token
-                req.user = verifyToken(newToken); // Verify and set user
+
+
+                const cookies = req.cookies;
+               
+
+                const newToken = JWT.sign({
+                    _id: user._id,
+                    username: user.username,
+                    email: user.email,
+                    role: user.role
+                }, process.env.ACCESS_TOKEN, { expiresIn: '15s' });
+
+
 
                 const tokenDAO = new TokenDAO();
-                tokenDAO.create({ token: newToken , userId: req.user._id });
+                tokenDAO.create({ token: newToken , userId: user._id });
 
 
 
+                res.cookie('accessToken', newToken, { httpOnly: true }); // Set new token
                 next();
             } catch (refreshErr) {
                 // If refresh fails, force re-login
@@ -77,12 +102,14 @@ const authenticateUser = (req, res, next) =>{
 }
 
 export const autherizeUserRole = (req, res, next, allowedRoles) => {
-    const userRole = req.user.role;
-    console.log(req.user);
+    const refreshToken = req.cookies?.refreshToken;
+    const user = JWT.verify(refreshToken, process.env.REFRESH_TOKEN);
+    const userRole = user.role;
+
     if(allowedRoles.includes(userRole)){
         next();
     }else{
-        res.status(403).json({message : "You are not allowed to access this resource" + 'The allowed roles are: ' + allowedRoles.join(',' )});
+        return res.status(403).json({message : "You are not allowed to access this resource" + 'The allowed roles are: ' + allowedRoles.join(',' )});
     }
 }
 export default authenticateUser;

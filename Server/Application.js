@@ -8,6 +8,7 @@ import tokenRouter from './Routes/TokenRouter.js';
 import cookieParser from 'cookie-parser';
 import authenticationRouter from './Routes/AuthRoutes.js';
 import cors from 'cors';
+import bodyParser from 'body-parser';
 
 dotenv.config();
 
@@ -20,13 +21,19 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
     console.log('Error connecting to database: ' + err);
 }
 );
+application.use(cookieParser());
+
+application.use(bodyParser.urlencoded({ extended: false }));
+
 
 application.use(express.json());
-application.use(cookieParser());
 //Allow CORS
+
 const corsOptions = {
     credentials: true,
-    origin: '*'
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+
 }
 application.use(cors(corsOptions));
 application.use(userRouter);

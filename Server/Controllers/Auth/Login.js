@@ -16,12 +16,12 @@ const LogIn = async (req, res) => {
             return res.status(401).json({ message: "Invalid credentials" });
         }
         const validPassword = await bcrypt.compare(password, user.password);
-        console.log(validPassword);
         if(!validPassword){
             return res.status(401).json({ message: "Invalid credentials" });
         }
 
         const accessToken = generateToken(user);
+        console.log(validPassword);
 
 
         const refreshToken = JWT.sign({
@@ -36,22 +36,24 @@ const LogIn = async (req, res) => {
 
         const userDTO = new UserDTO(user.username, user.email, user.role);
 
-        return res.cookie("accessToken", accessToken, {
-            httpOnly: true,
-            maxAge: 15 * 60 * 1000 // 15 minutes,
-            ,
-            sameSite: 'none',
-            secure: true
-
-        }).cookie("refreshToken", refreshToken, {
+   
+        res.cookie("accessToken", accessToken, {
             httpOnly: true,
             maxAge: 15 * 60 * 1000 // 15 minutes
-            ,
-            sameSite: 'none',
-            secure: true
-        })
-        .status(200)
-        .json({ message: "Logged in successfully 😊 👌", accessToken,user:JSON.stringify(userDTO.getUser()) });
+        });
+
+        res.cookie("refreshToken", refreshToken, {
+            httpOnly: true,
+            maxAge: 24 * 60 * 60 * 1000 // 1 day
+        });
+
+
+
+
+
+
+
+        return res.status(200).json({ message: "Logged in successfully 😊 👌", accessToken,refreshToken,user:userDTO.getUser() });
     } catch (error) {
         // Handle errors
         return res.status(500).json({ message: "Something went wrong" });

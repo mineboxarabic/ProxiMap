@@ -4,10 +4,10 @@ import JWT from "jsonwebtoken";
 
 const RefreshToken = async (req, res) => {
     const cookie = req.cookies;
-    console.log(cookie);
+    console.log('cookie',req.cookies);
     if (!cookie?.refreshToken) return res.status(401).json({ message: "You are not authenticated" });
 
-    const refreshToken = cookie.refreshToken;
+    const refreshToken = cookie?.refreshToken;
 
 
 
@@ -18,12 +18,13 @@ const RefreshToken = async (req, res) => {
 
     const newAccessToken = generateToken(decoded);
 
+    const tokenDAO = new TokenDAO();
     tokenDAO.create({ token: newAccessToken, userId: decoded._id });
 
     return res.cookie("accessToken", newAccessToken, {
         httpOnly: true,
         maxAge: 15 * 60 * 1000 // 15 minutes
-    }).status(200).json({ message: "Token refreshed successfully" });
+    }).status(200).json({ message: "Token refreshed successfully" , accessToken: newAccessToken, user: decoded});
 
 
 
