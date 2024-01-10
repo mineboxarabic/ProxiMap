@@ -1,25 +1,18 @@
 import TokenDAO from "../../DAO/TokenDAO.js";
-
+import JWT from "jsonwebtoken";
 const LogOut = async (req, res) => {
 
-    const accessToken = req.cookies.accessToken;
-    const user = req.user;
-    if (!accessToken) {
+    const refreshToken = req.cookies?.refreshToken;
+    const user = JWT.verify(refreshToken, process.env.REFRESH_TOKEN);
+    if (!refreshToken) {
         return res.status(401).json({ message: "You are not authenticated" });
     }
-
     const tokenDAO = new TokenDAO();
-    const tokens = await tokenDAO.findByUserIdAndToken(accessToken, user._id);
-    console.log(tokens);
-    if (tokens.length === 0) {
-        return res.status(403).json({ message: "Refresh token is not valid" });
-    }
-
+    //const tokens = await tokenDAO.findByUserIdAndToken(accessToken, user._id);
+    const deleted = await tokenDAO.deleteByUserId(user._id);
     try {
-        const deleted = await tokenDAO.deleteByUserId(tokens[0].userId);
-
         res.clearCookie("accessToken");
-        res.clearCookie("refreshToken");
+        res.clearCookie("refreshToken");    
 
         return res.status(200).json({ message: "Logged out successfully" });
     } catch (error) {

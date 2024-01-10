@@ -4,7 +4,7 @@ import { useEffect,useState } from "react";
 import useRefreshToken from "../Hooks/useRefreshToken";
 
 const PersistLogin = () => {
-    const { auth } = useAuth();
+    const { auth, persist} = useAuth();
     const refresh = useRefreshToken();
     const [isLoading , setIsLoading] = useState(true);
 
@@ -35,6 +35,7 @@ const PersistLogin = () => {
     return (
         <>
         {
+            !persist ? <Outlet /> :
             isLoading ? <div>Loading...</div> : <Outlet />
         }
         </>

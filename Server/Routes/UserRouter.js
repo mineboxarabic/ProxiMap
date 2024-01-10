@@ -22,6 +22,8 @@ userRouter.get('/users',authenticateUser,
 (req, res, next) => autherizeUserRole(req, res, next, userRoutes.read.allowedRoles),
 readUsers);
 
+userRouter.get('/users/me',readUsers);
+
 
 //Get a single user
 userRouter.get('/users/:id',checkId,

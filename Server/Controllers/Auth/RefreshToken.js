@@ -10,14 +10,17 @@ const RefreshToken = async (req, res) => {
     const refreshToken = cookie?.refreshToken;
 
 
-
-    const decoded = JWT.verify(refreshToken, process.env.REFRESH_TOKEN);
-    if (!decoded) {
-        return res.status(403).json({ message: "Refresh token is not valid" });
-    }
+    try{
+    const decoded = JWT.verify(refreshToken, process.env.REFRESH_TOKEN, (err, decoded) => {
+        if (err) {
+           throw new Error("Invalid token");
+        }
+        return decoded;
+    });
 
     const newAccessToken = generateToken(decoded);
 
+    
     const tokenDAO = new TokenDAO();
     tokenDAO.create({ token: newAccessToken, userId: decoded._id });
 
@@ -25,6 +28,12 @@ const RefreshToken = async (req, res) => {
         httpOnly: true,
         maxAge: 15 * 60 * 1000 // 15 minutes
     }).status(200).json({ message: "Token refreshed successfully" , accessToken: newAccessToken, user: decoded});
+
+
+}catch(error){
+    return res.status(401).json({ message: "You are not authenticated" });
+}
+
 
 
 
