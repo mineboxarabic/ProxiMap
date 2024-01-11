@@ -5,8 +5,6 @@ import Cookies from 'js-cookie';
 import '../../Style/Login.scss';
 import useAuth from '../../Hooks/useAuth';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import {FormGroup, FormControlLabel} from '@mui/material';
-import useLocalStorage from '../../Hooks/useLocalStorage';
 const LogIn = () =>
 {
     //This ref is to get 
