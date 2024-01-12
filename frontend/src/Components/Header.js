@@ -149,6 +149,14 @@ function Header() {
               </Button>
 
               <Button
+                key={"Users"}
+                onClick={()=>{ navigate('/users', { replace: true });}}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Users
+              </Button>
+
+              <Button
                 key={"viewusers"}
                 onClick={()=>{ navigate('/admin/viewusers', { replace: true });}}
                 sx={{ my: 2, color: 'white', display: 'block' }}

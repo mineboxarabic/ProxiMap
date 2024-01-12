@@ -1,5 +1,8 @@
 {
-  "dependencies": {
-    "react-router-dom": "^6.21.1"
+
+  "scripts": {
+    "startDB": "cd ./DB && docker-compose up -d",
+    "startBE": "cd ./Server && npm run dev",
+    "startFE": "cd ./frontend && npm run start"
   }
 }

@@ -13,6 +13,7 @@ import ViewUsers from './Pages/Admin/ViewUsers';
 
 import RequireAuth from './Components/RequireAuth';
 import PersistLogin from './Components/PersistLogin';
+import CRUDUser from './Pages/Admin/CRUD/CRUDUser';
 const ADMIN = 'Admin';
 const USER = 'User';
 const Partner = 'Partner';
@@ -36,6 +37,7 @@ function App() {
 
           <Route element={<RequireAuth allowedRoles={[ADMIN]} />}>
             <Route path='/admin/viewusers' element={<ViewUsers />} />
+            <Route path='/users' element={<CRUDUser />} />
           </Route>
 
         {/* Catch all */}

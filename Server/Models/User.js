@@ -1,13 +1,13 @@
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
-    username: String,
-    email: { type: String, unique: true },
-    password: String,
+    username: { type: String, unique: true, default: 'no name'},
+    email: { type: String, unique: true, default: 'no email'},
+    password: { type: String, default: 'no password'},
     role: { type: String, enum: ['Admin', 'User', 'Partner', 'Manager', 'Staff'] , default: 'User'},
     profile: {
-      bio: String,
-      profilePicture: String,
+      bio: { type: String, default: 'no bio'},
+      profilePicture: { type: String, default: 'no profile picture'}
     },
     createdAt: { type: Date, default: Date.now }
 });
