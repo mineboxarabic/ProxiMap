@@ -9,6 +9,7 @@ import checkUser from '../Utilities/User/CheckUser.js';
 import { autherizeUserRole } from '../Utilities/JWTUtil.js';
 import authenticateUser from '../Utilities/JWTUtil.js';
 import { userRoutes } from '../Config/AuthConfig.js';
+import checkPassword from '../Utilities/User/checkPassword.js';
 
 /**
  * To change the 
@@ -31,7 +32,7 @@ userRouter.get('/users/:id',checkId,
 getUser);
 
 //Create a user
-userRouter.post('/users',checkUser, 
+userRouter.post('/users',checkUser, checkPassword, 
 (req, res, next) => autherizeUserRole(req, res, next, userRoutes.create.allowedRoles),
 createUser);
 

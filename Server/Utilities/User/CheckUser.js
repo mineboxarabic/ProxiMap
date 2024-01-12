@@ -16,16 +16,6 @@ const checkUser = checkSchema({
         errorMessage: "Invalid email format",
         trim: true
     },
-    password: {
-        isString: true,
-        notEmpty: true,
-        errorMessage: "Password is required",
-        trim: true,
-        isLength:{
-            options: {min:8,max:50},
-            errorMessage: "Password must be of 8 to 50 characters long"
-        }
-    },
     role: {
         isIn: {
             options: [['Admin', 'User', 'Partner', 'Manager', 'Staff']],
