@@ -1,6 +1,5 @@
 import { checkSchema } from "express-validator";
-const checkPassword = () =>{
-    return checkSchema({
+const checkPassword  = checkSchema({
         password: {
             isString: true,
             notEmpty: true,
@@ -11,7 +10,6 @@ const checkPassword = () =>{
                 errorMessage: "Password must be of 8 to 50 characters long"
             }
         }
-    })
-}
+    });
 
 export default checkPassword;

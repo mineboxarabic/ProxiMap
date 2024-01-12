@@ -8,6 +8,20 @@ import Snackbar from "@mui/material/Snackbar";
 import "../../Style/Table.scss";
 
 const VerifyDeleteModal = ({ open, handleClose,handleDelete, id}) => {
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Enter") {
+        handleDelete(id);
+      }
+    };
+    window.addEventListener("keypress", handleKeyDown);
+
+     // Cleanup
+     return () => {
+       window.removeEventListener('keypress', handleKeyDown);
+     };
+  },[open]);
   return (
     open && (
       <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description" sx={{
@@ -15,6 +29,8 @@ const VerifyDeleteModal = ({ open, handleClose,handleDelete, id}) => {
           alignItems: "center",
           justifyContent: "center",
         }}
+
+      
       >
             <Box
              sx={{
@@ -27,6 +43,7 @@ const VerifyDeleteModal = ({ open, handleClose,handleDelete, id}) => {
                 flexDirection: "column",
                 justifyContent: "space-between",
               }}
+            
             >
                 <h1>Are you sure you want to delete this?</h1>
                 <Box 

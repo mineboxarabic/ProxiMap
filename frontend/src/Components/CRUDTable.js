@@ -18,19 +18,18 @@ import Snackbar from '@mui/material/Snackbar'
 import '../Style/App.scss';
 
 
-const CRUDTable = ({endpoint,columns, modelClass, nameOfClass}) => {
+const CRUDTable = ({columns, modelClass, nameOfClass}) => {
     const columnsWithAction = [...columns];
 
 
     //Modal states
     const [openModal, setOpenModal] = useState(false);
-    const [isOpenAddModal, setIsOpenAddModal] = useState(false);
-    const [isOpenEditModal, setIsOpenEditModal] = useState(false);
-    const [isDeleteModal, setIsDeleteModal] = useState(false);
+    const [isAdd, setIsAdd] = useState(false);
+    const [isEdit, setIsEdit] = useState(false);
+    const [isDelete, setIsDelete] = useState(false);
 
     //CRUD hooks
-    const {handleAddModel, handleEditModel, handleDeleteModel ,  handleGetAllModel
-    } = useCRUDModel();
+    const {handleAddModel, handleEditModel, handleDeleteModel ,  handleGetAllModel} = useCRUDModel();
     const [data, setData] = useState([]);
 
     
@@ -41,12 +40,12 @@ const CRUDTable = ({endpoint,columns, modelClass, nameOfClass}) => {
   
 
     //Model
-    const [model, setModel] = useState(modelClass());
-
+    const [model, setModel] = useState(modelClass);
+    //const model = new modelClass();
     useEffect(() => {
-        setModel(modelClass());
+      resetModel();
     }
-    ,[isOpenAddModal])
+    ,[isAdd])
 
     useEffect(() => {
         const data = async () => {
@@ -57,23 +56,28 @@ const CRUDTable = ({endpoint,columns, modelClass, nameOfClass}) => {
     }, [data, success])
 
     
-
+    const resetModel = () => {
+        setModel(modelClass);
+    }
 
 
     const handleClose = () => {
       setOpenModal(false);
+      setIsEdit(false);
+      setIsAdd(false);
     };
 
     const openEditModal = (row) => {
         setErrormsg("");
       setModel(row);
-      setIsOpenEditModal(true);
+      //model.setAttributesFromRow(row);
+      setIsEdit(true);
       setOpenModal(true);
     };
 
     const openAddModal = () => {
       setErrormsg("");
-      setIsOpenAddModal(true);
+      setIsAdd(true);
       setOpenModal(true);
     };
 
@@ -82,7 +86,7 @@ const CRUDTable = ({endpoint,columns, modelClass, nameOfClass}) => {
         setErrormsg("");
 
         setModel(row);
-        setIsDeleteModal(true);
+        setIsDelete(true);
     };
 
 
@@ -92,12 +96,12 @@ const CRUDTable = ({endpoint,columns, modelClass, nameOfClass}) => {
       const iserror = await handleAddModel(nameOfClass, model);
       if (iserror === true) {
         setOpenModal(false);
-        setIsOpenAddModal(false);
+        setIsAdd(false);
         setSuccess(true);
       }
       if (iserror === null) {
         setOpenModal(false);
-        setIsOpenAddModal(false);
+        setIsAdd(false);
       } else {
         setErrormsg(iserror);
       }
@@ -112,12 +116,12 @@ const CRUDTable = ({endpoint,columns, modelClass, nameOfClass}) => {
       
       if (iserror === true) {
         setOpenModal(false);
-        setIsOpenEditModal(false);
+        setIsEdit(false);
         setSuccess(true);
       }
       if (iserror === null) {
         setOpenModal(false);
-        setIsOpenEditModal(false);
+        setIsEdit(false);
       } else {
         setErrormsg(iserror);
       }
@@ -126,12 +130,12 @@ const CRUDTable = ({endpoint,columns, modelClass, nameOfClass}) => {
         const iserror = await handleDeleteModel(nameOfClass, id);
         if (iserror === true) {
             setOpenModal(false);
-            setIsDeleteModal(false);
+            setIsDelete(false);
             setSuccess(true);
         }
         if (iserror === null) {
             setOpenModal(false);
-            setIsDeleteModal(false);
+            setIsDelete(false);
         } else {
             setErrormsg(iserror);
         }
@@ -145,7 +149,7 @@ const CRUDTable = ({endpoint,columns, modelClass, nameOfClass}) => {
         case "users":
           return (
             <UsersModal
-              isEdit={isOpenEditModal}
+              isEdit={isEdit}
               open={openModal}
               handleClose={handleClose}
               handleAdd={handleAdd}
@@ -157,7 +161,7 @@ const CRUDTable = ({endpoint,columns, modelClass, nameOfClass}) => {
           );
 
         default:
-          return modelClass();
+          return model;
       }
     };
 
@@ -207,7 +211,7 @@ const CRUDTable = ({endpoint,columns, modelClass, nameOfClass}) => {
     </Snackbar>
 
             {handleChooseModal()}
-            <VerifyDeleteModal id={model['_id']} handleDelete={handleDelete} open={isDeleteModal} handleClose={() => setIsDeleteModal(false)}/>
+            <VerifyDeleteModal id={model['_id']} handleDelete={handleDelete} open={isDelete} handleClose={() => setIsDelete(false)}/>
 
  
 

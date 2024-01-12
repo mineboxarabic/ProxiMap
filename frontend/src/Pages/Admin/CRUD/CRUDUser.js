@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 
 import { Button } from '@mui/material';
 import CRUDTable from '../../../Components/CRUDTable';
+import User from '../../../Classes/User';
 
 
   
@@ -15,18 +16,7 @@ const CRUDUser = () => {
 
 
 
-    const userClass = () => {
-        return {
-            username: '',
-            email: '',
-            password: '',
-            role: '',
-            profile:{
-                bio: '',
-                profilePicture: ''
-            }
-        }
-    }
+    
 
     const columns = [
         {field: '_id' , headerName: 'ID', width: 100},
@@ -36,11 +26,21 @@ const CRUDUser = () => {
     ]
 
 
+    const user = {
+        username: '',
+        email: '',
+        password: '',
+        role: '',
+        profile:{
+            bio: '',
+            profilePicture: '',
+        }
+    }
 
 
     return (
         <>
-            <CRUDTable  columns={columns} modelClass={userClass} nameOfClass={'users'}/>
+            <CRUDTable  columns={columns} modelClass={user} nameOfClass={'users'}/>
         </>
         );
 

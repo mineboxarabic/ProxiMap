@@ -5,6 +5,7 @@ import { generateToken } from "../../Utilities/JWTUtil.js";
 import bcrypt from 'bcrypt';
 import JWT from "jsonwebtoken";
 
+
 const LogIn = async (req, res) => {
     // Extract user data from request
     const userDAO = new UserDAO();

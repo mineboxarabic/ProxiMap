@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Modal, Box } from "@mui/material";
+import { Modal, Box, Autocomplete } from "@mui/material";
 import { useState } from "react";
 import { Button } from "@mui/material";
 import { TextField } from "@mui/material";
@@ -7,10 +7,24 @@ import { Alert } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
 import "../../Style/Table.scss";
 
-const UsersModal = ({ open, isEdit, handleClose,  handleEdit,handleAdd, model, setModel, error,}) => {
+const UsersModal = ({
+  open,
+  isEdit,
+  handleClose,
+  handleEdit,
+  handleAdd,
+  model,
+  setModel,
+  error,
+}) => {
   return (
     open && (
-      <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description" sx={{
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        sx={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -67,19 +81,17 @@ const UsersModal = ({ open, isEdit, handleClose,  handleEdit,handleAdd, model, s
               label={"Password"}
               type="text"
               value={model["password"]}
+              disabled={isEdit}
               onChange={(e) =>
                 setModel((prev) => ({ ...prev, ["password"]: e.target.value }))
               }
             />
-            <TextField
-              className={"modalTextField"}
-              label={"Role"}
-              type="text"
-              value={model["role"]}
-              onChange={(e) =>
-                setModel((prev) => ({ ...prev, ["role"]: e.target.value }))
-              }
-            />
+
+
+
+            <TextField className={"modalTextField"} label={"Role"} type="text" value={model["role"]} onChange={(e) =>setModel((prev) => ({ ...prev, ["role"]: e.target.value }))}/>
+              <Autocomplete className={"modalTextField"} disablePortal={true} options={["admin", "user"]} value={model["role"]} onChange={(e, value) =>setModel((prev) => ({ ...prev, ["role"]: value }))} renderInput={(params) => <TextField {...params} label="Role" />} />
+
             <TextField
               className={"modalTextField"}
               label={"BIO"}
@@ -119,17 +131,13 @@ const UsersModal = ({ open, isEdit, handleClose,  handleEdit,handleAdd, model, s
               marginTop: "20px",
             }}
           >
-            <Button
-              color="error"
-variant="contained"
-              onClick={handleClose}
-            >
+            <Button color="error" variant="contained" onClick={handleClose}>
               cancel
             </Button>
             <Button
               color="success"
               variant="contained"
-              onClick={() => isEdit ? handleEdit(model['_id']):handleAdd()}
+              onClick={() => (isEdit ? handleEdit(model["_id"]) : handleAdd())}
             >
               save
             </Button>
