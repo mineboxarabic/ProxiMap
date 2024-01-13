@@ -1,6 +1,6 @@
 import { validationResult } from "express-validator";
 import ServiceDAO from "../../DAO/ServiceDAO.js";
-import ValidateRes from "../../Utilities/ValidateRes.js";
+import ValidateRes from "../../Validators/ValidateRes.js";
 
 const deleteService = async (req, res) => {
  

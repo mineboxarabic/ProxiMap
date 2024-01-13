@@ -16,7 +16,10 @@ const UsersModal = ({
   model,
   setModel,
   error,
-}) => {
+}) => 
+{
+
+
   return (
     open && (
       <Modal
@@ -42,14 +45,7 @@ const UsersModal = ({
             justifyContent: "space-between",
           }}
         >
-          <Alert
-            className={error ? "show" : "offscreen"}
-            onClose={handleClose}
-            severity="error"
-            sx={{ width: "100%" }}
-          >
-            {error}
-          </Alert>
+    
 
           <Box
             sx={{
@@ -58,6 +54,14 @@ const UsersModal = ({
               gap: "20px",
             }}
           >
+                  <Alert
+            className={error ? "show" : "offscreen"}
+            onClose={handleClose}
+            severity="error"
+
+          >
+            {error}
+          </Alert>
             <TextField
               className={"modalTextField"}
               label={"User name"}
@@ -89,8 +93,13 @@ const UsersModal = ({
 
 
 
-            <TextField className={"modalTextField"} label={"Role"} type="text" value={model["role"]} onChange={(e) =>setModel((prev) => ({ ...prev, ["role"]: e.target.value }))}/>
-              <Autocomplete className={"modalTextField"} disablePortal={true} options={["admin", "user"]} value={model["role"]} onChange={(e, value) =>setModel((prev) => ({ ...prev, ["role"]: value }))} renderInput={(params) => <TextField {...params} label="Role" />} />
+           { /*<TextField className={"modalTextField"} label={"Role"} type="text" value={model["role"]} onChange={(e) =>setModel((prev) => ({ ...prev, ["role"]: e.target.value }))}/>*/}
+              
+              <Autocomplete 
+              inputValue={model["role"] ? model["role"] : "Select a role"}
+              isOptionEqualToValue={(option, value) => option === value}
+              value={model["role"] ? model["role"] : "Select a role"}
+              className={"modalTextField"} disablePortal={true} options={["Admin", "User", "Staff", "Manager", "Partner","Select a role"]} onChange={(e, value) =>setModel((prev) => ({ ...prev, ["role"]: value }))} renderInput={(params) => <TextField {...params} label="Role" />} />
 
             <TextField
               className={"modalTextField"}

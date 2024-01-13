@@ -12,7 +12,7 @@ const LogIn = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const user = await userDAO.findByEmail(email)        
+        const user = await userDAO.findByEmail(email);
         if (!user) {
             return res.status(401).json({ message: "Invalid credentials" });
         }

@@ -9,20 +9,7 @@ const useCRUDModel = () => {
             const response = await axiosPrivate.post('/'+modelName, model);
             return true;
         } catch (error) {
-            if(error.response.data.error[0].msg){
-                return error.response.data.error[0].msg;
-            }
-            else if(error.response.data.error){
-                return error.response.data.error;
-            }
-            else if(error.response.data){
-                return error.response.data;
-            }
-            else if(error.response){
-                return error.response;
-            }
-
-            return error;
+            return error.response.data.error[0].msg;
         }
 
         
@@ -35,20 +22,7 @@ const useCRUDModel = () => {
                 , model);
             return true;
         } catch (error) {
-            if(error.response.data.error[0].msg){
-                return error.response.data.error[0].msg;
-            }
-            else if(error.response.data.error){
-                return error.response.data.error;
-            }
-            else if(error.response.data){
-                return error.response.data;
-            }
-            else if(error.response){
-                return error.response;
-            }
-
-            return error;
+            return error.response.data.error[0].msg;
         }
     }
 
@@ -59,20 +33,8 @@ const useCRUDModel = () => {
                 );
             return true;
         } catch (error) {
-            if(error.response.data.error[0].msg){
-                return error.response.data.error[0].msg;
-            }
-            else if(error.response.data.error){
-                return error.response.data.error;
-            }
-            else if(error.response.data){
-                return error.response.data;
-            }
-            else if(error.response){
-                return error.response;
-            }
 
-            return error;
+            return error.response.data.error[0].msg;
         }
     }
 
@@ -83,20 +45,7 @@ const useCRUDModel = () => {
                 );
             return response.data;
         } catch (error) {
-            if(error.response.data.error[0].msg){
-                return error.response.data.error[0].msg;
-            }
-            else if(error.response.data.error){
-                return error.response.data.error;
-            }
-            else if(error.response.data){
-                return error.response.data;
-            }
-            else if(error.response){
-                return error.response;
-            }
-
-            return error;
+            return error.response.data.error[0].msg;
         }
     }
 
@@ -107,20 +56,7 @@ const useCRUDModel = () => {
                 );
             return response.data;
         } catch (error) {
-            if(error.response.data.error[0].msg){
-                return error.response.data.error[0].msg;
-            }
-            else if(error.response.data.error){
-                return error.response.data.error;
-            }
-            else if(error.response.data){
-                return error.response.data;
-            }
-            else if(error.response){
-                return error.response;
-            }
-
-            return error;
+            return error.response.data.error[0].msg;
         }
     }
     return {handleAddModel, handleEditModel, handleDeleteModel , handleGetAllModel, handleGetOneModel};

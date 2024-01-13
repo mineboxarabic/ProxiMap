@@ -1,5 +1,5 @@
 import TokenDAO from "../../DAO/TokenDAO.js";
-import ValidateRes from "../../Utilities/ValidateRes.js";
+import ValidateRes from "../../Validators/ValidateRes.js";
 
 
 const readToken = async (req, res) => {

@@ -53,7 +53,7 @@ const CRUDTable = ({columns, modelClass, nameOfClass}) => {
             setData(response);
         }
         data();
-    }, [data, success])
+    }, [success])
 
     
     const resetModel = () => {
@@ -62,6 +62,7 @@ const CRUDTable = ({columns, modelClass, nameOfClass}) => {
 
 
     const handleClose = () => {
+      console.log("close");
       setOpenModal(false);
       setIsEdit(false);
       setIsAdd(false);

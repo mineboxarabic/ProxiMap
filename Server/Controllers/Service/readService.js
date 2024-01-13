@@ -1,5 +1,5 @@
 import ServiceDAO from "../../DAO/ServiceDAO.js";
-import ValidateRes from "../../Utilities/ValidateRes.js";
+import ValidateRes from "../../Validators/ValidateRes.js";
 
 const readService = async (req, res) => {
     const serviceDAO = new ServiceDAO();

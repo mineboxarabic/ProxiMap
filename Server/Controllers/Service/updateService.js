@@ -1,6 +1,6 @@
 import ServiceDAO from "../../DAO/ServiceDAO.js";
-import { param, validationResult } from 'express-validator';
-import ValidateRes from "../../Utilities/ValidateRes.js";
+import ValidateRes from "../../Validators/ValidateRes.js";
+
 const updateService = async (req, res) => {
     const serviceDAO = new ServiceDAO();
     const id = req.params.id;
@@ -11,12 +11,15 @@ const updateService = async (req, res) => {
 
 
     const updatedService = await serviceDAO.updateById(id, serviceUpdates);
-
-    if(!updatedService){
-        res.status(404).json({ error: "Service not found" });
-    } else {
-        res.status(200).json(updatedService);
+    if(updatedService.error){
+        if(updatedService.error.code === 11000){
+            res.status(409).json({error: "Service already exists"});
+            return;
+        }
+        res.status(400).json(updatedService);
+        return;
     }
+    res.status(200).json({message: "Service updated successfully"});
 };
 
 export default updateService;

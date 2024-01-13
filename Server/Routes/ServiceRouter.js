@@ -5,7 +5,7 @@ import updateService from '../Controllers/Service/updateService.js';
 import deleteService from '../Controllers/Service/deleteService.js';
 import readServices from '../Controllers/Service/readServices.js';
 import checkService from '../Utilities/Service/checkService.js';
-import checkId from '../Utilities/CheckMongoId.js';
+import checkId from '../Validators/CheckMongoId.js';
 import { serviceRoutes } from '../Config/AuthConfig.js';
 const serviceRouter = express.Router();
 

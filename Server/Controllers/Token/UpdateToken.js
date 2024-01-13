@@ -1,5 +1,5 @@
 import TokenDAO from "../../DAO/TokenDAO.js";
-import ValidateRes from "../../Utilities/ValidateRes.js";
+import ValidateRes from "../../Validators/ValidateRes.js";
 
 const updateToken = async (req, res) => {
     const tokenDAO = new TokenDAO();
@@ -20,8 +20,15 @@ const updateToken = async (req, res) => {
     }
 
 
-    await tokenDAO.updateById(id, token);
-
+    const response = await tokenDAO.updateById(id, token);
+    if(response.error){
+        if(response.error.code === 11000){
+            res.status(409).json({error: "Token already exists"});
+            return;
+        }
+        res.status(400).json(response);
+        return;
+    }
     res.status(200).json({message: "Token updated successfully"});
 };
 

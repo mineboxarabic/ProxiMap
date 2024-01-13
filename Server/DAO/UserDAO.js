@@ -48,6 +48,9 @@ class UserDAO {
     async findByEmail(email){
         return await User.findOne({email: email});
     }
+    async findByUserName(username){
+         return await User.findOne({username: username});
+    }
 
 }
 export default UserDAO;
