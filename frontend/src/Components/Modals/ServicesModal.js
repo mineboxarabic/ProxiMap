@@ -6,6 +6,7 @@ import { TextField } from "@mui/material";
 import { Alert } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
 import "../../Style/Table.scss";
+import useResource from "../../Hooks/useResource";
 
 const ServiceModal = ({
   open,
@@ -18,6 +19,20 @@ const ServiceModal = ({
   error,
 }) => 
 {
+  const {setResources:setPartners, resources: partners, getAll: getPartners } = useResource('/users');
+  const getPartnersAutoComplete = async () => {
+    await getPartners();
+    setPartners((partners) =>{
+      return partners.map((partner) => {
+        return { value: partner._id, label: partner.username };
+      });
+    });
+
+  }
+
+  useEffect(() => {
+    getPartnersAutoComplete();
+  }, []);
 
 
   return (
@@ -70,6 +85,17 @@ const ServiceModal = ({
             onChange={(e) => setModel({ ...model, partnerId: e.target.value })}
             
             />
+
+            <Autocomplete 
+            id="combo-box-demo"
+            options={partners}
+            isOptionEqualToValue = {(option, value) => option.value === value.value}
+            sx={{ width: 300 }}
+            onChange={(e, value) => setModel({ ...model, partnerId: value.value })}
+            renderInput={(params) => <TextField {...params} label="Partner" />}
+            />
+
+
 
             <TextField label="CategoryId" variant="outlined" value={model["categoryId"]} onChange={(e) => setModel({ ...model, categoryId: e.target.value })} />
             <TextField label="Name" variant="outlined" value={model["name"]} onChange={(e) => setModel({ ...model, name: e.target.value })} />

@@ -95,7 +95,7 @@ const UsersModal = ({
 
            { /*<TextField className={"modalTextField"} label={"Role"} type="text" value={model["role"]} onChange={(e) =>setModel((prev) => ({ ...prev, ["role"]: e.target.value }))}/>*/}
               
-              <Autocomplete 
+              <Autocomplete
               inputValue={model["role"] ? model["role"] : "Select a role"}
               isOptionEqualToValue={(option, value) => option === value}
               value={model["role"] ? model["role"] : "Select a role"}
