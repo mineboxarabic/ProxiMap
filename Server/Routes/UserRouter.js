@@ -9,8 +9,8 @@ import authenticateUser from '../Utilities/JWTUtil.js';
 import { userRoutes } from '../Config/AuthConfig.js';
 import ValidateRes from '../Validators/ValidateRes.js';
 import { checkSchema } from 'express-validator';
-import isUserExist from '../Utilities/User/IsUserExist.js';
-import userValidator from '../Validators/userValidator.js';
+import isUserExist from '../Validators/Users/IsUserExist.js';
+import userValidator, { userValidatorEdit } from '../Validators/userValidator.js';
 import passwordValidator from '../Validators/Users/passwordValidator.js';
 import checkId from '../Validators/CheckMongoId.js';
 /**
@@ -52,7 +52,7 @@ createUser);
 userRouter.put('/users/:id',
 checkId,
 isUserExist,
-userValidator,
+userValidatorEdit,
 (req, res, next) => ValidateRes(req,res,next),
 (req, res, next) => autherizeUserRole(req, res, next, userRoutes.update.allowedRoles),
 updateUser);

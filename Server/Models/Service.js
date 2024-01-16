@@ -5,6 +5,10 @@ const serviceSchema = new mongoose.Schema({
     name: String,
     description: String,
     price: Number,
+    position: {
+      lat: { type: Number, default: 0 },
+      lng: { type: Number, default: 0}},
+    range: { type: Number, default: 0 },
     availability: Boolean,
     ratings: [{
       type: mongoose.Schema.Types.ObjectId,

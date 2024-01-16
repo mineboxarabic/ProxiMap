@@ -6,6 +6,14 @@ const userSchema = new mongoose.Schema({
     password: { type: String, default: 'no password'},
     role: { type: String, enum: ['Admin', 'User', 'Partner', 'Manager', 'Staff'] , default: 'User'},
     profile: {
+      address: 
+        {
+          street: { type: String, default: 'no street'},
+          city: { type: String, default: 'no city'},
+          state: { type: String, default: 'no state'},
+          zip: { type: String, default: 'no zip'}
+        }
+      ,
       bio: { type: String, default: 'no bio'},
       profilePicture: { type: String, default: 'no profile picture'}
     },

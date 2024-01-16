@@ -13,7 +13,11 @@ const updateUser = async (req, res) => {
 
 
 
-    res.status(200).json({message: "User updated successfully"});
+    res.status(200).json({
+        success: true,
+        message: "User updated successfully",
+        updatedUser
+    });
 };
 
 export default updateUser;

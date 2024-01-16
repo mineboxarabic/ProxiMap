@@ -15,7 +15,11 @@ const createUser = async (req, res) => {
 
     const newUser = await userDAO.create(user);
     
-    res.status(201).json(newUser);
+    res.status(201).json({
+        success: true,
+        message: "User created successfully",
+        user: newUser
+    });
     return;
 };
 

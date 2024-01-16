@@ -4,19 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon Application.js",
+    "dev": "nodemon server.js",
     "start": "node Application.js",
     "test": "supertest",
     "dbMongo": "docker run -d -p 27017:27017 -v ./data:/data/db mongo",
-    "CRUDTest": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles User.test.js",
-    "CRUDErrorEndpointsTest": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles UserEndpointsErrorCheck.test.js",
-    "CRUDEndpointsTest": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles UserEndpoints.test.js",
-    "CRUDServices": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles Service.test.js",
-    "CRUDServicesEndPoints": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles ServiceEndPoints.test.js",
-    "CRUDServicesEndPointsError": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles ServiceEndPointsError.test.js",
-    "CRUDTokenTest": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles Token.test.js",
-    "CRUDTokenErrorEndpointsTest": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles TokenEndpointsErrorCheck.test.js",
-    "CRUDTokenEndpointsTest": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles TokenEndpoints.test.js"
+    "CRUDServiceEndpointsTest": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles ServiceEndPoints.test.js",
+    "CRUDUserEndpointsTest": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles UserEndPoints.test.js"
   },
   "keywords": [],
   "type": "module",
@@ -43,6 +36,15 @@
     "jest": "^29.7.0"
   },
   "jest": {
-    "transform": {}
+    "transform": {},
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "jsx",
+      "ts",
+      "tsx",
+      "node"
+    ],
+    "testEnvironment": "node"
   }
 }

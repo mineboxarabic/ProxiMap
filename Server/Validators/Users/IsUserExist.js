@@ -10,6 +10,7 @@ const isUserExist = checkSchema({
         },
         custom: {
             options: async (value) => {
+                
                 const userDAO = new UserDAO();
                 const user = await userDAO.findById(value);
 

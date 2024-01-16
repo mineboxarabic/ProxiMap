@@ -8,7 +8,10 @@ const deleteUser = async (req, res) => {
     const user = await userDAO.deleteById(id);
 
 
-    res.status(200).json({message: "User deleted successfully"});
+    res.status(200).json({
+        success: true,
+        message: "User deleted successfully"
+    });
 };
 
 export default deleteUser;

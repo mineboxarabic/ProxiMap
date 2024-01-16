@@ -7,17 +7,25 @@ import readServices from '../Controllers/Service/readServices.js';
 import checkService from '../Utilities/Service/checkService.js';
 import checkId from '../Validators/CheckMongoId.js';
 import { serviceRoutes } from '../Config/AuthConfig.js';
+import ValidateRes from '../Validators/ValidateRes.js';
+import serviceValidator, { serviceValidatorEdit } from '../Validators/serviceValidator.js';
+import { autherizeUserRole } from '../Utilities/JWTUtil.js';
+import { checkSchema, param } from 'express-validator';
 const serviceRouter = express.Router();
 
 //Here we do the crud of the services
 
 //Create a service
-serviceRouter.post('/services',checkService,
+serviceRouter.post('/services',
+serviceValidator,
+ValidateRes,
 (req, res, next) => autherizeUserRole(req, res, next, serviceRoutes.create.allowedRoles),
 createService);
 
 //Get a single service
-serviceRouter.get('/services/:id',checkId,
+serviceRouter.get('/services/:id',
+checkId,
+ValidateRes,
 (req, res, next) => autherizeUserRole(req, res, next, serviceRoutes.read.allowedRoles),
 readService);
 
@@ -28,7 +36,9 @@ serviceRouter.get('/services',
 
 
 //Update a service
-serviceRouter.put('/services/:id',checkService,checkId,
+serviceRouter.put('/services/:id',checkId,
+serviceValidatorEdit,
+ValidateRes,
 (req, res, next) => autherizeUserRole(req, res, next, serviceRoutes.update.allowedRoles),
 updateService);
 

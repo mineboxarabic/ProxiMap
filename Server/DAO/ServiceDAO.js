@@ -10,6 +10,10 @@ class ServiceDAO {
         return await Service.findById(id).catch((error) => { return error; });
     }
 
+    async findByPartnerId(id) {
+        return await Service.find({partnerId: id}).catch((error) => { return error; });
+    }
+
     async deleteById(id) {
         return await Service.findByIdAndDelete(id).catch((error) => { return error; });
     }

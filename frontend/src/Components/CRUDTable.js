@@ -16,6 +16,7 @@ import { Alert } from "@mui/material";
 import Snackbar from '@mui/material/Snackbar'
 
 import '../Style/App.scss';
+import ServiceModal from "./Modals/ServicesModal";
 
 
 const CRUDTable = ({columns, modelClass, nameOfClass}) => {
@@ -29,7 +30,7 @@ const CRUDTable = ({columns, modelClass, nameOfClass}) => {
     const [isDelete, setIsDelete] = useState(false);
 
     //CRUD hooks
-    const {handleAddModel, handleEditModel, handleDeleteModel ,  handleGetAllModel} = useCRUDModel();
+    const {AddModel, EditModel, DeleteModel ,  GetAllModels, loading} = useCRUDModel();
     const [data, setData] = useState([]);
 
     
@@ -48,11 +49,14 @@ const CRUDTable = ({columns, modelClass, nameOfClass}) => {
     ,[isAdd])
 
     useEffect(() => {
-        const data = async () => {
-            const response = await handleGetAllModel(nameOfClass);
+        const getData = async () => {
+            const response = await GetAllModels(nameOfClass);
+   
             setData(response);
+            console.log(response);
         }
-        data();
+        getData();
+        
     }, [success])
 
     
@@ -94,7 +98,7 @@ const CRUDTable = ({columns, modelClass, nameOfClass}) => {
 
     //CRUD functions
     const handleAdd = async () => {
-      const iserror = await handleAddModel(nameOfClass, model);
+      const iserror = await AddModel(nameOfClass, model);
       if (iserror === true) {
         setOpenModal(false);
         setIsAdd(false);
@@ -113,7 +117,7 @@ const CRUDTable = ({columns, modelClass, nameOfClass}) => {
         if(model['password']){
             delete model['password'];
         }
-        const iserror = await handleEditModel(nameOfClass, id, model);
+        const iserror = await EditModel(nameOfClass, id, model);
       
       if (iserror === true) {
         setOpenModal(false);
@@ -128,7 +132,7 @@ const CRUDTable = ({columns, modelClass, nameOfClass}) => {
       }
     };
     const handleDelete = async (id) => {
-        const iserror = await handleDeleteModel(nameOfClass, id);
+        const iserror = await DeleteModel(nameOfClass, id);
         if (iserror === true) {
             setOpenModal(false);
             setIsDelete(false);
@@ -161,8 +165,21 @@ const CRUDTable = ({columns, modelClass, nameOfClass}) => {
             />
           );
 
-        default:
-          return model;
+        
+
+        case "services":
+            return(
+              <ServiceModal
+            isEdit={isEdit}
+            open={openModal}
+            handleClose={handleClose}
+            handleAdd={handleAdd}
+            handleEdit={handleEdit}
+            model={model}
+            setModel={setModel}
+            error={errormsg}
+          />
+            )
       }
     };
 
@@ -221,6 +238,7 @@ const CRUDTable = ({columns, modelClass, nameOfClass}) => {
             //Disable selection
             disableSelectionOnClick
             style={{width: '60%', margin: 'auto'}}
+            loading={loading}
             getRowId={(row) => row._id} rows={data} columns={columnsWithAction} pageSize={5} >
             </DataGrid>
 

@@ -17,17 +17,30 @@ import Cookies from 'js-cookie';
 import useAuth from '../Hooks/useAuth';
 import {axiosPrivate} from '../api/axios';
 import useLogout from '../Hooks/useLogout';
+import NavDropDown from './NavDropDown';
+
+import { ADMIN, USER, PARTNER, MANAGER, STAFF } from '../Helpers/Roles';
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+const crudPages = [
+  {path:'users',label:'Users', allowedRoles:[ADMIN]},
+  {path:'services',label:'Services', allowedRoles:[ADMIN, MANAGER, STAFF]},
+  {path:'products',label:'Products', allowedRoles:[ADMIN, MANAGER, STAFF]},
+  {path:'orders',label:'Orders', allowedRoles:[ADMIN, MANAGER, STAFF]},
+]
+
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const {auth,setAuth} = useAuth();
   const isLogged = auth?.user ? true : false;
-
+  const role = auth?.user?.role;
   const navigate = useNavigate();
   const logout = useLogout();
+
+
   const handleLogout =async () => {
     await logout();
     navigate('/login', { replace: true });
@@ -139,6 +152,14 @@ function Header() {
               >
                 Home
               </Button>
+
+              <Button
+                key={"Map"}
+                onClick={()=>{ navigate('/map', { replace: true });}}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Map
+              </Button>
           
               <Button
                 key={"About"}
@@ -148,21 +169,8 @@ function Header() {
                 About
               </Button>
 
-              <Button
-                key={"Users"}
-                onClick={()=>{ navigate('/users', { replace: true });}}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                Users
-              </Button>
+              <NavDropDown buttonText="CRUD panel" menuItems={crudPages} />
 
-              <Button
-                key={"viewusers"}
-                onClick={()=>{ navigate('/admin/viewusers', { replace: true });}}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                View users
-              </Button>
           </Box>:
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
           {/*Here it's empty cus i just want the flex grow to be on */}
@@ -209,7 +217,8 @@ function Header() {
                 
               ))}
             </Menu>
-          </Box>:
+          </Box>
+          :
 
         <Box sx={{ flexGrow: 0 }}>
             <Link to='/login'>

@@ -1,128 +1,266 @@
-import jest from "jest-mock";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import axios from "axios";
-import supertest from "supertest";
+import jest from 'jest-mock';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import axios from 'axios';
+import supertest from 'supertest';
+import { connectDB, disconnectDB } from '../database.js';
+import  application  from '../../Application.js';
+
 dotenv.config();
 
-const randomEmail = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-let userId = "";
+const randomEmail = Math.random().toString(36).substring(2, 15) + '@example.com';
+let userId = '';
 
-const baseURL = process.env.BASE_URL + 'users';
-let accessToken = "";   
-let refreshToken = "";
-beforeAll(() => {
-    mongoose.connect(process.env.MONGODB_URI).then(() => {
-        console.log('Connected to database');
-    }
-    ).catch((err) => {
-        console.log('Error connecting to database: ' + err);
+const agent = supertest.agent(application);
+
+beforeAll(async () => {
+    await connectDB();
+    console.log('Connected to database');
+});
+
+afterAll(async () => {
+    await disconnectDB();
+    console.log('Disconnected from database');
+});
+
+describe("Persistent Session Testing", () => {
+
+    it("Should login a user", async () => {
+        const response = await agent.post('/login')
+            .send({
+                "email": "mineboxarabic@gmail.com",
+                "password": "Zaqwe123"
+            })
+            .expect(200);
+
+        expect(response.body).toHaveProperty('accessToken');
+        expect(response.body).toHaveProperty('refreshToken');
+        expect(response.body).toHaveProperty('user');
+        
+    });
+
+    it("Should get all users", async () => {
+        const response = await agent.get('/users')
+            .expect(200);
+
+        expect(response.body).toBeInstanceOf(Array);
+    });
+
+    it("Should create a user", async () => {
+        const response = await agent.post('/users')
+            .send({
+                "username": "Test Userwwssss",
+                "email": "mineboxtestxwssssw@gmail.com",
+                "role": "User",
+                "password": "Zaqwe123"
+            })
+            .expect(201);
+
+        expect(response.body).toHaveProperty('success');
+        expect(response.body).toHaveProperty('message');
+        expect(response.body).toHaveProperty('user');
+            userId = response.body.user._id;
+    });
+
+    it("Should get a user by id", async () => {
+        console.log('useriddddd',userId);
+        const response = await agent.get('/users/' + userId)
+            .expect(200);
+
+            //it will return only a single user json 
+
+            expect(response.body).toHaveProperty('success');
+            expect(response.body).toHaveProperty('message');
+            expect(response.body).toHaveProperty('user');
+
+        });
+
+    it("Should update a user by id", async () => {
+        const response = await agent.put('/users/' + userId)
+            .send({
+                "username": "Test User updated",
+            }).expect(200);
+
+            
+        expect(response.body).toHaveProperty('success');
+        expect(response.body).toHaveProperty('message');
+        expect(response.body).toHaveProperty('updatedUser');
     }
     );
-});
 
-afterAll(() => {
-    mongoose.disconnect();
-});
+    it("Should delete a user by id", async () => {
+        const response = await agent.delete('/users/' + userId)
+            .expect(200);
 
-describe("User CRUD functions (ENDPOINTS TESTING) ",  () => {
-
-    let req = {
-        cookie: {
-            accessToken : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTg3MmRkZjFjYjkyODYwMmVhNzdhZGYiLCJlbWFpbCI6Im1pbmVib3hhcmFiaWNAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzAzMzY2MTUwLCJleHAiOjE3MDM5NzA5NTB9.92M7SVqlGSP2wjZqBzzkrb_2DiSt69vNzKiJM65YwMw",
-            refreshToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTg3MmRkZjFjYjkyODYwMmVhNzdhZGYiLCJlbWFpbCI6Im1pbmVib3hhcmFiaWNAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzAzMzY2MTUwLCJleHAiOjE3MDM5NzA5NTB9.92M7SVqlGSP2wjZqBzzkrb_2DiSt69vNzKiJM65YwMw"
-        },
-        body : {
-            "username": "AbuRashedTechxx",
-            "email": "aburashedtech@example.com",
-            "password": "yassin123",
-            "role": "Manager",
-            "profile": {
-              "bio": "Tech manager with a keen interest in innovative solutions.",
-              "profilePicture": "path/to/manager/profile.jpg"
-            },
-            "createdAt": "2023-12-15T12:00:00Z"
-        }
-    }
-    let user = {
-       
-    }
-
-    //Login
-    test("Login a user", async () => {
-        let req = {
-                "email": "mineboxarabic@gmail.com",
-                "password": "1234"
-        }
-
-        const response = await axios.post(process.env.BASE_URL + 'login', req).catch(err=>{
-            console.log("Error Login: ", err);
-        })
-        console.log("The response is: ", response.data.accessToken);
-      
-        accessToken = response.data.accessToken;
-        refreshToken = response.data.refreshToken;
-        expect(response).toBeDefined();
-        expect(response.status).toBe(200)
-        console.log("The user is: ", response.data);
+        expect(response.body).toHaveProperty('success');
+        expect(response.body).toHaveProperty('message');
     });
 
 
+    it("Should logout a user", async () => {
+        const response = await agent.post('/logout')
+            .expect(200);
 
-    //Create 
-    test("Create a new user", async () => {
-        req.body.email = randomEmail + "@gmail.com";
+        expect(response.body).toHaveProperty('success');
+        expect(response.body).toHaveProperty('message');
+    });
+
+});
+
+describe("Error Testing", () => {
+    it("Should not login a user with invalid credentials", async () => {
+        const response = await agent.post('/login')
+            .send({
+                "email": "mine@gmail",
+                "password": "Zaqwe123"
+            }).expect(401);
+
+            //There will success false and message will be invalid credentials
+        expect(response.body).toHaveProperty('success');
+        expect(response.body).toHaveProperty('message');
+    }
+    );
         
+    it("Should login a user", async () => {
+        const response = await agent.post('/login')
+            .send({
+                "email": "mineboxarabic@gmail.com",
+                "password": "Zaqwe123"
+            })
+            .expect(200);
 
-        //Create cookies
-        const cookie = {
-            accessToken : accessToken,
-            refreshToken: refreshToken
-        }
-
-        const response = await axios.post(baseURL,req).catch((err)=>{
-            console.log("Error:", err.response ? err.response.data : err);
-        })
-
-        expect(response).toBeDefined();
-        expect(response.status).toBe(201)
-        userId = response.data._id;
+        expect(response.body).toHaveProperty('accessToken');
+        expect(response.body).toHaveProperty('refreshToken');
+        expect(response.body).toHaveProperty('user');
+        
     });
 
-    /*//Read
-    test("Read a user", async () => {
-        const response = await axios.get(baseURL + '/' + userId).catch(err=>{
-            console.log("Error: ", err);
-        })
-        expect(response).toBeDefined();
-        expect(response.status).toBe(200)
-        console.log("The user is: ", response.data);
+
+    it("Should no accept the id given to it ", async () => {
+        const response = await agent.get('/users/' + "1234567890").expect(400);
+
+        expect(response.body).toHaveProperty('error');
+        expect(response.body.error).toBeInstanceOf(Array);
+        expect(response.body.error[0]).toHaveProperty('msg');
+        expect(response.body.error[0]['msg']).toBe('The id you gave is not a mongoID');
+    }
+    );
+
+
+
+    it("Should not find the user", async () => {
+        const response = await agent.get('/users/' + "659fba2f1f253e0e1d5147dd").expect(404);
+
+        expect(response.body).toHaveProperty('error');
+        expect(response.body.error).toBeInstanceOf(Array);
+        expect(response.body.error[0]).toHaveProperty('msg');
+        expect(response.body.error[0]['msg']).toBe('User not found');
+    }
+    );
+
+    //Small username
+    it("Should not create a user with invalid username", async () => {
+        const response = await agent.post('/users')
+            .send({
+                "username": "Te",
+                "email": "minebox@gmai",
+                "role": "User",
+                "password": "Zaqwe123"
+            })
+            .expect(400);
+
+        expect(response.body).toHaveProperty('error');
+        expect(response.body.error).toBeInstanceOf(Array);
+        expect(response.body.error[0]).toHaveProperty('msg');
+        expect(response.body.error[0]['msg']).toBe('Username must be of 3 to 50 characters long');
     });
 
-    //Update
-    test("Update a new user", async () =>{
-        let user2 = user;
-        user2.username = "Updated Username";
-        const response = await axios.put(baseURL + '/' + userId, user2).catch(err=>{
-            console.log("Error: ", err);
-        })
-        expect(response).toBeDefined();
-        expect(response.status).toBe(200)
-        console.log("The user is: ", response.data);
+    //Long username
+    it("Should not create a user with invalid username", async () => {
+        const response = await agent.post('/users')
+        .send({
+            "username": "Teaidjoisjdoaijdijaosidjoaoaisdjoasdiaiasodjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
+            "email": "minebox@gmai",
+            "role": "User",
+            "password": "Zaqwe123"
+        }).expect(400);
+
+        expect(response.body).toHaveProperty('error');
+        expect(response.body.error).toBeInstanceOf(Array);
+        expect(response.body.error[0]).toHaveProperty('msg');
+        expect(response.body.error[0]['msg']).toBe('Username must be of 3 to 50 characters long');
+
+
     });
 
-    //Delete
-    test("Delete a user", async () =>{
-        const response = await axios.delete(baseURL + '/' + userId).catch(err=>{
-            console.log("Error: ", err);
-        })
-        expect(response).toBeDefined();
-        expect(response.status).toBe(200)
-        console.log("The user is: ", response.data);
+    //Not an email
+    it("Should not create a user with invalid email", async () => {
+        const response = await agent.post('/users')
+        .send({
+            "username": "Test Userss",
+            "email": "minebox",
+            "role": "User",
+            "password": "Zaqwe123"
+        }).expect(400);
+
+        expect(response.body).toHaveProperty('error');
+        expect(response.body.error).toBeInstanceOf(Array);
+        expect(response.body.error[0]).toHaveProperty('msg');
+        expect(response.body.error[0]['msg']).toBe('Invalid email format');
     });
-*/
+
+    //Small password
+    it("Should not create a user with invalid password", async () => {
+        const response = await agent.post('/users')
+        .send({
+            "username": "Test Userss",
+            "email": "minebox@gmail.com",
+            "role": "User",
+            "password": "Zaq"
+        }).expect(400);
+
+        expect(response.body).toHaveProperty('error');
+        expect(response.body.error).toBeInstanceOf(Array);
+        expect(response.body.error[0]).toHaveProperty('msg');
+        expect(response.body.error[0]['msg']).toBe('Password must be of 8 to 50 characters long');
+    });
 
 
-    
-    
+    //Existing email
+    it("Should not create a user with existing email", async () => {
+        const response = await agent.post('/users')
+        .send({
+            "username": "Test Userss",
+            "email": "mineboxarabic@gmail.com",
+            "role": "User",
+            "password": "Zaqwe123"
+        }).expect(409);
+
+        expect(response.body).toHaveProperty('error');
+        expect(response.body.error).toBeInstanceOf(Array);
+        expect(response.body.error[0]).toHaveProperty('msg');
+        expect(response.body.error[0]['msg']).toBe('Email already exists');
+
+    });
+
+    //Existing username
+    it("Should not create a user with existing username", async () => {
+        const response = await agent.post('/users')
+        .send({
+            "username": "yassin",
+            "email": "minddddd@gmail.com",
+            "role": "User",
+            "password": "Zaqwe123"
+        }).expect(409);
+
+        expect(response.body).toHaveProperty('error');
+        expect(response.body.error).toBeInstanceOf(Array);
+        expect(response.body.error[0]).toHaveProperty('msg');
+        expect(response.body.error[0]['msg']).toBe('Username already exists');
+
+    });  
+
+
+
+
 });

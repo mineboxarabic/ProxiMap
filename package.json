@@ -1,8 +1,41 @@
 {
+  "type": "module",
 
   "scripts": {
+
     "startDB": "cd ./DB && docker-compose up -d",
+
     "startBE": "cd ./Server && npm run dev",
-    "startFE": "cd ./frontend && npm run start"
+
+    "startFE": "cd ./frontend && npm run start",
+
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+
+  },
+
+  "dependencies": {
+
+    "jest": "^29.7.0"
+
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+
+  "jest":{
+    "transform": {},
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "js",
+      "mjs",
+      "cjs",
+      "json",
+      "jsx",
+      "ts",
+      "tsx",
+      "node"
+    ]
   }
+
 }
+

@@ -5,7 +5,7 @@ const LogOut = async (req, res) => {
     const refreshToken = req.cookies?.refreshToken;
     const user = JWT.verify(refreshToken, process.env.REFRESH_TOKEN);
     if (!refreshToken) {
-        return res.status(401).json({ message: "You are not authenticated" });
+        return res.status(401).json({success:false, message: "You are not authenticated" });
     }
     const tokenDAO = new TokenDAO();
     //const tokens = await tokenDAO.findByUserIdAndToken(accessToken, user._id);
@@ -14,9 +14,9 @@ const LogOut = async (req, res) => {
         res.clearCookie("accessToken");
         res.clearCookie("refreshToken");    
 
-        return res.status(200).json({ message: "Logged out successfully" });
+        return res.status(200).json({success:true, message: "Logged out successfully" });
     } catch (error) {
-        return res.status(500).json({ message: "Something went wrong" });
+        return res.status(500).json({success:false, message: "Something went wrong" });
     }
 
 }

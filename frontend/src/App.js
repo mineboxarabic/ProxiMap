@@ -14,11 +14,10 @@ import ViewUsers from './Pages/Admin/ViewUsers';
 import RequireAuth from './Components/RequireAuth';
 import PersistLogin from './Components/PersistLogin';
 import CRUDUser from './Pages/Admin/CRUD/CRUDUser';
-const ADMIN = 'Admin';
-const USER = 'User';
-const Partner = 'Partner';
-const Manager = 'Manager';
-const Staff = 'Staff';
+import CRUDService from './Pages/Admin/CRUD/CRUDService';
+
+import { ADMIN, USER, Partner, Manager, Staff } from './Helpers/Roles';
+import Map from './Pages/Map';
 
 function App() {
   return (
@@ -30,14 +29,16 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/about' element={<About />} />
         <Route path='/home' element={<Home />} />
-
+        <Route path='/map' element={<Map />} />
 
         {/* Private Routes */}
+
 
 
           <Route element={<RequireAuth allowedRoles={[ADMIN]} />}>
             <Route path='/admin/viewusers' element={<ViewUsers />} />
             <Route path='/users' element={<CRUDUser />} />
+            <Route path='/services' element={<CRUDService />} />
           </Route>
 
         {/* Catch all */}

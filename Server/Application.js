@@ -43,6 +43,6 @@ application.use(authenticationRouter)
 console.log(process.env.BASE_URL);
 //Type this in the terminal to create an infinite JWT token:
 
-application.listen(3001, () => {
-    console.log('Application running on port 3001');
-})
+
+
+export default application;

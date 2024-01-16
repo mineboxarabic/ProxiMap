@@ -1,9 +1,13 @@
-const Home = () => {
-    return (
-        <main>
-            <h1>Home</h1>
-        </main>
-    )
-}
+import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
+import { Box } from "@mui/system";
+import "leaflet/dist/leaflet.css";
 
-export default Home
+const Home = () => {
+  return (
+    <main>
+        <h1>Home</h1>
+    </main>
+  );
+};
+
+export default Home;
