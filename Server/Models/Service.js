@@ -6,8 +6,9 @@ const serviceSchema = new mongoose.Schema({
     description: String,
     price: Number,
     position: {
-      lat: { type: Number, default: 0 },
-      lng: { type: Number, default: 0}},
+      type: { type: String, default: 'Point' },
+      coordinates: { type: [Number], default: [0, 0]}
+     },
     range: { type: Number, default: 0 },
     availability: Boolean,
     ratings: [{

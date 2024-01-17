@@ -9,4 +9,12 @@ const readServices = async (req, res) => {
     res.status(200).json(services);
 };
 
+
+export const readServicesinMapView = async (req, res) => {
+    
+    const serviceDAO = new ServiceDAO();
+    const { swLat, swLng, neLat, neLng } = req.params;
+    const services = await serviceDAO.findServicesinMapView(swLat, swLng, neLat, neLng);
+    res.status(200).json(services);
+}; 
 export default readServices;

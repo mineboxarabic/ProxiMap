@@ -26,6 +26,20 @@ class ServiceDAO {
         return await Service.find().catch((error) => { return error; });
     }
 
+    async findServicesinMapView(swLat, swLng, neLat, neLng) {
+   
+        return await Service.find({
+        position:{
+            $geoWithin:{
+                $box:[
+                    [swLng, swLat],
+                    [neLng, neLat]
+                ]
+            }
+            }
+        }).catch((error) => { return error; });
+    }
+
 } 
 
 export default ServiceDAO;
