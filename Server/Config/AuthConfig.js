@@ -29,3 +29,18 @@ export const serviceRoutes ={
     }
 }
 
+export const categoryRoutes ={
+    create: {
+        allowedRoles: ['Admin', 'Manager', 'Staff']
+    },
+    read: {
+        allowedRoles: ['Admin', 'Manager', 'Staff', 'User']
+    },
+    update: {
+        allowedRoles: ['Admin', 'Manager', 'Staff']
+    },
+    delete: {
+        allowedRoles: ['Admin', 'Manager']
+    }
+}
+

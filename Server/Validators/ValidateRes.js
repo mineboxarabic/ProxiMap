@@ -14,7 +14,7 @@ const ValidateRes = (req,res,next) => {
 
             statusCode = 409;
         }
-        else if(err.msg === "User not found"){
+        else if(err.msg === "User not found" || err.msg === "Service not found" || err.msg === "Category not found" || err.msg === "Product not found" || err.msg === "Order not found" || err.msg === "Review not found" || err.msg === "Cart not found" || err.msg === "Wishlist not found" || err.msg === "Address not found" || err.msg === "Coupon not found"){
             statusCode = 404;
         }
         else{

@@ -14,6 +14,7 @@ const CRUDService = () => {
         {field: 'description' , headerName: 'Description', width: 200},
         {field: 'price' , headerName: 'Price', width: 200},
         {field: 'availability' , headerName: 'Availability', width: 200},
+        
     ]
 
 
@@ -24,7 +25,12 @@ const CRUDService = () => {
         description: '',
         price: '',
         availability: '',
-        ratings: []
+        ratings: [],
+        position: {
+            lat: 0,
+            lng: 0
+        },
+        range: 0
     }
 
 

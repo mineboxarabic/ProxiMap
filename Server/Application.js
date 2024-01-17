@@ -9,6 +9,7 @@ import cookieParser from 'cookie-parser';
 import authenticationRouter from './Routes/AuthRoutes.js';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import categoryRoute from './Routes/CategoryRouter.js';
 
 dotenv.config();
 
@@ -40,6 +41,7 @@ application.use(userRouter);
 application.use(serviceRouter);
 application.use(tokenRouter);
 application.use(authenticationRouter)
+application.use(categoryRoute);
 console.log(process.env.BASE_URL);
 //Type this in the terminal to create an infinite JWT token:
 

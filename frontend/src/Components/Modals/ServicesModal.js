@@ -104,6 +104,11 @@ const ServiceModal = ({
             <TextField label="Availability" variant="outlined" value={model["availability"]} onChange={(e) => setModel({ ...model, availability: e.target.value })} />
             <TextField label="Ratings" variant="outlined" value={model["ratings"]} onChange={(e) => setModel({ ...model, ratings: e.target.value })} />
 
+
+            <TextField type="number" label="lat" variant="outlined" value={model["position"]["lat"]} onChange={(e) => setModel({ ...model, position: { ...model["position"], lat: e.target.value } })} />
+            <TextField type="number" label="lng" variant="outlined" value={model["position"]["lng"]} onChange={(e) => setModel({ ...model, position: { ...model["position"], lng: e.target.value } })} />
+
+            <TextField  type="number"label="range" variant="outlined" value={model["range"]} onChange={(e) => setModel({ ...model, range: e.target.value })} />
           </Box>
 
           <Box

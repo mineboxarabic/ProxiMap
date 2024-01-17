@@ -11,6 +11,8 @@ import ValidateRes from '../Validators/ValidateRes.js';
 import serviceValidator, { serviceValidatorEdit } from '../Validators/serviceValidator.js';
 import { autherizeUserRole } from '../Utilities/JWTUtil.js';
 import { checkSchema, param } from 'express-validator';
+import isServiceExist from '../Validators/serviceValidator/isServiceExist.js';
+
 const serviceRouter = express.Router();
 
 //Here we do the crud of the services
@@ -25,6 +27,7 @@ createService);
 //Get a single service
 serviceRouter.get('/services/:id',
 checkId,
+isServiceExist,
 ValidateRes,
 (req, res, next) => autherizeUserRole(req, res, next, serviceRoutes.read.allowedRoles),
 readService);
@@ -37,6 +40,7 @@ serviceRouter.get('/services',
 
 //Update a service
 serviceRouter.put('/services/:id',checkId,
+isServiceExist,
 serviceValidatorEdit,
 ValidateRes,
 (req, res, next) => autherizeUserRole(req, res, next, serviceRoutes.update.allowedRoles),

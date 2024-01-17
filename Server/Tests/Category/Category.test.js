@@ -10,9 +10,14 @@ dotenv.config();
 
 const randomEmail =
   Math.random().toString(36).substring(2, 15) + "@example.com";
-let serviceId = "";
+let categoryId = "";
 
 const agent = supertest.agent(application);
+
+const category = {
+    "name": "Test Category",
+    "description": "Test Category Description"
+}
 
 beforeAll(async () => {
   await connectDB();
@@ -39,65 +44,55 @@ describe("Persistent Session Testing", () => {
     expect(response.body).toHaveProperty("user");
   });
 
-  it("Should get all services", async () => {
-    const response = await agent.get("/services").expect(200);
+  it("Should get all categorys", async () => {
+    const response = await agent.get("/categorys").expect(200);
 
     expect(response.body).toBeInstanceOf(Array);
   });
 
-  it("Should create a service", async () => {
+  it("Should create a category", async () => {
     const response = await agent
-      .post("/services")
-      .send({
-        "partnerId": "60b5c5b4c7a3c0b4e4f0f8c2",
-        "categoryId": "65a63a89fc13ae50c9fa2cf1",
-        "name": "jwyse16",
-        "description": "Corrosion of second degree of neck, initial encounter",
-        "price": 64,
-        "position": { "lat": 30.6377274, "lng": 73.0947607 },
-        "range": 2,
-        "ratings": ["659fba2a1f253e0e1d5147dd"],
-        "availability": true
-      }).expect(201);
+      .post("/categorys")
+      .send(category).expect(201);
 
     expect(response.body).toHaveProperty("success");
     expect(response.body).toHaveProperty("message");
-    expect(response.body).toHaveProperty("service");
-    serviceId = response.body.service._id;
+    expect(response.body).toHaveProperty("category");
+    categoryId = response.body.category._id;
   });
 
-  it("Should get a service by id", async () => {
-    console.log("serviceiddddd", serviceId);
-    const response = await agent.get("/services/" + serviceId).expect(200);
+  it("Should get a category by id", async () => {
+    console.log("categoryiddddd", categoryId);
+    const response = await agent.get("/categorys/" + categoryId).expect(200);
 
-    //it will return only a single service json
+    //it will return only a single category json
 
     expect(response.body).toHaveProperty("success");
     expect(response.body).toHaveProperty("message");
-    expect(response.body).toHaveProperty("service");
+    expect(response.body).toHaveProperty("category");
   });
 
-  it("Should update a service by id", async () => {
+  it("Should update a category by id", async () => {
     const response = await agent
-      .put("/services/" + serviceId)
+      .put("/categorys/" + categoryId)
       .send({
-        name: "Test Service  updated",
+        name: "Test Category updated",
       })
       .expect(200);
 
     expect(response.body).toHaveProperty("success");
     expect(response.body).toHaveProperty("message");
-    expect(response.body).toHaveProperty("updatedService");
+    expect(response.body).toHaveProperty("updatedCategory");
   });
 
-  it("Should delete a service by id", async () => {
-    const response = await agent.delete("/services/" + serviceId).expect(200);
+  it("Should delete a category by id", async () => {
+    const response = await agent.delete("/categorys/" + categoryId).expect(200);
 
     expect(response.body).toHaveProperty("success");
     expect(response.body).toHaveProperty("message");
   });
 
-  it("Should logout a service", async () => {
+  it("Should logout a category", async () => {
     const response = await agent.post("/logout").expect(200);
 
     expect(response.body).toHaveProperty("success");
@@ -121,7 +116,7 @@ describe("Error Testing", () => {
   });
 
   it("Should no accept the id given to it ", async () => {
-    const response = await agent.get("/services/" + "1234567890").expect(400);
+    const response = await agent.get("/categorys/" + "1234567890").expect(400);
 
     expect(response.body).toHaveProperty("error");
     expect(response.body.error).toBeInstanceOf(Array);
@@ -131,32 +126,23 @@ describe("Error Testing", () => {
     );
   });
 
-  it("Should not find the service", async () => {
+  it("Should not find the category", async () => {
     const response = await agent
-      .get("/services/" + "659fba2f1f253e0e1d5147dd")
+      .get("/categorys/" + "659fba2f1f253e0e1d5147dd")
       .expect(404);
 
     expect(response.body).toHaveProperty("error");
     expect(response.body.error).toBeInstanceOf(Array);
     expect(response.body.error[0]).toHaveProperty("msg");
-    expect(response.body.error[0]["msg"]).toBe("Service not found");
+    expect(response.body.error[0]["msg"]).toBe("Category not found");
   });
 
-  //Small servicename
-  it("Should not create a service with invalid servicename", async () => {
+  //Small categoryname
+  it("Should not create a category with invalid categoryname", async () => {
+    category.name = "j";
     const response = await agent
-      .post("/services")
-      .send({
-        "partnerId": "60b5c5b4c7a3c0b4e4f0f8c2",
-        "categoryId": "65a63a89fc13ae50c9fa2cf1",
-        "name": "j",
-        "description": "Corrosion of second degree of neck, initial encounter",
-        "price": 64,
-        "position": { "lat": 30.6377274, "lng": 73.0947607 },
-        "range": 2,
-        "ratings": ["659fba2a1f253e0e1d5147dd"],
-        "availability": true
-      })
+      .post("/categorys")
+      .send(category)
       .expect(400);
 
     expect(response.body).toHaveProperty("error");
@@ -167,10 +153,10 @@ describe("Error Testing", () => {
     );
   });
 
-  //Long servicename
-  it("Should not create a service with invalid servicename", async () => {
+  //Long categoryname
+  it("Should not create a category with invalid categoryname", async () => {
     const response = await agent
-      .post("/services")
+      .post("/categorys")
       .send({
         "partnerId": "60b5c5b4c7a3c0b4e4f0f8c2",
         "categoryId": "65a63a89fc13ae50c9fa2cf1",
@@ -193,9 +179,9 @@ describe("Error Testing", () => {
   });
 
   //Not an email
-  it("Should not create a service with invalid email", async () => {
+  it("Should not create a category with invalid email", async () => {
     const response = await agent
-      .post("/services")
+      .post("/categorys")
       .send({
         "partnerId": "60b5c5b4c7a3c0bf0f8c2",
         "categoryId": "65a63a89fc13ae50c9fa2cf1",
