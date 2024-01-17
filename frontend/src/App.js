@@ -23,22 +23,28 @@ function App() {
   return (
     <Routes>
       <Route path='/' element={<MainLayout />} >
-      <Route element={<PersistLogin />}>
+
         {/* Public Routes */}
         <Route path='/login' element={<LogIn />} />
         <Route path='/register' element={<Register />} />
         <Route path='/about' element={<About />} />
         <Route path='/home' element={<Home />} />
-        <Route path='/map' element={<Map />} />
 
         {/* Private Routes */}
 
 
-
+        <Route element={<PersistLogin />}>
+          {/* Admin Routes */}
           <Route element={<RequireAuth allowedRoles={[ADMIN]} />}>
             <Route path='/admin/viewusers' element={<ViewUsers />} />
             <Route path='/users' element={<CRUDUser />} />
             <Route path='/services' element={<CRUDService />} />
+
+          </Route>
+      
+            {/* User Routes */} 
+          <Route element={<RequireAuth allowedRoles={[ADMIN,USER]} />}>
+            <Route path='/map' element={<Map />} />
           </Route>
 
         {/* Catch all */}
