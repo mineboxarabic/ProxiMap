@@ -54,7 +54,22 @@ const useResource = (baseUrl) => {
         }
     }
 
-    return { resources,setResources, loading, error, getAll, create, update, remove }
+    const getOne = async (id) => {
+        setLoading(true)
+        try {
+            const response = await axiosPrivate.get(`${baseUrl}/${id}`)
+            setLoading(false)
+            //remove the / from the baseUrl
+
+            setResources(response.data)
+            return response.data
+        } catch (error) {
+            setError(true)
+            setLoading(false)
+        }
+    }
+
+    return { resources,setResources, loading, error, getAll, create, update, remove, getOne }
 
 
 }

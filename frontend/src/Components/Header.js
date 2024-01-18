@@ -21,7 +21,7 @@ import NavDropDown from './NavDropDown';
 
 import { ADMIN, USER, PARTNER, MANAGER, STAFF } from '../Helpers/Roles';
 const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = [ 'Account', 'Dashboard', 'Logout'];
 
 const crudPages = [
   {path:'users',label:'Users', allowedRoles:[ADMIN]},
@@ -184,7 +184,7 @@ function Header() {
             
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt={auth?.user?.username} src={auth?.user?.profile?.profilePicture} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -203,6 +203,11 @@ function Header() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
+
+              <MenuItem onClick={()=>{ navigate('/profile', { replace: true });}}>
+                <Typography textAlign="center">Profile</Typography>
+              </MenuItem>
+
               {settings.map((setting) => (
 
                 setting === 'Logout' ?

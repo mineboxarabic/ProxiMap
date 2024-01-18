@@ -18,6 +18,7 @@ import CRUDService from './Pages/Admin/CRUD/CRUDService';
 
 import { ADMIN, USER, Partner, Manager, Staff } from './Helpers/Roles';
 import Map from './Pages/Map';
+import ProfilePage from './Pages/Profile';
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
             {/* User Routes */} 
           <Route element={<RequireAuth allowedRoles={[ADMIN,USER]} />}>
             <Route path='/map' element={<Map />} />
+            <Route path='/profile' element={<ProfilePage />} />
           </Route>
 
         {/* Catch all */}

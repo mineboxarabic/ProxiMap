@@ -6,9 +6,14 @@ import useResource from "../Hooks/useResource";
 import { useEffect } from "react";
 import ButtonBase from "@mui/material/ButtonBase";
 import useGeneral from "../Hooks/useGeneral";
-const ServiceList = ({setHovered,height}) => {
+import ServiceItem from "./ServiceItem";
+const ServiceList = ({setHovered,height,setSelected,onCloseDrawer, setSelectedPartner}) => {
     const {oVServices} = useGeneral();
 
+
+    onCloseDrawer = () => {
+        setSelected(null);
+    }
 
     useEffect(() => {
         console.log(oVServices);
@@ -19,29 +24,7 @@ const ServiceList = ({setHovered,height}) => {
             <List>
                 {oVServices?.length > 0 && oVServices.map((service) => {
                     return (
-                        <ListItem key={service._id}
-                            disablePadding
-                            onMouseEnter={() => setHovered(service)}
-                            sx={{ 
-                                width: '100%',
-                                backgroundColor: 'primary.main',
-                                borderRadius: '10px',
-                                marginBottom: '10px',
-                            }}
-                        >
-                            <ButtonBase
-
-                             sx={{ 
-                                width: '100%',
-                                padding: '10px',
-                                paddingTop: '20px',
-                                paddingBottom: '20px',
-                                backgroundColor: 'primary.main',
-                            }}>
-                                <ListItemText primary={service.name} />
-                                <ListItemText primary={service.range} />
-                            </ButtonBase>
-                        </ListItem>
+                        <ServiceItem setSelectedPartner={setSelectedPartner} service={service} setHovered={setHovered} setSelected={setSelected} />
                     );
                 })}
             </List>

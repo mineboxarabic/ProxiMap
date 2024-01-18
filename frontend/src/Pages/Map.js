@@ -8,6 +8,7 @@ import "../Style/Map.scss";
 import MapEvents from "../Helpers/MapEvents";
 import useInMapView from "../Hooks/Services/useInMapView";
 import ServiceList from "../Components/ServiceList";
+import ServiceDetailsDrawer from "../Components/ServiceDetailsDrawer";
 const Map = () => {
   const { services, isLoadingServices, errorServices, updateBounds } =
     useInMapView();
@@ -15,9 +16,16 @@ const Map = () => {
   const [position, setPosition] = useState(null);
 
   const [hovered, setHovered] = useState(null);
+  const [selected, setSelected] = useState(null);
+
+
+  const [selectedPartner, setSelectedPartner] = useState(null);
 
   const [height, setHeight] = useState("85vh");
+  const onCloseDrawer = () => {
+    setSelected(null);
 
+  }
   useEffect(() => {
     if (!isLoadingServices && services.length > 0) {
       const positions = services.map((service) => {
@@ -37,6 +45,8 @@ const Map = () => {
 
 
   return (
+    <Box sx={{ width: "100%", height: "100%" }}>
+    <ServiceDetailsDrawer partner={selectedPartner} service={selected} open={selected} onClose={onCloseDrawer} />
     <Box
       sx={{
         width: "100%",
@@ -77,6 +87,7 @@ const Map = () => {
                     {
                       click: () => {
                         setHovered(service);
+                        setSelected(service);
                       },
                     }                    
                   }
@@ -91,6 +102,7 @@ const Map = () => {
                       eventHandlers: {
                         click: () => {
                           setHovered(service);
+                          setSelected(service);
                         },
                       }
                     })}>
@@ -114,9 +126,15 @@ const Map = () => {
         </Box>
       </Box>
       <Box sx={{ width: "30%" }}>
-        <ServiceList height={height} setHovered={setHovered} />
+        <ServiceList height={height} setSelectedPartner={setSelectedPartner} onCloseDrawer={onCloseDrawer} setSelected={setSelected} setHovered={setHovered} />
       </Box>
     </Box>
+
+
+    <Box sx={{ width: "100%", height: "50vh", backgroundColor: 'red' }}>
+      <h1>Footer</h1>
+      </Box>
+  </Box>
   );
 };
 
