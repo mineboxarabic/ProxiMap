@@ -1,12 +1,17 @@
 import Category from "../Models/Category.js";
 
 class CategoryDAO {
-    async create(user) {
-        const newUser = new Category(user);
-        return await newUser.save();
+    async create(category) {
+       console.log("category", category);
+       const newCategory = new Category(category);
+         const result = await newCategory.save().catch((err) => {
+              return {error: err};
+         });
+        return result;
     }
 
     async findById(id) {
+        console.log("id", id);
         return await Category.findById(id);
     }
 
@@ -14,8 +19,8 @@ class CategoryDAO {
         return await Category.findByIdAndDelete(id);
     }
 
-    async updateById(id, user) {
-        return await Category.findByIdAndUpdate(id, user);
+    async updateById(id, category) {
+        return await Category.findByIdAndUpdate(id, category);
     }
 
     async findAll() {

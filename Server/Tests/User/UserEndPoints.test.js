@@ -49,8 +49,8 @@ describe("Persistent Session Testing", () => {
     it("Should create a user", async () => {
         const response = await agent.post('/users')
             .send({
-                "username": "Test Userwwssss",
-                "email": "mineboxtestxwssssw@gmail.com",
+                "username": "Test Userwwssxxxss",
+                "email": "mineboxtestxwsssswxxs@gmail.com",
                 "role": "User",
                 "password": "Zaqwe123"
             })

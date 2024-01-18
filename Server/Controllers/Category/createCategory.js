@@ -6,8 +6,7 @@ const createCategory = async (req, res) => {
     const category = req.body;
 
     const newCategory = await categoryDAO.create(category);
-
-    if(!newCategory){
+    if(newCategory?.category?.error){
         return res.status(500).json({success:false, message: "Something went wrong" });
     }else{
         return res.status(201).json({success:true, message: "Category created successfully", category:newCategory });

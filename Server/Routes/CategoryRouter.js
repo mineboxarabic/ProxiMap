@@ -7,15 +7,16 @@ import readCategorys from '../Controllers/Category/readCategorys.js';
 import checkId from '../Validators/CheckMongoId.js';
 import { categoryRoutes } from '../Config/AuthConfig.js';
 import ValidateRes from '../Validators/ValidateRes.js';
-import serviceValidator, { serviceValidatorEdit } from '../Validators/serviceValidator.js';
+import categoryValidator, { categoryValidatorEdit } from '../Validators/categoryValidator.js';
 import { autherizeUserRole } from '../Utilities/JWTUtil.js';
+import isCategoryExist from '../Validators/Category/isCategoryExist.js';
 const categoryRoute = express.Router();
 
 //Here we do the crud of the categorys
 
 //Create a service
 categoryRoute.post('/categorys',
-serviceValidator,
+categoryValidator,
 ValidateRes,
 (req, res, next) => autherizeUserRole(req, res, next, categoryRoutes.create.allowedRoles),
 createCategory);
@@ -23,6 +24,7 @@ createCategory);
 //Get a single service
 categoryRoute.get('/categorys/:id',
 checkId,
+isCategoryExist,
 ValidateRes,
 (req, res, next) => autherizeUserRole(req, res, next, categoryRoutes.read.allowedRoles),
 readCategory);
@@ -35,7 +37,7 @@ categoryRoute.get('/categorys',
 
 //Update a service
 categoryRoute.put('/categorys/:id',checkId,
-serviceValidatorEdit,
+categoryValidatorEdit,
 ValidateRes,
 (req, res, next) => autherizeUserRole(req, res, next, categoryRoutes.update.allowedRoles),
 updateCategory);

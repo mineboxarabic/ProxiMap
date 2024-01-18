@@ -15,7 +15,7 @@ import useCRUDModel from "../Hooks/useCRUDModel";
 import { Alert } from "@mui/material";
 import Snackbar from '@mui/material/Snackbar'
 
-import '../Style/App.scss';
+import '../Style/DataTable.scss';
 import ServiceModal from "./Modals/ServicesModal";
 
 
@@ -237,9 +237,14 @@ const CRUDTable = ({columns, modelClass, nameOfClass}) => {
             autoHeight
             //Disable selection
             disableSelectionOnClick
-            style={{width: '60%', margin: 'auto'}}
+            className="dataGrid"
+
             loading={loading}
-            getRowId={(row) => row._id} rows={data} columns={columnsWithAction} pageSize={5} >
+            getRowId={(row) => row._id} rows={data} columns={columnsWithAction} pageSize={5} 
+            
+            //How many rows to show in the pagination
+            rowsPerPageOptions = {[5, 10, 20]}
+            >
             </DataGrid>
 
         <Fab color="primary" aria-label="add"

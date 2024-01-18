@@ -8,43 +8,35 @@ import L from 'leaflet';
   
 export default function MapEvents({
     setBounds,
-    setPosition
+    setPosition,
+    position
 }) {
     const map = useMap();
     
+    const goTo = (lat, lng) => {
+        map.flyTo([lat, lng], map.getZoom());
+    }
+
+    useEffect(() => {
+        if(!position) return;
+        goTo(position.lat, position.lng);
+    }, [position]);
 
     useEffect(() => {
         if (!map) return;
-
-
+      //Here we find the user location and set the position
+      //We also ask for permission to use the location
         map.locate().on("locationfound", function (e) {
           setPosition(e.latlng);
           map.flyTo(e.latlng, map.getZoom());
         });
-
-        const searchControle = L.control.search({
-          position: "topleft",
-          layer: L.geoJSON(),
-          propertyName: "name",
-          marker: false,
-          moveToLocation: function (latlng, title, map) {
-            map.flyTo(latlng, map.getZoom());
-          },
-        });
-
-        searchControle.on("search:locationfound", function (e) {
-          setPosition(e.latlng);
-          map.flyTo(e.latlng, map.getZoom());
-        });
-
-        map.addControl(searchControle);
-
-
       }, [map]);
 
 
     useEffect(() => {
         map.on('moveend', () => {
+          //Each time the map is moved, we update the bounds
+          //Thie bounds are four coordinates that define the area of the map
             setBounds(map.getBounds());
         });    
         return () => {

@@ -24,10 +24,9 @@ const useInMapView = () => {
 
     useEffect(() => {
 
-        if (services) {
-            setOVServices(services);
-        }
-
+      if (services) {
+          setOVServices(services);
+      }
     }, [services]);
 
     useEffect(() => {

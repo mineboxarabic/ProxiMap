@@ -1,4 +1,12 @@
-import { MapContainer, TileLayer, useMap, Marker, Popup, Circle, CircleMarker } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  useMap,
+  Marker,
+  Popup,
+  Circle,
+  CircleMarker,
+} from "react-leaflet";
 import { Box } from "@mui/system";
 import "leaflet/dist/leaflet.css";
 import useResource from "../Hooks/useResource";
@@ -11,6 +19,7 @@ import ServiceList from "../Components/ServiceList";
 import ServiceDetailsDrawer from "../Components/ServiceDetailsDrawer";
 import { Button } from "@mui/material";
 import MapSearchBar from "../Components/MapSearchBar";
+
 const Map = () => {
   const { services, isLoadingServices, updateBounds } = useInMapView();
 
@@ -30,8 +39,14 @@ const Map = () => {
   //This function is to close the drawer
   const onCloseDrawer = () => {
     setSelected(null);
-  }
+  };
 
+  //When we search we execute this function
+  const onSearchSubmit = (value) => {
+    const lat = value.lat;
+    const lng = value.lng;
+    setPosition({ lat, lng });
+  };
 
   //I use this useEffect to update the positions of the services onChange of the services
   useEffect(() => {
@@ -54,106 +69,117 @@ const Map = () => {
     }
   }, [selected]);
 
-
-
   return (
-    <Box sx={{ width: "100%", height: "100%" }}>
-    <ServiceDetailsDrawer partner={selectedPartner} service={selected} open={isDrawerOpened} onClose={onCloseDrawer} />
-    <Box
-      sx={{
-        width: "100%",
-        display: "flex",
-        flexDirection: "row",
-      }}
-    >
-      <Box
-        sx={{
-          width: "70%",
-          float: "left",
-        }}
-      >
-        <Box sx={{ height: height }}>
+    <Box className={"main-container"}>
+      <ServiceDetailsDrawer
+        partner={selectedPartner}
+        service={selected}
+        open={isDrawerOpened}
+        onClose={onCloseDrawer}
+      />
+      <Box className={"map-container"}>
+        <Box className={"map"}>
           {/*TODO:add in case of error */}
           <MapContainer
-            center={position ? [position.lat, position.lng] : [43.67248611471893 ,4.632794385153891 ]}
+            center={
+              position
+                ? [position.lat, position.lng]
+                : [43.67248611471893, 4.632794385153891]
+            }
             zoom={12}
             scrollWheelZoom={true}
             id="mapid"
           >
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution="&amp;copy OpenStreetMap contributors"
+            />
+            <Box className={"search-bar-container"}>
+              <MapSearchBar onSearchSubmit={onSearchSubmit} />
+            </Box>
 
-            
-        
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution="&amp;copy OpenStreetMap contributors"
-          />
-          <Box sx={{position: "absolute", zIndex: 1000, top: "5rem", left: "1rem"}}>
-              <MapSearchBar />
-          </Box>
-
-          
             {services.length > 0 ? (
               services.map((service, index) => {
                 const isHovered = hovered?._id === service._id;
-                const color = isHovered ? 'red' : '#FF8B87';
+                const color = isHovered ? "red" : "#FF8B87";
                 const opacity = isHovered ? 1 : 0;
                 return (
-                  <Circle key={index} radius={service.range * 100} center={[service.position.coordinates[1], service.position.coordinates[0]]}
-                  pathOptions={{color: color , opacity: opacity}}
-
-                  //onCLick={setHovered(service)}
-                  eventHandlers={
-                    {
+                  <Circle
+                    key={index}
+                    radius={service.range * 100}
+                    center={[
+                      service.position.coordinates[1],
+                      service.position.coordinates[0],
+                    ]}
+                    pathOptions={{ color: color, opacity: opacity }}
+                    //onCLick={setHovered(service)}
+                    eventHandlers={{
                       click: () => {
                         setHovered(service);
                         setSelected(service);
                       },
-                    }                    
-                  }
+                    }}
                   >
-                    <Marker key={`${index}`} position={[service.position.coordinates[1], service.position.coordinates[0]]} icon={L.icon({
-                      iconUrl:
-                        "https://cdn.iconscout.com/icon/free/png-256/free-location-3079544-2561454.png",
-                      iconSize: [30, 30],
-                      iconAnchor: [12.5, 25],
-                      popupAnchor: [0, -25],
+                    <Marker
+                      key={`${index}`}
+                      position={[
+                        service.position.coordinates[1],
+                        service.position.coordinates[0],
+                      ]}
+                      icon={L.icon({
+                        iconUrl:
+                          "https://cdn.iconscout.com/icon/free/png-256/free-location-3079544-2561454.png",
+                        iconSize: [30, 30],
+                        iconAnchor: [12.5, 25],
+                        popupAnchor: [0, -25],
 
-                      eventHandlers: {
-                        click: () => {
-                          setHovered(service);
-                          setSelected(service);
+                        eventHandlers: {
+                          click: () => {
+                            setHovered(service);
+                            setSelected(service);
+                          },
                         },
-                      }
-                    })}>
+                      })}
+                    >
                       <Popup>
                         <h2>{service.name}</h2>
                         <h3>{service.description}</h3>
                       </Popup>
                     </Marker>
                     <Popup>
-                    <h2>{service.name} can go for {service.range * 100}M From his house</h2>
+                      <h2>
+                        {service.name} can go for {service.range * 100}M From
+                        his house
+                      </h2>
                     </Popup>
                   </Circle>
-
                 );
               })
             ) : (
               <h1>Loading...</h1>
             )}
-            <MapEvents setBounds={updateBounds} setPosition={setPosition}/>
+            <MapEvents
+              position={position}
+              setBounds={updateBounds}
+              setPosition={setPosition}
+            />
           </MapContainer>
         </Box>
+        <Box className={"service-list-container"}>
+          <ServiceList
+            height={height}
+            setSelectedPartner={setSelectedPartner}
+            onCloseDrawer={onCloseDrawer}
+            setSelected={setSelected}
+            setHovered={setHovered}
+          />
+        </Box>
       </Box>
-      <Box sx={{ width: "30%" }}>
-        <ServiceList height={height} setSelectedPartner={setSelectedPartner} onCloseDrawer={onCloseDrawer} setSelected={setSelected} setHovered={setHovered} />
+
+      <Box className={"footer"}>
+        <h1>Footer</h1>
       </Box>
     </Box>
-
-
-    <Box sx={{ width: "100%", height: "50vh", backgroundColor: 'red' }}>
-      <h1>Footer</h1>
-      </Box>
-  </Box>
   );
 };
 

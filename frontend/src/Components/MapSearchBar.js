@@ -9,35 +9,55 @@ const MapSearchBar = ({ onSearchSubmit }) => {
     const {setAddress, getSuggestions, loading, suggest} = useGeoAPI();
     const [searchTerm, setSearchTerm] = useState('');
 
-    
+    const [selectedOption, setSelectedOption] = useState(null);
 
+    
+    const handleSearchChange = (e) => {
+      setSearchTerm(e.target.value);
+      setTimeout(() => {
+        setAddress(e.target.value);
+      }, 1000);
+
+    }
+
+    useEffect(() => {
+      console.log(selectedOption);
+    }, [selectedOption]);
+
+    const handleSubmit = (e) => {
+ 
+
+
+      
+    }
 
   return (
     <Paper
       component="form"
-      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
       onSubmit={handleSubmit}
+      className='search-bar'
     >
-      {/*<Autocomplete
-        freeSolo
+
+        <Autocomplete
+
+          id="combo-box-demo"
+          options={suggest}
+          sx={{ ml: 1, flex: 1 }}
+          renderInput={(params) => <TextField {...params} 
+          placeholder="Search in map"
+          onChange={handleSearchChange}
+          label="Search in map" />
         
-        onInputChange={handleSearchChange}
-        inputValue={searchTerm}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            sx={{ ml: 1, flex: 1 }}
-            placeholder="Search in map"
-            inputProps={{ ...params.inputProps, 'aria-label': 'search in map' }}
-          />
-        )}
-        />*/}
-        <TextField
-        sx={{ ml: 1, flex: 1 }}
-        placeholder="Search in map"
-        onChange={handleSearchChange}
-        value={searchTerm}
-        inputProps={{ 'aria-label': 'search in map' }}
+    }
+
+      getOptionLabel={(option) => option.name || ''}
+      onChange={(event, newValue) => {
+        setSelectedOption(newValue);
+        console.log(newValue);
+        if(newValue){
+          onSearchSubmit(newValue);
+        }
+      } }
         />
 
       <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">

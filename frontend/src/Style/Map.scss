@@ -1,3 +1,84 @@
-#mapid{
-    height:100%;
+$height-map-mobile: 85vh;
+
+@mixin full-size {
+  width: 100%;
+  height: 100%;
+}
+
+#mapid {
+  @include full-size;
+}
+
+.main-container {
+  @include full-size;
+
+  .map-container {
+    @include full-size;
+    display: flex;
+    flex-direction: row;
+    height: 85vh;
+
+    .map {
+      width: 70%;
+      float: left;
+
+      .search-bar-container {
+        position: absolute;
+        z-index: 1000;
+        top: 5rem;
+        left: 1rem;
+
+
+        .search-bar{
+            padding: 2px 4px;
+            display:flex; 
+            align-items: center;
+            width: 400px;
+        }
+      }
+    }
+
+    .service-list-container {
+      width: 30%;
+    }
+  }
+
+  .footer {
+    @include full-size;
+    background-color: #282c34;
+    color: white;
+    height: 5vh;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .main-container .map-container {
+    flex-direction: column;
+    height: $height-map-mobile;
+
+    .map {
+      width: 100%;
+      height: $height-map-mobile;
+      .search-bar-container{
+        top: 0.2rem;
+        left: 3rem;
+        .search-bar{
+            padding: 2px 4px;
+            display:flex; 
+            align-items: center;
+            width: 300px;
+        }
+      }
+    }
+    
+    .service-list-container {
+      width: 100%;
+        height: 15vh;
+    }
+
+
+    .footer {
+      height: 5vh;
+    }
+  }
 }

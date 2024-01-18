@@ -1,0 +1,25 @@
+//Mobile Responsive
+.dataGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+    width: 60%;
+    margin: 0 auto;
+    padding: 0 10px;
+    @media only screen and ( max-width: 600px ) {
+        grid-template-columns: 1fr;
+        grid-gap: 0px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 10px;
+    }
+}
+@media only screen and ( max-width: 600px ) {
+    .dataGrid {
+        display: block;
+
+        width: 100% !important;
+
+    }
+  }
+  

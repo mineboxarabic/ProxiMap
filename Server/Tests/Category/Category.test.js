@@ -8,14 +8,13 @@ import application from "../../Application.js";
 
 dotenv.config();
 
-const randomEmail =
-  Math.random().toString(36).substring(2, 15) + "@example.com";
+const randomEmail =Math.random().toString(36).substring(2, 15) + "@example.com";
 let categoryId = "";
 
 const agent = supertest.agent(application);
 
 const category = {
-    "name": "Test Category",
+    "name": "Test Category" + randomEmail,
     "description": "Test Category Description"
 }
 
@@ -178,27 +177,5 @@ describe("Error Testing", () => {
     );
   });
 
-  //Not an email
-  it("Should not create a category with invalid email", async () => {
-    const response = await agent
-      .post("/categorys")
-      .send({
-        "partnerId": "60b5c5b4c7a3c0bf0f8c2",
-        "categoryId": "65a63a89fc13ae50c9fa2cf1",
-        "name": "Teaidj",
-        "description": "Corrosion of second degree of neck, initial encounter",
-        "price": 64,
-        "position": { "lat": 30.6377274, "lng": 73.0947607 },
-        "range": 2,
-        "ratings": ["659fba2a1f253e0e1d5147dd"],
-        "availability": true
-      })
-      .expect(400);
-
-    expect(response.body).toHaveProperty("error");
-    expect(response.body.error).toBeInstanceOf(Array);
-    expect(response.body.error[0]).toHaveProperty("msg");
-    expect(response.body.error[0]["msg"]).toBe("partnerid must be a valid mongoId");
-  });
 
 });
