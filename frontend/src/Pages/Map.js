@@ -9,29 +9,37 @@ import MapEvents from "../Helpers/MapEvents";
 import useInMapView from "../Hooks/Services/useInMapView";
 import ServiceList from "../Components/ServiceList";
 import ServiceDetailsDrawer from "../Components/ServiceDetailsDrawer";
+import { Button } from "@mui/material";
+import MapSearchBar from "../Components/MapSearchBar";
 const Map = () => {
-  const { services, isLoadingServices, errorServices, updateBounds } =
-    useInMapView();
+  const { services, isLoadingServices, updateBounds } = useInMapView();
+
+  const [errormsg, setErrormsg] = useState(null);
+
+  const [isDrawerOpened, setIsDrawerOpened] = useState(false);
+
   const [positions, setPositions] = useState([]);
   const [position, setPosition] = useState(null);
 
   const [hovered, setHovered] = useState(null);
   const [selected, setSelected] = useState(null);
-
-
   const [selectedPartner, setSelectedPartner] = useState(null);
 
   const [height, setHeight] = useState("85vh");
+
+  //This function is to close the drawer
   const onCloseDrawer = () => {
     setSelected(null);
-
   }
+
+
+  //I use this useEffect to update the positions of the services onChange of the services
   useEffect(() => {
-    if (!isLoadingServices && services.length > 0) {
+    if (!isLoadingServices && services?.length > 0) {
       const positions = services.map((service) => {
         return {
-          lat: service.position.coordinates[1],
-          lng: service.position.coordinates[0],
+          lat: service?.position?.coordinates[1],
+          lng: service?.position?.coordinates[0],
         };
       });
       setPositions(positions);
@@ -39,14 +47,18 @@ const Map = () => {
   }, [services]);
 
   useEffect(() => {
-    console.log(hovered);
-  }, [hovered]);
+    if (selected) {
+      setIsDrawerOpened(true);
+    } else {
+      setIsDrawerOpened(false);
+    }
+  }, [selected]);
 
 
 
   return (
     <Box sx={{ width: "100%", height: "100%" }}>
-    <ServiceDetailsDrawer partner={selectedPartner} service={selected} open={selected} onClose={onCloseDrawer} />
+    <ServiceDetailsDrawer partner={selectedPartner} service={selected} open={isDrawerOpened} onClose={onCloseDrawer} />
     <Box
       sx={{
         width: "100%",
@@ -68,18 +80,25 @@ const Map = () => {
             scrollWheelZoom={true}
             id="mapid"
           >
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
 
+            
+        
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution="&amp;copy OpenStreetMap contributors"
+          />
+          <Box sx={{position: "absolute", zIndex: 1000, top: "5rem", left: "1rem"}}>
+              <MapSearchBar />
+          </Box>
+
+          
             {services.length > 0 ? (
               services.map((service, index) => {
                 const isHovered = hovered?._id === service._id;
                 const color = isHovered ? 'red' : '#FF8B87';
                 const opacity = isHovered ? 1 : 0;
                 return (
-                  <Circle radius={service.range * 100} center={[service.position.coordinates[1], service.position.coordinates[0]]}
+                  <Circle key={index} radius={service.range * 100} center={[service.position.coordinates[1], service.position.coordinates[0]]}
                   pathOptions={{color: color , opacity: opacity}}
 
                   //onCLick={setHovered(service)}

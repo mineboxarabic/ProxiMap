@@ -13,7 +13,7 @@ const useInMapView = () => {
       error: errorServices,
       loading: isLoadingServices,
     } = useResource(`/services/in-map-view/${bounds?._southWest?.lat}/${bounds?._southWest?.lng}/${bounds?._northEast?.lat}/${bounds?._northEast?.lng}`);
-    ///services/in-map-view/60.192059/24.945831/60.192059/24.945831
+
   
 
     useEffect(() => {

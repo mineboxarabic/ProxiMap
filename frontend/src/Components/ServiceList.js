@@ -15,16 +15,14 @@ const ServiceList = ({setHovered,height,setSelected,onCloseDrawer, setSelectedPa
         setSelected(null);
     }
 
-    useEffect(() => {
-        console.log(oVServices);
-    }, [oVServices]);
+
 
     return (
         <Box sx={{ maxHeight: height, overflow: 'auto' }}>
             <List>
-                {oVServices?.length > 0 && oVServices.map((service) => {
+                {oVServices?.length > 0 && oVServices.map((service, index) => {
                     return (
-                        <ServiceItem setSelectedPartner={setSelectedPartner} service={service} setHovered={setHovered} setSelected={setSelected} />
+                        <ServiceItem key={index} setSelectedPartner={setSelectedPartner} service={service} setHovered={setHovered} setSelected={setSelected} />
                     );
                 })}
             </List>

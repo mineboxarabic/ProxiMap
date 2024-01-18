@@ -5,7 +5,7 @@ const dbName = "ProxiMap";
 const collectionName = "services";
 
 async function run() {
-    const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
+    const client = new MongoClient(url);
     
     try {
         await client.connect();
@@ -14,24 +14,19 @@ async function run() {
         const db = client.db(dbName);
         const collection = db.collection(collectionName);
 
-        const services = await collection.find().toArray();
+        //Create a look up pipeline stage
+        const lookupStage = {
+            $lookup: {
+                from: "users",
+                localField: "partnerId",
+                foreignField: "_id",
+                as: "partnerDetails",
+            },
+        };
 
-        // Process and update each service
-        for (let service of services) {
-            if (service.position && typeof service.position.lng === "number" && typeof service.position.lat === "number") {
-                const updatedPosition = {
-                    type: "Point",
-                    coordinates: [service.position.lng, service.position.lat]
-                };
 
-                await collection.updateOne({ _id: service._id }, { $set: { position: updatedPosition } });
-                console.log(`Updated service with _id: ${service._id}`);
-            }
-        }
+        
 
-        // Create a 2dsphere index on the 'position' field
-        await collection.createIndex({ "position": "2dsphere" });
-        console.log("2dsphere index created on 'position' field");
 
     } catch (e) {
         console.error("An error occurred:", e);

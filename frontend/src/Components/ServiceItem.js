@@ -7,18 +7,9 @@ import Typography from "@mui/material/Typography";
 import useResource from "../Hooks/useResource";
 import Avatar from "@mui/material/Avatar";
 const ServiceItem = ({ service, setHovered, setSelected, setSelectedPartner }) => {
-    const {loading, setResources:setUser , resources:user, getOne:getPartner} = useResource(`/users`);
-    const [partner, setPartner] = useState(null);
-    React.useEffect(() => {
-        const fetchPartner = async () => {
-            await getPartner(service?.partnerId.toString());
-        }
-        if(!loading) fetchPartner();
 
-        setPartner(user.user);
-    }
-    , []);
 
+  const [partner, setPartner] = useState(service?.partnerDetails[0]);
   return (
     <ListItem
       key={service._id}
