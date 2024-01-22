@@ -7,6 +7,8 @@ const readService = async (req, res) => {
 
     const service = await serviceDAO.findById(id);
 
+    console.log(service);
+
     res.status(200).json({
         success: true,
         message: "Service found",

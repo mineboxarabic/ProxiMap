@@ -17,4 +17,13 @@ export const readServicesinMapView = async (req, res) => {
     const services = await serviceDAO.findServicesinMapView(swLat, swLng, neLat, neLng);
     res.status(200).json(services);
 }; 
+
+export const readServicesinMapViewOfUser = async (req, res) => {
+    
+    const id = req.params.id;
+    const serviceDAO = new ServiceDAO();
+    const { swLat, swLng, neLat, neLng } = req.params;
+    const services = await serviceDAO.findServicesinMapViewOfUser(swLat, swLng, neLat, neLng, id);
+    res.status(200).json(services);
+}; 
 export default readServices;

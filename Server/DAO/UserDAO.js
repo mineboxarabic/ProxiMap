@@ -51,6 +51,12 @@ class UserDAO {
     async findByUserName(username){
          return await User.findOne({username: username});
     }
+    async updateAvatar(id, fileName){
+        //Update only the profilePicture field but keep the rest of the profile the same
+        return await User.findByIdAndUpdate(id, {profile: {profilePicture: fileName}}).catch((err) => {
+            return {error: err};
+        });
+    }
 
 }
 export default UserDAO;

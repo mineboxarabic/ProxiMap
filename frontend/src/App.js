@@ -16,9 +16,11 @@ import PersistLogin from './Components/PersistLogin';
 import CRUDUser from './Pages/Admin/CRUD/CRUDUser';
 import CRUDService from './Pages/Admin/CRUD/CRUDService';
 
-import { ADMIN, USER, Partner, Manager, Staff } from './Helpers/Roles';
+import { ADMIN, USER, PARTNER, MANAGER, STAFF } from './Helpers/Roles';
 import Map from './Pages/Map';
 import ProfilePage from './Pages/Profile';
+import CRUDCategory from './Pages/Admin/CRUD/CRUDCategory';
+import MapEdit from './Pages/Partner/MapEdit';
 
 function App() {
   return (
@@ -37,18 +39,30 @@ function App() {
         <Route element={<PersistLogin />}>
           {/* Admin Routes */}
           <Route element={<RequireAuth allowedRoles={[ADMIN]} />}>
+
             <Route path='/admin/viewusers' element={<ViewUsers />} />
             <Route path='/users' element={<CRUDUser />} />
             <Route path='/services' element={<CRUDService />} />
+            <Route path='/categorys' element={<CRUDCategory />} />
+
 
           </Route>
       
             {/* User Routes */} 
           <Route element={<RequireAuth allowedRoles={[ADMIN,USER]} />}>
-            <Route path='/map' element={<Map />} />
+          </Route>
+
+          {/* All Roles Routes */}
+          <Route element={<RequireAuth allowedRoles={[ADMIN,USER , PARTNER, MANAGER, STAFF]} />}>
+          <Route path='/map' element={<Map />} />
+
             <Route path='/profile' element={<ProfilePage />} />
           </Route>
 
+      {/*Parnter only orutes */}
+      <Route element={<RequireAuth allowedRoles={[PARTNER]} />}>
+        <Route path='/services/edit' element={<MapEdit />} />
+      </Route>
         {/* Catch all */}
         <Route path='/*' element={<NotFound />} />
         <Route path='/unautherized' element={<UnAutherized />} />

@@ -1,23 +1,26 @@
 import UserDAO from "../../DAO/UserDAO.js";
-import ValidateRes from "../../Validators/ValidateRes.js";
+
+
 
 const updateUser = async (req, res) => {
     const userDAO = new UserDAO();
     const id = req.params.id;
 
+    const user = await userDAO.updateById(id, req.body);
 
-    const user = req.body;
-    const updatedUser = await userDAO.updateById(id, user);
-
-
-
-
+    if (!user) {
+        return res.status(404).json({
+            success: false,
+            message: "User not found"
+        });
+    }
 
     res.status(200).json({
         success: true,
-        message: "User updated successfully",
-        updatedUser
+        message: "User updated successfully"
     });
+
+
 };
 
 export default updateUser;

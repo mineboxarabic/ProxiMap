@@ -19,11 +19,12 @@ import ServiceList from "../Components/ServiceList";
 import ServiceDetailsDrawer from "../Components/ServiceDetailsDrawer";
 import { Button } from "@mui/material";
 import MapSearchBar from "../Components/MapSearchBar";
+import { Alert } from "@mui/material";
+import useCurrentUser from "../Hooks/useCurrentUser";
 
 const Map = () => {
-  const { services, isLoadingServices, updateBounds } = useInMapView();
+  const { services, isLoadingServices, updateBounds , errorServices} = useInMapView();
 
-  const [errormsg, setErrormsg] = useState(null);
 
   const [isDrawerOpened, setIsDrawerOpened] = useState(false);
 
@@ -41,12 +42,14 @@ const Map = () => {
     setSelected(null);
   };
 
+  const currentUser = useCurrentUser();
   //When we search we execute this function
   const onSearchSubmit = (value) => {
     const lat = value.lat;
     const lng = value.lng;
     setPosition({ lat, lng });
   };
+
 
   //I use this useEffect to update the positions of the services onChange of the services
   useEffect(() => {
@@ -80,6 +83,8 @@ const Map = () => {
       <Box className={"map-container"}>
         <Box className={"map"}>
           {/*TODO:add in case of error */}
+
+
           <MapContainer
             center={
               position
@@ -98,15 +103,27 @@ const Map = () => {
               <MapSearchBar onSearchSubmit={onSearchSubmit} />
             </Box>
 
+            {errorServices && (
+            <Box className={"error-container"}>
+              <Alert 
+                 sx={{ width: '100%' , zIndex: 1000, position: 'absolute', top: 0, left: 0, right: 0, margin: 'auto', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '2rem'}}
+              severity="error">{errorServices}</Alert>
+            </Box>
+          )}
             {services.length > 0 ? (
               services.map((service, index) => {
                 const isHovered = hovered?._id === service._id;
-                const color = isHovered ? "red" : "#FF8B87";
                 const opacity = isHovered ? 1 : 0;
+
+                const isSameUser = currentUser._id === service.partnerId;
+                
+                
+                const color = isSameUser ? isHovered ?  "darkred" : "red" : isHovered ? "darkblue" : "blue";
+
                 return (
                   <Circle
                     key={index}
-                    radius={service.range * 100}
+                    radius={service.range}
                     center={[
                       service.position.coordinates[1],
                       service.position.coordinates[0],
@@ -128,7 +145,7 @@ const Map = () => {
                       ]}
                       icon={L.icon({
                         iconUrl:
-                          "https://cdn.iconscout.com/icon/free/png-256/free-location-3079544-2561454.png",
+                        isSameUser ? "https://cdn-icons-png.flaticon.com/512/7711/7711464.png" : "https://cdn.iconscout.com/icon/free/png-256/free-location-3079544-2561454.png",
                         iconSize: [30, 30],
                         iconAnchor: [12.5, 25],
                         popupAnchor: [0, -25],
@@ -167,11 +184,13 @@ const Map = () => {
         </Box>
         <Box className={"service-list-container"}>
           <ServiceList
+            
             height={height}
             setSelectedPartner={setSelectedPartner}
             onCloseDrawer={onCloseDrawer}
             setSelected={setSelected}
             setHovered={setHovered}
+
           />
         </Box>
       </Box>

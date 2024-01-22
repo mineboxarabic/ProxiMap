@@ -29,7 +29,8 @@ const LogIn = async (req, res) => {
             _id: user._id,
             username: user.username,
             email: user.email,
-            role: user.role
+            role: user.role,
+            profile: user.profile
         }, process.env.REFRESH_TOKEN, { expiresIn: '1d' });
         
         const tokenDAO = new TokenDAO();
@@ -54,7 +55,7 @@ const LogIn = async (req, res) => {
 
 
 
-        return res.status(200).json({success:true, message: "Logged in successfully 😊 👌", accessToken,refreshToken,user:userDTO.getUser() });
+        return res.status(200).json({success:true, message: "Logged in successfully 😊 👌", accessToken,refreshToken,user });
     } catch (error) {
         // Handle errors
         return res.status(500).json({success:false, message: "Something went wrong" });

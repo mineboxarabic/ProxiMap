@@ -1,5 +1,4 @@
 import { MongoClient } from 'mongodb';
-
 const url = "mongodb://localhost:27017"; // Replace with your MongoDB URL
 const dbName = "ProxiMap";
 const collectionName = "services";
@@ -14,15 +13,28 @@ async function run() {
         const db = client.db(dbName);
         const collection = db.collection(collectionName);
 
-        //Create a look up pipeline stage
-        const lookupStage = {
-            $lookup: {
-                from: "users",
-                localField: "partnerId",
-                foreignField: "_id",
-                as: "partnerDetails",
-            },
-        };
+
+        const services = await collection.find({}).toArray();
+
+        for(let i = 0; i < services.length; i++) {
+            const service = services[i];
+        
+            const range = Math.floor(Math.random() * 1000) + 1;
+
+            const updatedService = {
+                ...service,
+                range: range
+            }
+
+            await collection.updateOne(
+                { _id: service._id },
+                { $set: updatedService }
+            );
+
+
+        }
+
+        console.log("Done");
 
 
         

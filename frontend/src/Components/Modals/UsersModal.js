@@ -14,10 +14,22 @@ const UsersModal = ({
   handleEdit,
   handleAdd,
   model,
-  setModel,
   error,
+  modelClass
 }) => 
 {
+
+  const [tempModel, setTempModel] = useState(modelClass);
+
+  useEffect(() => {
+    if(isEdit){
+      setTempModel(model);
+    }
+    else{
+      setTempModel(modelClass);
+    }
+  }, [open]);
+
 
 
   return (
@@ -66,28 +78,28 @@ const UsersModal = ({
               className={"modalTextField"}
               label={"User name"}
               type="text"
-              value={model["username"]}
+              value={tempModel["username"]}
               onChange={(e) =>
-                setModel((prev) => ({ ...prev, ["username"]: e.target.value }))
+                setTempModel((prev) => ({ ...prev, ["username"]: e.target.value }))
               }
             />
             <TextField
               className={"modalTextField"}
               label={"Email"}
               type="text"
-              value={model["email"]}
+              value={tempModel["email"]}
               onChange={(e) =>
-                setModel((prev) => ({ ...prev, ["email"]: e.target.value }))
+                setTempModel((prev) => ({ ...prev, ["email"]: e.target.value }))
               }
             />
             <TextField
               className={"modalTextField"}
               label={"Password"}
               type="text"
-              value={model["password"]}
-              disabled={isEdit}
+              value={tempModel["password"]}
+              disabled={isEdit ? true : false}
               onChange={(e) =>
-                setModel((prev) => ({ ...prev, ["password"]: e.target.value }))
+                setTempModel((prev) => ({ ...prev, ["password"]: e.target.value }))
               }
             />
 
@@ -96,21 +108,21 @@ const UsersModal = ({
            { /*<TextField className={"modalTextField"} label={"Role"} type="text" value={model["role"]} onChange={(e) =>setModel((prev) => ({ ...prev, ["role"]: e.target.value }))}/>*/}
               
               <Autocomplete
-              inputValue={model["role"] ? model["role"] : "Select a role"}
+              inputValue={tempModel["role"] ? tempModel["role"] : "Select a role"}
               isOptionEqualToValue={(option, value) => option === value}
-              value={model["role"] ? model["role"] : "Select a role"}
-              className={"modalTextField"} disablePortal={true} options={["Admin", "User", "Staff", "Manager", "Partner","Select a role"]} onChange={(e, value) =>setModel((prev) => ({ ...prev, ["role"]: value }))} renderInput={(params) => <TextField {...params} label="Role" />} />
+              value={tempModel["role"] ? tempModel["role"] : "Select a role"}
+              className={"modalTextField"} disablePortal={true} options={["Admin", "User", "Staff", "Manager", "Partner","Select a role"]} onChange={(e, value) =>setTempModel((prev) => ({ ...prev, ["role"]: value }))} renderInput={(params) => <TextField {...params} label="Role" />} />
 
             <TextField
               className={"modalTextField"}
               label={"BIO"}
               type="text"
-              value={model["profile"]["bio"]}
+              value={tempModel["profile"]["bio"]}
               onChange={(e) =>
-                setModel((prev) => ({
+                setTempModel((prev) => ({
                   ...prev,
                   ["profile"]: {
-                    ...model["profile"],
+                    ...tempModel["profile"],
                     ["bio"]: e.target.value,
                   },
                 }))
@@ -120,12 +132,12 @@ const UsersModal = ({
               className={"modalTextField"}
               label={"profile Picture"}
               type="text"
-              value={model["profile"]["profilePicture"]}
+              value={tempModel["profile"]["profilePicture"]}
               onChange={(e) =>
-                setModel((prev) => ({
+                setTempModel((prev) => ({
                   ...prev,
                   ["profile"]: {
-                    ...model["profile"],
+                    ...tempModel["profile"],
                     ["profilePicture"]: e.target.value,
                   },
                 }))
@@ -146,7 +158,7 @@ const UsersModal = ({
             <Button
               color="success"
               variant="contained"
-              onClick={() => (isEdit ? handleEdit(model["_id"]) : handleAdd())}
+              onClick={() => (isEdit ? handleEdit(tempModel) : handleAdd(tempModel))}
             >
               save
             </Button>

@@ -19,12 +19,16 @@ const ServiceList = ({setHovered,height,setSelected,onCloseDrawer, setSelectedPa
 
     return (
         <Box sx={{ maxHeight: height, overflow: 'auto' }}>
-            <List>
-                {oVServices?.length > 0 && oVServices.map((service, index) => {
+            <List  class="list">
+                {oVServices?.length > 0 ? oVServices.map((service, index) => {
                     return (
-                        <ServiceItem key={index} setSelectedPartner={setSelectedPartner} service={service} setHovered={setHovered} setSelected={setSelected} />
+                        <ServiceItem className="list-item" key={index} setSelectedPartner={setSelectedPartner} service={service} setHovered={setHovered} setSelected={setSelected} />
                     );
-                })}
+                }) : 
+                <ListItem >
+                    <ListItemText primary="No services found in this area" />
+                </ListItem>
+                }
             </List>
         </Box>
     )

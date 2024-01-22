@@ -40,6 +40,12 @@ $height-map-mobile: 85vh;
 
     .service-list-container {
       width: 30%;
+
+      .list-container{
+        height: 85vh;
+        display: flex;
+        flex-direction: column;
+      }
     }
   }
 
@@ -49,6 +55,33 @@ $height-map-mobile: 85vh;
     color: white;
     height: 5vh;
   }
+
+
+
+
+
+  
+
+  
+}
+
+.drawer-user-detail-container{
+  display: flex;
+  flex-direction: row;
+  .drawer-user-detail{
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+    height: 100%;
+    width: 70%;
+  }
+  .drawer-user-detail-text{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+  }
+  
 }
 
 @media only screen and (max-width: 600px) {
@@ -62,23 +95,79 @@ $height-map-mobile: 85vh;
       .search-bar-container{
         top: 0.2rem;
         left: 3rem;
+
+
         .search-bar{
             padding: 2px 4px;
             display:flex; 
             align-items: center;
             width: 300px;
         }
+
+
+
       }
     }
     
     .service-list-container {
+
       width: 100%;
-        height: 15vh;
+        height: 20vh;
+        .list{
+          height: 20vh;
+          display: flex;
+          flex-direction: row;
+          overflow-x: scroll;
+          overflow-y: hidden;
+
+          .list-item{
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+          }
+        }
     }
 
 
     .footer {
       height: 5vh;
     }
+
+ 
   }
+
+  .drawer-user-detail-container{
+    display: flex;
+    flex-direction: column;
+    .drawer-user-detail{
+      display: flex;
+      flex-direction: column;
+      align-items: left;
+      justify-content: center;
+      height: 100%;
+
+
+
+      .drawer-user-detail-text{
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        justify-content: center;
+        height: 100%;
+        width: 50%;
+
+        .badge{
+          display: absolute;
+          top: 0;
+          right: 0;
+        }
+      }
+
+
+    }
+    .drawer-buttons{
+
+    }
+  }
+
 }
+

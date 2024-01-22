@@ -13,6 +13,14 @@ import isUserExist from '../Validators/Users/IsUserExist.js';
 import userValidator, { userValidatorEdit } from '../Validators/userValidator.js';
 import passwordValidator from '../Validators/Users/passwordValidator.js';
 import checkId from '../Validators/CheckMongoId.js';
+import updateProfile from '../Controllers/User/UpdateProfile.js';
+import updateAvatar from '../Controllers/User/UpdateProfile.js';
+import multer from 'multer';
+import path from 'path';
+import uploadIMG from '../Validators/Users/uploadIMG.js';
+import upload from '../Validators/Users/uploadIMG.js';
+import getAvatar from '../Controllers/User/GetAvatar.js';
+
 /**
  * To change the 
  */
@@ -63,5 +71,14 @@ isUserExist,
 (req, res, next) => ValidateRes(req,res,next),
 (req, res, next) => autherizeUserRole(req, res, next, userRoutes.delete.allowedRoles),
 deleteUser);
+
+
+
+userRouter.post('/users/upload/:id',
+upload.single('file'),
+updateAvatar);
+
+userRouter.get('/users/avatar/:id', getAvatar);
+
 
 export default userRouter;

@@ -76,4 +76,37 @@ db.users.insertMany([
   }
 ]);
 
+db.categories.insertMany([{
+  "_id": {
+    "$oid": "65a9a3912f10d0a3fd7106cb"
+  },
+  "name": "House",
+  "description": "Test Category Description",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65a9a3b5b3bd35526b67f7a4"
+  },
+  "name": "Animals",
+  "description": "Corrosion of second degree of neck, initial encounter",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65a9aaf628a8cfe080f0680b"
+  },
+  "name": "Test Categorydsss",
+  "description": "Test Category Description",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65a9b6e21cbc6ccc562e4586"
+  },
+  "name": "testCat",
+  "description": "fdas sdfs efds fef d",
+  "__v": 0
+}])
+
 print("Done.");

@@ -3,7 +3,7 @@ import createService from '../Controllers/Service/createService.js';
 import readService from '../Controllers/Service/readService.js';
 import updateService from '../Controllers/Service/updateService.js';
 import deleteService from '../Controllers/Service/deleteService.js';
-import readServices, { readServicesinMapView } from '../Controllers/Service/readServices.js';
+import readServices, { readServicesinMapView, readServicesinMapViewOfUser } from '../Controllers/Service/readServices.js';
 import checkService from '../Utilities/Service/checkService.js';
 import checkId from '../Validators/CheckMongoId.js';
 import { serviceRoutes } from '../Config/AuthConfig.js';
@@ -37,8 +37,18 @@ serviceRouter.get('/services',
 (req, res, next) => autherizeUserRole(req, res, next, serviceRoutes.read.allowedRoles)
 ,readServices);
 
+serviceRouter.get('/services/in-map-view/:swLat/:swLng/:neLat/:neLng/:id',
+checkId,
+ValidateRes,
+(req, res, next) => autherizeUserRole(req, res, next, serviceRoutes.read.allowedRoles),
+readServicesinMapViewOfUser);
 
-serviceRouter.get('/services/in-map-view/:swLat/:swLng/:neLat/:neLng', readServicesinMapView);
+
+serviceRouter.get(
+    '/services/in-map-view/:swLat/:swLng/:neLat/:neLng', readServicesinMapView);
+
+
+
 
 //Update a service
 serviceRouter.put('/services/:id',checkId,

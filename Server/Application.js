@@ -10,10 +10,13 @@ import authenticationRouter from './Routes/AuthRoutes.js';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import categoryRoute from './Routes/CategoryRouter.js';
+import path from 'path';
 
 dotenv.config();
 
 const application = express();
+const __dirname = path.resolve();
+
 mongoose.connect(process.env.MONGODB_URI).then(() => {
     console.log('Connected to database');
 }
@@ -22,6 +25,8 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
     console.log('Error connecting to database: ' + err);
 }
 );
+application.use('/Assets/profile', express.static(path.join(__dirname, 'Assets/profile')));
+
 application.use(cookieParser());
 
 application.use(bodyParser.urlencoded({ extended: false }));

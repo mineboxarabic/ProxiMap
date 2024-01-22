@@ -17,9 +17,20 @@ const ServiceModal = ({
   model,
   setModel,
   error,
+  modelClass
 }) => 
 {
   const {setResources:setPartners, resources: partners, getAll: getPartners } = useResource('/users');
+  const {setResources:setCategorys, resources: categorys, getAll: getCategorys } = useResource('/categorys');
+
+
+  
+  const [tempModel, setTempModel] = useState(modelClass);
+
+
+
+
+
   const getPartnersAutoComplete = async () => {
     await getPartners();
     setPartners((partners) =>{
@@ -28,12 +39,34 @@ const ServiceModal = ({
       });
     });
 
+  
   }
+
+
+  const getCategorysAutoComplete = async () => {
+    await getCategorys();
+    setCategorys((categorys) =>{
+      return categorys.map((category) => {
+        return { value: category._id, label: category.name };
+      });
+    }
+    );
+  }
+
 
   useEffect(() => {
     getPartnersAutoComplete();
+    getCategorysAutoComplete();
   }, []);
 
+  useEffect(() => {
+    if(isEdit){
+      setTempModel(model);
+    }
+    else{
+      setTempModel(modelClass);
+    }
+  }, [open]);
 
   return (
     open && (
@@ -78,37 +111,84 @@ const ServiceModal = ({
             {error}
           </Alert>
 
-          <TextField
-            label="partnerId"
-            variant="outlined"
-            value={model["partnerId"]}
-            onChange={(e) => setModel({ ...model, partnerId: e.target.value })}
-            
-            />
+ 
 
             <Autocomplete 
             id="combo-box-demo"
             options={partners}
+            defaultValue={()=>{
+              if(isEdit){
+                return {value: model.partnerId, label:model?.partnerDetails[0] ? model?.partnerDetails[0].username : 'User not found'}
+              }else{
+                return {value: partners[0]?.value, label: partners[0]?.label}
+              }
+            }}
             isOptionEqualToValue = {(option, value) => option.value === value.value}
             sx={{ width: 300 }}
-            onChange={(e, value) => setModel({ ...model, partnerId: value.value })}
+            onChange={(e, value) => setTempModel({ ...tempModel, partnerId: value ? value.value : ''  })}
             renderInput={(params) => <TextField {...params} label="Partner" />}
             />
 
 
 
-            <TextField label="CategoryId" variant="outlined" value={model["categoryId"]} onChange={(e) => setModel({ ...model, categoryId: e.target.value })} />
-            <TextField label="Name" variant="outlined" value={model["name"]} onChange={(e) => setModel({ ...model, name: e.target.value })} />
-            <TextField label="Description" variant="outlined" value={model["description"]} onChange={(e) => setModel({ ...model, description: e.target.value })} />
-            <TextField label="Price" variant="outlined" value={model["price"]} onChange={(e) => setModel({ ...model, price: e.target.value })} />
-            <TextField label="Availability" variant="outlined" value={model["availability"]} onChange={(e) => setModel({ ...model, availability: e.target.value })} />
-            <TextField label="Ratings" variant="outlined" value={model["ratings"]} onChange={(e) => setModel({ ...model, ratings: e.target.value })} />
+            {/*<TextField label="CategoryId" variant="outlined" value={tempModel["categoryId"]} onChange={(e) => setTempModel({ ...tempModel, categoryId: e.target.value })} />*/}
+            <Autocomplete 
+            id="combo-box-demo"
+            options={categorys}
+            defaultValue={()=>{
+              if(isEdit){
+                return {value: model.categoryId, label: model.categoryDetails[0]
+                   ? model?.categoryDetails[0].name : 'Category not found'}
+              }else{
+                return {value: categorys[0]?.value || ''
+                  , label: categorys[0]?.label || ''}
+              }
+            }}
+            isOptionEqualToValue = {(option, value) => option.value === value.value}
+            sx={{ width: 300 }}
+            onChange={(e, value) => setTempModel({ ...tempModel, categoryId: value ? value.value : '' })}
+            renderInput={(params) => <TextField {...params} label="Category" />}
+            />
+
+           
+           
+           
+            <TextField label="Name" variant="outlined" value={tempModel["name"]} onChange={(e) => setTempModel({ ...tempModel, name: e.target.value })} />
+            <TextField label="Description" variant="outlined" value={tempModel["description"]} onChange={(e) => setTempModel({ ...tempModel, description: e.target.value })} />
+            <TextField type="number" label="Price" variant="outlined" value={tempModel["price"]} onChange={(e) => setTempModel({ ...tempModel, price: parseInt(e.target.value) })} />
+            <TextField label="Availability" variant="outlined" value={tempModel["availability"]} onChange={(e) => setTempModel({ ...tempModel, availability: e.target.value })} />
+            <TextField label="Ratings" variant="outlined" value={tempModel["ratings"]} onChange={(e) => setTempModel({ ...tempModel, ratings: e.target.value })} />
 
 
-            <TextField type="number" label="lat" variant="outlined" value={model["position"]["lat"]} onChange={(e) => setModel({ ...model, position: { ...model["position"], lat: e.target.value } })} />
-            <TextField type="number" label="lng" variant="outlined" value={model["position"]["lng"]} onChange={(e) => setModel({ ...model, position: { ...model["position"], lng: e.target.value } })} />
+            <TextField 
+            type="number" 
+            label="lat" 
+            variant="outlined"
+            value={tempModel.position.coordinates[0] || ''}
+            onChange={(e) => {
+              let newCoordinates = [...tempModel.position.coordinates];
+              newCoordinates[0] = parseFloat(e.target.value);
+              setTempModel({
+                ...tempModel,
+                position: { ...tempModel.position, coordinates: newCoordinates }
+              });
+            }} />
+            
+            
+            
+            
+            <TextField type="number" label="lng" variant="outlined" value={tempModel["position"]['coordinates'][1]} onChange={
+              (e) => {
+                let newCoordinates = [...tempModel.position.coordinates];
+                newCoordinates[1] = parseFloat(e.target.value);
+                setTempModel({
+                  ...tempModel,
+                  position: { ...tempModel.position, coordinates: newCoordinates }
+                });
+              
+              }} />
 
-            <TextField  type="number"label="range" variant="outlined" value={model["range"]} onChange={(e) => setModel({ ...model, range: e.target.value })} />
+            <TextField  type="number"label="range" variant="outlined" value={tempModel["range"]} onChange={(e) => setTempModel({ ...tempModel, range: e.target.value })} />
           </Box>
 
           <Box
@@ -124,7 +204,13 @@ const ServiceModal = ({
             <Button
               color="success"
               variant="contained"
-              onClick={() => (isEdit ? handleEdit(model["_id"]) : handleAdd())}
+              onClick={() => {
+                if (isEdit) {
+                    handleEdit(tempModel);
+                } else {
+                    handleAdd(tempModel);
+                }
+              }}
             >
               save
             </Button>

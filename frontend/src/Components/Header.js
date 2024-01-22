@@ -28,6 +28,7 @@ const crudPages = [
   {path:'services',label:'Services', allowedRoles:[ADMIN, MANAGER, STAFF]},
   {path:'products',label:'Products', allowedRoles:[ADMIN, MANAGER, STAFF]},
   {path:'orders',label:'Orders', allowedRoles:[ADMIN, MANAGER, STAFF]},
+  {path:'categorys',label:'Categorys', allowedRoles:[ADMIN, MANAGER, STAFF]},
 ]
 
 

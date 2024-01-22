@@ -6,10 +6,13 @@ export const userRoutes = {
         allowedRoles: ['Admin', 'Manager', 'Staff', 'User']
     },
     update: {
-        allowedRoles: ['Admin', 'Manager', 'Staff']
+        allowedRoles: ['Admin', 'Manager', 'Staff', 'User', 'Partner']
     },
     delete: {
         allowedRoles: ['Admin', 'Manager']
+    },
+    profile: {
+        allowedRoles: ['Admin', 'Manager', 'Staff', 'User', 'Partner']
     }
 
 }
@@ -19,10 +22,10 @@ export const serviceRoutes ={
         allowedRoles: ['Admin', 'Manager', 'Staff']
     },
     read: {
-        allowedRoles: ['Admin', 'Manager', 'Staff', 'User']
+        allowedRoles: ['Admin', 'Manager', 'Staff', 'User', 'Partner']
     },
     update: {
-        allowedRoles: ['Admin', 'Manager', 'Staff']
+        allowedRoles: ['Admin', 'Manager', 'Staff', 'Partner']
     },
     delete: {
         allowedRoles: ['Admin', 'Manager']

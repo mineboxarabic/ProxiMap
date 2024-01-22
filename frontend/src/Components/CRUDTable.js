@@ -1,175 +1,138 @@
-import useAxiosPrivate from "../Hooks/useAxiosPrivate"
+import useAxiosPrivate from "../Hooks/useAxiosPrivate";
 import { useEffect, useState } from "react";
 
-import { DataGrid } from '@mui/x-data-grid';
-import { Box } from '@mui/system';
-import { Button } from '@mui/material';
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
+import { DataGrid } from "@mui/x-data-grid";
+import { Box } from "@mui/system";
+import { Button } from "@mui/material";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
 
 import VerifyDeleteModal from "./Modals/VerifyDeleteModal";
 import UsersModal from "./Modals/UsersModal";
 
-
 import useCRUDModel from "../Hooks/useCRUDModel";
 import { Alert } from "@mui/material";
-import Snackbar from '@mui/material/Snackbar'
+import Snackbar from "@mui/material/Snackbar";
 
-import '../Style/DataTable.scss';
+import "../Style/DataTable.scss";
 import ServiceModal from "./Modals/ServicesModal";
+import CategorysModal from "./Modals/CategorysModal";
+
+const CRUDTable = ({ columns, modelClass, nameOfClass }) => {
+  const columnsWithAction = [...columns];
+
+  //Modal states
+  const [openModal, setOpenModal] = useState(false);
+  const [isAdd, setIsAdd] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
+
+  //CRUD hooks
+  const {
+    AddModel,
+    EditModel,
+    DeleteModel,
+    GetAllModels,
+    GetOneModel,
+    loading,
+    error,
+    success,
+    setSuccess,
+    setError
+  } = useCRUDModel();
 
 
-const CRUDTable = ({columns, modelClass, nameOfClass}) => {
-    const columnsWithAction = [...columns];
+
+  const [data, setData] = useState([]);
+
+  //Model
+  const [model, setModel] = useState(modelClass);
+  const [selectedModel, setSelectedModel] = useState(modelClass);
+
+  const getData = async () => {
+    setData([]);
+    const response = await GetAllModels(nameOfClass);
+    setData(response);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  useEffect(() => {
+    if (error) {
+      setOpenModal(true);
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (success) {
+      setOpenModal(false);
+      setIsAdd(false);
+      setIsEdit(false);
+      getData();
+    }
+  }, [success]);
 
 
-    //Modal states
-    const [openModal, setOpenModal] = useState(false);
-    const [isAdd, setIsAdd] = useState(false);
-    const [isEdit, setIsEdit] = useState(false);
-    const [isDelete, setIsDelete] = useState(false);
 
-    //CRUD hooks
-    const {AddModel, EditModel, DeleteModel ,  GetAllModels, loading} = useCRUDModel();
-    const [data, setData] = useState([]);
 
-    
-    
-    //Snackbar states
-    const [success, setSuccess] = useState(false);
-    const [errormsg, setErrormsg] = useState('');
+
+
+  const handleClose = () => {
+    setIsAdd(false);
+    setIsEdit(false);
+    setOpenModal(false);
+    setError('');
+  };
+
+  const openEditModal = async (row) => {
+
+    setModel(row);
+    setIsEdit(true);
+    setOpenModal(true);
+  };
+
+  const openAddModal = () => {
+    setModel(modelClass);
+    setIsAdd(true);
+    setOpenModal(true);
+    setIsEdit(false);
+  };
+
+  const openDeleteModal = (row) => {
+    setSelectedModel(row?._id);
+    setIsDelete(true);
+  };
+
+  //CRUD functions
+  const handleAdd = async (addedModel) => {
+    await AddModel(nameOfClass, addedModel);
+  };
+
+  const handleEdit = async (modelEdited) => {
+    if (modelEdited["password"]) {
+      delete modelEdited["password"];
+    }
+
+
+    const res = await EditModel(nameOfClass, modelEdited._id, modelEdited);
+
   
 
-    //Model
-    const [model, setModel] = useState(modelClass);
-    //const model = new modelClass();
-    useEffect(() => {
-      resetModel();
-    }
-    ,[isAdd])
+  };
+  const handleDelete = async (id) => {
+    await DeleteModel(nameOfClass, id);
 
-    useEffect(() => {
-        const getData = async () => {
-            const response = await GetAllModels(nameOfClass);
-   
-            setData(response);
-            console.log(response);
-        }
-        getData();
-        
-    }, [success])
+    getData();
+    setIsDelete(false);
+  };
 
-    
-    const resetModel = () => {
-        setModel(modelClass);
-    }
-
-
-    const handleClose = () => {
-      console.log("close");
-      setOpenModal(false);
-      setIsEdit(false);
-      setIsAdd(false);
-    };
-
-    const openEditModal = (row) => {
-        setErrormsg("");
-      setModel(row);
-      //model.setAttributesFromRow(row);
-      setIsEdit(true);
-      setOpenModal(true);
-    };
-
-    const openAddModal = () => {
-      setErrormsg("");
-      setIsAdd(true);
-      setOpenModal(true);
-    };
-
-    const openDeleteModal = (row) => {
-        console.log(row);
-        setErrormsg("");
-
-        setModel(row);
-        setIsDelete(true);
-    };
-
-
-
-    //CRUD functions
-    const handleAdd = async () => {
-      const iserror = await AddModel(nameOfClass, model);
-      if (iserror === true) {
-        setOpenModal(false);
-        setIsAdd(false);
-        setSuccess(true);
-      }
-      if (iserror === null) {
-        setOpenModal(false);
-        setIsAdd(false);
-      } else {
-        setErrormsg(iserror);
-      }
-    };
-
-    const handleEdit = async (id) => {
-      
-        if(model['password']){
-            delete model['password'];
-        }
-        const iserror = await EditModel(nameOfClass, id, model);
-      
-      if (iserror === true) {
-        setOpenModal(false);
-        setIsEdit(false);
-        setSuccess(true);
-      }
-      if (iserror === null) {
-        setOpenModal(false);
-        setIsEdit(false);
-      } else {
-        setErrormsg(iserror);
-      }
-    };
-    const handleDelete = async (id) => {
-        const iserror = await DeleteModel(nameOfClass, id);
-        if (iserror === true) {
-            setOpenModal(false);
-            setIsDelete(false);
-            setSuccess(true);
-        }
-        if (iserror === null) {
-            setOpenModal(false);
-            setIsDelete(false);
-        } else {
-            setErrormsg(iserror);
-        }
-    }
-
-
-
-
-    const handleChooseModal = () => {
-      switch (nameOfClass) {
-        case "users":
-          return (
-            <UsersModal
-              isEdit={isEdit}
-              open={openModal}
-              handleClose={handleClose}
-              handleAdd={handleAdd}
-              handleEdit={handleEdit}
-              model={model}
-              setModel={setModel}
-              error={errormsg}
-            />
-          );
-
-        
-
-        case "services":
-            return(
-              <ServiceModal
+  const handleChooseModal = () => {
+    switch (nameOfClass) {
+      case "users":
+        return (
+          <UsersModal
             isEdit={isEdit}
             open={openModal}
             handleClose={handleClose}
@@ -177,90 +140,125 @@ const CRUDTable = ({columns, modelClass, nameOfClass}) => {
             handleEdit={handleEdit}
             model={model}
             setModel={setModel}
-            error={errormsg}
+            error={error}
+            modelClass={modelClass}
+
           />
-            )
-      }
-    };
+        );
 
-   columnsWithAction.push({
-        field: 'action',
-        headerName: 'Action',
-        width: 150,
-        renderCell: (params) => {
+      case "services":
+        return (
+          <ServiceModal
+            isEdit={isEdit}
+            open={openModal}
+            handleClose={handleClose}
+            handleAdd={handleAdd}
+            handleEdit={handleEdit}
+            model={model}
+            modelClass={modelClass}
+            setModel={setModel}
+            error={error}
+          />
+        );
 
-            return (
-                <>
-                    <Button 
-                    variant="contained"
-                    style={{backgroundColor: '#00b300', color: 'white'}}
-                    className="userListEdit"
-                    onClick={() => openEditModal(params.row)}>Edit</Button>
+      case "categorys":
+        return (
+          <CategorysModal
+            isEdit={isEdit}
+            open={openModal}
+            handleClose={handleClose}
+            handleAdd={handleAdd}
+            handleEdit={handleEdit}
+            model={model}
+            setModel={setModel}
+            error={error}
+            modelClass={modelClass}
 
+          />
+        );
+    }
+  };
 
-                    <Button 
-                    variant="contained"
-                    style={{backgroundColor: '#ff1a1a', color: 'white'}}
-                    className="userListDelete"
-                    onClick={() => openDeleteModal(params.row)}>Delete</Button>
-                </>
-            )
-        }});
+  columnsWithAction.push({
+    field: "action",
+    headerName: "Action",
+    width: 150,
+    renderCell: (params) => {
+      return (
+        <>
+          <Button
+            variant="contained"
+            style={{ backgroundColor: "#00b300", color: "white" }}
+            className="userListEdit"
+            onClick={() => openEditModal(params.row)}
+          >
+            Edit
+          </Button>
 
+          <Button
+            variant="contained"
+            style={{ backgroundColor: "#ff1a1a", color: "white" }}
+            className="userListDelete"
+            onClick={() => openDeleteModal(params.row)}
+          >
+            Delete
+          </Button>
+        </>
+      );
+    },
+  });
 
-
-
-
-    return (
-   
-        <Box 
-        paddingTop={'50px'}
+  return (
+    <Box paddingTop={"50px"}>
+      <Snackbar
+        open={success}
+        autoHideDuration={6000}
+        onClose={() => {
+          setSuccess(false);
+        }}
+      >
+        <Alert
+          onClose={() => {
+            setSuccess(false);
+          }}
+          severity="success"
+          sx={{ width: "100%" }}
         >
-      
-
-      <Snackbar open={success} autoHideDuration={6000} onClose={()=>{
-            setSuccess(false);
-      }}>
-        <Alert onClose={()=>{
-            setSuccess(false);
-        }} severity="success" sx={{ width: '100%' }}>
-            This is a success message!
+          This is a success message!
         </Alert>
-    </Snackbar>
+      </Snackbar>
 
-            {handleChooseModal()}
-            <VerifyDeleteModal id={model['_id']} handleDelete={handleDelete} open={isDelete} handleClose={() => setIsDelete(false)}/>
+      {handleChooseModal()}
+      <VerifyDeleteModal
+        id={selectedModel}
+        handleDelete={handleDelete}
+        open={isDelete}
+        handleClose={() => setIsDelete(false)}
+      />
 
- 
+      <DataGrid
+        autoHeight
+        //Disable selection
+        disableSelectionOnClick
+        className="dataGrid"
+        loading={loading}
+        getRowId={(row) => row._id}
+        rows={data}
+        columns={columnsWithAction}
+        pageSize={5}
+        //How many rows to show in the pagination
+        rowsPerPageOptions={[5, 10, 20]}
+      ></DataGrid>
 
-            <DataGrid 
-            autoHeight
-            //Disable selection
-            disableSelectionOnClick
-            className="dataGrid"
-
-            loading={loading}
-            getRowId={(row) => row._id} rows={data} columns={columnsWithAction} pageSize={5} 
-            
-            //How many rows to show in the pagination
-            rowsPerPageOptions = {[5, 10, 20]}
-            >
-            </DataGrid>
-
-        <Fab color="primary" aria-label="add"
-        style={{position: 'fixed', bottom: '20px', right: '20px'}}
-        >
-        <AddIcon 
-        
-        onClick={openAddModal}
-        />
-        </Fab>
-
-        </Box>
-    
-    )
-
-
-}
+      <Fab
+        color="primary"
+        aria-label="add"
+        style={{ position: "fixed", bottom: "20px", right: "20px" }}
+      >
+        <AddIcon onClick={openAddModal} />
+      </Fab>
+    </Box>
+  );
+};
 
 export default CRUDTable;

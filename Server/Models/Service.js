@@ -6,7 +6,9 @@ const serviceSchema = new mongoose.Schema({
     description: String,
     price: Number,
     position: {
-      type: { type: String, default: 'Point' },
+      type: { type: String,
+        enum: ['Point'],
+        required: true, default: 'Point' },
       coordinates: { type: [Number], default: [0, 0]}
      },
     range: { type: Number, default: 0 },

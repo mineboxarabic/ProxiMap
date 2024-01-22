@@ -7,7 +7,16 @@ const createService = async (req, res) => {
     const service = req.body;
 
     const newService = await serviceDAO.create(service);
+    const coordinates = req.body.coordinates;
 
+    if(coordinates){
+        newService.position = {
+            type: "Point",
+            coordinates: coordinates
+        }
+    }
+
+    
     if(!newService){
         return res.status(500).json({success:false, message: "Something went wrong" });
     }else{

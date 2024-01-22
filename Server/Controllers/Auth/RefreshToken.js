@@ -1,10 +1,10 @@
 import TokenDAO from "../../DAO/TokenDAO.js";
+import UserDAO from "../../DAO/UserDAO.js";
 import { generateToken } from "../../Utilities/JWTUtil.js";
 import JWT from "jsonwebtoken";
 
 const RefreshToken = async (req, res) => {
     const cookie = req.cookies;
-    console.log('cookie',req.cookies);
     if (!cookie?.refreshToken) return res.status(401).json({ message: "You are not authenticated" });
 
     const refreshToken = cookie?.refreshToken;
@@ -24,10 +24,13 @@ const RefreshToken = async (req, res) => {
     const tokenDAO = new TokenDAO();
     tokenDAO.create({ token: newAccessToken, userId: decoded._id });
 
+    const userDAO = new UserDAO();
+    const user = await userDAO.findById(decoded._id);
+
     return res.cookie("accessToken", newAccessToken, {
         httpOnly: true,
         maxAge: 15 * 60 * 1000 // 15 minutes
-    }).status(200).json({ message: "Token refreshed successfully" , accessToken: newAccessToken, user: decoded});
+    }).status(200).json({ message: "Token refreshed successfully" , accessToken: newAccessToken, user: user});
 
 
 }catch(error){

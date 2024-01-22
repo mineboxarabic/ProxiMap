@@ -23,23 +23,20 @@ const useInMapView = () => {
     }, [bounds]);
 
     useEffect(() => {
-
       if (services) {
           setOVServices(services);
       }
     }, [services]);
 
     useEffect(() => {
-        //IF ERROR
         if (errorServices) {
-            console.log(errorServices);
+            console.log('error',errorServices);
         }
     }, [errorServices]);
 
 
     const updateBounds = (bounds) => {
         setBounds(bounds);
-        
     };
 
 

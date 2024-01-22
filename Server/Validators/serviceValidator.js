@@ -181,13 +181,6 @@ export const serviceValidatorEdit = checkSchema({
         errorMessage: "Invalid ratings",
         trim: true
     },
-    position: {
-        optional: true,
-
-        isObject: true,
-        errorMessage: "Position must be an object",
-        trim: true
-    },
     range: {
         optional: true,
         isNumeric: true,

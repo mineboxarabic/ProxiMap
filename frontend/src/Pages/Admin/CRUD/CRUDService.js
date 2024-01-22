@@ -27,8 +27,7 @@ const CRUDService = () => {
         availability: '',
         ratings: [],
         position: {
-            lat: 0,
-            lng: 0
+            coordinates: [0,0]
         },
         range: 0
     }

@@ -3,6 +3,9 @@ import JWT from "jsonwebtoken";
 const LogOut = async (req, res) => {
 
     const refreshToken = req.cookies?.refreshToken;
+    if (!refreshToken) {
+        return res.status(401).json({success:false, message: "You are not authenticated" });
+    }
     const user = JWT.verify(refreshToken, process.env.REFRESH_TOKEN);
     if (!refreshToken) {
         return res.status(401).json({success:false, message: "You are not authenticated" });
