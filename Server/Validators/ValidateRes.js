@@ -10,8 +10,6 @@ const ValidateRes = (req,res,next) => {
         let statusCode = 400;
         
         if(err.msg === "Email already exists" || err.msg === "Username already exists") {
-
-
             statusCode = 409;
         }
         else if(err.msg === "User not found" || err.msg === "Service not found" || err.msg === "Category not found" || err.msg === "Product not found" || err.msg === "Order not found" || err.msg === "Review not found" || err.msg === "Cart not found" || err.msg === "Wishlist not found" || err.msg === "Address not found" || err.msg === "Coupon not found"){
@@ -23,15 +21,17 @@ const ValidateRes = (req,res,next) => {
 
 
         return {
-            ...err,
-            statusCode
+           ok:false, message:err.msg, status:statusCode
         }
         });
 
-        const firstErrorCode = customError[0].statusCode || 400;
-        res.status(firstErrorCode);
-        res.json({error: customError});
-        return customError;
+        const firstErrorCode = customError[0] ||  {ok:false, message:" Server Error", status:500};
+
+        
+
+        res.status(firstErrorCode.status);
+        res.json(firstErrorCode);
+        return customError[0];
 
     }
 
@@ -39,3 +39,5 @@ const ValidateRes = (req,res,next) => {
 };
 
 export default ValidateRes;
+/*  {ok:false, message:"msg", status:400}
+    */

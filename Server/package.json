@@ -9,7 +9,8 @@
     "start": "node Application.js",
     "test": "supertest",
     "dbMongo": "docker run -d -p 27017:27017 -v ./data:/data/db mongo",
-    "CRUDServiceEndpointsTest": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles ServiceEndPoints.test.js",
+    "testAll":"node --experimental-vm-modules node_modules/jest/bin/jest.js ",
+    "CRUDServiceEndpointsTest": "node --experimental- vm-modules node_modules/jest/bin/jest.js --detectOpenHandles ServiceEndPoints.test.js",
     "CRUDUserEndpointsTest": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles UserEndPoints.test.js",
     "CRUDCategoryEndpointsTest": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles Category.test.js"
   },

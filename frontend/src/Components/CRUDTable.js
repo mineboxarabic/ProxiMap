@@ -17,6 +17,7 @@ import Snackbar from "@mui/material/Snackbar";
 import "../Style/DataTable.scss";
 import ServiceModal from "./Modals/ServicesModal";
 import CategorysModal from "./Modals/CategorysModal";
+import useResource from "../Hooks/useResource";
 
 const CRUDTable = ({ columns, modelClass, nameOfClass }) => {
   const columnsWithAction = [...columns];
@@ -29,17 +30,16 @@ const CRUDTable = ({ columns, modelClass, nameOfClass }) => {
 
   //CRUD hooks
   const {
-    AddModel,
-    EditModel,
-    DeleteModel,
-    GetAllModels,
-    GetOneModel,
+    create:AddModel,
+    update:EditModel,
+    remove:DeleteModel,
+    getAll:GetAllModels,
     loading,
     error,
     success,
     setSuccess,
     setError
-  } = useCRUDModel();
+  } = useResource(`/${modelClass}`);
 
 
 

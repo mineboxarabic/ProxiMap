@@ -52,7 +52,7 @@ class ServiceDAO {
             const swLng_p = parseFloat(swLng);
             const neLat_p = parseFloat(neLat);
             const neLng_p = parseFloat(neLng);
-
+           // console.log(swLat_p, swLng_p, neLat_p, neLng_p);
             const aggregationPipeline = [
                 {
                     $match: {
