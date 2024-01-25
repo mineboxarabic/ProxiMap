@@ -28,10 +28,12 @@ function App() {
       <Route path='/' element={<MainLayout />} >
 
         {/* Public Routes */}
-        <Route path='/login' element={<LogIn />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/home' element={<Home />} />
+
+          <Route path='/login' element={<LogIn />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/home' element={<Home />} />
+
 
         {/* Private Routes */}
 

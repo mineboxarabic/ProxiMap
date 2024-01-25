@@ -17,7 +17,7 @@ const NavDropDown = ({ buttonText, menuItems}) => {
   useEffect(() => {
     let allowed = false;
     for (let i = 0; i < menuItemsRoles.length; i++) {
-      if (menuItemsRoles[i].includes(role)) {
+      if (menuItemsRoles?.[i].includes(role)) {
         allowed = true;
         break;
       }

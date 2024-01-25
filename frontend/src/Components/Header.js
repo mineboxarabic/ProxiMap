@@ -20,6 +20,7 @@ import useLogout from '../Hooks/useLogout';
 import NavDropDown from './NavDropDown';
 
 import { ADMIN, USER, PARTNER, MANAGER, STAFF } from '../Helpers/Roles';
+import { Badge } from '@mui/material';
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = [ 'Account', 'Dashboard', 'Logout'];
 
@@ -31,12 +32,36 @@ const crudPages = [
   {path:'categorys',label:'Categorys', allowedRoles:[ADMIN, MANAGER, STAFF]},
 ]
 
+const pagesNav = [
+  {path:'/home',label:'Home', allowedRoles:['*']},
+  {path:'/map',label:'Map', allowedRoles:['*']},
+  {path:'/about',label:'About', allowedRoles:['*']},
+  {path:'/contact',label:'Contact', allowedRoles:['*']},
+  {path:'/services/edit',label:'My services', allowedRoles:[ADMIN, PARTNER]},
+]
+
+const getRoleColor = (role) => {
+  switch (role) {
+    case ADMIN:
+      return 'error';
+    case USER:
+      return 'primary'; 
+    case PARTNER:
+      return 'success';
+    case MANAGER:
+      return 'info';
+    case STAFF:
+      return  'warning';
+    default:
+      return 'default';
+  }
+
+}
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const {auth,setAuth} = useAuth();
-  const isLogged = auth?.user ? true : false;
   const role = auth?.user?.role;
   const navigate = useNavigate();
   const logout = useLogout();
@@ -143,32 +168,29 @@ function Header() {
           </Typography>
 
           {
-            isLogged ?
+            auth?.user ?
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
          
-              <Button
-                key={"Home"}
-                onClick={()=>{ navigate('/home', { replace: true });}}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                Home
-              </Button>
+           
+              {pagesNav.map((page) => 
+                {
+                  let allowed = false;
+                  if(page.allowedRoles.includes(role) || page.allowedRoles.includes('*'))  allowed = true;
+                
+                  if(allowed)
+                  return <Button
 
-              <Button
-                key={"Map"}
-                onClick={()=>{ navigate('/map', { replace: true });}}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                Map
-              </Button>
-          
-              <Button
-                key={"About"}
-                onClick={()=>{ navigate('/about', { replace: true });}}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                About
-              </Button>
+                  key={page.path}
+                  onClick={()=>{ navigate(page.path, { replace: true });}}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                  
+                >
+                  {page.label}
+                </Button>
+                }
+              )
+          }
+
 
               <NavDropDown buttonText="CRUD panel" menuItems={crudPages} />
 
@@ -179,15 +201,35 @@ function Header() {
             }
             
          { 
-         isLogged ?
+         auth?.user ?
          
          <Box sx={{ flexGrow: 0 }}>
             
+            <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
+              
+            <Typography sx={{ display: { xs: 'none', md: 'block' },
+            mr: 2,
+          }} variant="h6" noWrap component="div">
+              {auth?.user?.username}
+            </Typography>
+            
+            
             <Tooltip title="Open settings">
+            <Badge badgeContent={auth?.user?.role} 
+            color={getRoleColor(auth?.user?.role)}>
+              
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt={auth?.user?.username} src={auth?.user?.profile?.profilePicture} />
               </IconButton>
+            </Badge>
+
+
+
             </Tooltip>
+
+            </Box>
+
+
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"

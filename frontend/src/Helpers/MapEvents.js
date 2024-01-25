@@ -37,7 +37,8 @@ export default function MapEvents({
         map.on('moveend', () => {
           //Each time the map is moved, we update the bounds
           //Thie bounds are four coordinates that define the area of the map
-            setBounds(map.getBounds());
+          if(typeof setBounds !== 'function') return; 
+          setBounds(map.getBounds());
         });    
         return () => {
             map.off('moveend');

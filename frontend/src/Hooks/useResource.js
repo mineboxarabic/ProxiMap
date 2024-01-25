@@ -60,7 +60,6 @@ const useResource = (baseUrl) => {
     const remove = (id) => makeRequest('delete', `${baseUrl}/${id}`);
     const getOne = (id) => makeRequest('get', `${baseUrl}/${id}`);
     const updateWithForm = (id, data) => makeRequest('put', `${baseUrl}/${id}`, data);
-
    
     return { resources,setResources, loading, error, getAll, create, update, remove, getOne ,success ,setSuccess, setError, updateWithForm}
 

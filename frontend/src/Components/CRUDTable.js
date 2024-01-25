@@ -34,12 +34,13 @@ const CRUDTable = ({ columns, modelClass, nameOfClass }) => {
     update:EditModel,
     remove:DeleteModel,
     getAll:GetAllModels,
+    resources,
     loading,
     error,
     success,
     setSuccess,
     setError
-  } = useResource(`/${modelClass}`);
+  } = useResource(`/${nameOfClass}`);
 
 
 
@@ -51,14 +52,19 @@ const CRUDTable = ({ columns, modelClass, nameOfClass }) => {
 
   const getData = async () => {
     setData([]);
-    const response = await GetAllModels(nameOfClass);
-    setData(response);
+    await GetAllModels();
+    setData(resources);
   };
-
   useEffect(() => {
     getData();
   }, []);
 
+  useEffect(() => {
+  
+    setData(resources);
+  }, [resources]);
+
+  
   useEffect(() => {
     if (error) {
       setOpenModal(true);
@@ -86,6 +92,8 @@ const CRUDTable = ({ columns, modelClass, nameOfClass }) => {
     setError('');
   };
 
+
+
   const openEditModal = async (row) => {
 
     setModel(row);
@@ -107,7 +115,8 @@ const CRUDTable = ({ columns, modelClass, nameOfClass }) => {
 
   //CRUD functions
   const handleAdd = async (addedModel) => {
-    await AddModel(nameOfClass, addedModel);
+    await AddModel(addedModel);
+    getData();
   };
 
   const handleEdit = async (modelEdited) => {
@@ -116,14 +125,13 @@ const CRUDTable = ({ columns, modelClass, nameOfClass }) => {
     }
 
 
-    const res = await EditModel(nameOfClass, modelEdited._id, modelEdited);
+    const res = await EditModel(modelEdited);
 
   
 
   };
   const handleDelete = async (id) => {
-    await DeleteModel(nameOfClass, id);
-
+    await DeleteModel(id);
     getData();
     setIsDelete(false);
   };
@@ -243,7 +251,7 @@ const CRUDTable = ({ columns, modelClass, nameOfClass }) => {
         className="dataGrid"
         loading={loading}
         getRowId={(row) => row._id}
-        rows={data}
+        rows={data || []}
         columns={columnsWithAction}
         pageSize={5}
         //How many rows to show in the pagination

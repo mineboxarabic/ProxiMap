@@ -19,15 +19,10 @@ const PersistLogin = () => {
                 setIsLoading(false);
             }
         }
-        
+        console.log(`auth: ${auth?.accessToken}`);
         !auth?.accessToken ? checkAuth() : setIsLoading(false);
     }, [auth])
 
-
-
- useEffect(() => {
-        console.log(`isLoading: ${isLoading}`)
-    }, [isLoading])
 
 
 

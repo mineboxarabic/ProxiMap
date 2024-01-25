@@ -96,6 +96,7 @@ class ServiceDAO {
 
     async findServicesinMapViewOfUser(swLat, swLng, neLat, neLng, id) {
         try {
+            // Parse coordinates to floats
             const swLat_p = parseFloat(swLat);
             const swLng_p = parseFloat(swLng);
             const neLat_p = parseFloat(neLat);
@@ -103,7 +104,6 @@ class ServiceDAO {
 
             // Check if coordinates are valid
             if (!this.isValidCoordinate(swLat_p, swLng_p) || !this.isValidCoordinate(neLat_p, neLng_p)) {
-                console.log(swLat_p, swLng_p, neLat_p, neLng_p);
                 throw new Error('Invalid coordinates');
             }
 
@@ -112,13 +112,12 @@ class ServiceDAO {
                 throw new Error('Invalid ObjectId');
             }
 
-
             const idObject = new mongoose.Types.ObjectId(id);
 
+            // Define the aggregation pipeline
             const aggregationPipeline = [
                 {
                     $match: {
-                        
                         partnerId: idObject,
                         position: {
                             $geoWithin: {
@@ -137,11 +136,10 @@ class ServiceDAO {
                         foreignField: "_id",
                         as: "partnerDetails"
                     }
-                
                 },
                 {
                     $lookup: {
-                        from: "categories",        // Replace with your categories collection name
+                        from: "categories",    // Replace with your categories collection name
                         localField: "categoryId",
                         foreignField: "_id",
                         as: "categoryDetails"
@@ -149,13 +147,19 @@ class ServiceDAO {
                 }
             ];
 
-    
+            // Execute the aggregation pipeline
             const services = await Service.aggregate(aggregationPipeline);
+
             return services;
         } catch (error) {
             console.error("Error in findServicesinMapViewOfUser:", error);
-            return error;
+            throw error; // Re-throw the error for handling at a higher level
         }
+    }
+
+    async findAllByPartnerId(id) {
+        return await Service.find({partnerId: id}).catch((error) => { return error; });
+    
     }
     isValidCoordinate(lat, lng) {
         return isFinite(lat) && Math.abs(lat) <= 90 && isFinite(lng) && Math.abs(lng) <= 180;

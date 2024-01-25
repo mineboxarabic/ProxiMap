@@ -21,10 +21,10 @@ import { Button } from "@mui/material";
 import MapSearchBar from "../Components/MapSearchBar";
 import { Alert } from "@mui/material";
 import useCurrentUser from "../Hooks/useCurrentUser";
+import MarkerService from "../Components/Map/MarkerService";
 
 const Map = () => {
   const { services, isLoadingServices, updateBounds , errorServices} = useInMapView();
-
 
   const [isDrawerOpened, setIsDrawerOpened] = useState(false);
 
@@ -84,7 +84,7 @@ const Map = () => {
         <Box className={"map"}>
           {/*TODO:add in case of error */}
 
-
+      
           <MapContainer
             center={
               position
@@ -115,61 +115,8 @@ const Map = () => {
                 const isHovered = hovered?._id === service._id;
                 const opacity = isHovered ? 1 : 0;
 
-                const isSameUser = currentUser._id === service.partnerId;
-                
-                
-                const color = isSameUser ? isHovered ?  "darkred" : "red" : isHovered ? "darkblue" : "blue";
-
                 return (
-                  <Circle
-                    key={index}
-                    radius={service.range}
-                    center={[
-                      service.position.coordinates[1],
-                      service.position.coordinates[0],
-                    ]}
-                    pathOptions={{ color: color, opacity: opacity }}
-                    //onCLick={setHovered(service)}
-                    eventHandlers={{
-                      click: () => {
-                        setHovered(service);
-                        setSelected(service);
-                      },
-                    }}
-                  >
-                    <Marker
-                      key={`${index}`}
-                      position={[
-                        service.position.coordinates[1],
-                        service.position.coordinates[0],
-                      ]}
-                      icon={L.icon({
-                        iconUrl:
-                        isSameUser ? "https://cdn-icons-png.flaticon.com/512/7711/7711464.png" : "https://cdn.iconscout.com/icon/free/png-256/free-location-3079544-2561454.png",
-                        iconSize: [30, 30],
-                        iconAnchor: [12.5, 25],
-                        popupAnchor: [0, -25],
-
-                        eventHandlers: {
-                          click: () => {
-                            setHovered(service);
-                            setSelected(service);
-                          },
-                        },
-                      })}
-                    >
-                      <Popup>
-                        <h2>{service.name}</h2>
-                        <h3>{service.description}</h3>
-                      </Popup>
-                    </Marker>
-                    <Popup>
-                      <h2>
-                        {service.name} can go for {service.range * 100}M From
-                        his house
-                      </h2>
-                    </Popup>
-                  </Circle>
+                  <MarkerService service={service} />
                 );
               })
             ) : (

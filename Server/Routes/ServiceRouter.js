@@ -37,7 +37,7 @@ serviceRouter.get('/services',
 (req, res, next) => autherizeUserRole(req, res, next, serviceRoutes.read.allowedRoles)
 ,readServices);
 
-serviceRouter.get('/services/in-map-view/:swLat/:swLng/:neLat/:neLng/:id',
+serviceRouter.get('/services/partner/:id',
 checkId,
 ValidateRes,
 (req, res, next) => autherizeUserRole(req, res, next, serviceRoutes.read.allowedRoles),

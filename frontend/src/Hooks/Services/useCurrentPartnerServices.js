@@ -5,7 +5,6 @@ import useGeneral from "../useGeneral";
 import useCurrentUser from "../useCurrentUser";
 
 const useCurrentPartnerServices = () => {
-    const [bounds, setBounds] = useState(null);
     const {oVServices, setOVServices} = useGeneral();
 
     const currentUser = useCurrentUser();
@@ -15,38 +14,30 @@ const useCurrentPartnerServices = () => {
       getAll: getAllServices,
       error: errorServices,
       loading: isLoadingServices,
-      update: updateService,
-    } = useResource(`/services/in-map-view/${bounds?._southWest?.lat}/${bounds?._southWest?.lng}/${bounds?._northEast?.lat}/${bounds?._northEast?.lng}/${currentUser?._id}`);
+    } = useResource(`/services/partner/${currentUser?._id}`);
 
-  
-
-    useEffect(() => {
-      if (!isLoadingServices) {
+    
+  useEffect(() => {
+ 
         getAllServices();
-      }
-    }, [bounds]);
+        console.log('services', services);
+
+    }, []);
 
     useEffect(() => {
       if (services) {
           setOVServices(services);
       }
-    }, [services]);
+    }, [services, setOVServices]);
 
     useEffect(() => {
-        if (errorServices) {
-            console.log('error',errorServices);
-        }
+      if (errorServices) {
+          console.error('Error fetching services:', errorServices);
+      }
     }, [errorServices]);
 
 
-    const updateBounds = (bounds) => {
-        setBounds(bounds);
-    };
-
-  
-
-
-    return {services, isLoadingServices, errorServices, updateBounds};
+    return {services, isLoadingServices, errorServices};
 }
 
 export default useCurrentPartnerServices;

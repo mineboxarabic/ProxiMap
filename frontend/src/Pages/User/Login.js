@@ -29,6 +29,9 @@ const LogIn = () =>
     }
     ,[email, password])
 
+    useEffect(() => {
+        console.log(`persist: ${persist}`);
+    }, [persist])
 
 
     const togglePersist = () => {
@@ -128,6 +131,7 @@ const LogIn = () =>
                                 inputProps={{ 'aria-label': 'controlled' }}
                                 onChange={togglePersist}
                                 defaultValue={persist}
+                                checked={persist}
                             />} label="Remember me?" />
                         </FormGroup>
 

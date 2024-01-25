@@ -12,10 +12,8 @@ const ServiceSettings = () =>{
     return(
         <div>
             <h1>Service Settings</h1>
-            {selectedService ? 
+            {selectedService ?
             <>
-
-
                 <Box 
                     sx={{
                         display: 'flex',
