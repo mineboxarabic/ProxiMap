@@ -1,0 +1,2467 @@
+[{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20bb"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20bc"
+  },
+  "name": "mgresser0",
+  "description": "Laceration with foreign body of abdominal wall, periumbilic region with penetration into peritoneal cavity, subsequent encounter",
+  "price": 68,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      142.7481398,
+      47.2399267
+    ]
+  },
+  "range": 1,
+  "availability": true,
+  "ratings": []
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20bd"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20be"
+  },
+  "name": "tcausnett1",
+  "description": "Other specified retained foreign body",
+  "price": 790,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      15.6625947,
+      46.0565579
+    ]
+  },
+  "range": 7,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20bf"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20c0"
+  },
+  "name": "shammor2",
+  "description": "Nondisplaced segmental fracture of shaft of ulna, left arm, subsequent encounter for closed fracture with malunion",
+  "price": 441,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      23.5051414,
+      48.5225505
+    ]
+  },
+  "range": 0,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20c1"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20c2"
+  },
+  "name": "bbambra3",
+  "description": "Other superficial bite of abdominal wall",
+  "price": 287,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      138.0109374,
+      -2.2661571
+    ]
+  },
+  "range": 7,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20c3"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20c4"
+  },
+  "name": "kshallo4",
+  "description": "Accessory toe(s)",
+  "price": 968,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      7.0685103,
+      49.1073208
+    ]
+  },
+  "range": 8,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20c5"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20c6"
+  },
+  "name": "slenden5",
+  "description": "Unspecified fracture of right talus, initial encounter for closed fracture",
+  "price": 572,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      49.7613122,
+      54.1458603
+    ]
+  },
+  "range": 3,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20c7"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20c8"
+  },
+  "name": "edurnall6",
+  "description": "Dislocation of tarsometatarsal joint of unspecified foot, sequela",
+  "price": 593,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      -45.2243578,
+      -19.6499319
+    ]
+  },
+  "range": 4,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20c9"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20ca"
+  },
+  "name": "aparsley7",
+  "description": "Nondisplaced fracture of medial phalanx of unspecified lesser toe(s), subsequent encounter for fracture with delayed healing",
+  "price": 778,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      36.4878241,
+      4.9640933
+    ]
+  },
+  "range": 3,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20cb"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20cc"
+  },
+  "name": "bhaselgrove8",
+  "description": "Maternal care for hydrops fetalis, first trimester, fetus 3",
+  "price": 820,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      113.0845936,
+      -7.9454654
+    ]
+  },
+  "range": 6,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20cd"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20ce"
+  },
+  "name": "gsanja9",
+  "description": "Body mass index [BMI]",
+  "price": 943,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      1.9593782,
+      43.8139627
+    ]
+  },
+  "range": 8,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20cf"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20d0"
+  },
+  "name": "lmccaughrena",
+  "description": "Car as the place of occurrence of the external cause",
+  "price": 392,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      119.922796,
+      28.46763
+    ]
+  },
+  "range": 10,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20d1"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20d2"
+  },
+  "name": "aschwandenb",
+  "description": "Other specified complication of cardiac prosthetic devices, implants and grafts, subsequent encounter",
+  "price": 197,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      117.430061,
+      23.701262
+    ]
+  },
+  "range": 10,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20d3"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20d4"
+  },
+  "name": "dhacketc",
+  "description": "Calcium deposit in bursa",
+  "price": 906,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      20.1242053,
+      44.596795
+    ]
+  },
+  "range": 10,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20d5"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20d6"
+  },
+  "name": "nmagnusd",
+  "description": "2-part displaced fracture of surgical neck of unspecified humerus, sequela",
+  "price": 197,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      -98.5254159,
+      29.385634
+    ]
+  },
+  "range": 5,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20d7"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20d8"
+  },
+  "name": "lbrooksbiee",
+  "description": "Corrosion of second degree of right elbow, subsequent encounter",
+  "price": 885,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      38.404411,
+      54.0474092
+    ]
+  },
+  "range": 9,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20d9"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20da"
+  },
+  "name": "asartonf",
+  "description": "War operations involving gasoline bomb, military personnel, sequela",
+  "price": 680,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      140.3940646,
+      37.3844286
+    ]
+  },
+  "range": 5,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20db"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20dc"
+  },
+  "name": "amantg",
+  "description": "Displacement of femoral arterial graft (bypass)",
+  "price": 418,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      -73.4848038,
+      45.4693392
+    ]
+  },
+  "range": 9,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20dd"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20de"
+  },
+  "name": "jbischoph",
+  "description": "Basal cell carcinoma of skin of trunk",
+  "price": 786,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      10.2572084,
+      6.1360612
+    ]
+  },
+  "range": 5,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20df"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20e0"
+  },
+  "name": "tclapshawi",
+  "description": "Corrosion with resulting rupture and destruction of unspecified eyeball, sequela",
+  "price": 510,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      -49.9417277,
+      -15.5544752
+    ]
+  },
+  "range": 4,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20e1"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20e2"
+  },
+  "name": "adavidovicsj",
+  "description": "Other mechanical complication of muscle and tendon graft, subsequent encounter",
+  "price": 963,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      19.93528,
+      40.74389
+    ]
+  },
+  "range": 1,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20e3"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20e4"
+  },
+  "name": "aattawellk",
+  "description": "Unspecified injury of head of pancreas",
+  "price": 685,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      145.7467259,
+      15.1850483
+    ]
+  },
+  "range": 3,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20e5"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20e6"
+  },
+  "name": "erupprechtl",
+  "description": "Burn of third degree of multiple right fingers (nail), not including thumb, initial encounter",
+  "price": 151,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      17.3406456,
+      49.0338988
+    ]
+  },
+  "range": 1,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20e7"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20e8"
+  },
+  "name": "mcockingsm",
+  "description": "Lymphocytopenia",
+  "price": 851,
+  "position": "[object Object]",
+  "range": 4,
+  "availability": false,
+  "ratings": []
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20e9"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20ea"
+  },
+  "name": "wcoghilln",
+  "description": "Other physeal fracture of left calcaneus, initial encounter for open fracture",
+  "price": 209,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      108.3474974,
+      -6.9278214
+    ]
+  },
+  "range": 5,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20eb"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20ec"
+  },
+  "name": "rurpetho",
+  "description": "Presence of other bone and tendon implants",
+  "price": 201,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      -96,
+      36.15
+    ]
+  },
+  "range": 5,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20ed"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20ee"
+  },
+  "name": "ilightfootp",
+  "description": "Nondisplaced transverse fracture of shaft of right radius, subsequent encounter for closed fracture with malunion",
+  "price": 129,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      128.2579205,
+      35.474465
+    ]
+  },
+  "range": 10,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20ef"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20f0"
+  },
+  "name": "sbushillq",
+  "description": "Unspecified firearm discharge, undetermined intent, sequela",
+  "price": 472,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      -8.7470806,
+      40.638059
+    ]
+  },
+  "range": 1,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20f1"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20f2"
+  },
+  "name": "scartyr",
+  "description": "Contact with combine harvester, initial encounter",
+  "price": 838,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      -7.7452871,
+      41.1604713
+    ]
+  },
+  "range": 6,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20f3"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20f4"
+  },
+  "name": "kmettricks",
+  "description": "Posterior subcapsular polar age-related cataract, bilateral",
+  "price": 620,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      19.8223207,
+      44.4693308
+    ]
+  },
+  "range": 1,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20f5"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20f6"
+  },
+  "name": "nthurbornt",
+  "description": "Puncture wound without foreign body of left back wall of thorax without penetration into thoracic cavity, sequela",
+  "price": 395,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      57.4895229,
+      -20.1924448
+    ]
+  },
+  "range": 0,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20f7"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20f8"
+  },
+  "name": "lkemmonsu",
+  "description": "Other specified injury of muscle and tendon of long extensor muscle of toe at ankle and foot level",
+  "price": 272,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      107.446012,
+      -7.114172
+    ]
+  },
+  "range": 1,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20f9"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20fa"
+  },
+  "name": "sservisv",
+  "description": "Garden or yard of children's home and orphanage as the place of occurrence of the external cause",
+  "price": 66,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      126.2725057,
+      58.9637041
+    ]
+  },
+  "range": 6,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20fb"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20fc"
+  },
+  "name": "hgoslingw",
+  "description": "Nondisplaced fracture of lateral malleolus of left fibula, subsequent encounter for closed fracture with routine healing",
+  "price": 585,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      15.7510575,
+      50.2044695
+    ]
+  },
+  "range": 8,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20fd"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa20fe"
+  },
+  "name": "upennettax",
+  "description": "Unspecified injury of muscle, fascia and tendon of other parts of biceps, right arm, subsequent encounter",
+  "price": 409,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      121.050126,
+      14.3839328
+    ]
+  },
+  "range": 10,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa20ff"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2100"
+  },
+  "name": "mtompkinsony",
+  "description": "Other meniscus derangements, other medial meniscus, left knee",
+  "price": 686,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      10.9580947,
+      33.7754716
+    ]
+  },
+  "range": 8,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2101"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2102"
+  },
+  "name": "mackeryz",
+  "description": "Other specified transitory neonatal endocrine disorders",
+  "price": 567,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      -84.3150822,
+      33.9230243
+    ]
+  },
+  "range": 0,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2103"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2104"
+  },
+  "name": "cbravery10",
+  "description": "Nondisplaced spiral fracture of shaft of right fibula, sequela",
+  "price": 644,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      100.222545,
+      26.641315
+    ]
+  },
+  "range": 0,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2105"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2106"
+  },
+  "name": "pblagden11",
+  "description": "Drowning and submersion due to falling or jumping from burning (nonpowered) inflatable craft, initial encounter",
+  "price": 898,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      16.6553945,
+      50.5750633
+    ]
+  },
+  "range": 3,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2107"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2108"
+  },
+  "name": "rscotchford12",
+  "description": "Parapoxvirus infections",
+  "price": 395,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      20.8627188,
+      50.8426863
+    ]
+  },
+  "range": 6,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2109"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa210a"
+  },
+  "name": "jjohananoff13",
+  "description": "Dislocation and sprain of joints and ligaments of lumbar spine and pelvis",
+  "price": 56,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      111.982232,
+      21.857958
+    ]
+  },
+  "range": 9,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa210b"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa210c"
+  },
+  "name": "bleimster14",
+  "description": "Nondisplaced fracture of proximal third of navicular [scaphoid] bone of right wrist, subsequent encounter for fracture with nonunion",
+  "price": 874,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      121.7587348,
+      16.9334683
+    ]
+  },
+  "range": 9,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa210d"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa210e"
+  },
+  "name": "bmusterd15",
+  "description": "Atherosclerosis of nonbiological bypass graft(s) of the extremities with intermittent claudication",
+  "price": 157,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      72.7289812,
+      30.7879384
+    ]
+  },
+  "range": 3,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa210f"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2110"
+  },
+  "name": "asawyers16",
+  "description": "Burn due to merchant ship on fire, initial encounter",
+  "price": 755,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      114.513012,
+      32.203072
+    ]
+  },
+  "range": 9,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2111"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2112"
+  },
+  "name": "cwulfinger17",
+  "description": "Dual sensory impairment",
+  "price": 650,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      114.524679,
+      23.269131
+    ]
+  },
+  "range": 5,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2113"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2114"
+  },
+  "name": "sarbuckle18",
+  "description": "Fracture of symphysis of mandible, subsequent encounter for fracture with nonunion",
+  "price": 565,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      -79.796898,
+      -4.581521
+    ]
+  },
+  "range": 9,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2115"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2116"
+  },
+  "name": "cbeardwood19",
+  "description": "Nondisplaced fracture of anterior process of unspecified calcaneus, subsequent encounter for fracture with malunion",
+  "price": 903,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      36.5661908,
+      28.3835079
+    ]
+  },
+  "range": 10,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2117"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2118"
+  },
+  "name": "gcurtayne1a",
+  "description": "Complications peculiar to reattachment and amputation",
+  "price": 641,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      112.673499,
+      -8.2497955
+    ]
+  },
+  "range": 6,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2119"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa211a"
+  },
+  "name": "bhurring1b",
+  "description": "Poisoning by, adverse effect of and underdosing of unspecified antiepileptic and sedative-hypnotic drugs",
+  "price": 398,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      117.365052,
+      25.941937
+    ]
+  },
+  "range": 0,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa211b"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa211c"
+  },
+  "name": "rjanosevic1c",
+  "description": "Other congenital malformations of testis and scrotum",
+  "price": 229,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      116.3957812,
+      -8.305583
+    ]
+  },
+  "range": 4,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa211d"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa211e"
+  },
+  "name": "tbradock1d",
+  "description": "Abrasion, right knee, subsequent encounter",
+  "price": 580,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      116.3968433,
+      39.9250988
+    ]
+  },
+  "range": 2,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa211f"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2120"
+  },
+  "name": "mberic1e",
+  "description": "Displaced unspecified condyle fracture of lower end of unspecified femur, subsequent encounter for open fracture type I or II with malunion",
+  "price": 317,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      115.374821,
+      33.258244
+    ]
+  },
+  "range": 1,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2121"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2122"
+  },
+  "name": "cbyrd1f",
+  "description": "Burn of second degree of multiple right fingers (nail), including thumb, sequela",
+  "price": 16,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      112.865891,
+      39.193073
+    ]
+  },
+  "range": 5,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2123"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2124"
+  },
+  "name": "rlusgdin1g",
+  "description": "Regular astigmatism, right eye",
+  "price": 117,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      112.175245,
+      27.456658
+    ]
+  },
+  "range": 7,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2125"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2126"
+  },
+  "name": "aocuolahan1h",
+  "description": "War operations involving unintentional restriction of air and airway, military personnel, sequela",
+  "price": 859,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      135.4162726,
+      34.4921654
+    ]
+  },
+  "range": 7,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2127"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2128"
+  },
+  "name": "mgorce1i",
+  "description": "Postprocedural seroma of a circulatory system organ or structure following a cardiac catheterization",
+  "price": 425,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      104.066801,
+      30.572815
+    ]
+  },
+  "range": 2,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2129"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa212a"
+  },
+  "name": "oladbrooke1j",
+  "description": "Superficial foreign body of unspecified external genital organs, male, initial encounter",
+  "price": 600,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      89.09061,
+      23.11134
+    ]
+  },
+  "range": 6,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa212b"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa212c"
+  },
+  "name": "amoncreiff1k",
+  "description": "Laceration without foreign body of right little finger without damage to nail, subsequent encounter",
+  "price": 395,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      116.700277,
+      23.364295
+    ]
+  },
+  "range": 7,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa212d"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa212e"
+  },
+  "name": "bmacdermot1l",
+  "description": "Superficial foreign body of fingers",
+  "price": 534,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      18.1905615,
+      53.9165867
+    ]
+  },
+  "range": 8,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa212f"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2130"
+  },
+  "name": "wmeanwell1m",
+  "description": "Displaced fracture of medial condyle of unspecified femur, initial encounter for open fracture type I or II",
+  "price": 327,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      116.771211,
+      40.400903
+    ]
+  },
+  "range": 3,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2131"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2132"
+  },
+  "name": "mrodolfi1n",
+  "description": "Other injury of abdominal aorta, sequela",
+  "price": 627,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      110.6338382,
+      -7.8307181
+    ]
+  },
+  "range": 3,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2133"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2134"
+  },
+  "name": "nhrishanok1o",
+  "description": "Other fracture of left patella, subsequent encounter for open fracture type I or II with malunion",
+  "price": 933,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      124.011269,
+      10.7160345
+    ]
+  },
+  "range": 9,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2135"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2136"
+  },
+  "name": "tmorrid1p",
+  "description": "Jumping or diving from boat striking bottom causing other injury, initial encounter",
+  "price": 423,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      91.8580145,
+      22.9155908
+    ]
+  },
+  "range": 1,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2137"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2138"
+  },
+  "name": "bcord1q",
+  "description": "Malignant neoplasm of other and unspecified cranial nerves",
+  "price": 868,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      -75.6499025,
+      4.8271607
+    ]
+  },
+  "range": 1,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2139"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa213a"
+  },
+  "name": "vchuck1r",
+  "description": "Nondisplaced segmental fracture of shaft of right femur, subsequent encounter for open fracture type I or II with malunion",
+  "price": 616,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      128.1744945,
+      41.387384
+    ]
+  },
+  "range": 10,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa213b"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa213c"
+  },
+  "name": "dshingfield1s",
+  "description": "Partial traumatic transphalangeal amputation of unspecified finger, initial encounter",
+  "price": 184,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      23.1771438,
+      51.9038827
+    ]
+  },
+  "range": 9,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa213d"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa213e"
+  },
+  "name": "bhaversum1t",
+  "description": "Colostomy malfunction",
+  "price": 60,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      12.5742882,
+      55.6751524
+    ]
+  },
+  "range": 6,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa213f"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2140"
+  },
+  "name": "scasbolt1u",
+  "description": "Palindromic rheumatism, right hip",
+  "price": 882,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      9.8216043,
+      44.1034593
+    ]
+  },
+  "range": 0,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2141"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2142"
+  },
+  "name": "dharrowsmith1v",
+  "description": "Chronic thyroiditis with transient thyrotoxicosis",
+  "price": 955,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      80.2531784,
+      6.0067464
+    ]
+  },
+  "range": 3,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2143"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2144"
+  },
+  "name": "npassby1w",
+  "description": "Anterior dislocation of proximal end of tibia, right knee",
+  "price": 830,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      6.186692,
+      52.804249
+    ]
+  },
+  "range": 10,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2145"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2146"
+  },
+  "name": "hhaizelden1x",
+  "description": "Bitten by cat, initial encounter",
+  "price": 135,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      44.9621678,
+      41.7260416
+    ]
+  },
+  "range": 8,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2147"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2148"
+  },
+  "name": "bsprules1y",
+  "description": "Laceration of other blood vessels at wrist and hand level of unspecified arm",
+  "price": 885,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      20.05889,
+      41.81194
+    ]
+  },
+  "range": 5,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2149"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa214a"
+  },
+  "name": "wantonchik1z",
+  "description": "Superficial frostbite of unspecified wrist, subsequent encounter",
+  "price": 293,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      -8.4824714,
+      51.8862378
+    ]
+  },
+  "range": 0,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa214b"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa214c"
+  },
+  "name": "dcrenage20",
+  "description": "Fracture of tooth (traumatic), sequela",
+  "price": 496,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      105.3241245,
+      -5.0898252
+    ]
+  },
+  "range": 0,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa214d"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa214e"
+  },
+  "name": "asproston21",
+  "description": "Other spondylosis, thoracic region",
+  "price": 667,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      -74.889557,
+      5.576269
+    ]
+  },
+  "range": 9,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa214f"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2150"
+  },
+  "name": "eniaves22",
+  "description": "Injury of other nerves at ankle and foot level, left leg, sequela",
+  "price": 573,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      106.27613,
+      29.972084
+    ]
+  },
+  "range": 0,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2151"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2152"
+  },
+  "name": "gberardt23",
+  "description": "Osteitis deformans of right thigh",
+  "price": 264,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      38.9511518,
+      36.6919385
+    ]
+  },
+  "range": 0,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2153"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2154"
+  },
+  "name": "cgately24",
+  "description": "Immersion foot, unspecified foot",
+  "price": 905,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      12.9890358,
+      57.7119589
+    ]
+  },
+  "range": 5,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2155"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2156"
+  },
+  "name": "bjaneway25",
+  "description": "Granulation of postmastoidectomy cavity, left ear",
+  "price": 133,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      124.453464,
+      -8.15831
+    ]
+  },
+  "range": 3,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2157"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2158"
+  },
+  "name": "rvlasov26",
+  "description": "Traumatic rupture of unspecified radial collateral ligament, sequela",
+  "price": 439,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      -79.5069436,
+      -7.4242735
+    ]
+  },
+  "range": 1,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2159"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa215a"
+  },
+  "name": "mcanner27",
+  "description": "Terrorism involving chemical weapons, terrorist injured",
+  "price": 177,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      -66.1415263,
+      -2.4681009
+    ]
+  },
+  "range": 4,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa215b"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa215c"
+  },
+  "name": "hanfrey28",
+  "description": "Displaced intraarticular fracture of unspecified calcaneus, subsequent encounter for fracture with nonunion",
+  "price": 311,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      -69.1014935,
+      -16.4981761
+    ]
+  },
+  "range": 6,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa215d"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa215e"
+  },
+  "name": "slube29",
+  "description": "Pedestrian on foot injured in collision with pedal cycle, unspecified whether traffic or nontraffic accident",
+  "price": 261,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      10.7048554,
+      12.6400252
+    ]
+  },
+  "range": 2,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa215f"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2160"
+  },
+  "name": "ikaszper2a",
+  "description": "Other fracture of upper end of right ulna, subsequent encounter for closed fracture with delayed healing",
+  "price": 377,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      6.0237938,
+      52.5470847
+    ]
+  },
+  "range": 7,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2161"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2162"
+  },
+  "name": "kcorrin2b",
+  "description": "Underdosing of chloramphenicol group, subsequent encounter",
+  "price": 364,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      40.1445151,
+      59.4051145
+    ]
+  },
+  "range": 1,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2163"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2164"
+  },
+  "name": "fredan2c",
+  "description": "Injury of blood vessels at wrist and hand level",
+  "price": 832,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      -74.1402449,
+      45.7340335
+    ]
+  },
+  "range": 3,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2165"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2166"
+  },
+  "name": "fburnsell2d",
+  "description": "Unspecified laceration of spleen, initial encounter",
+  "price": 976,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      44.0430569,
+      44.0271757
+    ]
+  },
+  "range": 3,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2167"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2168"
+  },
+  "name": "cagirre2e",
+  "description": "Monoarthritis, not elsewhere classified, left ankle and foot",
+  "price": 356,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      114.0369075,
+      -8.557437
+    ]
+  },
+  "range": 4,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2169"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa216a"
+  },
+  "name": "bmackessock2f",
+  "description": "Unspecified fracture of lower end of unspecified tibia, subsequent encounter for open fracture type I or II with delayed healing",
+  "price": 7,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      89.7853218,
+      25.0830926
+    ]
+  },
+  "range": 4,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa216b"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa216c"
+  },
+  "name": "ceadmeads2g",
+  "description": "Displaced fracture of proximal third of navicular [scaphoid] bone of left wrist, subsequent encounter for fracture with malunion",
+  "price": 52,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      103.262152,
+      36.733165
+    ]
+  },
+  "range": 1,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa216d"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa216e"
+  },
+  "name": "bfabbri2h",
+  "description": "Underdosing of other synthetic narcotics, sequela",
+  "price": 442,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      110.9387418,
+      -7.4703872
+    ]
+  },
+  "range": 10,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa216f"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2170"
+  },
+  "name": "mmoyles2i",
+  "description": "Other traumatic displaced spondylolisthesis of seventh cervical vertebra, subsequent encounter for fracture with routine healing",
+  "price": 138,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      -82.3533266,
+      23.1343601
+    ]
+  },
+  "range": 2,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2171"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c4"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2172"
+  },
+  "name": "fshillitoe2j",
+  "description": "Supervision of pregnancy with grand multiparity, second trimester",
+  "price": 134,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      126.9826111,
+      47.73021
+    ]
+  },
+  "range": 7,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2173"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2174"
+  },
+  "name": "ltranmer2k",
+  "description": "Unspecified injury of intrinsic muscle, fascia and tendon of other finger at wrist and hand level, subsequent encounter",
+  "price": 800,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      115.69993,
+      3.61023
+    ]
+  },
+  "range": 2,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2175"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2176"
+  },
+  "name": "dscudder2l",
+  "description": "Pathological fracture, other site",
+  "price": 620,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      120.9723263,
+      14.8305973
+    ]
+  },
+  "range": 9,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2177"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2178"
+  },
+  "name": "cledley2m",
+  "description": "Blister (nonthermal) of left ring finger, initial encounter",
+  "price": 164,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      110.0926112,
+      -1.2468663
+    ]
+  },
+  "range": 4,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2179"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa217a"
+  },
+  "name": "dmoulder2n",
+  "description": "Unspecified fracture of lower end of unspecified femur, subsequent encounter for closed fracture with nonunion",
+  "price": 356,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      121.1136216,
+      14.6074523
+    ]
+  },
+  "range": 1,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa217b"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa217c"
+  },
+  "name": "radame2o",
+  "description": "Other injury of unspecified muscle, fascia and tendon at wrist and hand level, unspecified hand, subsequent encounter",
+  "price": 280,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      176.9852185,
+      -37.9625979
+    ]
+  },
+  "range": 6,
+  "availability": true
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa217d"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa217e"
+  },
+  "name": "gcastanares2p",
+  "description": "Cardiac arrest",
+  "price": 779,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      -6.2761016,
+      36.5052612
+    ]
+  },
+  "range": 1784,
+  "availability": true,
+  "ratings": []
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa217f"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2180"
+  },
+  "name": "mbathowe2q",
+  "description": "Other shellfish poisoning",
+  "price": 680,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      -8.7860267,
+      37.5236561
+    ]
+  },
+  "range": 8,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a7a132fc13ae4ab8fa2181"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c1"
+  },
+  "categoryId": {
+    "$oid": "65a7a132fc13ae4ab8fa2182"
+  },
+  "name": "fbenns2r",
+  "description": "Nondisplaced fracture of lateral condyle of unspecified femur",
+  "price": 643,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      120.0496593,
+      -9.4511841
+    ]
+  },
+  "range": 8,
+  "availability": false
+},
+{
+  "_id": {
+    "$oid": "65a8d951f37dc8ab9aed5971"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a81325fc13ae6aa8fa2180"
+  },
+  "name": "wdearell2r",
+  "description": "Industrial and construction area as the place o",
+  "price": 22282,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      4.675721327402181,
+      43.64799887477249
+    ]
+  },
+  "range": 2337,
+  "availability": false,
+  "ratings": []
+},
+{
+  "_id": {
+    "$oid": "65a8d951f37dc8ab9aed5972"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a81325fc13ae6aa8fa2180"
+  },
+  "name": "swankling2mfkjsod",
+  "description": "Indondisplaced segmental fracture of shaft of humerus, left arm",
+  "price": 228,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      4.699402537767528,
+      43.74357677216048
+    ]
+  },
+  "range": 2132,
+  "availability": true,
+  "ratings": []
+},
+{
+  "_id": {
+    "$oid": "65a8d951f37dc8ab9aed5973"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a81325fc13ae6aa8fa2180"
+  },
+  "name": "barnauduc2p",
+  "description": "Industondisplaced segddddddddddddddddddmental fracture of shaft of humerus, left arm the place of occurrence of the external cause",
+  "price": 2282222,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      4.613909200782268,
+      43.71999328737963
+    ]
+  },
+  "range": 3451,
+  "availability": false,
+  "ratings": [],
+  "status": "pending"
+},
+{
+  "_id": {
+    "$oid": "65a8d951f37dc8ab9aed5974"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a81325fc13ae6aa8fa2180"
+  },
+  "name": "thazleton2j",
+  "description": "Industrial and construction area as the place of occurrence of the external cause",
+  "price": 228,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      4.690144379847468,
+      43.78444311037717
+    ]
+  },
+  "range": 1939,
+  "availability": true,
+  "ratings": []
+},
+{
+  "_id": {
+    "$oid": "65a8d951f37dc8ab9aed5975"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a81325fc13ae6aa8fa2180"
+  },
+  "name": "dilden2i",
+  "description": "Industrial and construction area as the ondisplaced segmental fracture of shaft of humerus, left armxternal cause",
+  "price": 228,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      4.680534327795174,
+      43.83055584455495
+    ]
+  },
+  "range": 4176,
+  "availability": true,
+  "ratings": []
+},
+{
+  "_id": {
+    "$oid": "65a8d951f37dc8ab9aed5976"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a81325fc13ae6aa8fa2180"
+  },
+  "name": "wdearell2r",
+  "description": "Industrial and construction area as the place of occurrence of the external cause",
+  "price": 228,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      4.759143128711246,
+      43.70063875619395
+    ]
+  },
+  "range": 2944,
+  "availability": true,
+  "ratings": []
+},
+{
+  "_id": {
+    "$oid": "65a8d951f37dc8ab9aed5977"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c2"
+  },
+  "categoryId": {
+    "$oid": "65a81325fc13ae6aa8fa2180"
+  },
+  "name": "dilden2i",
+  "description": "Industrial and construction areondisplaced segmental fracture of shaft of humerus, left armuse",
+  "price": 228,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      43.67850769242416,
+      4.6183748301324234
+    ]
+  },
+  "range": 6,
+  "availability": true,
+  "ratings": [],
+  "status": "pending"
+}]

@@ -7,16 +7,18 @@ const serviceSchema = new mongoose.Schema({
     price: Number,
     position: {
       type: { type: String,
-        enum: ['Point'],
-        required: true, default: 'Point' },
+        enum: ['Point'],default: 'Point' },
       coordinates: { type: [Number], default: [0, 0]}
      },
     range: { type: Number, default: 0 },
+     
     availability: Boolean,
     ratings: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Rating'
-    }]
+    }],
+    status: { type: String, enum: ['pending', 'accepted', 'rejected'], default: 'pending' },
+
   });
 
 const Service = mongoose.model('Service', serviceSchema);

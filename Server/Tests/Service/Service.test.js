@@ -1,15 +1,10 @@
-import jest from "jest-mock";
-import mongoose from "mongoose";
 import dotenv from "dotenv";
-import axios from "axios";
 import supertest from "supertest";
 import { connectDB, disconnectDB } from "../database.js";
 import application from "../../Application.js";
 
 dotenv.config();
 
-const randomEmail =
-  Math.random().toString(36).substring(2, 15) + "@example.com";
 let serviceId = "";
 
 const agent = supertest.agent(application);
@@ -57,7 +52,8 @@ describe("Persistent Session Testing", () => {
         "position": { "lat": 30.6377274, "lng": 73.0947607 },
         "range": 2,
         "ratings": ["659fba2a1f253e0e1d5147dd"],
-        "availability": true
+        "availability": true,
+        "status": "pending"
       }).expect(201);
 
     expect(response.body).toHaveProperty("success");
@@ -106,6 +102,15 @@ describe("Persistent Session Testing", () => {
 });
 
 describe("Error Testing", () => {
+
+
+  const checkError = (response, message) =>{
+    expect(response.body).toHaveProperty("ok");
+    expect(response.body).toHaveProperty("message");
+    expect(response.body).toHaveProperty("status");
+    expect(response.body.message).toBe(message);
+  }
+
   it("Should login a User", async () => {
     const response = await agent
       .post("/login")
@@ -120,26 +125,18 @@ describe("Error Testing", () => {
     expect(response.body).toHaveProperty("user");
   });
 
-  it("Should no accept the id given to it ", async () => {
+  it("Should not accept the id given to it ", async () => {
     const response = await agent.get("/services/" + "1234567890").expect(400);
 
-    expect(response.body).toHaveProperty("error");
-    expect(response.body.error).toBeInstanceOf(Array);
-    expect(response.body.error[0]).toHaveProperty("msg");
-    expect(response.body.error[0]["msg"]).toBe(
-      "The id you gave is not a mongoID"
-    );
-  });
+    checkError(response, "The id you gave is not a mongoID");
+});
 
   it("Should not find the service", async () => {
     const response = await agent
       .get("/services/" + "659fba2f1f253e0e1d5147dd")
       .expect(404);
 
-    expect(response.body).toHaveProperty("error");
-    expect(response.body.error).toBeInstanceOf(Array);
-    expect(response.body.error[0]).toHaveProperty("msg");
-    expect(response.body.error[0]["msg"]).toBe("Service not found");
+    checkError(response, "Service not found");
   });
 
   //Small servicename
@@ -159,12 +156,8 @@ describe("Error Testing", () => {
       })
       .expect(400);
 
-    expect(response.body).toHaveProperty("error");
-    expect(response.body.error).toBeInstanceOf(Array);
-    expect(response.body.error[0]).toHaveProperty("msg");
-    expect(response.body.error[0]["msg"]).toBe(
-      "Name must be of 2 to 100 characters long"
-    );
+
+    checkError(response, "Name must be of 2 to 100 characters long");
   });
 
   //Long servicename
@@ -184,12 +177,9 @@ describe("Error Testing", () => {
       })
       .expect(400);
 
-    expect(response.body).toHaveProperty("error");
-    expect(response.body.error).toBeInstanceOf(Array);
-    expect(response.body.error[0]).toHaveProperty("msg");
-    expect(response.body.error[0]["msg"]).toBe(
-      "Name must be of 2 to 100 characters long"
-    );
+
+    checkError(response, "Name must be of 2 to 100 characters long");
+
   });
 
   //Not an email
@@ -209,10 +199,7 @@ describe("Error Testing", () => {
       })
       .expect(400);
 
-    expect(response.body).toHaveProperty("error");
-    expect(response.body.error).toBeInstanceOf(Array);
-    expect(response.body.error[0]).toHaveProperty("msg");
-    expect(response.body.error[0]["msg"]).toBe("partnerid must be a valid mongoId");
+    checkError(response, "partnerid must be a valid mongoId");
   });
 
 });

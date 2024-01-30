@@ -33,6 +33,10 @@ import useGeneral from "../../Hooks/useGeneral";
     ,[selectedService]);
 
 
+    useEffect(() => {
+      console.log('historyOfChanges', historyOfChanges.map((service) => service.price));
+    }
+    ,[historyOfChanges]);
 
     return (
         <>

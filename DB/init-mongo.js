@@ -1,3 +1,7 @@
+load('/docker-entrypoint-initdb.d/USERS_DATA.js');
+load('/docker-entrypoint-initdb.d/CATEGORIES_DATA.js');
+load('/docker-entrypoint-initdb.d/SERVICES_DATA.js');
+
 cuurentTime = "2021-06-01T00:00:00.000Z";
 db = new Mongo().getDB("ProxiMap");
 /*{
@@ -13,100 +17,12 @@ db = new Mongo().getDB("ProxiMap");
 } */
 // Here you can insert your default data
 print("Inserting default data...");
-db.services.insertMany([
-  // Example document
-  {
-    name: "Service 1",
-    description: "Description of Service 1",
-    // Other fields...
-  },
-  // Add more documents as needed
-]);
 
 
-db.users.insertMany([
-  {
-    _id: ObjectId("60b5c5b4c7a3c0b4e4f0f8c2"),
-    username: "Yassin",
-    email: "mineboxarabic@gmail.com",
-    password: "$2b$10$eUxzAIF5hnapD56diZgioONFsYZt9tDy7N28oqRoD.ah/i56ye25S",
-    role: "Admin",
-    profile: {
-      bio: "I am the admin",
-      profilePicture: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F708613941184400862%2F&psig=AOvVaw2z9W4lq7QKQ6b8uN0jYh2a&ust=1622545559155000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMjBh7qj9_ACFQAAAAAdAAAAABAD",
-    },
-    createdAt: new Date()
-  },
 
-  {
-    _id: ObjectId("60b5c5b4c7a3c0b4e4f0f8c1"),
-    username: "user",
-    email: "user@gmail.com",
-    password: "$2b$10$eUxzAIF5hnapD56diZgioONFsYZt9tDy7N28oqRoD.ah/i56ye25S",
-    role: "User",
-    profile: {
-      bio: "I am the User",
-      profilePicture: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F708613941184400862%2F&psig=AOvVaw2z9W4lq7QKQ6b8uN0jYh2a&ust=1622545559155000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMjBh7qj9_ACFQAAAAAdAAAAABAD",
-    },
-    createdAt: new Date()
-  },  {
-    _id: ObjectId("60b5c5b4c7a3c0b4e4f0f8c4"),
-    username: "yassiddd",
-    email: "user23@gmaildd.com",
-    password: "$2b$10$eUxzAIF5hnapD56diZgioONFsYZt9tDy7N28oqRoD.ah/i56ye25S",
-    role: "User",
-    profile: {
-      bio: "I am the User",
-      profilePicture: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F708613941184400862%2F&psig=AOvVaw2z9W4lq7QKQ6b8uN0jYh2a&ust=1622545559155000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMjBh7qj9_ACFQAAAAAdAAAAABAD",
-    },
-    createdAt: new Date()
-  }
-    ,
-    {
-      _id: ObjectId("60b5c5b4c7a3c0b4f4f0f8c3"),
-      username: "yassiddd",
-      email: "userd223@gmaildd.com",
-      password: "$2b$10$eUxzAIF5hnapD56diZgioONFsYZt9tDy7N28oqRoD.ah/i56ye25S",
-      role: "User",
-      profile: {
-        bio: "I am the User",
-        profilePicture: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F708613941184400862%2F&psig=AOvVaw2z9W4lq7QKQ6b8uN0jYh2a&ust=1622545559155000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMjBh7qj9_ACFQAAAAAdAAAAABAD",
-      },
-      createdAt: new Date()
-  }
-]);
+db.users.insertMany(USERS_DATA);
 
-db.categories.insertMany([{
-  "_id": {
-    "$oid": "65a9a3912f10d0a3fd7106cb"
-  },
-  "name": "House",
-  "description": "Test Category Description",
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "65a9a3b5b3bd35526b67f7a4"
-  },
-  "name": "Animals",
-  "description": "Corrosion of second degree of neck, initial encounter",
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "65a9aaf628a8cfe080f0680b"
-  },
-  "name": "Test Categorydsss",
-  "description": "Test Category Description",
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "65a9b6e21cbc6ccc562e4586"
-  },
-  "name": "testCat",
-  "description": "fdas sdfs efds fef d",
-  "__v": 0
-}])
+db.categories.insertMany(CATEGORIES_DATA);
 
+db.services.insertMany(SERVICES_DATA);
 print("Done.");

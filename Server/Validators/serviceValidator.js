@@ -91,6 +91,13 @@ const serviceValidator = checkSchema({
             errorMessage: "Range must be of 2 to 9999 characters long"
         }
     
+    },
+    status:{
+            isIn: {
+                options: [['pending', 'accepted', 'rejected']],
+                errorMessage: "Status must be either pending, accepted, or rejected"
+            },
+            trim: true
     }
 });
 
@@ -192,6 +199,14 @@ export const serviceValidatorEdit = checkSchema({
             errorMessage: "Range must be of 2 to 9999 characters long"
         }
     
+    },
+    status:{
+        optional: true,
+            isIn: {
+                options: [['pending', 'accepted', 'rejected']],
+                errorMessage: "Status must be either pending, accepted, or rejected"
+            },
+            trim: true
     }
 });
 export default serviceValidator;

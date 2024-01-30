@@ -6,6 +6,7 @@ import { Checkbox } from "@mui/material";
 
 import { FormControlLabel } from "@mui/material";
 import { Box } from "@mui/system";
+
 const ServiceSettings = () =>{
     const {selectedService, setSelectedService} = useGeneral();
 
@@ -36,7 +37,7 @@ const ServiceSettings = () =>{
 
             <TextField type="number" id="outlined-basic" label="Price €" variant="outlined"
             value={selectedService.price}
-            onChange={(e) => setSelectedService({...selectedService, price: e.target.value})}
+            onChange={(e) => setSelectedService({...selectedService, price: parseInt(e.target.value)})}
             />
                 </Box>
 

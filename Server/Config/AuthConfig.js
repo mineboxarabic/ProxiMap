@@ -32,6 +32,21 @@ export const serviceRoutes ={
     }
 }
 
+export const askedServiceRoutes ={
+    create: {
+        allowedRoles: ['Admin', 'Manager', 'Staff']
+    },
+    read: {
+        allowedRoles: ['Admin', 'Manager', 'Staff', 'User', 'Partner']
+    },
+    update: {
+        allowedRoles: ['Admin', 'Manager', 'Staff', 'Partner']
+    },
+    delete: {
+        allowedRoles: ['Admin', 'Manager']
+    }
+}
+
 export const categoryRoutes ={
     create: {
         allowedRoles: ['Admin', 'Manager', 'Staff']
