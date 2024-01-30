@@ -22,6 +22,7 @@ import MapSearchBar from "../Components/MapSearchBar";
 import { Alert } from "@mui/material";
 import useCurrentUser from "../Hooks/useCurrentUser";
 import MarkerService from "../Components/Map/MarkerService";
+import Container from "@mui/material/Container";
 
 const Map = () => {
   const { services, isLoadingServices, updateBounds , errorServices} = useInMapView();
@@ -56,8 +57,8 @@ const Map = () => {
     if (!isLoadingServices && services?.length > 0) {
       const positions = services.map((service) => {
         return {
-          lat: service?.position?.coordinates[1],
-          lng: service?.position?.coordinates[0],
+          lat: service?.position?.coordinates?.[1],
+          lng: service?.position?.coordinates?.[0],
         };
       });
       setPositions(positions);
@@ -73,6 +74,7 @@ const Map = () => {
   }, [selected]);
 
   return (
+      <Container maxWidth="xl" sx={{ height: "100vh", width: "100%" }}>
     <Box className={"main-container"}>
       <ServiceDetailsDrawer
         partner={selectedPartner}
@@ -142,10 +144,8 @@ const Map = () => {
         </Box>
       </Box>
 
-      <Box className={"footer"}>
-        <h1>Footer</h1>
-      </Box>
     </Box>
+    </Container>
   );
 };
 

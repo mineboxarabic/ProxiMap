@@ -47,11 +47,12 @@ class ServiceDAO {
 
 
     async findServicesinMapView(swLat, swLng, neLat, neLng) {
+        const swLat_p = parseFloat(swLat);
+        const swLng_p = parseFloat(swLng);
+        const neLat_p = parseFloat(neLat);
+        const neLng_p = parseFloat(neLng);
         try {
-            const swLat_p = parseFloat(swLat);
-            const swLng_p = parseFloat(swLng);
-            const neLat_p = parseFloat(neLat);
-            const neLng_p = parseFloat(neLng);
+
            // console.log(swLat_p, swLng_p, neLat_p, neLng_p);
             const aggregationPipeline = [
                 {
@@ -89,8 +90,9 @@ class ServiceDAO {
             const services = await Service.aggregate(aggregationPipeline);
             return services;
         } catch (error) {
+            console.log(swLat_p, swLng_p, neLat_p, neLng_p);
             console.error("Error in findServicesinMapView:", error);
-            return error;
+            return [];
         }
     }
 

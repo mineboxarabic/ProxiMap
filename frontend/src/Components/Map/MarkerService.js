@@ -11,8 +11,8 @@ const MarkerService = ({ service }) => {
 
     const isSameUser = currentUser._id === service.partnerId;
     const position = {
-        lat: service?.position?.coordinates[1] || 0,
-        lng: service?.position?.coordinates[0] || 0,
+        lat: service?.position?.coordinates?.[1] || 0,
+        lng: service?.position?.coordinates?.[0] || 0,
     };
     const handleHover = (hov) => {
 

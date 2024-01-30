@@ -1,3 +1,29 @@
+
+/*{
+  "_id": {
+    "$oid": "65b8d148fc13ae7a51234951"
+  },
+  "categoryId": {
+    "$oid": "65a9a3912f10d0a3fd7106c3"
+  },
+  "partnerId": {
+    "$oid": "60b5c5b4c7a3c0b4e4f0f8c3"
+  },
+  "name": "mvidgeon5",
+  "description": "Pressure ulcer of right elbow, stage 1",
+  "price": 56,
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      4.568749743547676,
+      46.0841182620497
+    ]
+  },
+  "range": 1,
+  "availability": true,
+  "status": "pending",
+  "ratings": []
+}*/
 const SERVICES_DATA = [
   {
     _id: ObjectId("65b8d148fc13ae7a5123494c"),
@@ -6,7 +32,13 @@ const SERVICES_DATA = [
     name: "rcleeton0",
     description: "Colles' fracture of right radius",
     price: 552,
-    position: { lat: -22.7691646, lng: -43.6950804 },
+    position: {
+      type: "Point",
+      coordinates: [
+        4.568749743547676,
+        46.0841182620497
+      ]
+    },
     range: 4,
     availability: true,
     status: "accepted",
@@ -18,7 +50,13 @@ const SERVICES_DATA = [
     name: "rkubu1",
     description: "Other specified disorders of arteries and arterioles",
     price: 150,
-    position: { lat: 50.254933, lng: 21.478359 },
+    position: {
+      type: "Point",
+      coordinates: [
+        2.568749743547676,
+        26.0841182620497
+      ]
+    },
     range: 8,
     availability: false,
     status: "accepted",
@@ -31,8 +69,15 @@ const SERVICES_DATA = [
     description:
       "Unspecified fracture of shaft of right radius, subsequent encounter for open fracture type IIIA, IIIB, or IIIC with routine healing",
     price: 885,
-    position: { lat: 38.8959734, lng: 22.4349003 },
-    range: 4,
+    position: {
+        type: "Point",
+        coordinates: [
+            3.568749743547676,
+            36.0841182620497
+        ]
+
+    },
+      range: 4,
     availability: false,
     status: "pending",
   },
@@ -44,7 +89,13 @@ const SERVICES_DATA = [
     description:
       "Other injury of other muscles, fascia and tendons at shoulder and upper arm level, right arm, initial encounter",
     price: 770,
-    position: { lat: 32.497877, lng: 11.975728 },
+    position: {
+        type: "Point",
+        coordinates: [
+            3.568749743547676,
+            36.0841182620497
+        ]
+    },
     range: 7,
     availability: false,
     status: "pending",
@@ -57,7 +108,13 @@ const SERVICES_DATA = [
     description:
       "Traumatic rupture of unspecified ligament of right middle finger at metacarpophalangeal and interphalangeal joint, sequela",
     price: 531,
-    position: { lat: 63.1507161, lng: 23.1069244 },
+    position: {
+        type: "Point",
+        coordinates: [
+            3.568749743547676,
+            36.0841182620497
+        ]
+    },
     range: 4,
     availability: true,
     status: "accepted",
@@ -69,7 +126,13 @@ const SERVICES_DATA = [
     name: "mvidgeon5",
     description: "Pressure ulcer of right elbow, stage 1",
     price: 56,
-    position: { lat: 34.64921, lng: 70.5914 },
+    position: {
+        type: "Point",
+        coordinates: [
+            4.568749743547676,
+            46.0841182620497
+        ]
+    },
     range: 1,
     availability: true,
     status: "pending",
@@ -81,7 +144,13 @@ const SERVICES_DATA = [
     name: "lpickering6",
     description: "Injury of unspecified nerves of neck",
     price: 412,
-    position: { lat: -7.0655878, lng: 13.7037797 },
+    position: {
+        type: "Point",
+        coordinates: [
+            4.568749743547676,
+            46.0841182620497
+        ]
+    },
     range: 10,
     availability: false,
     status: "pending",
@@ -93,7 +162,13 @@ const SERVICES_DATA = [
     name: "bbails7",
     description: "Chronic multifocal osteomyelitis, left femur",
     price: 87,
-    position: { lat: 6.76716, lng: 80.9435092 },
+    position: {
+        type: "Point",
+        coordinates: [
+            4.568749743547676,
+            46.0841182620497
+        ]
+    },
     range: 5,
     availability: true,
     status: "accepted",
@@ -106,7 +181,13 @@ const SERVICES_DATA = [
     description:
       "Asphyxiation due to plastic bag, intentional self-harm, subsequent encounter",
     price: 680,
-    position: { lat: -7.9454654, lng: 13.0845936 },
+    position: {
+        type: "Point",
+        coordinates: [
+            6.568749743547676,
+            46.0841182620497
+        ]
+    },
     range: 1,
     availability: false,
     status: "pending",
@@ -118,7 +199,13 @@ const SERVICES_DATA = [
     name: "tdiruggero9",
     description: "Thyrotoxicosis factitia without thyrotoxic crisis or storm",
     price: 609,
-    position: { lat: 39.7024946, lng: -8.7377503 },
+    position: {
+        type: "Point",
+        coordinates: [
+            5.568749743547676,
+            46.0841182620497
+        ]
+    },
     range: 4,
     availability: true,
     status: "rejected",

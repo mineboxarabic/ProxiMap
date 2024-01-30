@@ -1,5 +1,5 @@
 import { checkSchema } from "express-validator";
-import usernameValidator from "./Users/userNameValidator.js";
+import usernameValidator from "./Users/usernameValidator.js";
 import emailValidator from "./Users/emailValidator.js";
 const userValidator = checkSchema({
     username: usernameValidator
