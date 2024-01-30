@@ -3,9 +3,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ProductHeroLayout from './ProductHeroLayout';
 
-const backgroundImage =
-    'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400';
-
+import backgroundImage from '../../assets/images/map_background.jpg';
 const ProductHero = () =>{
     return (
         <ProductHeroLayout

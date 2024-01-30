@@ -12,7 +12,7 @@ const readAskedService = async (req, res) => {
     res.status(200).json({
         success: true,
         message: "AskedService found",
-        askedAskedService: askedAskedService
+        askedService: askedAskedService
     });
 };
 

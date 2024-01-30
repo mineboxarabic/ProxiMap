@@ -100,6 +100,13 @@ describe("Persistent Session Testing", () => {
 });
 
 describe("Error Testing", () => {
+
+  const checkError = (response, message) =>{
+    expect(response.body).toHaveProperty("ok");
+    expect(response.body).toHaveProperty("message");
+    expect(response.body).toHaveProperty("status");
+    if(message) expect(response.body.message).toBe(message);
+  }
   it("Should login a User", async () => {
     const response = await agent
       .post("/login")
@@ -117,12 +124,8 @@ describe("Error Testing", () => {
   it("Should no accept the id given to it ", async () => {
     const response = await agent.get("/categorys/" + "1234567890").expect(400);
 
-    expect(response.body).toHaveProperty("error");
-    expect(response.body.error).toBeInstanceOf(Array);
-    expect(response.body.error[0]).toHaveProperty("msg");
-    expect(response.body.error[0]["msg"]).toBe(
-      "The id you gave is not a mongoID"
-    );
+
+    checkError(response, "The id you gave is not a mongoID");
   });
 
   it("Should not find the category", async () => {
@@ -130,10 +133,8 @@ describe("Error Testing", () => {
       .get("/categorys/" + "659fba2f1f253e0e1d5147dd")
       .expect(404);
 
-    expect(response.body).toHaveProperty("error");
-    expect(response.body.error).toBeInstanceOf(Array);
-    expect(response.body.error[0]).toHaveProperty("msg");
-    expect(response.body.error[0]["msg"]).toBe("Category not found");
+
+    checkError(response, "Category not found");
   });
 
   //Small categoryname
@@ -144,12 +145,9 @@ describe("Error Testing", () => {
       .send(category)
       .expect(400);
 
-    expect(response.body).toHaveProperty("error");
-    expect(response.body.error).toBeInstanceOf(Array);
-    expect(response.body.error[0]).toHaveProperty("msg");
-    expect(response.body.error[0]["msg"]).toBe(
-      "Name must be of 2 to 100 characters long"
-    );
+  
+
+    checkError(response, "Name must be of 2 to 100 characters long");
   });
 
   //Long categoryname
@@ -169,12 +167,7 @@ describe("Error Testing", () => {
       })
       .expect(400);
 
-    expect(response.body).toHaveProperty("error");
-    expect(response.body.error).toBeInstanceOf(Array);
-    expect(response.body.error[0]).toHaveProperty("msg");
-    expect(response.body.error[0]["msg"]).toBe(
-      "Name must be of 2 to 100 characters long"
-    );
+    checkError(response, "Name must be of 2 to 100 characters long");
   });
 
 

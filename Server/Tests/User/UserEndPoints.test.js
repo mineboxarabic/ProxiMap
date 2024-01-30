@@ -108,6 +108,15 @@ describe("Persistent Session Testing", () => {
 });
 
 describe("Error Testing", () => {
+
+    
+  const checkError = (response, message) =>{
+    expect(response.body).toHaveProperty("ok");
+    expect(response.body).toHaveProperty("message");
+    expect(response.body).toHaveProperty("status");
+    if(message) expect(response.body.message).toBe(message);
+  }
+  
     it("Should not login a user with invalid credentials", async () => {
         const response = await agent.post('/login')
             .send({
@@ -132,6 +141,7 @@ describe("Error Testing", () => {
         expect(response.body).toHaveProperty('accessToken');
         expect(response.body).toHaveProperty('refreshToken');
         expect(response.body).toHaveProperty('user');
+
         
     });
 
@@ -139,10 +149,8 @@ describe("Error Testing", () => {
     it("Should no accept the id given to it ", async () => {
         const response = await agent.get('/users/' + "1234567890").expect(400);
 
-        expect(response.body).toHaveProperty('error');
-        expect(response.body.error).toBeInstanceOf(Array);
-        expect(response.body.error[0]).toHaveProperty('msg');
-        expect(response.body.error[0]['msg']).toBe('The id you gave is not a mongoID');
+    
+        checkError(response, "The id you gave is not a mongoID");
     }
     );
 
@@ -151,10 +159,7 @@ describe("Error Testing", () => {
     it("Should not find the user", async () => {
         const response = await agent.get('/users/' + "659fba2f1f253e0e1d5147dd").expect(404);
 
-        expect(response.body).toHaveProperty('error');
-        expect(response.body.error).toBeInstanceOf(Array);
-        expect(response.body.error[0]).toHaveProperty('msg');
-        expect(response.body.error[0]['msg']).toBe('User not found');
+        checkError(response, "User not found");
     }
     );
 
@@ -169,10 +174,7 @@ describe("Error Testing", () => {
             })
             .expect(400);
 
-        expect(response.body).toHaveProperty('error');
-        expect(response.body.error).toBeInstanceOf(Array);
-        expect(response.body.error[0]).toHaveProperty('msg');
-        expect(response.body.error[0]['msg']).toBe('Username must be of 3 to 50 characters long');
+        checkError(response, "Username must be of 3 to 50 characters long");
     });
 
     //Long username
@@ -185,10 +187,8 @@ describe("Error Testing", () => {
             "password": "Zaqwe123"
         }).expect(400);
 
-        expect(response.body).toHaveProperty('error');
-        expect(response.body.error).toBeInstanceOf(Array);
-        expect(response.body.error[0]).toHaveProperty('msg');
-        expect(response.body.error[0]['msg']).toBe('Username must be of 3 to 50 characters long');
+
+        checkError(response, 'Username must be of 3 to 50 characters long')
 
 
     });
@@ -203,10 +203,8 @@ describe("Error Testing", () => {
             "password": "Zaqwe123"
         }).expect(400);
 
-        expect(response.body).toHaveProperty('error');
-        expect(response.body.error).toBeInstanceOf(Array);
-        expect(response.body.error[0]).toHaveProperty('msg');
-        expect(response.body.error[0]['msg']).toBe('Invalid email format');
+
+        checkError(response, 'Invalid email format');
     });
 
     //Small password
@@ -219,10 +217,7 @@ describe("Error Testing", () => {
             "password": "Zaq"
         }).expect(400);
 
-        expect(response.body).toHaveProperty('error');
-        expect(response.body.error).toBeInstanceOf(Array);
-        expect(response.body.error[0]).toHaveProperty('msg');
-        expect(response.body.error[0]['msg']).toBe('Password must be of 8 to 50 characters long');
+        checkError(response, 'Password must be of 8 to 50 characters long')
     });
 
 
@@ -236,10 +231,8 @@ describe("Error Testing", () => {
             "password": "Zaqwe123"
         }).expect(409);
 
-        expect(response.body).toHaveProperty('error');
-        expect(response.body.error).toBeInstanceOf(Array);
-        expect(response.body.error[0]).toHaveProperty('msg');
-        expect(response.body.error[0]['msg']).toBe('Email already exists');
+
+        checkError(response, 'Email already exists');
 
     });
 
@@ -253,10 +246,7 @@ describe("Error Testing", () => {
             "password": "Zaqwe123"
         }).expect(409);
 
-        expect(response.body).toHaveProperty('error');
-        expect(response.body.error).toBeInstanceOf(Array);
-        expect(response.body.error[0]).toHaveProperty('msg');
-        expect(response.body.error[0]['msg']).toBe('Username already exists');
+        checkError(response, 'Username already exists');
 
     });  
 

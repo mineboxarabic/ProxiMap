@@ -1,21 +1,6 @@
 import { checkSchema } from "express-validator";
 import UserDAO from "../DAO/UserDAO.js";
 import CategoryDAO from "../DAO/CategoryDAO.js";
-/*{
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    categoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
-    name: String,
-    description: String,
-    price: Number,
-    position: {
-      type: { type: String,
-        enum: ['Point'],
-        required: true, default: 'Point' },
-      coordinates: { type: [Number], default: [0, 0]}
-     },
-     date: {type: Date, default: Date.now},
-    status: { type: String, enum: ['pending', 'accepted', 'rejected'], default: 'pending' },
-  } */
   const askedServiceValidator = checkSchema({
     userId: {
         isMongoId: {
@@ -82,11 +67,7 @@ import CategoryDAO from "../DAO/CategoryDAO.js";
         errorMessage: "Position must be an object",
         trim: true
     },
-    'position.coordinates': {
-        isArray: true,
-        errorMessage: "Coordinates must be an array",
-        trim: true
-    },
+
     date: {
         isDate: true,
         errorMessage: "Date must be valid",
@@ -168,12 +149,6 @@ export const askedServiceValidatorEdit = checkSchema({
         optional: true,
         isObject: true,
         errorMessage: "Position must be an object",
-        trim: true
-    },
-    'position.coordinates': {
-        optional: true,
-        isArray: true,
-        errorMessage: "Coordinates must be an array",
         trim: true
     },
     date: {

@@ -46,6 +46,7 @@ const corsOptions = {
 application.use(cors(corsOptions));
 application.use(userRouter);
 application.use(serviceRouter);
+application.use(askedServiceRouter);
 application.use(tokenRouter);
 application.use(authenticationRouter)
 application.use(categoryRoute);

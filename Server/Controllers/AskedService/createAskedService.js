@@ -8,7 +8,7 @@ const createAskedService = async (req, res) => {
 
     const newAskedService = await askedAskedServiceDAO.create(askedAskedService);
     const coordinates = req.body.coordinates;
-
+console.log("test", req.body);
     if(coordinates){
         newAskedService.position = {
             type: "Point",
@@ -20,7 +20,7 @@ const createAskedService = async (req, res) => {
     if(!newAskedService){
         return res.status(500).json({success:false, message: "Something went wrong" });
     }else{
-        return res.status(201).json({success:true, message: "AskedService created successfully", askedAskedService:newAskedService });
+        return res.status(201).json({success:true, message: "AskedService created successfully", askedService:newAskedService });
     }
 };
 

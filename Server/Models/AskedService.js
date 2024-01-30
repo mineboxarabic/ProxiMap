@@ -7,8 +7,7 @@ const AskedServiceSchema = new mongoose.Schema({
     price: Number,
     position: {
       type: { type: String,
-        enum: ['Point'],
-        required: true, default: 'Point' },
+        enum: ['Point'], default: 'Point' },
       coordinates: { type: [Number], default: [0, 0]}
      },
      date: {type: Date, default: Date.now},
