@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
+import bubles from '../../assets/images/bubles.png';
 
 const ProductHeroLayoutRoot = styled('section')(({ theme }) => ({
     color: theme.palette.common.white,
@@ -43,7 +44,7 @@ function ProductHeroLayout(props) {
                 }}
             >
                 <img
-                    src="/static/themes/onepirate/productHeroWonder.png"
+                    src={bubles}
                     alt="wonder"
                     width="147"
                     height="80"
