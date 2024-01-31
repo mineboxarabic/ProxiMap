@@ -8,20 +8,27 @@ const useServicesHistory = () => {
         return historyOfChanges.find((ser) => ser?._id === service?._id);
     }
 
+
+
     const addServiceToHistory = (service) => {
+
         setHistoryOfChanges([...historyOfChanges, service]);
+
     }
 
     const updateServiceInHistory = (service) => {
-        const updatedHistory = historyOfChanges.map(ser =>
-            ser?._id === service?._id ? service : ser
-        );
+
+        const updatedHistory = historyOfChanges.map(ser =>ser?._id === service?._id ? service : ser);
+
+
+        const selectedService = updatedHistory.find((ser) => ser?._id === service?._id);
+        const index = updatedHistory.indexOf(selectedService);
+        updatedHistory.splice(index, 1);
+        updatedHistory.push(selectedService);
         setHistoryOfChanges(updatedHistory);
     }
 
-
     
-
     const updatePosition = (service, newPosition) => {
         const serviceInHistory = isServiceInHistory(service);
         const updatedService = { 
@@ -74,6 +81,8 @@ const useServicesHistory = () => {
             });
           }
     }
+
+
 
 
 

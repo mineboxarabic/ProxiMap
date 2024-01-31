@@ -59,7 +59,7 @@ const EditableMarker = ({service, selected, setSelected}) =>
     }, [])
   
     useEffect(() => {
-        updatePosition(service, position);
+        if(draggable) updatePosition(service, position);
     }
     , [position]);
 
