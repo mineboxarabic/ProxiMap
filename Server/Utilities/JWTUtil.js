@@ -104,6 +104,7 @@ const authenticateUser = (req, res, next) =>{
 export const autherizeUserRole = (req, res, next, allowedRoles) => {
     const refreshToken = req.cookies?.refreshToken;
     const user = JWT.verify(refreshToken, process.env.REFRESH_TOKEN);
+
     const userRole = user.role;
 
     if(allowedRoles.includes(userRole)){

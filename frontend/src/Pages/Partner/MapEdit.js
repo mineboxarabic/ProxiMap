@@ -34,6 +34,7 @@ import AddIcon from '@mui/icons-material/Add';
 import SdStorage from '@mui/icons-material/SdStorage';
 import NavigationIcon from '@mui/icons-material/Navigation';
 import NewServiceModal from "./NewServiceModal.js";
+import useServicesHistory from "../../Hooks/useServicesHistory.js";
 
 const MapEdit = ({nameOfClass, defaultModel}) => {
   const currentUser = useCurrentUser();
@@ -47,10 +48,9 @@ const MapEdit = ({nameOfClass, defaultModel}) => {
 
 
 
-  const { historyOfChanges, setSelectedService, setHistoryOfChanges } =
-    useGeneral();
+
   
-  
+  const {updateDB, historyOfChanges , setSelectedService,selectedService} = useServicesHistory();
 
   const [isSave, setIsSave] = useState(true);
   const [position, setPosition] = useState(null);
@@ -67,10 +67,11 @@ const MapEdit = ({nameOfClass, defaultModel}) => {
   const {
     update: updateService,
     create: createService,
-    error: errorUpdateService,
-    setError: setErrorUpdateService,
-    success: updateSuccess,
-    setSuccess: setUpdateSuccess,
+    error: serviceError,
+    setError: setServiceError,
+    success: serviceSuccess,
+    setSuccess: setServiceSuccess,
+    remove: removeService,
   } = useResource(`/${nameOfClass}`);
 
   useEffect(() => {
@@ -80,39 +81,56 @@ const MapEdit = ({nameOfClass, defaultModel}) => {
   const handlSaveChanges = () => {
     setIsSave(true);
     setSelectedService(null);
-
-    if (historyOfChanges?.length > 0) {
-      historyOfChanges.forEach((service) => {
-        updateService(service);
-      });
-    }
+    updateDB(updateService);
   };
+
+  const handleDelete = () => {
+    removeService(selectedService._id);
+    setSelectedService(null);
+    getAllServices();
+  }
 
   useEffect(() => {
     setIsSave(false);
   }, [historyOfChanges]);
 
 
-  const handleAddService = (tempModel) =>{
+  const handleAddService = async (tempModel) =>{
       const newService = tempModel;
 
       newService.partnerId = currentUser._id;
+
+
+      const centerPoint = currentBounds.getCenter();
       newService.position = {
         type: "Point",
-        coordinates: [newService.position.coordinates[0], newService.position.coordinates[1]],
+        coordinates: [centerPoint.lng, centerPoint.lat],
       };
-      createService(newService);
 
-
-      console.log('add service');
+      await createService(newService);
   }
 
-  const [addNewMarker, setAddNewMarker] = useState(false);
-  const [showNewMarker, setShowNewMarker] = useState(false);
-  const [serviceModel, setServiceModel] = useState(defaultModel);
-  const [modal, setModal] = useState(false);
-  const [addError, setAddError] = useState('');
 
+
+  useEffect(() => { 
+
+    const isSuccessful = serviceSuccess !== "";
+    const isError = serviceError !== "";
+
+    if (isSuccessful) {
+      getAllServices();
+      setModal(false);
+    }
+
+    if (isError) {
+      setServiceError("");
+    }
+
+
+  }, [serviceSuccess]);
+
+  const [currentBounds, setCurrentBounds] = useState(null);
+  const [modal, setModal] = useState(serviceSuccess);
   return (
     <Box className={"main-container"}>
 
@@ -120,19 +138,19 @@ const MapEdit = ({nameOfClass, defaultModel}) => {
       open={modal}
         handleClose={()=>setModal(false)}
         handleAdd={handleAddService}
-        error={addError}
+        error={serviceError}
         modelClass={defaultModel}
       />
       <Snackbar
-        open={updateSuccess !== ""}
+        open={serviceSuccess !== ""}
         autoHideDuration={6000}
         onClose={() => {
-          setUpdateSuccess("");
+          setServiceSuccess("");
         }}
       >
         <Alert
           onClose={() => {
-            setUpdateSuccess("");
+            setServiceSuccess("");
           }}
           severity="success"
           sx={{ width: "100%" }}
@@ -142,20 +160,20 @@ const MapEdit = ({nameOfClass, defaultModel}) => {
       </Snackbar>
 
       <Snackbar
-        open={errorUpdateService !== ""}
+        open={serviceError !== ""}
         autoHideDuration={6000}
         onClose={() => {
-          setErrorUpdateService("");
+          setServiceError("");
         }}
       >
         <Alert
           onClose={() => {
-            setErrorUpdateService("");
+            setServiceError("");
           }}
           severity="error"
           sx={{ width: "100%" }}
         >
-          {errorUpdateService}
+          {serviceError}
         </Alert>
       </Snackbar>
 
@@ -239,6 +257,7 @@ const MapEdit = ({nameOfClass, defaultModel}) => {
 
              
             </Box>
+            <MapEvents  setBounds={setCurrentBounds} setPosition={setPosition}/>
           </MapContainer>
         </Box>
         <Box
@@ -246,7 +265,7 @@ const MapEdit = ({nameOfClass, defaultModel}) => {
           sx={{ width: { xs: "100%", md: "30%" } }}
         >
           {/*right side */}
-          <ServiceSettings />
+          <ServiceSettings handleDelete={handleDelete}/>
         </Box>
       </Box>
     </Box>

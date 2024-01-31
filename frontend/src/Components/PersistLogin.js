@@ -3,14 +3,17 @@ import useAuth from "../Hooks/useAuth"
 import { useEffect,useState } from "react";
 import useRefreshToken from "../Hooks/useRefreshToken";
 import { Backdrop, CircularProgress } from "@mui/material";
+import useLocalStorage from "../Hooks/useLocalStorage";
 
 const PersistLogin = () => {
-    const { auth, persist} = useAuth();
+    const { auth} = useAuth();
     const refresh = useRefreshToken();
     const [isLoading , setIsLoading] = useState(true);
+    const [persist] = useLocalStorage('persist', false);
 
     useEffect(() => {
         const checkAuth = async () => {
+            console.log('checkAuth');
             try{
                 await refresh();
             }catch(error){

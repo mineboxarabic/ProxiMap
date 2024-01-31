@@ -6,9 +6,12 @@ import { Checkbox } from "@mui/material";
 
 import { FormControlLabel } from "@mui/material";
 import { Box } from "@mui/system";
+import { Button } from "@mui/material";
+import useResource from "../../Hooks/useResource";
 
-const ServiceSettings = () =>{
+const ServiceSettings = ({handleDelete}) =>{
     const {selectedService, setSelectedService} = useGeneral();
+
 
     return(
         <div>
@@ -54,6 +57,8 @@ const ServiceSettings = () =>{
             onChange={(e) => setSelectedService({...selectedService, availability: e.target.checked})}
             
         />} label="Availability" />
+
+        <Button variant="contained" color="error" onClick={handleDelete} >Delete</Button>
 
 
             </>: <h1>No service selected</h1>}

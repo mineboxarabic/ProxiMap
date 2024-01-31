@@ -12,11 +12,13 @@ const createService = async (req, res) => {
     if(coordinates){
         newService.position = {
             type: "Point",
-            coordinates: coordinates
+            coordinates: [
+                coordinates[1],
+                coordinates[0]
+            ]
         }
     }
 
-    
     if(!newService){
         return res.status(500).json({success:false, message: "Something went wrong" });
     }else{

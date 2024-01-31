@@ -90,37 +90,9 @@ const NewServiceModal = ({
             <TextField label="Name" variant="outlined" value={tempModel["name"]} onChange={(e) => setTempModel({ ...tempModel, name: e.target.value })} />
             <TextField label="Description" variant="outlined" value={tempModel["description"]} onChange={(e) => setTempModel({ ...tempModel, description: e.target.value })} />
             <TextField type="number" label="Price" variant="outlined" value={tempModel["price"]} onChange={(e) => setTempModel({ ...tempModel, price: parseInt(e.target.value) })} />
-            <TextField label="Availability" variant="outlined" value={tempModel["availability"]} onChange={(e) => setTempModel({ ...tempModel, availability: e.target.value })} />
-            <TextField label="Ratings" variant="outlined" value={tempModel["ratings"]} onChange={(e) => setTempModel({ ...tempModel, ratings: e.target.value })} />
 
-
-            <TextField 
-            type="number" 
-            label="lat" 
-            variant="outlined"
-            value={tempModel.position.coordinates[0] || ''}
-            onChange={(e) => {
-              let newCoordinates = [...tempModel.position.coordinates];
-              newCoordinates[0] = parseFloat(e.target.value);
-              setTempModel({
-                ...tempModel,
-                position: { ...tempModel.position, coordinates: newCoordinates }
-              });
-            }} />
             
-            
-            
-            
-            <TextField type="number" label="lng" variant="outlined" value={tempModel["position"]['coordinates'][1]} onChange={
-              (e) => {
-                let newCoordinates = [...tempModel.position.coordinates];
-                newCoordinates[1] = parseFloat(e.target.value);
-                setTempModel({
-                  ...tempModel,
-                  position: { ...tempModel.position, coordinates: newCoordinates }
-                });
-              
-              }} />
+        
 
             <TextField  type="number"label="range" variant="outlined" value={tempModel["range"]} onChange={(e) => setTempModel({ ...tempModel, range: e.target.value })} />
           

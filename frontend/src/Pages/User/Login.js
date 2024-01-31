@@ -7,13 +7,15 @@ import useAuth from '../../Hooks/useAuth';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import useLocalStorage  from '../../Hooks/useLocalStorage';
 import { FormControlLabel, FormGroup } from '@mui/material';
+
 const LogIn = () =>
 {
     //This ref is to get 
     const emailRef = useRef();
     const errorRef = useRef();
 
-    const {setAuth, persist, setPersist} = useAuth();
+    const {auth, setAuth} = useAuth();
+    const [persist, setPersist] = useLocalStorage('persist', false);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -35,18 +37,27 @@ const LogIn = () =>
 
 
     const togglePersist = () => {
-        setPersist(prev => !prev);
+        setPersist(!persist);
     }
     useEffect(() => { 
         localStorage.setItem('persist', persist);
     }, [persist])
 
+    useEffect(() => {
+        //if the user is already logged in go to back
+        if(auth?.accessToken){
+            navigate(from, { replace: true });
+        }
+
+    }, [auth])
+
     const handleSubmit = async (e) =>
     {
         e.preventDefault();
+ 
         try
         {
-            const response = await axios.post('http://localhost:3001/login',
+            const response = await axios.post(process.env.REACT_APP_BASE_URL + 'login',
                 {
                     email: email,
                     password: password

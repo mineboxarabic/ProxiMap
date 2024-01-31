@@ -68,18 +68,51 @@ const serviceValidator = checkSchema({
         errorMessage: "Availability must be a boolean",
         trim: true
     },
-    ratings: {
-        isMongoId: {
-
-            errorMessage: "Must be a valid mongoId",
-        },
-        errorMessage: "Invalid ratings",
-        trim: true
-    },
     position: {
-        isObject: true,
-        errorMessage: "Position must be an object",
-        trim: true
+        notEmpty: {
+            errorMessage: "Position is required",
+        },
+        isObject: {
+            errorMessage: "Position must be an object",
+        },
+        custom: {
+            options: (value, { req }) => {
+                if (typeof value.type !== 'string' || !Array.isArray(value.coordinates)) {
+                    throw new Error("Position object is invalid");
+                }
+                // Further validation can be added here, e.g., checking coordinate values
+                return true;
+            },
+        },
+    },
+    'position.type': {
+        isString: {
+            errorMessage: "Position type must be a string",
+        },
+        custom: {
+            options: (value, { req }) => {
+                // Example: Check if type is one of the allowed values
+                const allowedTypes = ['Point', 'Polygon']; // Add more types as needed
+                if (!allowedTypes.includes(value)) {
+                    throw new Error(`Position type must be one of the following: ${allowedTypes.join(", ")}`);
+                }
+                return true;
+            },
+        },
+    },
+    'position.coordinates': {
+        isArray: {
+            errorMessage: "Position coordinates must be an array",
+        },
+        custom: {
+            options: (value, { req }) => {
+                // Example: Check if coordinates array has the correct length/format
+                if (value.length !== 2 || !value.every(num => typeof num === 'number')) {
+                    throw new Error("Coordinates must be an array of two numbers");
+                }
+                return true;
+            },
+        },
     },
     range: {
         isNumeric: true,

@@ -28,18 +28,23 @@ function App() {
     <Routes>
       <Route path='/' element={<MainLayout />} >
 
-        {/* Public Routes */}
+        <Route element={<PersistLogin />}>
+
+          {/* Public Routes */}
 
           <Route path='/login' element={<LogIn />} />
           <Route path='/register' element={<Register />} />
           <Route path='/about' element={<About />} />
           <Route path='/home' element={<Home />} />
 
+          {/*Parnter only orutes */}
+          <Route element={<RequireAuth allowedRoles={[PARTNER, ADMIN]} />}>
+            <Route path='/services/edit' element={<ServiceEditMap />} />
+          </Route>
 
-        {/* Private Routes */}
+          {/* Private Routes */}
 
 
-        <Route element={<PersistLogin />}>
           {/* Admin Routes */}
           <Route element={<RequireAuth allowedRoles={[ADMIN]} />}>
 
@@ -50,26 +55,23 @@ function App() {
 
 
           </Route>
-      
-            {/* User Routes */} 
-          <Route element={<RequireAuth allowedRoles={[ADMIN,USER]} />}>
+
+          {/* User Routes */}
+          <Route element={<RequireAuth allowedRoles={[ADMIN, USER]} />}>
           </Route>
 
           {/* All Roles Routes */}
-          <Route element={<RequireAuth allowedRoles={[ADMIN,USER , PARTNER, MANAGER, STAFF]} />}>
-          <Route path='/map' element={<Map />} />
+          <Route element={<RequireAuth allowedRoles={[ADMIN, USER, PARTNER, MANAGER, STAFF]} />}>
+            <Route path='/map' element={<Map />} />
 
             <Route path='/profile' element={<ProfilePage />} />
           </Route>
 
-      {/*Parnter only orutes */}
-      <Route element={<RequireAuth allowedRoles={[PARTNER,ADMIN]} />}>
-        <Route path='/services/edit' element={<ServiceEditMap />} />
-      </Route>
-        {/* Catch all */}
-        <Route path='/*' element={<NotFound />} />
-        <Route path='/unautherized' element={<UnAutherized />} />
-      </Route>
+
+          {/* Catch all */}
+          <Route path='/*' element={<NotFound />} />
+          <Route path='/unautherized' element={<UnAutherized />} />
+        </Route>
       </Route>
 
     </Routes>

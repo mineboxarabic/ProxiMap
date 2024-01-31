@@ -23,7 +23,6 @@ export const readServicesinMapViewOfUser = async (req, res) => {
     const id = req.params.id;
     const serviceDAO = new ServiceDAO();
     const services = await serviceDAO.findAllByPartnerId(id);
-
     if(services instanceof Error){
         ValidateRes(res, services);
         return;

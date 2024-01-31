@@ -10,14 +10,25 @@ import  dragableLogo  from '../../assets/dragableLogo.png';
 import useLocalStorage from "../../Hooks/useLocalStorage";
 import useGeneral from "../../Hooks/useGeneral";
 import '../../Style/editableMap.scss'
+import useServicesHistory from "../../Hooks/useServicesHistory";
 const EditableMarker = ({service, selected, setSelected}) => 
 {
     const [position, setPosition] = useState({
-        lat: service?.position?.coordinates[1] || 0,
-        lng: service?.position?.coordinates[0] || 0,
+        lat: service?.position?.coordinates[1],
+        lng: service?.position?.coordinates[0],
     });
     
-    const {selectedService, setSelectedService, historyOfChanges, setHistoryOfChanges} = useGeneral();
+
+    const {updatePosition, 
+        isServiceInHistory, 
+        selectService,
+        isCurrentServiceSelected,
+        selectedService,
+        getService
+    } = useServicesHistory();
+
+
+
     const [draggable, setDraggable] = useState(false)
     const [color, setColor] = useState("blue");
 
@@ -43,51 +54,22 @@ const EditableMarker = ({service, selected, setSelected}) =>
         [],
     )
 
-
-
-    const serviceSet = historyOfChanges.find((ser) => ser?._id === service?._id);
-
-
-    const updateServcePostion = () => {
-            if(serviceSet){
-                const newService = { ...serviceSet, position: { ...serviceSet.position, coordinates: [position.lng, position.lat] } };
-                
-                setHistoryOfChanges([...historyOfChanges.filter((ser) => ser?._id !== service?._id), newService])
-            }
-            else{
-                const newService = { ...service, position: { ...service.position, coordinates: [position.lng, position.lat] } };
-                setHistoryOfChanges([...historyOfChanges, newService]);
-            }
-    }
-
-    const manageSelectionStatus = () => {
-        const serviceSet = historyOfChanges.find((ser) => ser?._id === service?._id);
-        //we check if the service is draggable and if it is not the selected service
-        //We check if it's not selected service so that we unselect it when we double click on it again
-        if (draggable && selectedService?._id !== service._id) {
-            //if the service exists in the history of changes we put it in the selected service
-            if (serviceSet) {
-                setSelectedService(serviceSet);
-            } else {
-                setSelectedService(service);
-            }
-        } else if (!draggable && selectedService?._id === service._id) {
-            setSelectedService(null);
-        }
-    }; 
-
     useEffect(() => {
         handleHover(false)
     }, [])
   
     useEffect(() => {
-       updateServcePostion();
+        updatePosition(service, position);
     }
     , [position]);
 
 
     useEffect(() => {
-        manageSelectionStatus();
+
+        if (draggable) {
+            selectService(service);
+        }
+   
     }, [draggable]);
 
 
@@ -96,16 +78,13 @@ const EditableMarker = ({service, selected, setSelected}) =>
     }, [selected, service._id]);
 
     useEffect(() => {
-        setDraggable(prev =>{
-        if(selectedService == null) return false;
-        return selectedService._id === service._id;
-        })
+        setDraggable(isCurrentServiceSelected(service) ? true : false);
     }, [selectedService]);
 
     const key = position.toString() + color;
     return(
         <Circle key={key} center={position} radius={
-                serviceSet ? serviceSet?.range : service?.range
+               isServiceInHistory(service) ? getService(service)?.range : service?.range
         } color={color}
             className="rangeCircle"
         >
