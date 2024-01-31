@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import useGeneral from './useGeneral';
+import { useEffect } from 'react';
 const useServicesHistory = () => {
 
     const {historyOfChanges, setHistoryOfChanges,setSelectedService, selectedService} = useGeneral();
@@ -86,7 +87,36 @@ const useServicesHistory = () => {
 
 
 
-    
+    useEffect(() => {
+        /*if (selectedService) {
+            if (historyOfChanges.find((service) => service._id === selectedService._id)) {
+              const newHistory = historyOfChanges.map((service) => {
+                if (service._id === selectedService._id) {
+                  return selectedService;
+                } else {
+                  return service;
+                }
+              }
+              );
+                setHistoryOfChanges(newHistory);
+            } else {
+              setHistoryOfChanges([...historyOfChanges, selectedService]);
+            }
+        }*/
+
+
+        if(selectedService){
+            const isService = isServiceInHistory(selectedService);
+            if(isService){
+                updateServiceInHistory(selectedService);
+            }
+            else{
+                addServiceToHistory(selectedService);
+            }
+        }
+        
+    }
+    ,[selectedService]);
 
 
 

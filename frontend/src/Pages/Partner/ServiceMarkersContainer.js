@@ -17,25 +17,7 @@ import useServicesHistory from "../../Hooks/useServicesHistory";
     const currentUser = useCurrentUser();
 
 
-    useEffect(() => {
-        /*if (selectedService) {
-            if (historyOfChanges.find((service) => service._id === selectedService._id)) {
-              const newHistory = historyOfChanges.map((service) => {
-                if (service._id === selectedService._id) {
-                  return selectedService;
-                } else {
-                  return service;
-                }
-              }
-              );
-                setHistoryOfChanges(newHistory);
-            } else {
-              setHistoryOfChanges([...historyOfChanges, selectedService]);
-            }
-        }*/
-        
-    }
-    ,[selectedService]);
+
 
 
     useEffect(() => {

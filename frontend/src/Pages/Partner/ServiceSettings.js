@@ -12,6 +12,13 @@ import useResource from "../../Hooks/useResource";
 const ServiceSettings = ({handleDelete}) =>{
     const {selectedService, setSelectedService} = useGeneral();
 
+    const [name, setName] = useState(selectedService.name);
+    const [description, setDescription] = useState(selectedService.description);
+    const [price, setPrice] = useState(selectedService.price);
+    const [range, setRange] = useState(selectedService.range);
+    const [availability, setAvailability] = useState(selectedService.availability);
+
+
 
     return(
         <div>
@@ -29,26 +36,31 @@ const ServiceSettings = ({handleDelete}) =>{
                 >
 
             <TextField id="outlined-basic" label="Dame" variant="outlined"
-            value={selectedService.name}
-            onChange={(e) => setSelectedService({...selectedService, name: e.target.value})}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            onBlure={() => setSelectedService({...selectedService, name: name})}
             />
 
             <TextField id="outlined-basic" label="Description" variant="outlined"
-            value={selectedService.description}
-            onChange={(e) => setSelectedService({...selectedService, description: e.target.value})}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            onBlure={() => setSelectedService({...selectedService, description: description})}
+
             />
 
             <TextField type="number" id="outlined-basic" label="Price €" variant="outlined"
-            value={selectedService.price}
-            onChange={(e) => setSelectedService({...selectedService, price: parseInt(e.target.value)})}
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            onBlure={() => setSelectedService({...selectedService, price: price})}
             />
                 </Box>
 
         <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto"
-        value={selectedService.range}
+        value={range}
         max={5000}
 
-        onChange={(e) => setSelectedService({...selectedService, range: e.target.value})}
+        onChange={(e) => setRange(e.target.value)}
+        onBlure={() => setSelectedService({...selectedService, range: range})}
         />
 
     <FormControlLabel control={<Checkbox 
