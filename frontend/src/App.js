@@ -21,6 +21,7 @@ import Map from './Pages/Map';
 import ProfilePage from './Pages/Profile';
 import CRUDCategory from './Pages/Admin/CRUD/CRUDCategory';
 import MapEdit from './Pages/Partner/MapEdit';
+import ServiceEditMap from './Pages/ServiceEditMap';
 
 function App() {
   return (
@@ -62,8 +63,8 @@ function App() {
           </Route>
 
       {/*Parnter only orutes */}
-      <Route element={<RequireAuth allowedRoles={[PARTNER]} />}>
-        <Route path='/services/edit' element={<MapEdit />} />
+      <Route element={<RequireAuth allowedRoles={[PARTNER,ADMIN]} />}>
+        <Route path='/services/edit' element={<ServiceEditMap />} />
       </Route>
         {/* Catch all */}
         <Route path='/*' element={<NotFound />} />

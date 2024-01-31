@@ -28,19 +28,34 @@ import useLocalStorage from "../../Hooks/useLocalStorage";
 import useResource from "../../Hooks/useResource";
 
 import { Snackbar } from "@mui/material";
+import { Fab } from "@mui/material";
+//import {AddIcon, SdStorage} from '@mui/icons-material';
+import AddIcon from '@mui/icons-material/Add';
+import SdStorage from '@mui/icons-material/SdStorage';
+import NavigationIcon from '@mui/icons-material/Navigation';
+import NewServiceModal from "./NewServiceModal.js";
 
-const MapEdit = () => {
+const MapEdit = ({nameOfClass, defaultModel}) => {
   const currentUser = useCurrentUser();
+  
   const {
     resources: services,
     getAll: getAllServices,
     error: errorServices,
     loading: isLoadingServices,
-  } = useResource(`/services/partner/${currentUser?._id}`);
+  } = useResource(`/${nameOfClass}/partner/${currentUser?._id}`);
+
+
+
   const { historyOfChanges, setSelectedService, setHistoryOfChanges } =
     useGeneral();
+  
+  
+
   const [isSave, setIsSave] = useState(true);
   const [position, setPosition] = useState(null);
+  
+  
 
   //When we search we execute this function
   const onSearchSubmit = (value) => {
@@ -51,11 +66,12 @@ const MapEdit = () => {
 
   const {
     update: updateService,
+    create: createService,
     error: errorUpdateService,
     setError: setErrorUpdateService,
     success: updateSuccess,
     setSuccess: setUpdateSuccess,
-  } = useResource(`/services`);
+  } = useResource(`/${nameOfClass}`);
 
   useEffect(() => {
     getAllServices();
@@ -76,8 +92,37 @@ const MapEdit = () => {
     setIsSave(false);
   }, [historyOfChanges]);
 
+
+  const handleAddService = (tempModel) =>{
+      const newService = tempModel;
+
+      newService.partnerId = currentUser._id;
+      newService.position = {
+        type: "Point",
+        coordinates: [newService.position.coordinates[0], newService.position.coordinates[1]],
+      };
+      createService(newService);
+
+
+      console.log('add service');
+  }
+
+  const [addNewMarker, setAddNewMarker] = useState(false);
+  const [showNewMarker, setShowNewMarker] = useState(false);
+  const [serviceModel, setServiceModel] = useState(defaultModel);
+  const [modal, setModal] = useState(false);
+  const [addError, setAddError] = useState('');
+
   return (
     <Box className={"main-container"}>
+
+      <NewServiceModal 
+      open={modal}
+        handleClose={()=>setModal(false)}
+        handleAdd={handleAddService}
+        error={addError}
+        modelClass={defaultModel}
+      />
       <Snackbar
         open={updateSuccess !== ""}
         autoHideDuration={6000}
@@ -179,16 +224,20 @@ const MapEdit = () => {
             <Box
               sx={{ zIndex: 1000, position: "absolute", bottom: 0, right: 0 }}
             >
-              <Button
-                sx={{
-                  fontSize: "1.5rem",
-                }}
-                variant="contained"
-                color="primary"
-                onClick={handlSaveChanges}
-              >
-                Save
-              </Button>
+            <Fab
+              onClick={()=>setModal(true)}
+            sx={{mr:1,mb:3, p:4}} color="primary" aria-label="add">
+            
+              <AddIcon />
+            </Fab>
+
+            <Fab sx={{mr:1,mb:3, p:4}} color="secondary" aria-label="save" 
+              onClick={handlSaveChanges}
+            >
+              <SdStorage />
+            </Fab>
+
+             
             </Box>
           </MapContainer>
         </Box>
