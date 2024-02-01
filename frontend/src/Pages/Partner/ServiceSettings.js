@@ -14,6 +14,9 @@ import useServicesHistory from "../../Hooks/useServicesHistory";
 const ServiceSettings = ({handleDelete}) =>{
     const {selectedService, setSelectedService} = useGeneral();
     const {getSelectedService} = useServicesHistory();
+
+
+    
     
     const [name, setName] = useState( '');
     const [description, setDescription] = useState('');

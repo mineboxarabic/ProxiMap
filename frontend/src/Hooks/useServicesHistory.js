@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import useGeneral from './useGeneral';
 import { useEffect } from 'react';
 const useServicesHistory = () => {
@@ -94,22 +94,26 @@ const useServicesHistory = () => {
 
 
     useEffect(() => {
-        if(selectedService){
-        console.log('selectedService', selectedService);
+        if (selectedService) {
 
-            const isService = isServiceInHistory(selectedService);
-            if(isService){
-                updateServiceInHistory(selectedService);
+            if (isServiceInHistory(selectedService)) {
+                const serviceInHistory = isServiceInHistory(selectedService);
+                setSelectedService(serviceInHistory);
             }
+
+
+            else {
+                setSelectedService(selectedService);
+            }
+
+            
         }
     }
     ,[selectedService]);
-
-    useEffect(() => {
-        console.log('historyOfChanges', historyOfChanges);
-      }
-      ,[historyOfChanges]);
-
+  
+  
+    
+ 
     return {updatePosition,getSelectedService, isServiceInHistory,selectService, isCurrentServiceSelected, selectedService
     ,getService
     ,updateDB,
