@@ -13,17 +13,55 @@ import useServicesHistory from "../../Hooks/useServicesHistory";
 
 const ServiceSettings = ({handleDelete}) =>{
     const {selectedService, setSelectedService} = useGeneral();
-    const {getSelectedService} = useServicesHistory();
+    const {getSelectedService, updateSelectedService} = useServicesHistory();
 
 
     
     
-    const [name, setName] = useState( '');
+    const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState(0);
     const [range, setRange] = useState(0);
     const [availability, setAvailability] = useState(false);
 
+    const [currentService, setCurrentService] = useState(null);
+
+
+    useEffect(() => {
+
+        setCurrentService(getSelectedService());
+
+
+
+    }, [selectedService]);
+
+
+    useEffect(() => {
+        if(currentService){
+            setName(currentService.name);
+            setDescription(currentService.description);
+            setPrice(currentService.price);
+            setRange(currentService.range);
+            setAvailability(currentService.availability);
+        }
+    }
+    , [currentService]);
+
+
+
+    useEffect(() => {
+        if(!currentService) return;
+        updateSelectedService({
+            ...currentService,
+            name,
+            description,
+            price,
+            range,
+            availability
+        });
+
+
+    }, [name, description, price, range, availability]);
 
 
     return(
@@ -42,7 +80,7 @@ const ServiceSettings = ({handleDelete}) =>{
         >
             <h1>Service Settings</h1>
             <Divider />
-            {selectedService ?
+            {currentService ?
             <>
                 <Box 
                     sx={{
@@ -55,22 +93,19 @@ const ServiceSettings = ({handleDelete}) =>{
                 >
 
             <TextField id="outlined-basic" label="Dame" variant="outlined"
-            value={getSelectedService() ? name : ''}
-            onChange={(e) => setName(e.target.value)}
-            onBlur={() => setSelectedService({...selectedService, name: name})}
+            value={name}
+            onChange={  (e) => setName(e.target.value)}
             />
 
             <TextField id="outlined-basic" label="Description" variant="outlined"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            onBlur={() => setSelectedService({...selectedService, description: description})}
 
             />
 
             <TextField type="number" id="outlined-basic" label="Price €" variant="outlined"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
-            onBlur={() => setSelectedService({...selectedService, price: price})}
             />
                 </Box>
 
@@ -79,14 +114,12 @@ const ServiceSettings = ({handleDelete}) =>{
         max={5000}
 
         onChange={(e) => setRange(e.target.value)}
-        onBlure={() => setSelectedService({...selectedService, range: range})}
         />
 
     <FormControlLabel control={<Checkbox 
-            defaultValue={selectedService.availability}
-            checked={selectedService.availability}
-            onChange={(e) => setSelectedService({...selectedService, availability: e.target.checked})}
-            
+            defaultValue={availability}
+            checked={availability}
+            onChange={(e) => setAvailability(e.target.checked)}
         />} label="Availability" />
             <Divider />
 

@@ -47,12 +47,27 @@ const useServicesHistory = () => {
         //Why do we need to check if the service is in history?
         //Because if it is in history, we want to select the service from history to be able to change the settings of it and update it
 
+        if(!service){
+            setSelectedService(null);
+            return;
+        }
+
         const isService = isServiceInHistory(service);
         if(isService){
             setSelectedService(isService);
         }
         else{
             setSelectedService(service);
+        }
+    }
+
+    const updateSelectedService = (service) => {
+        const isService = isServiceInHistory(service);
+        if(isService){
+            updateServiceInHistory(service);
+        }
+        else{
+            addServiceToHistory(service);
         }
     }
 
@@ -82,9 +97,11 @@ const useServicesHistory = () => {
 
     const getSelectedService = () => {
          if(!selectedService) return null;
-        if(historyOfChanges.find((ser) => ser?._id === selectedService?._id)){
+         const isService = isServiceInHistory(selectedService);
+       
+        if(isService){
             //If the service is in history, return the service from history
-            return historyOfChanges.find((ser) => ser?._id === selectedService?._id);
+            return isService;
         }
         else{
             //If the service is not in history, return the service from the database
@@ -93,32 +110,18 @@ const useServicesHistory = () => {
     }
 
 
+  
     useEffect(() => {
-        if (selectedService) {
-
-            if (isServiceInHistory(selectedService)) {
-                const serviceInHistory = isServiceInHistory(selectedService);
-                setSelectedService(serviceInHistory);
-            }
-
-
-            else {
-                setSelectedService(selectedService);
-            }
-
-            
-        }
+        console.log('historyOfChanges', historyOfChanges);
     }
-    ,[selectedService]);
-  
-  
-    
+    , [historyOfChanges]);
  
     return {updatePosition,getSelectedService, isServiceInHistory,selectService, isCurrentServiceSelected, selectedService
     ,getService
     ,updateDB,
     historyOfChanges,
-    setSelectedService
+    setSelectedService,
+    updateSelectedService
     };
 
 }

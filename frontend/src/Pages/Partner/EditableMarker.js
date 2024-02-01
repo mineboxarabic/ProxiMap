@@ -61,9 +61,12 @@ const EditableMarker = ({service, selected, setSelected}) =>
 
 
     useEffect(() => {
-
-        if (draggable) {
+        //If the service is double clicked, it will be selected
+        
+        if(draggable){
             selectService(service);
+        }else if(!draggable && isCurrentServiceSelected(service)){
+            selectService(null);
         }
    
     }, [draggable]);
@@ -80,8 +83,8 @@ const EditableMarker = ({service, selected, setSelected}) =>
     const key = position.toString() + color;
     return(
         <Circle key={key} center={position} radius={
-               //isServiceInHistory(service) ? getService(service)?.range : service?.range
-                 1000
+               isServiceInHistory(service) ? getService(service)?.range : service?.range
+                 
             } color={color}
             className="rangeCircle"
         >
