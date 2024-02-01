@@ -7,8 +7,14 @@ export const GeneralProvider = ({ children }) => {
     const [oVServices, setOVServices] = useState(localStorage.getItem('oVServices') || null);
     const [selectedService, setSelectedService] = useState(null);
     const [historyOfChanges, setHistoryOfChanges] = useState([]);
+    const [usersServices, setUsersServices] = useState([]);
     return (
-        <GeneralContext.Provider value={{ general, setGeneral, oVServices, setOVServices , selectedService, setSelectedService , historyOfChanges, setHistoryOfChanges 
+        <GeneralContext.Provider value={{ 
+            general, setGeneral, 
+            oVServices, setOVServices , 
+            selectedService, setSelectedService , 
+            historyOfChanges, setHistoryOfChanges ,
+            usersServices, setUsersServices
          }}>
             {children}
         </GeneralContext.Provider>

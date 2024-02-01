@@ -17,7 +17,7 @@ import useInMapView from "../../Hooks/Services/useInMapView";
 import ServiceList from "../../Components/ServiceList";
 import ServiceDetailsDrawer from "../../Components/ServiceDetailsDrawer";
 import MapSearchBar from "../../Components/MapSearchBar";
-import { Alert, Typography } from "@mui/material";
+import { Alert, Container, Typography } from "@mui/material";
 import useCurrentUser from "../../Hooks/useCurrentUser";
 import useCurrentPartnerServices from "../../Hooks/Services/useCurrentPartnerServices";
 import ServicMarkersContainer from "./ServiceMarkersContainer";
@@ -30,15 +30,15 @@ import useResource from "../../Hooks/useResource";
 import { Snackbar } from "@mui/material";
 import { Fab } from "@mui/material";
 //import {AddIcon, SdStorage} from '@mui/icons-material';
-import AddIcon from '@mui/icons-material/Add';
-import SdStorage from '@mui/icons-material/SdStorage';
-import NavigationIcon from '@mui/icons-material/Navigation';
+import AddIcon from "@mui/icons-material/Add";
+import SdStorage from "@mui/icons-material/SdStorage";
+import NavigationIcon from "@mui/icons-material/Navigation";
 import NewServiceModal from "./NewServiceModal.js";
 import useServicesHistory from "../../Hooks/useServicesHistory.js";
 
-const MapEdit = ({nameOfClass, defaultModel}) => {
+const MapEdit = ({ nameOfClass, defaultModel }) => {
   const currentUser = useCurrentUser();
-  
+
   const {
     resources: services,
     getAll: getAllServices,
@@ -46,16 +46,10 @@ const MapEdit = ({nameOfClass, defaultModel}) => {
     loading: isLoadingServices,
   } = useResource(`/${nameOfClass}/partner/${currentUser?._id}`);
 
-
-
-
-  
-  const {updateDB, historyOfChanges , setSelectedService,selectedService} = useServicesHistory();
+  const { updateDB, historyOfChanges, setSelectedService, selectedService } = useServicesHistory();
 
   const [isSave, setIsSave] = useState(true);
   const [position, setPosition] = useState(null);
-  
-  
 
   //When we search we execute this function
   const onSearchSubmit = (value) => {
@@ -88,32 +82,27 @@ const MapEdit = ({nameOfClass, defaultModel}) => {
     removeService(selectedService._id);
     setSelectedService(null);
     getAllServices();
-  }
+  };
 
   useEffect(() => {
     setIsSave(false);
   }, [historyOfChanges]);
 
+  const handleAddService = async (tempModel) => {
+    const newService = tempModel;
 
-  const handleAddService = async (tempModel) =>{
-      const newService = tempModel;
+    newService.partnerId = currentUser._id;
 
-      newService.partnerId = currentUser._id;
+    const centerPoint = currentBounds.getCenter();
+    newService.position = {
+      type: "Point",
+      coordinates: [centerPoint.lng, centerPoint.lat],
+    };
 
+    await createService(newService);
+  };
 
-      const centerPoint = currentBounds.getCenter();
-      newService.position = {
-        type: "Point",
-        coordinates: [centerPoint.lng, centerPoint.lat],
-      };
-
-      await createService(newService);
-  }
-
-
-
-  useEffect(() => { 
-
+  useEffect(() => {
     const isSuccessful = serviceSuccess !== "";
     const isError = serviceError !== "";
 
@@ -125,18 +114,15 @@ const MapEdit = ({nameOfClass, defaultModel}) => {
     if (isError) {
       setServiceError("");
     }
-
-
   }, [serviceSuccess]);
 
   const [currentBounds, setCurrentBounds] = useState(null);
   const [modal, setModal] = useState(serviceSuccess);
   return (
     <Box className={"main-container"}>
-
-      <NewServiceModal 
-      open={modal}
-        handleClose={()=>setModal(false)}
+      <NewServiceModal
+        open={modal}
+        handleClose={() => setModal(false)}
         handleAdd={handleAddService}
         error={serviceError}
         modelClass={defaultModel}
@@ -177,8 +163,26 @@ const MapEdit = ({nameOfClass, defaultModel}) => {
         </Alert>
       </Snackbar>
 
-      <Box className={"map-container"}>
-        <Box className={"map"}>
+      <Box sx={{
+            display: "flex",
+            flexDirection:"row",
+            width: "97%",
+            justifyContent: "space-between",
+            marginTop: "0.5rem",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}>
+        <Box
+          sx={{
+            height: "91vh",
+            width: "70%",
+            borderRadius: '1rem',
+            overflow: 'hidden',
+
+            
+          }}
+        >
+
           <MapContainer
             center={
               position
@@ -188,12 +192,17 @@ const MapEdit = ({nameOfClass, defaultModel}) => {
             zoom={12}
             scrollWheelZoom={true}
             id="mapid"
+       
           >
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution="&amp;copy OpenStreetMap contributors"
             />
-            <Box className={"search-bar-container"}>
+            <Box sx={{
+              position: 'absolute',
+              zIndex:1000,
+              width: '30%',
+            }}>
               <MapSearchBar onSearchSubmit={onSearchSubmit} />
             </Box>
 
@@ -242,30 +251,33 @@ const MapEdit = ({nameOfClass, defaultModel}) => {
             <Box
               sx={{ zIndex: 1000, position: "absolute", bottom: 0, right: 0 }}
             >
-            <Fab
-              onClick={()=>setModal(true)}
-            sx={{mr:1,mb:3, p:4}} color="primary" aria-label="add">
-            
-              <AddIcon />
-            </Fab>
+              <Fab
+                onClick={() => setModal(true)}
+                sx={{ mr: 1, mb: 3, p: 4 }}
+                color="primary"
+                aria-label="add"
+              >
+                <AddIcon />
+              </Fab>
 
-            <Fab sx={{mr:1,mb:3, p:4}} color="secondary" aria-label="save" 
-              onClick={handlSaveChanges}
-            >
-              <SdStorage />
-            </Fab>
-
-             
+              <Fab
+                sx={{ mr: 1, mb: 3, p: 4 }}
+                color="secondary"
+                aria-label="save"
+                onClick={handlSaveChanges}
+              >
+                <SdStorage />
+              </Fab>
             </Box>
-            <MapEvents  setBounds={setCurrentBounds} setPosition={setPosition}/>
+            <MapEvents setBounds={setCurrentBounds} setPosition={setPosition} />
           </MapContainer>
+
         </Box>
         <Box
-          className={"service-list-container"}
           sx={{ width: { xs: "100%", md: "30%" } }}
         >
           {/*right side */}
-          <ServiceSettings handleDelete={handleDelete}/>
+          <ServiceSettings handleDelete={handleDelete} />
         </Box>
       </Box>
     </Box>

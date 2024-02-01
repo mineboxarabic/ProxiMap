@@ -20,10 +20,7 @@ import useServicesHistory from "../../Hooks/useServicesHistory";
 
 
 
-    useEffect(() => {
-      console.log('historyOfChanges', historyOfChanges);
-    }
-    ,[historyOfChanges]);
+    
 
     return (
         <>

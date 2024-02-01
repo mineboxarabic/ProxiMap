@@ -35,17 +35,15 @@ const EditableMarker = ({service, selected, setSelected}) =>
     const markerRef = useRef(null)
 
 
-    const handleHover = (hover) =>{
-        setColor(hover ? (draggable ? "darkblue" : "#1077EF") : "#78B9EB");
-    }
-
-
     const eventHandlers = useMemo(() => (
         {
         dragend() {
             const marker = markerRef.current;
             if (marker) {
-                setPosition(marker.getLatLng());
+                //setPosition(marker.getLatLng());
+                const lat = marker.getLatLng().lat;
+                const lng = marker.getLatLng().lng;
+                setPosition({lng,lat});
             }
         },
         dblclick: ()=>{setDraggable((d) => !d) },
@@ -54,9 +52,7 @@ const EditableMarker = ({service, selected, setSelected}) =>
         [],
     )
 
-    useEffect(() => {
-        handleHover(false)
-    }, [])
+
   
     useEffect(() => {
         if(draggable) updatePosition(service, position);
@@ -84,8 +80,9 @@ const EditableMarker = ({service, selected, setSelected}) =>
     const key = position.toString() + color;
     return(
         <Circle key={key} center={position} radius={
-               isServiceInHistory(service) ? getService(service)?.range : service?.range
-        } color={color}
+               //isServiceInHistory(service) ? getService(service)?.range : service?.range
+                 1000
+            } color={color}
             className="rangeCircle"
         >
             <Marker

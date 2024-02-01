@@ -39,14 +39,8 @@ const useServicesHistory = () => {
                 coordinates: [newPosition.lng, newPosition.lat] 
             }
         };
-    
-        if (serviceInHistory) {
-            //If the service is in history, we update it
-           updateServiceInHistory(updatedService);
-        } else {
-            //If the service is not in history, we add it to the history
-            addServiceToHistory(updatedService);
-        }
+
+        addServiceToHistory(updatedService);
     }
 
     const selectService = (service) => {
@@ -86,41 +80,37 @@ const useServicesHistory = () => {
 
 
 
+    const getSelectedService = () => {
+         if(!selectedService) return null;
+        if(historyOfChanges.find((ser) => ser?._id === selectedService?._id)){
+            //If the service is in history, return the service from history
+            return historyOfChanges.find((ser) => ser?._id === selectedService?._id);
+        }
+        else{
+            //If the service is not in history, return the service from the database
+            return selectedService;
+        }
+    }
+
 
     useEffect(() => {
-        /*if (selectedService) {
-            if (historyOfChanges.find((service) => service._id === selectedService._id)) {
-              const newHistory = historyOfChanges.map((service) => {
-                if (service._id === selectedService._id) {
-                  return selectedService;
-                } else {
-                  return service;
-                }
-              }
-              );
-                setHistoryOfChanges(newHistory);
-            } else {
-              setHistoryOfChanges([...historyOfChanges, selectedService]);
-            }
-        }*/
-
-
         if(selectedService){
+        console.log('selectedService', selectedService);
+
             const isService = isServiceInHistory(selectedService);
             if(isService){
                 updateServiceInHistory(selectedService);
             }
-            else{
-                addServiceToHistory(selectedService);
-            }
         }
-        
     }
     ,[selectedService]);
 
+    useEffect(() => {
+        console.log('historyOfChanges', historyOfChanges);
+      }
+      ,[historyOfChanges]);
 
-
-    return {updatePosition, isServiceInHistory,selectService, isCurrentServiceSelected, selectedService
+    return {updatePosition,getSelectedService, isServiceInHistory,selectService, isCurrentServiceSelected, selectedService
     ,getService
     ,updateDB,
     historyOfChanges,
