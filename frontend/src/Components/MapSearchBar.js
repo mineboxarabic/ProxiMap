@@ -35,7 +35,8 @@ const MapSearchBar = ({ onSearchSubmit }) => {
     <Paper
       component="form"
       onSubmit={handleSubmit}
-      className='search-bar'
+     // className='search-bar'
+      sx={{ p: '2px', display: 'absolute', top: '10px', left: '10px', zIndex: 1000, position: 'absolute', width: '300px', display: 'flex', alignItems: 'center' }}
     >
 
         <Autocomplete

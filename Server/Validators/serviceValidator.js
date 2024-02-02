@@ -56,11 +56,7 @@ const serviceValidator = checkSchema({
         isNumeric: true,
         notEmpty: true,
         errorMessage: "Price is required",
-        trim: true,
-        isLength:{
-            options: {min:2,max:50},
-            errorMessage: "Price must be of 2 to 50 characters long"
-        }
+        trim: true
     
     },
     availability: {
@@ -115,15 +111,23 @@ const serviceValidator = checkSchema({
         },
     },
     range: {
-        isNumeric: true,
+   
+        isNumeric: {
+            errorMessage: "Range must be a number",
+
+
+        },
+
+
+
         notEmpty: true,
         errorMessage: "Range is required",
         trim: true,
-        isLength:{
-            options: {min:1,max:9999},
-            errorMessage: "Range must be of 2 to 9999 characters long"
+
+        isInt: {
+            options: { min: 1, max: 5000 }, // Adjust min and max as needed
+            errorMessage: "Range must be between 1 and 5000",
         }
-    
     },
     status:{
             isIn: {
@@ -197,11 +201,7 @@ export const serviceValidatorEdit = checkSchema({
         isNumeric: true,
         notEmpty: true,
         errorMessage: "Price is required",
-        trim: true,
-        isLength:{
-            options: {min:2,max:50},
-            errorMessage: "Price must be of 2 to 50 characters long"
-        }
+        trim: true
     
     },
     availability: {
@@ -227,9 +227,9 @@ export const serviceValidatorEdit = checkSchema({
         notEmpty: true,
         errorMessage: "Range is required",
         trim: true,
-        isLength:{
-            options: {min:1,max:9999},
-            errorMessage: "Range must be of 2 to 9999 characters long"
+        isInt: {
+            options: { min: 1, max: 5000 }, // Adjust min and max as needed
+            errorMessage: "Range must be between 1 and 5000",
         }
     
     },

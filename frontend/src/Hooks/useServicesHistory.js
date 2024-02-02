@@ -40,7 +40,13 @@ const useServicesHistory = () => {
             }
         };
 
+        if(serviceInHistory){
+            updateServiceInHistory(updatedService);
+        }
+        else{
+
         addServiceToHistory(updatedService);
+        }
     }
 
     const selectService = (service) => {
@@ -80,8 +86,14 @@ const useServicesHistory = () => {
     }
 
     const removeServiceFromHistory = (service) => {
-        const updatedHistory = historyOfChanges.filter((ser) => ser?._id !== service?._id);
-        setHistoryOfChanges(updatedHistory);
+        const isService = isServiceInHistory(service);
+        if(!isService) return;
+        if(isService)
+        {
+            //Remove the service from history
+            const updatedHistory = historyOfChanges.filter((ser) => ser?._id !== service?._id);
+            setHistoryOfChanges(updatedHistory);
+        }
     }
 
     const updateDB = (updateService) => {
@@ -110,6 +122,9 @@ const useServicesHistory = () => {
     }
 
 
+    const emptyHistory = () => {
+        setHistoryOfChanges([]);
+    }
   
     useEffect(() => {
         console.log('historyOfChanges', historyOfChanges);
@@ -121,7 +136,9 @@ const useServicesHistory = () => {
     ,updateDB,
     historyOfChanges,
     setSelectedService,
-    updateSelectedService
+    updateSelectedService,
+    removeServiceFromHistory,
+    emptyHistory
     };
 
 }

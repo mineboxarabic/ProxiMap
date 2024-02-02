@@ -46,13 +46,14 @@ const MapEdit = ({ nameOfClass, defaultModel }) => {
     loading: isLoadingServices,
   } = useResource(`/${nameOfClass}/partner/${currentUser?._id}`);
 
-  const { updateDB, historyOfChanges, setSelectedService, selectedService } = useServicesHistory();
+  const { updateDB, historyOfChanges,selectService, setSelectedService, selectedService,removeServiceFromHistory ,emptyHistory} = useServicesHistory();
 
   const [isSave, setIsSave] = useState(true);
   const [position, setPosition] = useState(null);
 
   //When we search we execute this function
   const onSearchSubmit = (value) => {
+    
     const lat = value.lat;
     const lng = value.lng;
     setPosition({ lat, lng });
@@ -77,11 +78,19 @@ const MapEdit = ({ nameOfClass, defaultModel }) => {
     setSelectedService(null);
     updateDB(updateService);
   };
-
+  useEffect(() => {
+    if (selectedService) console.log('selectedService', selectedService._id);
+  }, [selectedService]);
   const handleDelete = () => {
+
+    console.log('selectedService', selectedService._id);
+
     removeService(selectedService._id);
+
+    removeServiceFromHistory(selectedService);
     setSelectedService(null);
-    getAllServices();
+    emptyHistory();
+
   };
 
   useEffect(() => {
@@ -100,6 +109,7 @@ const MapEdit = ({ nameOfClass, defaultModel }) => {
     };
 
     await createService(newService);
+    
   };
 
   useEffect(() => {
@@ -109,6 +119,7 @@ const MapEdit = ({ nameOfClass, defaultModel }) => {
     if (isSuccessful) {
       getAllServices();
       setModal(false);
+
     }
 
     if (isError) {
@@ -203,7 +214,7 @@ const MapEdit = ({ nameOfClass, defaultModel }) => {
               zIndex:1000,
               width: '30%',
             }}>
-              <MapSearchBar onSearchSubmit={onSearchSubmit} />
+              {/*<MapSearchBar onSearchSubmit={onSearchSubmit} />*/}
             </Box>
 
             <Box>

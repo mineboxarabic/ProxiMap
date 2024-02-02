@@ -171,3 +171,17 @@ $height-map-mobile: 85vh;
 
 }
 
+
+
+.circle {
+  //"#1077EF" : "#78B9EB"
+  fill: #78B9EB;
+  stroke: #1077EF;
+  transition: 0.1s ease; // Assuming you can transition the stroke color
+
+  &:hover {
+
+      stroke: #1077EF; // Changes the border color of the circle on hover
+      fill: #1077EF; // Changes the fill color of the circle on hover
+    }
+}

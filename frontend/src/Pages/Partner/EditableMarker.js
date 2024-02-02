@@ -11,6 +11,10 @@ import useLocalStorage from "../../Hooks/useLocalStorage";
 import useGeneral from "../../Hooks/useGeneral";
 import '../../Style/editableMap.scss'
 import useServicesHistory from "../../Hooks/useServicesHistory";
+import "../../Style/Map.scss";
+
+
+
 const EditableMarker = ({service, selected, setSelected}) => 
 {
     const [position, setPosition] = useState({
@@ -84,10 +88,11 @@ const EditableMarker = ({service, selected, setSelected}) =>
     return(
         <Circle key={key} center={position} radius={
                isServiceInHistory(service) ? getService(service)?.range : service?.range
-                 
-            } color={color}
-            className="rangeCircle"
-        >
+                
+            } 
+            color={color}
+            className="circle"
+>
             <Marker
             draggable={draggable}
             eventHandlers={eventHandlers}
