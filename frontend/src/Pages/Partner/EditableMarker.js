@@ -15,21 +15,30 @@ import "../../Style/Map.scss";
 
 
 
-const EditableMarker = ({service, selected, setSelected}) => 
+const EditableMarker = ({service, isAsked}) => 
 {
-    const [position, setPosition] = useState({
-        lat: service?.position?.coordinates[1],
-        lng: service?.position?.coordinates[0],
-    });
-    
+
 
     const {updatePosition, 
         isServiceInHistory, 
         selectService,
         isCurrentServiceSelected,
         selectedService,
-        getService
+        getService,
+        updateSelectedService
     } = useServicesHistory();
+
+    const [position, setPosition] = useState({
+        lat: isServiceInHistory(service) ? getService(service)?.position?.coordinates?.[1] : service?.position?.coordinates?.[1],
+        lng: isServiceInHistory(service) ? getService(service)?.position?.coordinates?.[0] : service?.position?.coordinates?.[0]
+    });
+
+    useEffect(() => {
+        setPosition({
+            lat: isServiceInHistory(service) ? getService(service)?.position?.coordinates?.[1] : service?.position?.coordinates?.[1],
+            lng: isServiceInHistory(service) ? getService(service)?.position?.coordinates?.[0] : service?.position?.coordinates?.[0]
+        });
+    }, [service]);
 
 
 
@@ -59,7 +68,18 @@ const EditableMarker = ({service, selected, setSelected}) =>
 
   
     useEffect(() => {
-        if(draggable) updatePosition(service, position);
+        if(draggable){
+            if(isServiceInHistory(service)){
+                updateSelectedService({...getService(service), position: {
+                        type: "Point",
+                    coordinates: [position.lng, position.lat]}});
+            }else{
+                updateSelectedService({...service, position: {
+                        type: "Point",
+                    coordinates: [position.lng, position.lat]}});
+            }
+            
+        } 
     }
     , [position]);
 
@@ -77,22 +97,25 @@ const EditableMarker = ({service, selected, setSelected}) =>
 
 
     useEffect(() => {
-        setDraggable(selectedService?._id === service._id);
-    }, [selected, service._id]);
-
-    useEffect(() => {
         setDraggable(isCurrentServiceSelected(service) ? true : false);
     }, [selectedService]);
 
+    useEffect(() => 
+    {
+        console.log('isAsked', isAsked);
+    }, [isAsked]);
+
     const key = position.toString() + color;
-    return(
+    if(!isAsked) return(
+    
         <Circle key={key} center={position} radius={
-               isServiceInHistory(service) ? getService(service)?.range : service?.range
-                
+               isServiceInHistory(service) ? getService(service)?.range : service?.range || 0
             } 
             color={color}
+            //Dont show if isAsked is true
+            
             className="circle"
->
+        >
             <Marker
             draggable={draggable}
             eventHandlers={eventHandlers}
@@ -108,6 +131,22 @@ const EditableMarker = ({service, selected, setSelected}) =>
             </Marker>
 
         </Circle>
+    
+    )
+    else return(
+        <Marker
+        draggable={draggable}
+        eventHandlers={eventHandlers}
+        ref={markerRef}
+        position={position} icon={L.icon({
+            iconUrl: draggable ? dragableLogo : "https://cdn-icons-png.flaticon.com/512/7711/7711464.png",
+            iconSize: draggable ? [50, 50] : [40, 40],
+            iconAnchor: draggable ? [25, 45] : [25, 25],
+            popupAnchor: [0, -50],
+            className: "marker"
+        })} 
+        >
+        </Marker>
     )
 
 

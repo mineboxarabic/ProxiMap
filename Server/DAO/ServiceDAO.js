@@ -166,6 +166,10 @@ class ServiceDAO {
     isValidCoordinate(lat, lng) {
         return isFinite(lat) && Math.abs(lat) <= 90 && isFinite(lng) && Math.abs(lng) <= 180;
     }
+
+    async updateMany(services) {
+        return await Service.updateMany(services).catch((error) => { return error; });
+    }
 } 
 
 export default ServiceDAO;

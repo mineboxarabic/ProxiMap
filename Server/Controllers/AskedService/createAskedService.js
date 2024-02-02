@@ -7,12 +7,15 @@ const createAskedService = async (req, res) => {
     const askedAskedService = req.body;
 
     const newAskedService = await askedAskedServiceDAO.create(askedAskedService);
-    const coordinates = req.body.coordinates;
-console.log("test", req.body);
+    const coordinates = req.body.position.coordinates;
+
     if(coordinates){
         newAskedService.position = {
             type: "Point",
-            coordinates: coordinates
+            coordinates: [
+                coordinates[1],
+                coordinates[0]
+            ]
         }
     }
 

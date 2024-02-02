@@ -41,6 +41,7 @@ const MapEdit = ({ nameOfClass, defaultModel }) => {
 
   const {
     resources: services,
+    setResources: setServices,
     getAll: getAllServices,
     error: errorServices,
     loading: isLoadingServices,
@@ -67,29 +68,43 @@ const MapEdit = ({ nameOfClass, defaultModel }) => {
     success: serviceSuccess,
     setSuccess: setServiceSuccess,
     remove: removeService,
+    updateMultiple: updateServices,
   } = useResource(`/${nameOfClass}`);
 
   useEffect(() => {
     getAllServices();
   }, []);
 
+
+
   const handlSaveChanges = () => {
     setIsSave(true);
     setSelectedService(null);
-    updateDB(updateService);
+
+    historyOfChanges.forEach((service) => {
+      updateService(service);
+    }
+    );
   };
+
+
+
+
   useEffect(() => {
-    if (selectedService) console.log('selectedService', selectedService._id);
-  }, [selectedService]);
+    emptyHistory();
+  }, []);
+
   const handleDelete = () => {
 
-    console.log('selectedService', selectedService._id);
+    console.log('selectedServicessss', selectedService._id);
+
 
     removeService(selectedService._id);
 
     removeServiceFromHistory(selectedService);
     setSelectedService(null);
-    emptyHistory();
+
+
 
   };
 
@@ -100,13 +115,13 @@ const MapEdit = ({ nameOfClass, defaultModel }) => {
   const handleAddService = async (tempModel) => {
     const newService = tempModel;
 
-    newService.partnerId = currentUser._id;
-
+    nameOfClass === "services" ? (newService.userId = currentUser._id) : (newService.userId = currentUser._id);
     const centerPoint = currentBounds.getCenter();
     newService.position = {
       type: "Point",
       coordinates: [centerPoint.lng, centerPoint.lat],
     };
+    console.log('newService', newService);
 
     await createService(newService);
     
@@ -137,6 +152,7 @@ const MapEdit = ({ nameOfClass, defaultModel }) => {
         handleAdd={handleAddService}
         error={serviceError}
         modelClass={defaultModel}
+        isAsked={nameOfClass === "services" ? false : true}
       />
       <Snackbar
         open={serviceSuccess !== ""}
@@ -254,11 +270,9 @@ const MapEdit = ({ nameOfClass, defaultModel }) => {
                   {errorServices}
                 </Alert>
               </Box>
-            )}
-            <ServicMarkersContainer
-              services={services}
-              isLoadingServices={isLoadingServices}
-            />
+            )} 
+            <ServicMarkersContainer isAsked = {nameOfClass === "services" ? false : true}
+             services={services}isLoadingServices={isLoadingServices}/>
             <Box
               sx={{ zIndex: 1000, position: "absolute", bottom: 0, right: 0 }}
             >
@@ -288,7 +302,8 @@ const MapEdit = ({ nameOfClass, defaultModel }) => {
           sx={{ width: { xs: "100%", md: "30%" } }}
         >
           {/*right side */}
-          <ServiceSettings handleDelete={handleDelete} />
+          <ServiceSettings isAsked={nameOfClass === "services" ? false : true} 
+           handleDelete={handleDelete} />
         </Box>
       </Box>
     </Box>

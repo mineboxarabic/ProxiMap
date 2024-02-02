@@ -38,6 +38,7 @@ const pagesNav = [
   {path:'/about',label:'About', allowedRoles:['*']},
   {path:'/contact',label:'Contact', allowedRoles:['*']},
   {path:'/services/edit',label:'My services', allowedRoles:[ADMIN, PARTNER]},
+  {path:'/services/edit/user',label:'My asked services', allowedRoles:['*']},
 ]
 
 const getRoleColor = (role) => {

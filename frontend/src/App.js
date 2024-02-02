@@ -22,6 +22,7 @@ import ProfilePage from './Pages/Profile';
 import CRUDCategory from './Pages/Admin/CRUD/CRUDCategory';
 import MapEdit from './Pages/Partner/MapEdit';
 import ServiceEditMap from './Pages/ServiceEditMap';
+import AskedServiceEditMap from './Pages/AskedServicesEditMap';
 
 function App() {
   return (
@@ -40,6 +41,10 @@ function App() {
           {/*Parnter only orutes */}
           <Route element={<RequireAuth allowedRoles={[PARTNER, ADMIN]} />}>
             <Route path='/services/edit' element={<ServiceEditMap />} />
+          </Route>
+
+          <Route element={<RequireAuth allowedRoles={[PARTNER, ADMIN, USER]} />}>
+            <Route path='/services/edit/user' element={<AskedServiceEditMap />} />
           </Route>
 
           {/* Private Routes */}

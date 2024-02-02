@@ -54,14 +54,16 @@ const useResource = (baseUrl) => {
         }
     };
 
+
     const getAll = () => makeRequest('get', baseUrl);
     const create = (resource) => makeRequest('post', baseUrl, resource);
     const update = (resource) => makeRequest('put', `${baseUrl}/${resource._id}`, resource);
     const remove = (id) => makeRequest('delete', `${baseUrl}/${id}`);
     const getOne = (id) => makeRequest('get', `${baseUrl}/${id}`);
     const updateWithForm = (id, data) => makeRequest('put', `${baseUrl}/${id}`, data);
-   
-    return { resources,setResources, loading, error, getAll, create, update, remove, getOne ,success ,setSuccess, setError, updateWithForm}
+    const updateMultiple = (data) => makeRequest('put', baseUrl, data);
+
+    return {updateMultiple, resources,setResources, loading, error, getAll, create, update, remove, getOne ,success ,setSuccess, setError, updateWithForm}
 
 
 }

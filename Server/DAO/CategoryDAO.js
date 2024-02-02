@@ -11,7 +11,6 @@ class CategoryDAO {
     }
 
     async findById(id) {
-        console.log("id", id);
         return await Category.findById(id);
     }
 

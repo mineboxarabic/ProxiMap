@@ -34,16 +34,16 @@ export const serviceRoutes ={
 
 export const askedServiceRoutes ={
     create: {
-        allowedRoles: ['Admin', 'Manager', 'Staff']
+        allowedRoles: ['Admin', 'Manager', 'Staff', 'User']
     },
     read: {
-        allowedRoles: ['Admin', 'Manager', 'Staff', 'User', 'Partner']
+        allowedRoles: ['Admin', 'Manager', 'Staff', 'User', 'Partner','User']
     },
     update: {
-        allowedRoles: ['Admin', 'Manager', 'Staff', 'Partner']
+        allowedRoles: ['Admin', 'Manager', 'Staff', 'Partner', 'User']
     },
     delete: {
-        allowedRoles: ['Admin', 'Manager']
+        allowedRoles: ['Admin', 'Manager', 'User']
     }
 }
 

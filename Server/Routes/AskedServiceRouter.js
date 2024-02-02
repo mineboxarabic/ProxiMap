@@ -43,8 +43,7 @@ ValidateRes,
 readAskedServicesinMapViewOfUser);
 
 
-askedServiceRouter.get(
-    '/askedServices/in-map-view/:swLat/:swLng/:neLat/:neLng', readAskedServicesinMapView);
+askedServiceRouter.get('/askedServices/in-map-view/:swLat/:swLng/:neLat/:neLng', readAskedServicesinMapView);
 
 
 
@@ -56,6 +55,9 @@ askedServiceValidatorEdit,
 ValidateRes,
 (req, res, next) => autherizeUserRole(req, res, next, askedServiceRoutes.update.allowedRoles),
 updateAskedService);
+
+
+
 
 //Delete a askedService
 askedServiceRouter.delete('/askedServices/:id',checkId,

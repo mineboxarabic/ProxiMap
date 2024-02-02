@@ -8,7 +8,6 @@ const updateAskedService = async (req, res) => {
 
 
     const updatedAskedService = await askedAskedServiceDAO.updateById(id, askedAskedServiceUpdates);
-    console.log(updatedAskedService);
     if(!updatedAskedService || updatedAskedService.ok == 0){
         return res.status(500).json({success:false, message: "Something went wrong" });
     }

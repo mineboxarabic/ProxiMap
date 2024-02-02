@@ -5,17 +5,16 @@ const AskedServiceEditMap = () =>{
     const nameOfClass = 'askedServices';
     const currentUser = useCurrentUser();
     const deafultService = {
-        partnerId: currentUser._id,
+        userId: currentUser._id,
         categoryId: '',
         name: '',
         description: '',
-        price: '',
-        availability: false,
-        ratings: [],
+        price: 0,
         position: {
+            type: 'Point',
             coordinates: [0,0]
         },
-        range: 0,
+        date: new Date(),
         status:'pending'
     }
     return(<>

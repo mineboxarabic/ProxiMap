@@ -6,7 +6,7 @@ import EditableMarker from "./EditableMarker";
 import useGeneral from "../../Hooks/useGeneral";
 import useServicesHistory from "../../Hooks/useServicesHistory";
   
-  const ServicMarkersContainer = ({services, isLoadingServices}) => {
+  const ServicMarkersContainer = ({services, isAsked, isLoadingServices}) => {
 
 
     const {selectedService} = useGeneral();
@@ -25,9 +25,11 @@ import useServicesHistory from "../../Hooks/useServicesHistory";
         <>
               {services.length > 0 ? (
                 services.map((service, index) => {
-                  const isSameUser = currentUser._id === service.partnerId;
+                  const isSameUser = currentUser._id === service.partnerId || currentUser._id === service.userId;
+                  
                   return (
-                    <EditableMarker key={index} sameUser={isSameUser} service={service} />
+
+                    <EditableMarker key={index} sameUser={isSameUser} service={service} isAsked={isAsked} />
                   );
                 })
               ) : (

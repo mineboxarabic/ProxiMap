@@ -158,8 +158,7 @@ class AskedServiceDAO {
     }
 
     async findAllByPartnerId(id) {
-        return await AskedService.find({partnerId: id}).catch((error) => { return error; });
-    
+        return await AskedService.find({userId: id}).catch((error) => { return error; });
     }
     isValidCoordinate(lat, lng) {
         return isFinite(lat) && Math.abs(lat) <= 90 && isFinite(lng) && Math.abs(lng) <= 180;

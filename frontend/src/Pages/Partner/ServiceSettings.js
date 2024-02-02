@@ -11,9 +11,9 @@ import useResource from "../../Hooks/useResource";
 import { Divider } from "@mui/material";
 import useServicesHistory from "../../Hooks/useServicesHistory";
 
-const ServiceSettings = ({handleDelete}) =>{
+const ServiceSettings = ({handleDelete, isAsked}) =>{
     const {selectedService, setSelectedService} = useGeneral();
-    const {getSelectedService, updateSelectedService} = useServicesHistory();
+    const {getSelectedService, updateSelectedService,isServiceInHistory} = useServicesHistory();
 
 
     
@@ -23,13 +23,14 @@ const ServiceSettings = ({handleDelete}) =>{
     const [price, setPrice] = useState(0);
     const [range, setRange] = useState(0);
     const [availability, setAvailability] = useState(false);
+    const [date, setDate] = useState('');
 
     const [currentService, setCurrentService] = useState(null);
 
 
     useEffect(() => {
 
-        setCurrentService(getSelectedService());
+        setCurrentService(isServiceInHistory(selectedService) ? getSelectedService(selectedService) : selectedService);
 
 
 
@@ -37,12 +38,23 @@ const ServiceSettings = ({handleDelete}) =>{
 
 
     useEffect(() => {
+        
+        
         if(currentService){
-            setName(currentService.name);
-            setDescription(currentService.description);
-            setPrice(currentService.price);
-            setRange(currentService.range);
-            setAvailability(currentService.availability);
+            if(isAsked){
+                setName(currentService.name);
+                setDescription(currentService.description);
+                setPrice(currentService.price);
+                const date = new Date(currentService.date);
+                const formattedDate = date?.toISOString().split('T')[0];
+                setDate(formattedDate);
+            }else{
+                setName(currentService.name);
+                setDescription(currentService.description);
+                setPrice(currentService.price);
+                setRange(currentService.range);
+                setAvailability(currentService.availability);
+            }
         }
     }
     , [currentService]);
@@ -51,17 +63,55 @@ const ServiceSettings = ({handleDelete}) =>{
 
     useEffect(() => {
         if(!currentService) return;
+
+        if(isAsked)
+    {
+
+        if(isServiceInHistory(currentService)){
+            updateSelectedService({
+                ...getSelectedService(currentService),
+                name,
+                description,
+                price,
+                date
+            });
+        }else{
+
         updateSelectedService({
             ...currentService,
             name,
             description,
             price,
-            range,
-            availability
+            date
         });
+    }
+    }else{
+
+        if(isServiceInHistory(currentService)){
+            updateSelectedService({
+                ...getSelectedService(currentService),
+                name,
+                description,
+                price,
+                range,
+                availability
+            });
+        }else{
+            updateSelectedService({
+                ...currentService,
+                name,
+                description,
+                price,
+                range,
+                availability
+            });
+        }
 
 
-    }, [name, description, price, range, availability]);
+    }
+      
+
+    }, [name, description, price, range, availability, date]);
 
 
     return(
@@ -109,6 +159,8 @@ const ServiceSettings = ({handleDelete}) =>{
             />
                 </Box>
 
+{
+    !isAsked &&<> 
         <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto"
         value={range}
         max={5000}
@@ -121,6 +173,23 @@ const ServiceSettings = ({handleDelete}) =>{
             checked={availability}
             onChange={(e) => setAvailability(e.target.checked)}
         />} label="Availability" />
+
+        </>
+    }
+
+    {
+        isAsked && <TextField
+        id="date"
+        label="Date"
+        type="date"
+        //defaultValue={date}
+        value={date}
+        InputLabelProps={{
+            shrink: true,
+        }}
+        onChange={(e) => setDate(e.target.value)}
+        />
+    }
             <Divider />
 
         <Button variant="contained" color="error" onClick={handleDelete} >Delete</Button>

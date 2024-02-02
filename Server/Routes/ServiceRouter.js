@@ -1,7 +1,7 @@
 import express from 'express';
 import createService from '../Controllers/Service/createService.js';
 import readService from '../Controllers/Service/readService.js';
-import updateService from '../Controllers/Service/updateService.js';
+import updateService, { updateMutilpleServices } from '../Controllers/Service/updateService.js';
 import deleteService from '../Controllers/Service/deleteService.js';
 import readServices, { readServicesinMapView, readServicesinMapViewOfUser } from '../Controllers/Service/readServices.js';
 import checkService from '../Utilities/Service/checkService.js';
@@ -57,6 +57,11 @@ serviceValidatorEdit,
 ValidateRes,
 (req, res, next) => autherizeUserRole(req, res, next, serviceRoutes.update.allowedRoles),
 updateService);
+
+//Update multiple services
+serviceRouter.put('/services',
+(req, res, next) => autherizeUserRole(req, res, next, serviceRoutes.update.allowedRoles),
+updateMutilpleServices);
 
 //Delete a service
 serviceRouter.delete('/services/:id',checkId,

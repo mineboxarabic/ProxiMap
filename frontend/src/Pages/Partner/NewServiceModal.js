@@ -14,7 +14,8 @@ const NewServiceModal = ({
   handleClose,
   handleAdd,
   error,
-  modelClass
+  modelClass,
+  isAsked
 }) => 
 {
 
@@ -24,10 +25,18 @@ const NewServiceModal = ({
 
   useEffect(()=>{
     getCategorys();
-    console.log('catttt',categorys);
 
   },[])
 
+  //On every open, set the model to the default model
+  useEffect(() => {
+    setTempModel(modelClass);
+  }
+  , [open]);
+
+  useEffect(() => {
+    console.log('isAsked', isAsked);
+  }, [isAsked]);
 
   return (
     open && (
@@ -93,9 +102,28 @@ const NewServiceModal = ({
 
             
         
-
+            {
+              !isAsked &&
             <TextField  type="number"label="range" variant="outlined" value={tempModel["range"]} onChange={(e) => setTempModel({ ...tempModel, range: e.target.value })} />
+
+            }
           
+          {isAsked && (
+            <TextField
+              label="Date"
+              type="date"
+              variant="outlined"
+              value={tempModel["date"]}
+              onChange={(e) => 
+                {
+                  console.log('e.target.value', e.target.value);
+                  setTempModel({ ...tempModel, date: e.target.value });
+
+                }
+              
+              }
+            />
+          )}
         
           </Box>
 

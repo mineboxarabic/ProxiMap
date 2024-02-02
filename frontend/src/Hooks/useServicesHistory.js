@@ -19,14 +19,15 @@ const useServicesHistory = () => {
 
     const updateServiceInHistory = (service) => {
 
-        const updatedHistory = historyOfChanges.map(ser =>ser?._id === service?._id ? service : ser);
-
-
-        const selectedService = updatedHistory.find((ser) => ser?._id === service?._id);
-        const index = updatedHistory.indexOf(selectedService);
-        updatedHistory.splice(index, 1);
-        updatedHistory.push(selectedService);
+        const updatedHistory = historyOfChanges.map((ser) => {
+            if(ser?._id === service?._id){
+                return service;
+            }
+            return ser;
+        });
         setHistoryOfChanges(updatedHistory);
+
+
     }
 
     
@@ -45,7 +46,7 @@ const useServicesHistory = () => {
         }
         else{
 
-        addServiceToHistory(updatedService);
+            addServiceToHistory(updatedService);
         }
     }
 
@@ -88,18 +89,18 @@ const useServicesHistory = () => {
     const removeServiceFromHistory = (service) => {
         const isService = isServiceInHistory(service);
         if(!isService) return;
+        const updatedHistory = historyOfChanges.filter((ser) => ser?._id !== service?._id);
         if(isService)
         {
-            //Remove the service from history
-            const updatedHistory = historyOfChanges.filter((ser) => ser?._id !== service?._id);
             setHistoryOfChanges(updatedHistory);
         }
     }
 
-    const updateDB = (updateService) => {
+    const updateDB = async (updateService) => {
         if (historyOfChanges?.length > 0) {
-            historyOfChanges.forEach((service) => {
-              updateService(service);
+            historyOfChanges.forEach(async (service) => {
+                console.log('service', service);
+              await updateService(service);
             });
           }
     }
@@ -127,7 +128,7 @@ const useServicesHistory = () => {
     }
   
     useEffect(() => {
-        console.log('historyOfChanges', historyOfChanges);
+        //console.log('historyOfChanges', historyOfChanges);
     }
     , [historyOfChanges]);
  

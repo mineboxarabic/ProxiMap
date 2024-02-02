@@ -63,12 +63,63 @@ import CategoryDAO from "../DAO/CategoryDAO.js";
         trim: true
     },
     position: {
-        isObject: true,
-        errorMessage: "Position must be an object",
-        trim: true
+        notEmpty: {
+            errorMessage: "Position is required",
+        },
+        isObject: {
+            errorMessage: "Position must be an object",
+        },
+        custom: {
+            options: (value, { req }) => {
+                if (typeof value.type !== 'string' || !Array.isArray(value.coordinates)) {
+                    throw new Error("Position object is invalid");
+                }
+                // Further validation can be added here, e.g., checking coordinate values
+                return true;
+            },
+        },
+    },
+    'position.type': {
+        isString: {
+            errorMessage: "Position type must be a string",
+        },
+        custom: {
+            options: (value, { req }) => {
+                // Example: Check if type is one of the allowed values
+                const allowedTypes = ['Point', 'Polygon']; // Add more types as needed
+                if (!allowedTypes.includes(value)) {
+                    throw new Error(`Position type must be one of the following: ${allowedTypes.join(", ")}`);
+                }
+                return true;
+            },
+        },
+    },
+    'position.coordinates': {
+        isArray: {
+            errorMessage: "Position coordinates must be an array",
+        },
+        custom: {
+            options: (value, { req }) => {
+                // Example: Check if coordinates array has the correct length/format
+                if (value.length !== 2 || !value.every(num => typeof num === 'number')) {
+                    throw new Error("Coordinates must be an array of two numbers");
+                }
+                return true;
+            },
+        },
     },
 
     date: {
+        custom:{
+            options: (value, { req }) => {
+                console.log('value', value);
+                if (value && isNaN(Date.parse(value))) {
+                    throw new Error("Date must be valid");
+                }
+                return true;
+            }
+
+        },
         isDate: true,
         errorMessage: "Date must be valid",
         optional: true
@@ -146,15 +197,68 @@ export const askedServiceValidatorEdit = checkSchema({
         trim: true
     },
     position: {
-        optional: true,
-        isObject: true,
-        errorMessage: "Position must be an object",
-        trim: true
+        notEmpty: {
+            errorMessage: "Position is required",
+        },
+        isObject: {
+            errorMessage: "Position must be an object",
+        },
+        custom: {
+            options: (value, { req }) => {
+
+                if (typeof value.type !== 'string' || !Array.isArray(value.coordinates)) {
+                    console.log('value', value);
+                    throw new Error("Position object is invalid");
+                }
+                // Further validation can be added here, e.g., checking coordinate values
+                return true;
+            },
+        },
+    },
+    'position.type': {
+        isString: {
+            errorMessage: "Position type must be a string",
+        },
+        custom: {
+            options: (value, { req }) => {
+                // Example: Check if type is one of the allowed values
+                const allowedTypes = ['Point', 'Polygon']; // Add more types as needed
+                if (!allowedTypes.includes(value)) {
+                    throw new Error(`Position type must be one of the following: ${allowedTypes.join(", ")}`);
+                }
+                return true;
+            },
+        },
+    },
+    'position.coordinates': {
+        isArray: {
+            errorMessage: "Position coordinates must be an array",
+        },
+        custom: {
+            options: (value, { req }) => {
+                // Example: Check if coordinates array has the correct length/format
+                if (value.length !== 2 || !value.every(num => typeof num === 'number')) {
+                    throw new Error("Coordinates must be an array of two numbers");
+                }
+                return true;
+            },
+        },
     },
     date: {
-        optional: true,
-        isDate: true,
-        errorMessage: "Date must be valid"
+        custom:{
+            options: (value, { req }) => {
+
+                const date = new Date(value);
+                if (value && isNaN(date.getTime())) {
+                    throw new Error("Date must be valixxd");
+                }
+                return true;
+            },
+            errorMessage: "Date must be valid"
+
+        },
+        errorMessage: "Date must be xxvalid",
+        optional: true
     },
     status: {
         optional: true,
