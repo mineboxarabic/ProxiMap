@@ -5,6 +5,7 @@ import { styled } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import bubles from '../../assets/images/bubles.png';
+import downArrow from '../../assets/down-arrow.png';
 const ProductHeroLayoutRoot = styled('section')(({ theme }) => ({
     color: theme.palette.common.white,
     position: 'relative',
@@ -68,11 +69,17 @@ function ProductHeroLayout(props) {
                 <Background sx={sxBackground} />
                 <Box
                     component="img"
-                    src="/static/themes/onepirate/productHeroArrowDown.png"
-                    height="16"
-                    width="12"
+                    src={downArrow}
+
+
                     alt="arrow down"
-                    sx={{ position: 'absolute', bottom: 32 }}
+                    
+                    sx={{ position: 'absolute', bottom: 32,
+                        width: 60,
+                        height: 60,
+                        animation: 'bounce 2s infinite',
+                    
+                }}
                 />
             </Container>
         </ProductHeroLayoutRoot>

@@ -27,19 +27,18 @@ const ServiceItem = ({className, service, setHovered, setSelected, setSelectedPa
       onMouseEnter={() => setHovered(service)}
       onClick={() => {setSelected(service); setSelectedPartner(partner)}}
       sx={{
-        width: "100%",
-        backgroundColor: "primary.main",
-        borderRadius: "10px",
         marginBottom: "10px",
+        //center the list
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
       }}
     >
       <ButtonBase
         sx={{
-          width: "100%",
+          width: "95%",
           padding: "10px",
-          paddingTop: "20px",
-          paddingBottom: "20px",
-          backgroundColor: auth?.user?._id === partner?._id ? "secondary.main" : "primary.main",
+          backgroundColor: auth?.user?._id === partner?._id ? "ownService.main" : "lighter.main",
         }}
       >
         <Box sx={{ width: "100%", height: "100%" }}> 
@@ -50,13 +49,13 @@ const ServiceItem = ({className, service, setHovered, setSelected, setSelectedPa
             <ListItemText 
 
             sx={{
-            color: "lightgray",
+           
             fontSize: "1rem",
             textAlign:"left"
             }}
             primary={`${service.range*100} m`} />
 
-            <ListItemText primary={`${service.price} €`} sx={{textAlign:"left" , color: "lightgray", fontSize: "2rem" }}  />
+            <ListItemText primary={`${service.price} €`} sx={{textAlign:"left" , fontSize: "2rem" }}  />
 
 
             </Box>

@@ -74,16 +74,33 @@ const Map = () => {
   }, [selected]);
 
   return (
-      <Container maxWidth="xl" sx={{ height: "100vh", width: "100%" }}>
-    <Box className={"main-container"}>
-      <ServiceDetailsDrawer
-        partner={selectedPartner}
-        service={selected}
-        open={isDrawerOpened}
-        onClose={onCloseDrawer}
-      />
-      <Box className={"map-container"}>
-        <Box className={"map"}>
+      <Box >
+
+      <ServiceDetailsDrawer partner={selectedPartner} service={selected} open={isDrawerOpened} onClose={onCloseDrawer}/>
+      <Box
+      
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "row"},
+          height: { xs: "100vh", md: "90vh"},
+          
+        
+                padding: '0',
+                width: '96%',
+                margin: 'auto',
+                justifyContent: 'center',
+                border: '10px solid white',
+                borderRadius: '10px',
+                backgroundColor: 'white',
+        }}
+      >
+
+
+        <Box sx={{
+          width: { xs: '100%', md: '70%'},
+          height: { xs: '100%', md: '100%'},
+          
+        }}>
           {/*TODO:add in case of error */}
 
       
@@ -131,7 +148,18 @@ const Map = () => {
             />
           </MapContainer>
         </Box>
-        <Box className={"service-list-container"}>
+
+
+
+        <Box 
+          sx={{
+            width: '30%',
+            overflow: 'auto',
+         
+                
+       
+          }}
+        >
           <ServiceList
             
             height={height}
@@ -144,8 +172,8 @@ const Map = () => {
         </Box>
       </Box>
 
+
     </Box>
-    </Container>
   );
 };
 

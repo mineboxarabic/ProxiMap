@@ -10,12 +10,14 @@ import { GeneralProvider } from './Context/GeneralProvider';
 
 import theme from './theme';
 import { ThemeProvider } from '@emotion/react';
+import {GlobalStyles} from '@mui/material';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider theme={theme}>
+ 
       <AuthProvider>
         <GeneralProvider>
         <Routes>

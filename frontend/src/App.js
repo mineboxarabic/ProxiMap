@@ -24,6 +24,8 @@ import MapEdit from './Pages/Partner/MapEdit';
 import ServiceEditMap from './Pages/ServiceEditMap';
 import AskedServiceEditMap from './Pages/AskedServicesEditMap';
 
+
+
 function App() {
   return (
     <Routes>

@@ -100,7 +100,6 @@ function Header() {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
@@ -158,7 +157,6 @@ function Header() {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
@@ -183,7 +181,8 @@ function Header() {
 
                   key={page.path}
                   onClick={()=>{ navigate(page.path, { replace: true });}}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
+                  sx={{ my: 2, color: 'white', display: 'block'
+                }}
                   
                 >
                   {page.label}

@@ -2,9 +2,12 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ProductHeroLayout from './ProductHeroLayout';
+import backgroundImage from '../../assets/images/bg.jpg';
 
-import backgroundImage from '../../assets/images/map_background.jpg';
+
+import useCurrentUser from '../../Hooks/useCurrentUser';
 const ProductHero = () =>{
+    const currentUser = useCurrentUser();
     return (
         <ProductHeroLayout
             sxBackground={{
@@ -19,8 +22,10 @@ const ProductHero = () =>{
                 src={backgroundImage}
                 alt="increase priority"
             />
-            <Typography color="inherit" align="center" variant="h2" marked="center">
-                Upgrade your Sundays
+            <Typography
+            fontFamily={'"Impact"'}
+            color="inherit" align="center" variant="h2" marked="center">
+                Welcome to ProxiMap: Your Community's Service Hub!
             </Typography>
             <Typography
                 color="inherit"
@@ -28,8 +33,13 @@ const ProductHero = () =>{
                 variant="h5"
                 sx={{ mb: 4, mt: { xs: 4, sm: 10 } }}
             >
-                Enjoy secret offers up to -70% off the best luxury hotels every Sunday.
-            </Typography>
+🌟 Discover Local. Connect Instantly. Experience Together. 🌟
+
+</Typography>
+{
+
+            !currentUser &&
+
             <Button
                 color="secondary"
                 variant="contained"
@@ -38,11 +48,26 @@ const ProductHero = () =>{
                 href="/register"
                 sx={{ minWidth: 200 }}
             >
-                Register
+                Get started
             </Button>
-            <Typography variant="body2" color="inherit" sx={{ mt: 2 }}>
-                Discover the experience
-            </Typography>
+            }
+
+{
+            currentUser &&
+            <Button
+                color="secondary"
+                variant="contained"
+                size="large"
+                component="a"
+                href="/services"
+                sx={{ minWidth: 200 }
+            }>
+                Explore Services
+            </Button>
+}
+
+
+            
         </ProductHeroLayout>
     );
 }

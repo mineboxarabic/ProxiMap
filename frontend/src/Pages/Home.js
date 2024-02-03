@@ -10,7 +10,7 @@ import ProductValues from "./Home/ProductValues";
 const Home = () => {
     //https://github.com/mui/material-ui/tree/master/docs/src/modules
   return (
-    <Container maxWidth="xl l" sx={{ height: "100vh", width: "100%" }}>
+    <Box  sx={{ height: "100vh", width: "100%" }}>
         <ProductHero />
         <ProductValues   />
         
@@ -22,7 +22,7 @@ const Home = () => {
         */}
 
 
-    </Container>
+    </Box>
   );
 };
 

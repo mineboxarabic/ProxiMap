@@ -20,13 +20,16 @@ const theme = createTheme({
         main:'#91F1F6'
     },
     background: {
-      default: '#fff',
+      default: '#1B262C',
     },
+    ownService:{
+        main:'#82E184'
+    }
     //23A3B0, 94FFEB
-    
 
 
-  },
-});
+  
+  
+  }});
 
 export default theme;

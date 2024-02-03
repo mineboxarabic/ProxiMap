@@ -12,7 +12,7 @@ const Map = () => {
 
   const { services, isLoadingServices, errorServices, updateBounds} = useInMapView();
   const [positions, setPositions] = useState([]);
-  const [height, setHeight] = useState('85vh');
+  const [height, setHeight] = useState('95vh');
 
 
   useEffect(() => {
