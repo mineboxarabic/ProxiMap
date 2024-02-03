@@ -7,12 +7,15 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 import { AuthProvider } from './Context/AuthProvider';
 import { GeneralProvider } from './Context/GeneralProvider';
+
+import theme from './theme';
+import { ThemeProvider } from '@emotion/react';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
   <React.StrictMode>
     <BrowserRouter>
-
+      <ThemeProvider theme={theme}>
       <AuthProvider>
         <GeneralProvider>
         <Routes>
@@ -20,6 +23,7 @@ root.render(
         </Routes>
         </GeneralProvider>
       </AuthProvider>
+      </ThemeProvider>
     </BrowserRouter>
     </React.StrictMode>
   );

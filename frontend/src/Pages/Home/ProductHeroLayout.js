@@ -5,7 +5,6 @@ import { styled } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import bubles from '../../assets/images/bubles.png';
-
 const ProductHeroLayoutRoot = styled('section')(({ theme }) => ({
     color: theme.palette.common.white,
     position: 'relative',
@@ -30,7 +29,11 @@ const Background = styled('div')({
 });
 
 function ProductHeroLayout(props) {
+    
+    
     const { sxBackground, children } = props;
+
+
 
     return (
         <ProductHeroLayoutRoot>
