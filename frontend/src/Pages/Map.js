@@ -73,7 +73,7 @@ const Map = () => {
   return (
       <Box 
         sx={{
-          backgroundColor: '#1B262C',
+          backgroundColor: 'dark.main',
 
         }}
       >
@@ -91,7 +91,7 @@ const Map = () => {
           justifyContent: 'center',
          // border: '10px solid white',
           borderRadius: '10px',
-          backgroundColor: '#1B262C',
+          backgroundColor: 'dark.main',
         }}
       >
 
@@ -198,7 +198,7 @@ const Map = () => {
         >
           <ServiceList
             
-            height={height}
+            //height={height}
             setSelectedPartner={setSelectedPartner}
             onCloseDrawer={onCloseDrawer}
             setSelected={setSelected}

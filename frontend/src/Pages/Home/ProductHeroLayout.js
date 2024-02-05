@@ -26,7 +26,7 @@ const Background = styled('div')({
     bottom: 0,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    zIndex: -2,
+    zIndex: 0,
 });
 
 function ProductHeroLayout(props) {

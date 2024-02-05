@@ -8,22 +8,18 @@ import { Box } from '@mui/system';
 
 const MainLayout = () => {
     return (
-        <Box  sx={{
-            backgroundColor: '#1B262C',
-
-        height: '93vh',
-    }}>
+        <Box  
+            
+            sx={{
+                backgroundColor: 'dark.main',
+                height: '100vh',
+                width: '100%',
+            }}
+            >
             <Header />
             <Box
            sx={{
-            backgroundColor: '#1B262C',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            height: '100%',
-            width: '100%',
-            padding: '0',
-            margin: '0',
+            backgroundColor: 'dark.main',
            }}
             className='App'>
             <Outlet />

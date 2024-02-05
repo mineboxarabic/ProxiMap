@@ -123,7 +123,7 @@ const ServiceSettings = ({handleDelete, isAsked}) =>{
                     alignItems: 'center',
                     '& > :not(style)': { m: 1, width: '90%' },
                     height: '100%',
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: 'dark.main',
 
                 }
             }
@@ -204,7 +204,7 @@ const ServiceSettings = ({handleDelete, isAsked}) =>{
                     alignItems: 'center',
                     height: '100%',
                     '& > :not(style)': { m: 1, width: '90%' },
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: 'dark.main',
 
                 }}
             >

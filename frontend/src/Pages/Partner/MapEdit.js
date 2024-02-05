@@ -131,7 +131,7 @@ const MapEdit = ({ nameOfClass, defaultModel }) => {
   const [currentBounds, setCurrentBounds] = useState(null);
   const [modal, setModal] = useState(serviceSuccess);
   return (
-    <Box className={"main-container"}>
+    <Box>
       <NewServiceModal
         open={modal}
         handleClose={() => setModal(false)}

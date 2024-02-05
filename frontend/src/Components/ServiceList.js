@@ -25,16 +25,19 @@ const ServiceList = ({
   };
 
   return (
-    <Box>
+    <Box
+      
+    >
       <List
         sx={{
           //center the list
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+
         }}
       >
-        {oVServices?.length > 0 ? (
+        {oVServices?.length > 0 && (
           oVServices.map((service, index) => {
             return (
               <>
@@ -50,25 +53,9 @@ const ServiceList = ({
               </>
             );
           })
-        ) : (
-          <ListItem>
-            <Typography
-              variant="h4"
-              sx={{
-                color: "black",
-                textAlign: "center",
-                width: "100%",
-                marginTop: "20px",
-                //make bold,
-                weight: "bold",
-              }}
-            >
-              No services found in this area
-            </Typography>
-          </ListItem>
-        )}
+        ) }
 
-        {oVAskedServices?.length > 0 ? (
+        {oVAskedServices?.length > 0 && (
           oVAskedServices.map((service, index) => {
             return (
               <>
@@ -84,12 +71,15 @@ const ServiceList = ({
               </>
             );
           })
-        ) : (
+        ) }
+        {
+          oVServices?.length === 0 && oVAskedServices?.length === 0 &&
+        (
           <ListItem>
             <Typography
               variant="h4"
               sx={{
-                color: "black",
+                color: "light.main",
                 textAlign: "center",
                 width: "100%",
                 marginTop: "20px",

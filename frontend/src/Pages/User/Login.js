@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Checkbox, Container, TextField } from '@mui/material';
+import { Alert, Box, Button, Card, Checkbox, Container, TextField } from '@mui/material';
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -103,7 +103,18 @@ const LogIn = () =>
                     }}
                 >
                     <Alert severity="error" className={!error ?"offScreen" : "error"} ref={errorRef}>{error}</Alert>
-                    <form>
+                    
+                        <Card 
+                        sx={{ 
+                            p: 3,
+                                display: 'flex',
+                          flexDirection: 'column',
+                           alignItems: 'center',
+                            gap: '1rem',
+                            width: '70%',
+                            backgroundColor: '#425463',
+
+                           }}>
                         <TextField
                             margin="normal"
                             required
@@ -116,7 +127,7 @@ const LogIn = () =>
                             inputRef={emailRef}
                             onChange={(e) => setEmail(e.target.value)}
                         />
-                        <LightTextField
+                        <TextField
                             margin="normal"
                             required
                             fullWidth
@@ -131,7 +142,7 @@ const LogIn = () =>
                             type="submit"
                             fullWidth
                             variant="contained"
-                            color='secondary'
+                            color='primary'
                             sx={{ mt: 3, mb: 2 }}
                             onClick={handleSubmit}
                         >
@@ -140,16 +151,25 @@ const LogIn = () =>
 
                         {/*DO you trust this devise?*/}
                         <FormGroup>
-                            <FormControlLabel control={<Checkbox
+                            <FormControlLabel 
+                            
+                            sx={{
+                                color: 'light.main'
+                                }}
+                            control={<Checkbox
                                 inputProps={{ 'aria-label': 'controlled' }}
                                 onChange={togglePersist}
                                 defaultValue={persist}
                                 checked={persist}
+                                sx={{
+                                color: 'light.main'
+                                }}
                             />} label="Remember me?" />
                         </FormGroup>
+                        </Card>
 
 
-                    </form>
+                
                 </Box>
             </Container>
         </>

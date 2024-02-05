@@ -9,7 +9,8 @@ import { AuthProvider } from './Context/AuthProvider';
 import { GeneralProvider } from './Context/GeneralProvider';
 
 import theme from './theme';
-import { ThemeProvider } from '@emotion/react';
+import { ThemeProvider } from '@mui/material/styles'; // Correct import for MUI ThemeProvider
+
 import {GlobalStyles} from '@mui/material';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
