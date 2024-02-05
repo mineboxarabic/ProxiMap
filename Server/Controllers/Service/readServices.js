@@ -12,10 +12,29 @@ const readServices = async (req, res) => {
 
 export const readServicesinMapView = async (req, res) => {
     
+
+
+
+
     const serviceDAO = new ServiceDAO();
+   
+   
     const { swLat, swLng, neLat, neLng } = req.params;
+    if(swLat == undefined || swLng == undefined || neLat == undefined || neLng == undefined){
+        res.status(400).json({
+            success: false,
+            message: "Please provide all the required fields"
+        });
+        return;
+    }
     const services = await serviceDAO.findServicesinMapView(swLat, swLng, neLat, neLng);
+
     res.status(200).json(services);
+
+
+
+
+
 }; 
 
 export const readServicesinMapViewOfUser = async (req, res) => {

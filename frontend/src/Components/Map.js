@@ -31,7 +31,7 @@ const Map = () => {
             height: height,
         }}
       >
-        {/*TODO:add in case of error */}
+        
         <MapContainer
           center={[60.192059, 24.945831]}
           zoom={12}

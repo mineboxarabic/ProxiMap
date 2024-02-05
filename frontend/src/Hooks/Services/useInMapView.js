@@ -3,29 +3,52 @@ import useResource from "../useResource";
 import useLocalStorage from "../useLocalStorage";
 import useGeneral from "../useGeneral";
 
-const useInMapView = () => {
+const useInMapView = (isAsked) => {
     const [bounds, setBounds] = useState(null);
-    const {oVServices, setOVServices} = useGeneral();
+    const {oVServices, setOVServices , oVAskedServices, setOVAskedServices} = useGeneral();
+
+    const [url, setURL] = useState(null);
+  
+    const getURL = () => {
+      if(!isAsked) return `/services/in-map-view/${bounds?._southWest?.lat || 0}/${bounds?._southWest?.lng || 0}/${bounds?._northEast?.lat || 0}/${bounds?._northEast?.lng || 0}` 
+
+      return `/askedServices/in-map-view/${bounds?._southWest?.lat || 0}/${bounds?._southWest?.lng || 0}/${bounds?._northEast?.lat || 0}/${bounds?._northEast?.lng || 0}`;
+
+    }
 
     const {
       resources: services,
       getAll: getAllServices,
       error: errorServices,
       loading: isLoadingServices,
-    } = useResource(`/services/in-map-view/${bounds?._southWest?.lat}/${bounds?._southWest?.lng}/${bounds?._northEast?.lat}/${bounds?._northEast?.lng}`);
+    } = useResource(getURL());
 
   
 
     useEffect(() => {
-      if (!isLoadingServices) {
-        getAllServices();
-      }
+      const delayDebounceFn = setTimeout(() => {
+        if (bounds != null) {
+            if (!isLoadingServices) {
+                getAllServices();
+            }
+        }
+    }, 500); 
+
+    return () => clearTimeout(delayDebounceFn); 
     }, [bounds]);
 
     useEffect(() => {
-      if (services) {
+      if(!isAsked){
+        if (services && services.length > 0) {
           setOVServices(services);
       }
+      }
+      else{
+        if (services && services.length > 0) {
+          setOVAskedServices(services);
+        }
+      }
+
     }, [services]);
 
     useEffect(() => {

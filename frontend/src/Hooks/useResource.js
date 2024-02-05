@@ -62,8 +62,9 @@ const useResource = (baseUrl) => {
     const getOne = (id) => makeRequest('get', `${baseUrl}/${id}`);
     const updateWithForm = (id, data) => makeRequest('put', `${baseUrl}/${id}`, data);
     const updateMultiple = (data) => makeRequest('put', baseUrl, data);
+    const getAllWithBody = (data) => makeRequest('get', baseUrl, data);
 
-    return {updateMultiple, resources,setResources, loading, error, getAll, create, update, remove, getOne ,success ,setSuccess, setError, updateWithForm}
+    return {getAllWithBody,updateMultiple, resources,setResources, loading, error, getAll, create, update, remove, getOne ,success ,setSuccess, setError, updateWithForm}
 
 
 }

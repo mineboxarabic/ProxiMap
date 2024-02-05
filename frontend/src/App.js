@@ -23,6 +23,7 @@ import CRUDCategory from './Pages/Admin/CRUD/CRUDCategory';
 import MapEdit from './Pages/Partner/MapEdit';
 import ServiceEditMap from './Pages/ServiceEditMap';
 import AskedServiceEditMap from './Pages/AskedServicesEditMap';
+import FilteredMap from './Pages/FilteredMap/FilteredMap';
 
 
 
@@ -69,7 +70,8 @@ function App() {
 
           {/* All Roles Routes */}
           <Route element={<RequireAuth allowedRoles={[ADMIN, USER, PARTNER, MANAGER, STAFF]} />}>
-            <Route path='/map' element={<Map />} />
+            <Route path='/map/inview' element={<Map />} />
+            <Route path='/map' element={<FilteredMap />} />
 
             <Route path='/profile' element={<ProfilePage />} />
           </Route>

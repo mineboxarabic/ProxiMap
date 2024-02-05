@@ -8,13 +8,14 @@ import { Box } from '@mui/system';
 
 const MainLayout = () => {
     return (
-        <Box>
+        <Box  sx={{
+            backgroundColor: '#1B262C',
+
+        height: '93vh',
+    }}>
             <Header />
             <Box
-            sx={{
-               
-                height: '93vh',
-            }}
+           
             className='App'>
             <Outlet />
 

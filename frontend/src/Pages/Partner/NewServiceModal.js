@@ -25,7 +25,7 @@ const NewServiceModal = ({
 
   useEffect(()=>{
     getCategorys();
-
+    console.log('categorys', categorys);
   },[])
 
   //On every open, set the model to the default model

@@ -1,31 +1,16 @@
 import {
   MapContainer,
   TileLayer,
-  useMap,
-  Marker,
-  Popup,
-  Circle,
-  CircleMarker,
 } from "react-leaflet";
 import { Box } from "@mui/system";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
-import L from "leaflet";
 import "../../Style/Map.scss";
 import MapEvents from "../../Helpers/MapEvents";
-import useInMapView from "../../Hooks/Services/useInMapView";
-import ServiceList from "../../Components/ServiceList";
-import ServiceDetailsDrawer from "../../Components/ServiceDetailsDrawer";
-import MapSearchBar from "../../Components/MapSearchBar";
-import { Alert, Container, Typography } from "@mui/material";
+import { Alert, Typography } from "@mui/material";
 import useCurrentUser from "../../Hooks/useCurrentUser";
-import useCurrentPartnerServices from "../../Hooks/Services/useCurrentPartnerServices";
 import ServicMarkersContainer from "./ServiceMarkersContainer";
-import { Button } from "@mui/material";
 import ServiceSettings from "./ServiceSettings";
-import useGeneral from "../../Hooks/useGeneral";
-import useLocalStorage from "../../Hooks/useLocalStorage";
-import useResource from "../../Hooks/useResource";
 
 import { Snackbar } from "@mui/material";
 import { Fab } from "@mui/material";
@@ -35,6 +20,7 @@ import SdStorage from "@mui/icons-material/SdStorage";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import NewServiceModal from "./NewServiceModal.js";
 import useServicesHistory from "../../Hooks/useServicesHistory.js";
+import useResource from "../../Hooks/useResource.js";
 
 const MapEdit = ({ nameOfClass, defaultModel }) => {
   const currentUser = useCurrentUser();

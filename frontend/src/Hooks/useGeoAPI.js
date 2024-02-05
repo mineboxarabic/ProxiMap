@@ -39,6 +39,9 @@ const useGeoAPI = () => {
     }
   };
 
+
+  
+
   useEffect(() => {
     getSuggestions();
   }, [address]);

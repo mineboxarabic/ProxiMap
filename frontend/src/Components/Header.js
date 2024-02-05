@@ -34,7 +34,8 @@ const crudPages = [
 
 const pagesNav = [
   {path:'/home',label:'Home', allowedRoles:['*']},
-  {path:'/map',label:'Map', allowedRoles:['*']},
+  {path:'/map/inview',label:'Map', allowedRoles:['*']},
+  {path:'/map',label:'Filtered Map', allowedRoles:['*']},
   {path:'/about',label:'About', allowedRoles:['*']},
   {path:'/contact',label:'Contact', allowedRoles:['*']},
   {path:'/services/edit',label:'My services', allowedRoles:[ADMIN, PARTNER]},

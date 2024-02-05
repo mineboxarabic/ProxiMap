@@ -32,6 +32,11 @@ ValidateRes,
 (req, res, next) => autherizeUserRole(req, res, next, serviceRoutes.read.allowedRoles),
 readService);
 
+
+
+serviceRouter.get('/services/in-map-view/:swLat/:swLng/:neLat/:neLng', readServicesinMapView);
+
+
 //Get the list of services (All services)
 serviceRouter.get('/services',
 (req, res, next) => autherizeUserRole(req, res, next, serviceRoutes.read.allowedRoles)
@@ -43,9 +48,6 @@ ValidateRes,
 (req, res, next) => autherizeUserRole(req, res, next, serviceRoutes.read.allowedRoles),
 readServicesinMapViewOfUser);
 
-
-serviceRouter.get(
-    '/services/in-map-view/:swLat/:swLng/:neLat/:neLng', readServicesinMapView);
 
 
 

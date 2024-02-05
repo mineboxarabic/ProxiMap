@@ -185,3 +185,29 @@ $height-map-mobile: 85vh;
       fill: #1077EF; // Changes the fill color of the circle on hover
     }
 }
+
+.same-user{
+  fill: #599965;
+  stroke: #4a7a32;
+  transition: 0.1s ease; // Assuming you can transition the stroke color
+
+  &:hover {
+
+      stroke: #4a7a32; // Changes the border color of the circle on hover
+      fill: #4a7a32; // Changes the fill color of the circle on hover
+    }
+
+}
+.asked{
+  display: none;
+}
+
+.remove-background{
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}

@@ -14,7 +14,6 @@ const ServiceItem = ({className, service, setHovered, setSelected, setSelectedPa
 
   const [partner, setPartner] = useState(service?.partnerDetails?.[0]);
   const [category, setCategory] = useState(service?.categoryDetails?.[0]);
-
   const {auth} = useAuth();
 
 
@@ -38,8 +37,11 @@ const ServiceItem = ({className, service, setHovered, setSelected, setSelectedPa
         sx={{
           width: "95%",
           padding: "10px",
-          backgroundColor: auth?.user?._id === partner?._id ? "ownService.main" : "lighter.main",
-        }}
+          backgroundColor: auth?.user?._id === partner?._id ? "#599965" : "#46909C",
+          boxShadow:  auth?.user?._id === partner?._id ?'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px' :  'rgb(38, 57, 77) 0px 20px 30px -10px;',
+
+          borderRadius: "10px",
+        }}  
       >
         <Box sx={{ width: "100%", height: "100%" }}> 
         <Typography variant="h5" sx={{color: "black", textAlign:"left"}}>{service.name}</Typography>
