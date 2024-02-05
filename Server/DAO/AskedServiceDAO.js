@@ -69,7 +69,7 @@ class AskedServiceDAO {
                 {
                     $lookup: {
                         from: "users",        // Replace with your users collection name
-                        localField: "partnerId",
+                        localField: "userId",
                         foreignField: "_id",
                         as: "partnerDetails"
                     }

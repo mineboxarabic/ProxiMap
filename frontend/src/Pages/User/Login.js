@@ -7,6 +7,7 @@ import useAuth from '../../Hooks/useAuth';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import useLocalStorage  from '../../Hooks/useLocalStorage';
 import { FormControlLabel, FormGroup } from '@mui/material';
+import LightTextField from '../../Components/MUI/LightTextField';
 
 const LogIn = () =>
 {
@@ -115,7 +116,7 @@ const LogIn = () =>
                             inputRef={emailRef}
                             onChange={(e) => setEmail(e.target.value)}
                         />
-                        <TextField
+                        <LightTextField
                             margin="normal"
                             required
                             fullWidth
@@ -130,6 +131,7 @@ const LogIn = () =>
                             type="submit"
                             fullWidth
                             variant="contained"
+                            color='secondary'
                             sx={{ mt: 3, mb: 2 }}
                             onClick={handleSubmit}
                         >

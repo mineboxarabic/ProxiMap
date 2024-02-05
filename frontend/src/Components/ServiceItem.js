@@ -9,14 +9,27 @@ import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
 import { useEffect } from "react";
 import useAuth from "../Hooks/useAuth";
-const ServiceItem = ({className, service, setHovered, setSelected, setSelectedPartner }) => {
+const ServiceItem = ({className, service, setHovered, setSelected, setSelectedPartner, isAsked }) => {
 
+  
 
-  const [partner, setPartner] = useState(service?.partnerDetails?.[0]);
+  const [partner, setPartner] = useState(service?.partnerDetails?.[0] || service?.userDetails?.[0]);
+ // const [user, setUser] = useState(service?.userDetails?.[0]);
+
   const [category, setCategory] = useState(service?.categoryDetails?.[0]);
   const {auth} = useAuth();
 
-
+  const getColor = () => {
+    //If the user is the same as the partner
+    if (auth?.user?._id === partner?._id) {
+      //if it's the same user and it's an asked service
+      if(isAsked){
+        return "gray";
+      }
+      return "#599965";
+    }
+    return "#46909C";
+  };
 
   return (
     <ListItem
@@ -37,7 +50,7 @@ const ServiceItem = ({className, service, setHovered, setSelected, setSelectedPa
         sx={{
           width: "95%",
           padding: "10px",
-          backgroundColor: auth?.user?._id === partner?._id ? "#599965" : "#46909C",
+          backgroundColor: getColor(),
           boxShadow:  auth?.user?._id === partner?._id ?'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px' :  'rgb(38, 57, 77) 0px 20px 30px -10px;',
 
           borderRadius: "10px",
@@ -47,8 +60,9 @@ const ServiceItem = ({className, service, setHovered, setSelected, setSelectedPa
         <Typography variant="h5" sx={{color: "black", textAlign:"left"}}>{service.name}</Typography>
 
             <Box  sx={{display: "flex", flexDirection: "row"}}>
-            
-            <ListItemText 
+            {
+              !isAsked && 
+             <ListItemText 
 
             sx={{
            
@@ -56,9 +70,9 @@ const ServiceItem = ({className, service, setHovered, setSelected, setSelectedPa
             textAlign:"left"
             }}
             primary={`${service.range*100} m`} />
-
+          }
             <ListItemText primary={`${service.price} €`} sx={{textAlign:"left" , fontSize: "2rem" }}  />
-
+         
 
             </Box>
             <Box sx={{display: "flex", flexDirection: "row"}}>

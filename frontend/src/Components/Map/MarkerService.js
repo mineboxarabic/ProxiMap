@@ -22,17 +22,22 @@ const MarkerService = ({ service, isAsked }) => {
     };
  
     const getColor = () => {
+        //if it's the same user
         if (isSameUser) {
 
-            setColor("#4a7a32");
+            return "#4a7a32"
+            //if it's the same user and it's an asked service
             if(isAsked){
-                setColor("black");
-        }
+                return "gray";
+            }
+
         }else{
 
-            setColor("#78B9EB");
+            //setColor("#78B9EB");
+            return "#78B9EB";
             if(isAsked){
-                setColor("gray");
+           //     setColor("gray");
+             return "gray";
             }
         }
     }
@@ -45,7 +50,7 @@ const MarkerService = ({ service, isAsked }) => {
                     style={{
                         width: "100%",
                         height: "100%",
-                        color: color,
+                        color: getColor(),
                         cursor: "pointer",
                     }}
                     />
@@ -69,10 +74,7 @@ const MarkerService = ({ service, isAsked }) => {
        
     }
 
-    useEffect(() => {
-        getColor();
-    }
-    , [isSameUser]);
+
     
 
 
@@ -94,14 +96,14 @@ const MarkerService = ({ service, isAsked }) => {
             center={position} 
             radius={service?.range || 0}
             
-            color={isSameUser ? "#599965" : "#78B9EB"}
+            color={getColor()}
+            fillOpacity={0.2}
+            weight={2}
            //className={'circle',"notSameUser"}
            //two classes
 
-           className={`circle 
-            ${isSameUser ? "same-user" : "notSameUser"}
-            ${isAsked ? "asked" : "notAsked"}
-           `}
+
+
         >
         
             <Marker

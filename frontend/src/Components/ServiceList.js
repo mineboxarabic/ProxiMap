@@ -18,6 +18,8 @@ const ServiceList = ({
 }) => {
   const { oVServices, oVAskedServices } = useGeneral();
 
+
+
   onCloseDrawer = () => {
     setSelected(null);
   };
@@ -40,10 +42,10 @@ const ServiceList = ({
                 <ServiceItem
                   key={index}
                   service={service}
-                    setSelectedPartner={setSelectedPartner}
+                  setSelectedPartner={setSelectedPartner}
                   setHovered={setHovered}
                   setSelected={setSelected}
-                  isAsked={true}
+                  isAsked={false}
                 />
               </>
             );

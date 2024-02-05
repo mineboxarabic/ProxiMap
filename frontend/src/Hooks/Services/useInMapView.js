@@ -39,12 +39,12 @@ const useInMapView = (isAsked) => {
 
     useEffect(() => {
       if(!isAsked){
-        if (services && services.length > 0) {
+        if (services ) {
           setOVServices(services);
       }
       }
       else{
-        if (services && services.length > 0) {
+        if (services) {
           setOVAskedServices(services);
         }
       }
