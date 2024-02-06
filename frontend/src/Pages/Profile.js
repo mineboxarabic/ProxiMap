@@ -172,12 +172,8 @@ function ProfilePage() {
         label="About Me" />
 
       </Tabs>
-
-
       <TabPanel value={tabIndex} index={0}>
         {/* General Edit Form */}
-
-        <Card variant='form'>
       <Alert severity="error" sx={{display: updateError ? 'block' : 'none', width: '100%', marginBottom: '10px'}} 
 
       >{updateError}</Alert>
@@ -192,7 +188,12 @@ function ProfilePage() {
         <Grid container spacing={2} >
 
           <Grid item xs={12} >
-            <TextField sx={{ width: { xs: '100%', md: '50%' } }} label="Email" defaultValue={currentUser?.email} onChange={(e) => setEmail(e.target.value)} />
+            <TextField label="Email" 
+            sx={
+              {
+                width: '70%'
+              }
+            } defaultValue={currentUser?.email} onChange={(e) => setEmail(e.target.value)} />
           </Grid>
           <Grid item xs={12} >
             <TextField sx={
