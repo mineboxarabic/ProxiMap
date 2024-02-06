@@ -7,7 +7,33 @@ import useResource from '../Hooks/useResource';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import useAxiosPrivate from '../Hooks/useAxiosPrivate';
+import Card from '@mui/material/Card';
+import styled from '@emotion/styled';
 
+const StyledTab = styled(Tab)(({ theme }) => ({
+  width: '30%',
+  [theme.breakpoints.up('md')]: {
+    width: '53%',
+  },
+
+  //Make text white
+  color: theme.palette.light.main,
+
+  //Make the tab indicator white
+  '&.Mui-selected': {
+  color: theme.palette.primary.main,
+
+  },
+
+
+
+}));
+
+const SmallTextField = styled(TextField)(({ theme }) => ({
+
+  margin: '5px',
+
+}));
 
 function ProfilePage() {
   const [tabIndex, setTabIndex] = useState(0);
@@ -127,19 +153,22 @@ function ProfilePage() {
 
 
       <Tabs 
-       sx={{ borderBottom: 1, borderColor: 'divider' }}
+       sx={{ borderBottom: 1, borderColor: 'divider' 
+      
+       //Center the tabs
+        , margin: 'auto'
+        , width: '70%'
+      }}
       value={tabIndex} onChange={handleTabChange}>
 
-        <Tab 
+        <StyledTab 
 
-          sx={{ width: { xs: '30%', md: '53%' } }}
         label="Edit Profile" />
-        <Tab 
-        
-          sx={{ width: { xs: '30%', md: '53%' } }}
+
+        <StyledTab 
+
         label="Change Password" />
-        <Tab 
-        sx={{ width: { xs: '30%', md: '53%' } }}
+        <StyledTab 
         label="About Me" />
 
       </Tabs>
@@ -151,23 +180,42 @@ function ProfilePage() {
 
   
 
+
+
+        <Card
+          variant='form'
+        >
         <Grid container spacing={2} >
 
           <Grid item xs={12} >
-            <TextField sx={{ width: { xs: '100%', md: '50%' } }} label="Email" defaultValue={currentUser?.email} onChange={(e) => setEmail(e.target.value)} />
+            <TextField label="Email" 
+            sx={
+              {
+                width: '70%'
+              }
+            } defaultValue={currentUser?.email} onChange={(e) => setEmail(e.target.value)} />
           </Grid>
           <Grid item xs={12} >
-            <TextField sx={{ width: { xs: '100%', md: '50%' } }} label="Username" defaultValue={currentUser?.username} onChange={(e) => setUsername(e.target.value)} />
+            <TextField sx={
+              {
+                width: '70%'
+              }
+            } label="Username" defaultValue={currentUser?.username} onChange={(e) => setUsername(e.target.value)} />
           </Grid>
           <Grid item xs={12} >
-            <TextField sx={{ width: { xs: '100%', md: '50%' } }} label="About Me" defaultValue={currentUser?.profile?.bio} onChange={(e) => setBio(e.target.value)} />
+            <TextField sx={
+              {
+                width: '70%'
+                
+              }
+            } label="About Me" defaultValue={currentUser?.profile?.bio} onChange={(e) => setBio(e.target.value)} />
             
           </Grid>
-          <Grid item xs={12} >
-            <TextField label="Street" defaultValue={currentUser?.profile?.address.street} onChange={(e) => setStreet(e.target.value)} />
-            <TextField label="city" defaultValue={currentUser?.profile?.address.city} onChange={(e) => setCity(e.target.value)} />
-            <TextField label="state" defaultValue={currentUser?.profile?.address.state} onChange={(e) => setState(e.target.value)} />
-            <TextField label="zip" defaultValue={currentUser?.profile?.address.zip} onChange={(e) => setZip(e.target.value)} />
+          <Grid item xs={12}>
+            <SmallTextField label="Street" defaultValue={currentUser?.profile?.address.street} onChange={(e) => setStreet(e.target.value)} />
+            <SmallTextField label="city" defaultValue={currentUser?.profile?.address.city} onChange={(e) => setCity(e.target.value)} />
+            <SmallTextField label="state" defaultValue={currentUser?.profile?.address.state} onChange={(e) => setState(e.target.value)} />
+            <SmallTextField label="zip" defaultValue={currentUser?.profile?.address.zip} onChange={(e) => setZip(e.target.value)} />
           </Grid>
 
           <Grid item xs={12} >
@@ -176,6 +224,7 @@ function ProfilePage() {
           </Grid>
             
         </Grid>
+        </Card>
       </TabPanel>
 
 

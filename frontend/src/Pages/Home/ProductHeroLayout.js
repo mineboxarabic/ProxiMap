@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import bubles from '../../assets/images/bubles.png';
 import downArrow from '../../assets/down-arrow.png';
 const ProductHeroLayoutRoot = styled('section')(({ theme }) => ({
-    color: theme.palette.common.white,
+    color: theme.palette.light.main,
     position: 'relative',
     display: 'flex',
     alignItems: 'center',
@@ -15,7 +15,9 @@ const ProductHeroLayoutRoot = styled('section')(({ theme }) => ({
         height: '80vh',
         minHeight: 500,
         maxHeight: 1300,
+
     },
+    zIndex: 0,
 }));
 
 const Background = styled('div')({
@@ -26,7 +28,7 @@ const Background = styled('div')({
     bottom: 0,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    zIndex: 0,
+    zIndex: -2,
 });
 
 function ProductHeroLayout(props) {
@@ -38,6 +40,7 @@ function ProductHeroLayout(props) {
 
     return (
         <ProductHeroLayoutRoot>
+
             <Container
                 sx={{
                     mt: 3,
@@ -47,12 +50,15 @@ function ProductHeroLayout(props) {
                     alignItems: 'center',
                 }}
             >
+            <Background sx={sxBackground} />
+
                 <img
                     src={bubles}
                     alt="wonder"
                     width="147"
                     height="80"
                 />
+
                 {children}
                 <Box
                     sx={{
@@ -66,7 +72,7 @@ function ProductHeroLayout(props) {
                         zIndex: -1,
                     }}
                 />
-                <Background sx={sxBackground} />
+                
                 <Box
                     component="img"
                     src={downArrow}

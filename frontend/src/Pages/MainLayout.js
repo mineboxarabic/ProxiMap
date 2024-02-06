@@ -14,17 +14,16 @@ const MainLayout = () => {
                 backgroundColor: 'dark.main',
                 height: '100vh',
                 width: '100%',
+
             }}
             >
             <Header />
-            <Box
-           sx={{
-            backgroundColor: 'dark.main',
-           }}
+            <main
+
             className='App'>
             <Outlet />
 
-            </Box>
+            </main>
             
         </Box>
     );

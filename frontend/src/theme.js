@@ -41,7 +41,8 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           '& .MuiFilledInput-root': {
-            backgroundColor: 'white', // Keeps background white by default
+            //Back ground color as light.main
+            backgroundColor: '#dfdfdf',
             borderRadius: '5px',
             "&:before": {
               borderBottom: "none",
@@ -70,6 +71,42 @@ const theme = createTheme({
         },
       },
     },
+
+    MuiCard:{
+
+      variants:[
+        {
+          props: {variant: 'form'},
+          style: {
+            p: 3,
+            padding: '1rem',
+            display: 'flex',
+      flexDirection: 'column',
+       alignItems: 'center',
+       justifyContent: 'center',
+
+        gap: '1rem',
+        width: '70%',
+        backgroundColor: '#425463',
+            //Center the form
+            margin: 'auto',
+            //Center the content
+            textAlign: 'center',
+            //Center the content
+            justifyContent: 'center',
+            boxShadow: '2px 2px 4px 0px rgb(32 39 51)',
+            
+          }
+        }
+      ],
+      styleOverrides:{
+        root:{
+
+
+        }
+      }
+    }
+
   },
 
 });
