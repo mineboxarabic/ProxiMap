@@ -8,8 +8,11 @@ import { FormControlLabel } from "@mui/material";
 import { Box } from "@mui/system";
 import { Button } from "@mui/material";
 import useResource from "../../Hooks/useResource";
+
 import { Divider } from "@mui/material";
 import useServicesHistory from "../../Hooks/useServicesHistory";
+import { TextareaAutosize } from '@mui/base/TextareaAutosize';
+
 
 const ServiceSettings = ({handleDelete, isAsked}) =>{
     const {selectedService, setSelectedService} = useGeneral();
@@ -128,7 +131,9 @@ const ServiceSettings = ({handleDelete, isAsked}) =>{
                 }
             }
         >
-            <h1>Service Settings</h1>
+            <Typography variant="h3"
+                color={'light.main'}
+            >Service Settings</Typography>
             <Divider />
             {currentService ?
             <>
@@ -142,20 +147,29 @@ const ServiceSettings = ({handleDelete, isAsked}) =>{
                     }}
                 >
 
-            <TextField id="outlined-basic" label="Dame" variant="outlined"
+            <TextField id="outlined-basic" label="Dame" variant="filled"
             value={name}
             onChange={  (e) => setName(e.target.value)}
             />
 
-            <TextField id="outlined-basic" label="Description" variant="outlined"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
 
-            />
-
-            <TextField type="number" id="outlined-basic" label="Price €" variant="outlined"
+            <TextField type="number" id="outlined-basic" label="Price €" variant="filled"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
+            />
+
+            <TextareaAutosize id="outlined-basic" label="Description" variant="filled"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            minRows={3}
+            style={{ 
+                
+                    fontSize: '1rem',
+
+                width: '90%',
+                
+                maxWidth: '500px',
+                 minWidth: '200px' }} // 
             />
                 </Box>
 
@@ -209,7 +223,7 @@ const ServiceSettings = ({handleDelete, isAsked}) =>{
                 }}
             >
                 
-                <Typography variant="h4" component="div" gutterBottom>
+                <Typography color={'light.main'} variant="h4" component="div" gutterBottom>
                     No service selected
                 </Typography>
 

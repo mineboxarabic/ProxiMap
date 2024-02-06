@@ -36,10 +36,10 @@ function App() {
 
           {/* Public Routes */}
 
-          <Route path='/login' element={<LogIn />} />
           <Route path='/register' element={<Register />} />
           <Route path='/about' element={<About />} />
           <Route path='/home' element={<Home />} />
+          <Route path='/login' element={<LogIn />} />
 
           {/*Parnter only orutes */}
           <Route element={<RequireAuth allowedRoles={[PARTNER, ADMIN]} />}>

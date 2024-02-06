@@ -5,7 +5,12 @@ import JWT from "jsonwebtoken";
 
 const RefreshToken = async (req, res) => {
     const cookie = req.cookies;
-    if (!cookie?.refreshToken) return res.status(401).json({ message: "You are not authenticated" });
+    console.log('cookie',cookie);
+    //If there is no refresh token, return 401
+
+    if (!cookie?.refreshToken) {
+        return res.status(401).json({ message: "You are not authenticated" });
+    }
 
     const refreshToken = cookie?.refreshToken;
 

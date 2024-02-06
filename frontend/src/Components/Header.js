@@ -18,6 +18,7 @@ import useAuth from '../Hooks/useAuth';
 import {axiosPrivate} from '../api/axios';
 import useLogout from '../Hooks/useLogout';
 import NavDropDown from './NavDropDown';
+import { useEffect } from 'react';
 
 import { ADMIN, USER, PARTNER, MANAGER, STAFF } from '../Helpers/Roles';
 import { Badge } from '@mui/material';
@@ -41,6 +42,7 @@ const pagesNav = [
   {path:'/services/edit',label:'My services', allowedRoles:[ADMIN, PARTNER]},
   {path:'/services/edit/user',label:'My asked services', allowedRoles:['*']},
 ]
+
 
 const getRoleColor = (role) => {
   switch (role) {
@@ -67,7 +69,9 @@ function Header() {
   const role = auth?.user?.role;
   const navigate = useNavigate();
   const logout = useLogout();
-
+  useEffect(() => {
+    console.log(`user: ${auth}`);
+  }, [auth])
 
   const handleLogout =async () => {
     await logout();

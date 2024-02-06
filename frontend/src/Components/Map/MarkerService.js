@@ -14,8 +14,11 @@ import '../../Style/Map.scss';
 const MarkerService = ({ service, isAsked }) => {
     const currentUser = useCurrentUser();
 
-    const isSameUser = isAsked ? currentUser._id === service.userId : currentUser._id === service.partnerId
-    const [color, setColor] = useState("#78B9EB");
+    //const isSameUser = isAsked ? currentUser._id === service.userId : currentUser._id === service.partnerId
+    const [isSameUser, setIsSameUser] = useState(false);
+
+
+    const [color, setColor] = useState(null);
     const position = {
         lat: service?.position?.coordinates?.[1] || 0,
         lng: service?.position?.coordinates?.[0] || 0,
@@ -23,34 +26,51 @@ const MarkerService = ({ service, isAsked }) => {
  
     const getColor = () => {
         //if it's the same user
+        if(isAsked){
+            //return "gray";
+            setColor("gray");
+            return "gray";
+        }
         if (isSameUser) {
 
+            setColor("#4a7a32");
             return "#4a7a32"
-            //if it's the same user and it's an asked service
-            if(isAsked){
-                return "gray";
-            }
+           
+
 
         }else{
-
-            //setColor("#78B9EB");
-            return "#78B9EB";
-            if(isAsked){
-           //     setColor("gray");
-             return "gray";
-            }
+            setColor("#78B9EB");
+           return "#78B9EB";
+ 
         }
+
+       
     }
+    useEffect(() => {
+        getColor();
+    }
+    , [isAsked, isSameUser, service]);
+    useEffect(() => {
+        if (isAsked) {
+            setIsSameUser(currentUser._id === service?.userId);
+        }
+        else {
+            setIsSameUser(currentUser._id === service?.partnerId);
+        }
+
+    }, [currentUser, service, isAsked]);
+
+
 
     const getIcon = () =>{
         if(!isAsked){
-
+            
             return(
                 <FmdGoodTwoToneIcon
                     style={{
                         width: "100%",
                         height: "100%",
-                        color: getColor(),
+                        color: color,
                         cursor: "pointer",
                     }}
                     />
@@ -89,14 +109,14 @@ const MarkerService = ({ service, isAsked }) => {
 
 
   
-  let key = position;
+  let key = position + color;
     return (
         <Circle 
         key={key}
             center={position} 
             radius={service?.range || 0}
             
-            color={getColor()}
+            color={color}
             fillOpacity={0.2}
             weight={2}
            //className={'circle',"notSameUser"}
@@ -109,6 +129,7 @@ const MarkerService = ({ service, isAsked }) => {
             <Marker
                 position={position} 
                 icon={customIcon}
+    
            
             >
                 <Popup>

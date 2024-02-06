@@ -20,8 +20,10 @@ const LogIn = () =>
 
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location?.state?.from?.pathname || { pathname: '/home' };
+    const from = location?.state?.from?.pathname || '/home';
 
+
+    console.log(`from: ${from}`);
 
     const [email, setEmail] = useLocalStorage('email','');
     const [password, setPassword] = useState('');

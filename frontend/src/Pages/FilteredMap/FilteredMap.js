@@ -118,10 +118,6 @@ import { ThemedAutocomplete } from "./ThemedAutocomplete";
   
     return (
         <Box 
-          sx={{
-            backgroundColor: '#1B262C',
-  
-          }}
         >
           
         <ServiceDetailsDrawer partner={selectedPartner} service={selected} open={isDrawerOpened} onClose={onCloseDrawer}/>
@@ -150,7 +146,6 @@ import { ThemedAutocomplete } from "./ThemedAutocomplete";
             margin: 'auto',
             justifyContent: 'center',
             borderRadius: '10px',
-            backgroundColor: '#1B262C',
           }}
         >
   

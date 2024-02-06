@@ -1,51 +1,47 @@
-import {Outlet } from "react-router-dom";
-import useAuth from "../Hooks/useAuth"
-import { useEffect,useState } from "react";
+import { Outlet } from "react-router-dom";
+import useAuth from "../Hooks/useAuth";
+import { useEffect, useState } from "react";
 import useRefreshToken from "../Hooks/useRefreshToken";
 import { Backdrop, CircularProgress } from "@mui/material";
 import useLocalStorage from "../Hooks/useLocalStorage";
 
 const PersistLogin = () => {
-    const { auth} = useAuth();
+    const { auth } = useAuth();
     const refresh = useRefreshToken();
-    const [isLoading , setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
     const [persist] = useLocalStorage('persist', false);
 
     useEffect(() => {
         const checkAuth = async () => {
-            console.log('checkAuth');
-            try{
+            try {
+                console.log('checkAuth');
                 await refresh();
-            }catch(error){
+            } catch (error) {
                 console.log(error);
-            }finally{
+            } finally {
                 setIsLoading(false);
             }
+        };
+
+        // Check persist flag before deciding to refresh or not
+        if (persist && !auth?.accessToken) {
+            checkAuth();
+        } else {
+            setIsLoading(false); // Immediately stop loading if persist is false
         }
-        console.log(`auth: ${auth?.accessToken}`);
-        !auth?.accessToken ? checkAuth() : setIsLoading(false);
-    }, [auth])
-
-
-
-
-
+    }, [auth, persist, refresh]);
 
     return (
         <>
-        {
-            !persist ? <Outlet /> :
-            isLoading ? <div>
-                <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={isLoading}
-                >   
-            <CircularProgress color="inherit" />
-            </Backdrop>
-            </div> : <Outlet />
-        }
+            {isLoading ? (
+                <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open>
+                    <CircularProgress color="inherit" />
+                </Backdrop>
+            ) : (
+                <Outlet />
+            )}
         </>
-    )
-}
+    );
+};
 
 export default PersistLogin;

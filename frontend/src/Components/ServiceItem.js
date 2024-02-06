@@ -18,18 +18,47 @@ const ServiceItem = ({className, service, setHovered, setSelected, setSelectedPa
 
   const [category, setCategory] = useState(service?.categoryDetails?.[0]);
   const {auth} = useAuth();
+  const [isSameUser, setIsSameUser] = useState(false);
+  const [color, setColor] = useState(null);
+
+
+  useEffect(() => {
+    if (isAsked) {
+        setIsSameUser(auth?.user?._id === service?.userId);
+    }
+    else {
+        setIsSameUser(auth?.user?._id === service?.partnerId);
+    }
+  }, [auth, service, isAsked]);
 
   const getColor = () => {
-    //If the user is the same as the partner
-    if (auth?.user?._id === partner?._id) {
-      //if it's the same user and it's an asked service
-      if(isAsked){
+    //if it's the same user
+    if(isAsked){
+        //return "gray";
+        setColor("gray");
         return "gray";
-      }
-      return "#599965";
     }
-    return "#46909C";
-  };
+    if (isSameUser) {
+
+        setColor("#4a7a32");
+        return "#4a7a32"
+       
+
+
+    }else{
+        setColor("#78B9EB");
+       return "#78B9EB";
+
+    }
+
+   
+}
+
+
+  useEffect(() => {
+    getColor();
+  }
+  , [isAsked, isSameUser, service]);
 
   return (
     <ListItem
@@ -55,7 +84,7 @@ const ServiceItem = ({className, service, setHovered, setSelected, setSelectedPa
         sx={{
           width: "95%",
           padding: "10px",
-          backgroundColor: getColor(),
+          backgroundColor: color,
           boxShadow:  auth?.user?._id === partner?._id ?'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px' :  'rgb(38, 57, 77) 0px 20px 30px -10px;',
 
           borderRadius: "10px",

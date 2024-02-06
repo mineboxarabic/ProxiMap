@@ -3,25 +3,40 @@ import useAuth from "./useAuth";
 
 
 const useRefreshToken = () => {
-    const { setAuth} = useAuth();
+    const { auth, setAuth} = useAuth();
     const refresh = async () => {
+
+        try{
+
+  
+
         const response = await axios.post('/refresh', {}, {
             withCredentials: true,
         });
 
 
-        setAuth(prev => {
-            console.log('prev',prev);
-            return {
-                ...prev,
-                user : response.data.user,
-                accessToken: response.data.accessToken,
-            }
-        })
+        
+        if(auth !== null){
+            setAuth(prev => {
+
+                return {
+                    ...prev,
+                    user : response.data.user,
+                    accessToken: response.data.accessToken,
+                }
+            })
+        }
+
 
         console.log('auth after refresh', response.data.accessToken);
 
         return response.data.accessToken;
+    
+    }
+        catch(error){
+            console.log(error);
+            throw error;
+        }
 
     }
 

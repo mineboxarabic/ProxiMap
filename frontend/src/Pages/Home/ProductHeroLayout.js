@@ -22,6 +22,7 @@ const ProductHeroLayoutRoot = styled('section')(({ theme }) => ({
 
 const Background = styled('div')({
     position: 'absolute',
+    
     left: 0,
     right: 0,
     top: 0,
@@ -39,7 +40,9 @@ function ProductHeroLayout(props) {
 
 
     return (
-        <ProductHeroLayoutRoot>
+        <ProductHeroLayoutRoot
+            
+        >
 
             <Container
                 sx={{
@@ -67,7 +70,7 @@ function ProductHeroLayout(props) {
                         right: 0,
                         top: 0,
                         bottom: 0,
-                        backgroundColor: 'common.black',
+                        backgroundColor: 'black',
                         opacity: 0.5,
                         zIndex: -1,
                     }}

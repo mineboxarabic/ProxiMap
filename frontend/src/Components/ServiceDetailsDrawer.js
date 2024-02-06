@@ -43,7 +43,7 @@ const ServiceDetailsDrawer = ({ service, open, onClose }) => {
               <Badge className="badge" badgeContent={partner?.role} color="primary">
                 <Typography p={0} variant="h6" gutterBottom>
                   <Link
-                    href={`/profile/${partner?._id}`}
+                    href={`services/edit`}
                     underline="none"
                     color="inherit"
                   >
@@ -64,7 +64,7 @@ const ServiceDetailsDrawer = ({ service, open, onClose }) => {
               {isSameUser && (
                 <Button variant="outlined" color="primary" onClick={
                   () =>{
-                    window.location.href = `/profile`;
+                    window.location.href = `/services/edit`;
                   }
                 }>
                   Edit
