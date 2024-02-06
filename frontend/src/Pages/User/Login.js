@@ -104,17 +104,7 @@ const LogIn = () =>
                 >
                     <Alert severity="error" className={!error ?"offScreen" : "error"} ref={errorRef}>{error}</Alert>
                     
-                        <Card 
-                        sx={{ 
-                            p: 3,
-                                display: 'flex',
-                          flexDirection: 'column',
-                           alignItems: 'center',
-                            gap: '1rem',
-                            width: '70%',
-                            backgroundColor: '#425463',
-
-                           }}>
+                        <Card variant='form'>
                         <TextField
                             margin="normal"
                             required

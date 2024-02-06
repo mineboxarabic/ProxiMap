@@ -36,7 +36,7 @@ const ServiceItem = ({className, service, setHovered, setSelected, setSelectedPa
     className={className}
       key={service._id}
       disablePadding
-      onMouseEnter={() => setHovered(service)}
+      //onMouseEnter={() => setHovered(service)}
       onClick={() => {setSelected(service); setSelectedPartner(partner)}}
       sx={{
         marginBottom: "10px",
@@ -69,7 +69,7 @@ const ServiceItem = ({className, service, setHovered, setSelected, setSelectedPa
             fontSize: "1rem",
             textAlign:"left"
             }}
-            primary={`${service.range*100} m`} />
+            primary={`${service.range} m`} />
           }
             <ListItemText primary={`${service.price} €`} sx={{textAlign:"left" , fontSize: "2rem" }}  />
          
