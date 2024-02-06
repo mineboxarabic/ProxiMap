@@ -55,6 +55,9 @@ const NavDropDown = ({ buttonText, menuItems}) => {
         onClick={handleClick}
         variant="text"
         color="inherit"
+        sx={{
+          color: 'light.main',
+        }}
 
         endIcon={<ArrowDropDownIcon />}
       >

@@ -8,7 +8,7 @@ const useLogout = () => {
         const response = await axiosPrivate.post('/logout');
             
         //Reload
-        window.location.reload();
+       // window.location.reload();
         
     }catch(error){
             console.log(error);

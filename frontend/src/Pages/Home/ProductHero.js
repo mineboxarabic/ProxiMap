@@ -41,7 +41,7 @@ const ProductHero = () =>{
             !currentUser &&
 
             <Button
-                color="secondary"
+                color="primary"
                 variant="contained"
                 size="large"
                 component="a"
@@ -55,7 +55,7 @@ const ProductHero = () =>{
 {
             currentUser &&
             <Button
-                color="secondary"
+                color="primary"
                 variant="contained"
                 size="large"
                 component="a"

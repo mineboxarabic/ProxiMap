@@ -41,7 +41,8 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           '& .MuiFilledInput-root': {
-            backgroundColor: 'white', // Keeps background white by default
+            //Back ground color as light.main
+            backgroundColor: '#dfdfdf',
             borderRadius: '5px',
             "&:before": {
               borderBottom: "none",

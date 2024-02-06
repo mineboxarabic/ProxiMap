@@ -33,6 +33,7 @@ const ServiceItem = ({className, service, setHovered, setSelected, setSelectedPa
 
   return (
     <ListItem
+
     className={className}
       key={service._id}
       disablePadding
@@ -46,6 +47,10 @@ const ServiceItem = ({className, service, setHovered, setSelected, setSelectedPa
         alignItems: "center",
       }}
     >
+
+
+
+
       <ButtonBase
         sx={{
           width: "95%",
@@ -56,7 +61,14 @@ const ServiceItem = ({className, service, setHovered, setSelected, setSelectedPa
           borderRadius: "10px",
         }}  
       >
+
+
         <Box sx={{ width: "100%", height: "100%" }}> 
+          
+        <Typography variant="h6" sx={{color: "drakgray",opacity:0.4, textAlign:"left"}}>{isAsked? "Asked":"Offered"}</Typography>
+
+
+
         <Typography variant="h5" sx={{color: "black", textAlign:"left"}}>{service.name}</Typography>
 
             <Box  sx={{display: "flex", flexDirection: "row"}}>
