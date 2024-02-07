@@ -12,6 +12,10 @@ const theme = createTheme({
         main: '#303949',
 
     },
+
+    bgForm:{
+      main: '#425463',
+    },
     
     light:{
         main: '#dfdfdf',

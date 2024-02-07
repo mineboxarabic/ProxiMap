@@ -79,15 +79,13 @@ const CRUDTable = ({ modelClass, nameOfClass, modelStructure, columns }) => {
     console.log(isEdit);
     if (isEdit) {
       await update(model);
-      
     } else {
       await create(model);
     }
     console.log('success', success);
     setOpenModal(false);
-
     console.log('error', error);
-
+    updateDataTable();
     //await getAll();
   };
 
@@ -122,6 +120,22 @@ const CRUDTable = ({ modelClass, nameOfClass, modelStructure, columns }) => {
         rowsPerPageOptions={[5, 10, 20]}
         loading={loading}
         getRowId={(row) => row._id}
+        sx={{
+          '& .MuiDataGrid-row': {
+            cursor: 'pointer',
+          },
+          backgroundColor: 'light.main',
+
+          //Centering the table
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+
+          width: 'fit-content',
+          height: '80vh',
+          margin: 'auto',
+
+        }}
       />
 
       <Fab color="primary" aria-label="add" sx={{ position: 'fixed', bottom: 20, right: 20 }} onClick={openAddModal}>

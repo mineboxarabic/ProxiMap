@@ -13,10 +13,8 @@ import '../../Style/Register.scss';
 import axios from '../../api/axios';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import { USER_REGEX, EMAIL_REGEX, PASSWORD_REGEX } from '../../Helpers/REGEXS';
 
-const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,30}$/;
-const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,24}$/;
-const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 const Register = () =>
 {   
 
