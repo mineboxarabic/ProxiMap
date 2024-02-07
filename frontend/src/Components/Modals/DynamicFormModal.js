@@ -2,7 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Modal, Box, Button, TextField, Autocomplete } from '@mui/material';
 import Card from '@mui/material/Card';
 function getValue(obj, path) {
-  return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+  //return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+  const keys = path.split('.');
+  let current = obj;
+  for (let i = 0; i < keys.length; i++) {
+    if (!current[keys[i]]) return '';
+    current = current[keys[i]];
+  }
+  return current;
 }
 
 function setValue(obj, path, value) {
@@ -13,6 +20,7 @@ function setValue(obj, path, value) {
     const key = keys[i];
     if (!current[key]) current[key] = {};
     current = current[key];
+
   }
 
   current[keys[keys.length - 1]] = value;
