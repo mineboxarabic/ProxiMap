@@ -3,7 +3,7 @@ import ValidateRes from "../../Validators/ValidateRes.js";
 import bcrypt from 'bcrypt';
 const createUser = async (req, res) => {
     //TODO:Create a function to check if the user is valid or not
-
+console.log('user', req.body);
     const userDAO = new UserDAO();
     const user = req.body;
     
@@ -14,6 +14,7 @@ const createUser = async (req, res) => {
 
 
     const newUser = await userDAO.create(user);
+
     
     res.status(201).json({
         success: true,

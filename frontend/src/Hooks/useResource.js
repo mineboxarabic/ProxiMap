@@ -8,7 +8,12 @@ const useResource = (baseUrl) => {
     const [success, setSuccess] = useState('');
     const axiosPrivate = useAxiosPrivate();
 
-    const handleResponse = (response, message) => {
+    const handleResponse = (response, message, method, resource) => {
+        if(method === 'post' || method === 'put') {
+            setSuccess(message);
+            setLoading(false);  
+            return;
+        }
         setResources(response.data);
         setSuccess(message);
         setLoading(false);
@@ -48,7 +53,7 @@ const useResource = (baseUrl) => {
             setLoading(true);
             setError('');
             const response = await axiosPrivate[method](url, data);
-            handleResponse(response, 'Operation successful');
+            handleResponse(response, 'Operation successful', method, data);
         } catch (error) {   
             handleError(error);
         }

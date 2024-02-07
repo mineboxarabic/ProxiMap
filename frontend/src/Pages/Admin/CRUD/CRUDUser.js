@@ -37,10 +37,55 @@ const CRUDUser = () => {
         }
     }
 
+    const userStructure = [
+        {
+            name: 'username',
+            label: 'User Name',
+            type: 'text',
+            customAttributes: {
+                required: true,
+                minLength: 3
+            }
+            ,
+            regex: /^[a-zA-Z0-9]{3,}$/, // Example regex, adjust as needed
+            errorMessage: "Username must be at least 3 characters long and contain only letters and numbers"
+        },
+        {
+            name: 'role',
+            label: 'Role',
+            type: 'select',
+            options: ['Admin', 'User', 'Staff'],
+            customAttributes: {
+                onChange: (value) => console.log(`Role changed to ${value}`),
+            }
+        },
+        {
+            name: 'email',
+            label: 'Email',
+            type: 'email',
+            customAttributes: {
+                required: true,
+            }
+        },
+        {
+            name: 'password',
+            label: 'Password',
+            type: 'password',
+            customAttributes: {
+                required: true,
+                minLength: 6
+            }
+        },
+        {
+            name: 'profile.bio',
+            label: 'Bio',
+            type: 'text',
+        }
+    ]
 
     return (
         <>
-            <CRUDTable  columns={columns} modelClass={user} nameOfClass={'users'}/>
+            <CRUDTable  columns={columns} modelClass={user} modelStructure={userStructure} nameOfClass={'users'}/>
         </>
         );
 

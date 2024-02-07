@@ -1,270 +1,153 @@
-import useAxiosPrivate from "../Hooks/useAxiosPrivate";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
+import { DataGrid } from '@mui/x-data-grid';
+import { Box, Button, Fab } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import DynamicFormModal from './Modals/DynamicFormModal';
+import VerifyDeleteModal from './Modals/VerifyDeleteModal';
+import useResource from '../Hooks/useResource';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+import useAxiosPrivate from '../Hooks/useAxiosPrivate';
 
-import { DataGrid } from "@mui/x-data-grid";
-import { Box } from "@mui/system";
-import { Button } from "@mui/material";
-import Fab from "@mui/material/Fab";
-import AddIcon from "@mui/icons-material/Add";
-
-import VerifyDeleteModal from "./Modals/VerifyDeleteModal";
-import UsersModal from "./Modals/UsersModal";
-
-import useCRUDModel from "../Hooks/useCRUDModel";
-import { Alert } from "@mui/material";
-import Snackbar from "@mui/material/Snackbar";
-
-import "../Style/DataTable.scss";
-import ServiceModal from "./Modals/ServicesModal";
-import CategorysModal from "./Modals/CategorysModal";
-import useResource from "../Hooks/useResource";
-
-const CRUDTable = ({ columns, modelClass, nameOfClass }) => {
-  const columnsWithAction = [...columns];
-
-  //Modal states
+const CRUDTable = ({ modelClass, nameOfClass, modelStructure, columns }) => {
   const [openModal, setOpenModal] = useState(false);
-  const [isAdd, setIsAdd] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
+  const [selectedModel, setSelectedModel] = useState({});
   const [isDelete, setIsDelete] = useState(false);
 
-  //CRUD hooks
-  const {
-    create:AddModel,
-    update:EditModel,
-    remove:DeleteModel,
-    getAll:GetAllModels,
-    resources,
-    loading,
-    error,
-    success,
-    setSuccess,
-    setError
-  } = useResource(`/${nameOfClass}`);
+  const {setResources, create, update, remove, getAll, resources, loading, error, success, setSuccess, setError } = useResource(`/${nameOfClass}`);
+  const axiosPrivate = useAxiosPrivate();
+  
+  const updateDataTable = async () => {
+    const response = await axiosPrivate.get(`/${nameOfClass}`);
+    setResources(response.data);
 
-
-
-  const [data, setData] = useState([]);
-
-  //Model
-  const [model, setModel] = useState(modelClass);
-  const [selectedModel, setSelectedModel] = useState(modelClass);
-
-  const getData = async () => {
-    setData([]);
-    await GetAllModels();
-    setData(resources);
-  };
+  }
   useEffect(() => {
-    getData();
+    const fetchData = async () => {
+      updateDataTable();
+    };
+    fetchData();
   }, []);
 
   useEffect(() => {
-  
-    setData(resources);
-  }, [resources]);
-
-  
-  useEffect(() => {
-    if (error) {
-      setOpenModal(true);
-    }
-  }, [error]);
-
-  useEffect(() => {
     if (success) {
-      setOpenModal(false);
-      setIsAdd(false);
-      setIsEdit(false);
-      getData();
+      setTimeout(() => {
+        setSuccess('');
+      }, 3000);
     }
   }, [success]);
 
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        setError('');
+      }, 3000);
+    }
+  }, [error]);
 
 
-
-
-
-  const handleClose = () => {
-    setIsAdd(false);
-    setIsEdit(false);
-    setOpenModal(false);
-    setError('');
-  };
-
-
-
-  const openEditModal = async (row) => {
-
-    setModel(row);
+  const openEditModal = (row) => {
+    setSelectedModel(row);
     setIsEdit(true);
     setOpenModal(true);
   };
 
   const openAddModal = () => {
-    setModel(modelClass);
-    setIsAdd(true);
-    setOpenModal(true);
+    setSelectedModel(modelClass);
     setIsEdit(false);
+    setOpenModal(true);
   };
 
   const openDeleteModal = (row) => {
-    setSelectedModel(row?._id);
+    setSelectedModel(row);
     setIsDelete(true);
   };
 
-  //CRUD functions
-  const handleAdd = async (addedModel) => {
-    await AddModel(addedModel);
-    getData();
-  };
-
-  const handleEdit = async (modelEdited) => {
-    if (modelEdited["password"]) {
-      delete modelEdited["password"];
-    }
-
-
-    const res = await EditModel(modelEdited);
-
-  
-
-  };
-  const handleDelete = async (id) => {
-    await DeleteModel(id);
-    getData();
+  const handleClose = () => {
+    setOpenModal(false);
     setIsDelete(false);
+    setError('');
   };
 
-  const handleChooseModal = () => {
-    switch (nameOfClass) {
-      case "users":
-        return (
-          <UsersModal
-            isEdit={isEdit}
-            open={openModal}
-            handleClose={handleClose}
-            handleAdd={handleAdd}
-            handleEdit={handleEdit}
-            model={model}
-            setModel={setModel}
-            error={error}
-            modelClass={modelClass}
+  const handleSuccessClose = () => {
+    setSuccess(false);
+  };
 
-          />
-        );
-
-      case "services":
-        return (
-          <ServiceModal
-            isEdit={isEdit}
-            open={openModal}
-            handleClose={handleClose}
-            handleAdd={handleAdd}
-            handleEdit={handleEdit}
-            model={model}
-            modelClass={modelClass}
-            setModel={setModel}
-            error={error}
-          />
-        );
-
-      case "categorys":
-        return (
-          <CategorysModal
-            isEdit={isEdit}
-            open={openModal}
-            handleClose={handleClose}
-            handleAdd={handleAdd}
-            handleEdit={handleEdit}
-            model={model}
-            setModel={setModel}
-            error={error}
-            modelClass={modelClass}
-
-          />
-        );
+  const handleAddOrEdit = async (model) => {
+    console.log(model);
+    console.log(isEdit);
+    if (isEdit) {
+      await update(model);
+      
+    } else {
+      await create(model);
     }
+    console.log('success', success);
+    setOpenModal(false);
+
+    console.log('error', error);
+
+    //await getAll();
   };
 
-  columnsWithAction.push({
-    field: "action",
-    headerName: "Action",
-    width: 150,
-    renderCell: (params) => {
-      return (
-        <>
-          <Button
-            variant="contained"
-            style={{ backgroundColor: "#00b300", color: "white" }}
-            className="userListEdit"
-            onClick={() => openEditModal(params.row)}
-          >
-            Edit
-          </Button>
+  const handleDelete = async () => {
+    await remove(selectedModel._id);
+    setIsDelete(false);
+    await getAll();
+  };
 
-          <Button
-            variant="contained"
-            style={{ backgroundColor: "#ff1a1a", color: "white" }}
-            className="userListDelete"
-            onClick={() => openDeleteModal(params.row)}
-          >
-            Delete
-          </Button>
-        </>
-      );
-    },
-  });
+  const actionColumn = {
+    field: 'action',
+    headerName: 'Action',
+    width: 150,
+    renderCell: (params) => (
+      <>
+        <Button color="primary" onClick={() => openEditModal(params.row)}>Edit</Button>
+        <Button color="error" onClick={() => openDeleteModal(params.row)}>Delete</Button>
+      </>
+    ),
+  };
+
+  const tableColumns = [...columns, actionColumn];
 
   return (
-    <Box paddingTop={"50px"}>
-      <Snackbar
-        open={success}
-        autoHideDuration={6000}
-        onClose={() => {
-          setSuccess(false);
-        }}
-      >
-        <Alert
-          onClose={() => {
-            setSuccess(false);
-          }}
-          severity="success"
-          sx={{ width: "100%" }}
-        >
-          This is a success message!
-        </Alert>
-      </Snackbar>
-
-      {handleChooseModal()}
-      <VerifyDeleteModal
-        id={selectedModel}
-        handleDelete={handleDelete}
-        open={isDelete}
-        handleClose={() => setIsDelete(false)}
-      />
+    <Box sx={{ height: 400, width: '100%', mt: 5 }}>
+      {error && <Alert severity="error">{error}</Alert>}
 
       <DataGrid
-        autoHeight
-        //Disable selection
-        disableSelectionOnClick
-        className="dataGrid"
+        rows={resources}
+        columns={tableColumns}
+        pageSize={5}
+        rowsPerPageOptions={[5, 10, 20]}
         loading={loading}
         getRowId={(row) => row._id}
-        rows={data || []}
-        columns={columnsWithAction}
-        pageSize={5}
-        //How many rows to show in the pagination
-        rowsPerPageOptions={[5, 10, 20]}
-      ></DataGrid>
+      />
 
-      <Fab
-        color="primary"
-        aria-label="add"
-        style={{ position: "fixed", bottom: "20px", right: "20px" }}
-      >
-        <AddIcon onClick={openAddModal} />
+      <Fab color="primary" aria-label="add" sx={{ position: 'fixed', bottom: 20, right: 20 }} onClick={openAddModal}>
+        <AddIcon />
       </Fab>
+
+      <DynamicFormModal
+        open={openModal}
+        handleClose={handleClose}
+        handleSubmit={handleAddOrEdit}
+        initialData={selectedModel}
+        fields={modelStructure}
+        isEdit={isEdit}
+      />
+
+      <VerifyDeleteModal
+        open={isDelete}
+        handleClose={handleClose}
+        handleDelete={handleDelete}
+      />
+
+      <Snackbar open={success} autoHideDuration={6000} onClose={handleSuccessClose}>
+        <Alert onClose={handleSuccessClose} severity="success" sx={{ width: '100%' }}>
+          Operation successful!
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

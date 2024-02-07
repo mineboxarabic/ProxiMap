@@ -5,7 +5,6 @@ const ValidateRes = (req,res,next) => {
 
     const validateRes = validationResult(req);
     if(!validateRes.isEmpty()){
-
         const customError = validateRes.array().map((err) => {
         let statusCode = 400;
         

@@ -46,11 +46,13 @@ getUser);
 
 //Create a user
 userRouter.post('/users',
+
 userValidator, 
 //Here we check the password beacuase we ar not checking it in the userValidator,
 //Why we are not checking it in the userValidator? because we are using the same validator for the update user
 //and we don't want to check the password when we are updating the user cus we are not changing it in the update
 checkSchema({password: passwordValidator}),
+
 (req, res, next) => ValidateRes(req,res,next),
 (req, res, next) => autherizeUserRole(req, res, next, userRoutes.create.allowedRoles),
 createUser);
