@@ -157,7 +157,7 @@ const CRUDTable = ({ modelClass, nameOfClass, modelStructure, columns }) => {
         handleDelete={handleDelete}
       />
 
-      <Snackbar open={success} autoHideDuration={6000} onClose={handleSuccessClose}>
+      <Snackbar open={success !== ''} autoHideDuration={6000} onClose={handleSuccessClose}>
         <Alert onClose={handleSuccessClose} severity="success" sx={{ width: '100%' }}>
           Operation successful!
         </Alert>

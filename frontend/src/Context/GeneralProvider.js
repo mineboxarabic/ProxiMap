@@ -10,6 +10,7 @@ export const GeneralProvider = ({ children }) => {
     const [selectedService, setSelectedService] = useState(null);
     const [historyOfChanges, setHistoryOfChanges] = useState([]);
     const [usersServices, setUsersServices] = useState([]);
+    const [filters, setFilters] = useState({});
     return (
         <GeneralContext.Provider value={{ 
             general, setGeneral, 
@@ -17,7 +18,8 @@ export const GeneralProvider = ({ children }) => {
             selectedService, setSelectedService , 
             historyOfChanges, setHistoryOfChanges ,
             usersServices, setUsersServices,
-            oVAskedServices, setOVAskedServices
+            oVAskedServices, setOVAskedServices,
+            filters, setFilters
          }}>
             {children}
         </GeneralContext.Provider>

@@ -23,10 +23,13 @@ import { Alert } from "@mui/material";
 import useCurrentUser from "../Hooks/useCurrentUser";
 import MarkerService from "../Components/Map/MarkerService";
 import Container from "@mui/material/Container";
+import useGeneral from "../Hooks/useGeneral";
+import ServiceFilter from "../Components/ServiceFilter";
 
 const Map = () => {
   const { services, isLoadingServices, updateBounds:updateServiceBounds , errorServices} = useInMapView(false);
   const { services:askedServices, isLoadingServices:isLoadingAskedServices, updateBounds:updateAskedBounds , errorServices:errorAskedServices} = useInMapView(true);
+  const { oVServices,setOVServices, oVAskedServices, setOVAskedServices } = useGeneral();
   const [isDrawerOpened, setIsDrawerOpened] = useState(false);
 
   const [position, setPosition] = useState(null);
@@ -70,6 +73,25 @@ const Map = () => {
     }
   }, [selected]);
 
+  const onFilterChange = (filter) => {
+     /* const {categoryId, priceRange, minimumRating, serviceType, serviceStatus} = filter;
+    let filteredServices = services.filter(service => {
+      let isValid = true;
+      if(categoryId){
+        isValid = isValid && service.categoryId == categoryId;
+      }
+      return isValid;
+
+    });
+    console.log(filteredServices);
+    */
+
+
+
+  }
+  useEffect(() => {
+    console.log(oVServices);
+  } , [oVServices]);
   return (
       <Box 
         sx={{
@@ -103,7 +125,7 @@ const Map = () => {
         }}>
           {/*TODO:add in case of error */}
 
-      
+        <ServiceFilter onFilterChange={onFilterChange}/>
           <MapContainer
             center={
               position
@@ -154,8 +176,8 @@ const Map = () => {
 
             {
 
-            services?.length > 0 ? (
-              services.map((service, index) => {
+            oVServices?.length > 0 ? (
+              oVServices.map((service, index) => {
                 return (
                   <MarkerService service={service} isAsked={false}/>
                 );
@@ -168,8 +190,8 @@ const Map = () => {
 
           {
 
-          askedServices?.length > 0 ? (
-            askedServices.map((service, index) => {
+          oVAskedServices?.length > 0 ? (
+            oVAskedServices.map((service, index) => {
               return (
                 <MarkerService service={service}  isAsked={true}/>
               );

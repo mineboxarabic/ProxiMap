@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Avatar, Box, Button, Divider, Drawer, Link } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
 import useCurrentUser from "../Hooks/useCurrentUser";
 
 const ServiceDetailsDrawer = ({ service, open, onClose }) => {
-  const partner = service?.partnerDetails[0];
+  //IF the service has an attribute called userId then it's asked
+  const isAsked = service?.userId ? true : false;
+  const partner = service?.partnerDetails[0] || service?.userDetails[0];
+
   const currentUser = useCurrentUser();
 
-  const isSameUser = currentUser?._id === partner?._id;
+  const isSameUser = currentUser?._id === partner?._id || currentUser?._id === service?.userId;
+  useEffect(() => {
+    console.log(isAsked);
+  }, [service]);
 
   return (
     <Drawer
       anchor="bottom"
+
       open={open}
       onClose={onClose}
       sx={{
@@ -20,7 +27,11 @@ const ServiceDetailsDrawer = ({ service, open, onClose }) => {
           height: "50vh",
           width: "100%",
           borderRadius: "10px 10px 0px 0px",
+          backgroundColor:"light.main",
+
+
         },
+   
       }}
     >
       {service && (
@@ -81,6 +92,17 @@ const ServiceDetailsDrawer = ({ service, open, onClose }) => {
           </Box>
           <Divider />
 
+                {
+                  isAsked && (
+                    <Typography sx={{
+                      marginTop: "0.1rem",
+                      marginBottom: "0.1rem",
+                      color: "primary.main",
+                    }} variant="h6" gutterBottom>
+                      Asked service
+                    </Typography>
+                  )
+                }
           <Typography marginTop={"1rem"} variant="h3" gutterBottom>
             {service.name}
           </Typography>

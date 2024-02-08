@@ -26,18 +26,6 @@ const CRUDUser = () => {
     ]
 
 
-    const user = {
-        username: '',
-        email: '',
-        password: '',
-        role: '',
-        profile:{
-            bio: '',
-            profilePicture: '',
-        }
-       
-    }
-
     const userStructure = [
         {
             name: 'username',
@@ -55,7 +43,13 @@ const CRUDUser = () => {
             name: 'role',
             label: 'Role',
             type: 'select',
-            options: ['Admin', 'User', 'Staff', 'Manager', 'Partner'],
+            options: [
+                {name: 'Admin', value: 'Admin'},
+                {name: 'User', value: 'User'},
+                {name: 'Staff', value: 'Staff'},
+                {name: 'Manager', value: 'Manager'},
+                {name: 'Partner', value: 'Partner'}
+            ],
             customAttributes: {
                 onChange: (value) => console.log(`Role changed to ${value}`),
             }
@@ -85,7 +79,7 @@ const CRUDUser = () => {
             label: 'Bio',
             regex: BIO_REGEX,
             errorMessage: "Bio must be at most 1000 characters long",
-            type: 'text',
+            type: 'textarea',
         },
         {
             name: 'profile.address.street',
@@ -119,7 +113,7 @@ const CRUDUser = () => {
 
     return (
         <>
-            <CRUDTable  columns={columns} modelClass={user} modelStructure={userStructure} nameOfClass={'users'}/>
+            <CRUDTable  columns={columns} modelStructure={userStructure} nameOfClass={'users'}/>
         </>
         );
 

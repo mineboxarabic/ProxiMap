@@ -28,7 +28,7 @@ const settings = [ 'Account', 'Dashboard', 'Logout'];
 const crudPages = [
   {path:'users',label:'Users', allowedRoles:[ADMIN]},
   {path:'services',label:'Services', allowedRoles:[ADMIN, MANAGER, STAFF]},
-  {path:'products',label:'Products', allowedRoles:[ADMIN, MANAGER, STAFF]},
+  {path:'askedServices',label:'Asked Services', allowedRoles:[ADMIN, MANAGER, STAFF]},
   {path:'orders',label:'Orders', allowedRoles:[ADMIN, MANAGER, STAFF]},
   {path:'categorys',label:'Categorys', allowedRoles:[ADMIN, MANAGER, STAFF]},
 ]

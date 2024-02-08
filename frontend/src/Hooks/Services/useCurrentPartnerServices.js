@@ -28,7 +28,7 @@ const useCurrentPartnerServices = () => {
       if (services) {
           setOVServices(services);
       }
-    }, [services, setOVServices]);
+    }, [services]);
 
     useEffect(() => {
       if (errorServices) {

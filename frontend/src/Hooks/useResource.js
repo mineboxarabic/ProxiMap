@@ -61,6 +61,7 @@ const useResource = (baseUrl) => {
 
 
     const getAll = () => makeRequest('get', baseUrl);
+    const getAllByUrl = (url) => makeRequest('get', url);
     const create = (resource) => makeRequest('post', baseUrl, resource);
     const update = (resource) => makeRequest('put', `${baseUrl}/${resource._id}`, resource);
     const remove = (id) => makeRequest('delete', `${baseUrl}/${id}`);
@@ -69,7 +70,8 @@ const useResource = (baseUrl) => {
     const updateMultiple = (data) => makeRequest('put', baseUrl, data);
     const getAllWithBody = (data) => makeRequest('get', baseUrl, data);
 
-    return {getAllWithBody,updateMultiple, resources,setResources, loading, error, getAll, create, update, remove, getOne ,success ,setSuccess, setError, updateWithForm}
+
+    return {getAllByUrl,getAllWithBody,updateMultiple, resources,setResources, loading, error, getAll, create, update, remove, getOne ,success ,setSuccess, setError, updateWithForm}
 
 
 }

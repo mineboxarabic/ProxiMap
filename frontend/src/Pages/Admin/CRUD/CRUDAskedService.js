@@ -11,7 +11,7 @@ import {SERVICE_RANGE_REGEX,SERVICE_LATITUDE_REGEX,SERVICE_LONGITUDE_REGEX, SERV
 
 
   
-const CRUDService = () => {
+const CRUDAskedService = () => {
 
 
 
@@ -46,24 +46,12 @@ const CRUDService = () => {
 
 
 
-    const service = {
-        partnerId: '',
-        categoryId: '',
-        name: '',
-        description: '',
-        price: '',
-        availability: '',
-        ratings: [],
-        position: {
-            coordinates: [0,0]
-        },
-        range: 0
-    }
+
 
     const serviceStructure = [
         {
-            name: 'partnerId',
-            label: 'Partner ID',
+            name: 'userId',
+            label: 'User ID',
             type: 'select',
             options: partners.map(partner => {return {name: partner.username, value: partner._id}}),
         
@@ -96,18 +84,6 @@ const CRUDService = () => {
             errorMessage: 'Price must be between 1 and 10 digits long'
         },
         {
-            name: 'availability',
-            label: 'Availability',
-            type: 'checkbox',
-        },
-        {
-            name: 'range',
-            label: 'Range',
-            type: 'slider',
-            regex: SERVICE_RANGE_REGEX,
-            errorMessage: 'Range must be between 1 and 5000 digits long'
-        },
-        {
             name: 'position.coordinates.0',
             label: 'Latitude',
             type: 'number',
@@ -121,6 +97,22 @@ const CRUDService = () => {
             regex: SERVICE_LONGITUDE_REGEX,
             errorMessage: 'Longitude must be between -180 and 180'
 
+        },
+        {
+            name: 'date',
+            label: 'Date',
+            type: 'date',
+
+        },
+        {
+            name: 'status',
+            label: 'Status',
+            type: 'select',
+            options: [
+                {name: 'pending', value: 'pending'},
+                {name: 'accepted', value: 'accepted'},
+                {name: 'rejected', value: 'rejected'},
+            ],
         }
     ]
 
@@ -128,10 +120,10 @@ const CRUDService = () => {
 
     return (
         <>
-            <CRUDTable  columns={columns}  modelStructure={serviceStructure} modelClass={service} nameOfClass={'services'}/>
+            <CRUDTable  columns={columns}  modelStructure={serviceStructure} nameOfClass={'askedServices'}/>
         </>
         );
 
 }
 
-export default CRUDService;
+export default CRUDAskedService;

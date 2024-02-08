@@ -23,6 +23,7 @@ const ServiceItem = ({className, service, setHovered, setSelected, setSelectedPa
 
 
   useEffect(() => {
+    setCategory(service?.categoryDetails?.[0]);
     if (isAsked) {
         setIsSameUser(auth?.user?._id === service?.userId);
     }

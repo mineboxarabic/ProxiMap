@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Box, Button, TextField, Autocomplete } from '@mui/material';
 import Card from '@mui/material/Card';
+import useResource from '../../Hooks/useResource';
+import useAxiosPrivate from '../../Hooks/useAxiosPrivate';
+import Checkbox from '@mui/material/Checkbox';
+import Typography from '@mui/material/Typography';
+import Slider from '@mui/material/Slider';
 function getValue(obj, path) {
   //return path.split('.').reduce((acc, part) => acc && acc[part], obj);
   const keys = path.split('.');
@@ -25,17 +30,27 @@ function setValue(obj, path, value) {
 
   current[keys[keys.length - 1]] = value;
 }
+
+function convertDateToISO(date) {
+  if(!date) return new Date().toISOString().split('T')[0];
+  return new Date(date).toISOString().split('T')[0];
+}
+
 const DynamicFormModal = ({ open, handleClose, handleSubmit, initialData, fields, isEdit }) => {
   const [formData, setFormData] = useState({});
   const [fieldErrors, setFieldErrors] = useState({}); // Track validation states and messages
+  const axiosPrivate = useAxiosPrivate();
+
+
 
   useEffect(() => {
-    if (isEdit) {
 
+
+    if (isEdit) {
       setFormData(initialData);
     } else {
       
-      const defaultFormData = fields.reduce((acc, field) => {
+      const defaultFormData = fields.reduce(async (acc, field) => {
         acc[field.name] = field.type === 'select' ? field.options[0] : '';
         return acc;
       }, {});
@@ -46,11 +61,11 @@ const DynamicFormModal = ({ open, handleClose, handleSubmit, initialData, fields
   const handleChange = (name, value, regex, errorMessage) => {
  //   setFormData((prev) => ({ ...prev, [name]: value }));
 
- setFormData((prev) => {
-  const newFormData = { ...prev, [name]: value };
-  setValue(newFormData, name, value);
-  return newFormData;
-});
+  setFormData((prev) => {
+    const newFormData = { ...prev };
+    setValue(newFormData, name, value);
+    return newFormData;
+  });
 
 
     const isValid = regex ? new RegExp(regex).test(value) : true;
@@ -58,27 +73,26 @@ const DynamicFormModal = ({ open, handleClose, handleSubmit, initialData, fields
   };
 
   const renderField = ({ name, label, type, options, regex, errorMessage }) => {
-    console.log(formData);
+
     const error = fieldErrors[name];
     const commonProps = {
       key: name,
       label,
       fullWidth: true,
-      value: getValue(formData, name) ?? '', // Fallback to empty string if undefined
+      value: type == 'date' ? convertDateToISO(getValue(formData, name)) ?? '' : getValue(formData, name) ?? '',
       error: !!error, // Boolean: true if there's an error
       helperText: error, // Display custom error message
       onChange: (e) => handleChange(name, e.target.value, regex, errorMessage),
-      //turn of auto fill
-      autoComplete: 'off',
+
 
     };
     switch (type) {
       case 'text':
       case 'email':
       case 'password':
-        console.log(formData);
+
         return <TextField {...commonProps} type={type} 
-        autoComplete="nope-no-autofill"
+        autoComplete="off"
       
         />;
       case 'select':
@@ -86,10 +100,15 @@ const DynamicFormModal = ({ open, handleClose, handleSubmit, initialData, fields
           <Autocomplete
             {...commonProps}
             options={options}
-            getOptionLabel={(option) => option}
-            value={formData[name] ?? options[0]} // Default to first option if no value
+          //{name: "", value: ""}
+            getOptionLabel={(option) => option.name}
+
+            value={options.find((o) => o.value === getValue(formData, name)) ?? options[0]}
+            getOptionKey={(option) => option.value}
+            
             onChange={(event, newValue) => {
-              handleChange(name, newValue, regex, errorMessage);
+              console.log('new value', newValue);
+              handleChange(name, newValue.value, regex, errorMessage);
             }}
             renderInput={(params) => (
               <TextField
@@ -100,6 +119,68 @@ const DynamicFormModal = ({ open, handleClose, handleSubmit, initialData, fields
             )}
           />
         );
+
+
+      case 'textarea':
+        return <TextField {...commonProps} multiline minRows={4} />;
+      case 'number':
+        return <TextField {...commonProps} type="number" />;
+      case 'checkbox':
+        return (
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Typography
+              sx={{
+                color: 'light.main',
+                fontSize: '0.875rem',
+                fontWeight: 500,
+              }}
+            >{label}</Typography>
+            <Checkbox
+            color='primary'
+              {...commonProps}
+              checked={getValue(formData, name)}
+              onChange={(e) => handleChange(name, e.target.checked)}
+            />
+          </Box>
+        );
+      case 'slider':
+          return(
+            //Use Slider component from Material UI
+            <Box sx={{width: '100%'}}>
+              <Typography
+              sx={{
+                color: 'light.main',
+                fontSize: '0.875rem',
+                fontWeight: 500,
+              }}
+              id="discrete-slider" gutterBottom>
+                {label}
+              </Typography>
+              <Slider
+                {...commonProps}
+                valueLabelDisplay="auto"
+                step={1}
+               
+                min={1}
+                max={5000}
+              />
+      
+
+            </Box>
+          )
+
+      case 'date':
+
+            return(
+              <TextField
+             
+         
+              {...commonProps}
+              type="date"
+              //InputLabelProps={{shrink: true}}
+              />
+            )
+
       default:
         return null;
     }

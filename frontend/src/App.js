@@ -24,6 +24,7 @@ import MapEdit from './Pages/Partner/MapEdit';
 import ServiceEditMap from './Pages/ServiceEditMap';
 import AskedServiceEditMap from './Pages/AskedServicesEditMap';
 import FilteredMap from './Pages/FilteredMap/FilteredMap';
+import CRUDAskedService from './Pages/Admin/CRUD/CRUDAskedService';
 
 
 
@@ -60,6 +61,8 @@ function App() {
             <Route path='/users' element={<CRUDUser />} />
             <Route path='/services' element={<CRUDService />} />
             <Route path='/categorys' element={<CRUDCategory />} />
+            <Route path='/askedServices' element={<CRUDAskedService />} />
+
 
 
           </Route>
