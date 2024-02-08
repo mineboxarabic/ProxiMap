@@ -35,15 +35,11 @@ function ProductValues() {
                 sx={{ height: 55 }}
               />
               <Typography variant="h6" sx={{ my: 5 }}>
-                The best luxury hotels
+                Discover Local Gems
               </Typography>
               <Typography variant="h5">
                 {
-                  'From the latest trendy boutique hotel to the iconic palace with XXL pool'
-                }
-
-                {
-                  ', go for a mini-vacation just a few subway stops away from your home.'
+                  'Dive into the heart of your community with our curated selection of local shops, cozy cafes, and unique pop-up events. Find your new favorite spot just around the corner!'
                 }
               </Typography>
             </Box>
@@ -57,14 +53,12 @@ function ProductValues() {
                 sx={{ height: 55 }}
               />
               <Typography variant="h6" sx={{ my: 5 }}>
-                New experiences
+              Community Events
               </Typography>
               <Typography variant="h5">
                 {
-                  'Privatize a pool, take a Japanese bath or wake up in 900m2 of garden… '
+                  'From neighborhood block parties to local workshops, stay updated with the latest happenings. Get involved and connect with your neighbors!'
                 }
-
-                {'your Sundays will not be alike.'}
               </Typography>
             </Box>
           </Grid>
@@ -77,11 +71,11 @@ function ProductValues() {
                 sx={{ height: 55 }}
               />
               <Typography variant="h6" sx={{ my: 5 }}>
-                Exclusive rates
-              </Typography>
+              Local Services
+
+</Typography>
               <Typography variant="h5">
-                {'By registering, you will access specially negotiated rates '}
-                {'that you will not find anywhere else.'}
+                {'Need a hand? Our platform connects you with trusted local service providers—from plumbers to tutors. Support local businesses and get the job done!'}
               </Typography>
             </Box>
           </Grid>
