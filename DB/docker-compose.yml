@@ -1,18 +1,18 @@
 version: '3.8'
 
 services:
-  mongodb:
+  mongodbs:
     image: mongo:latest
-    container_name: proximap_mongodb
+    container_name: proximap_mongodbs
 
     ports:
       - "27017:27017"
     volumes:
-      - mongodb_data:/data/db
+      - mongodb_datas:/data/db
   data-seeder:
     build: .
     depends_on:
-      - mongodb
+      - mongodbs
 
 volumes:
-  mongodb_data:
+  mongodb_datas:
