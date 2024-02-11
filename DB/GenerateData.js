@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 import { faker } from '@faker-js/faker';
 import { ObjectId } from 'mongodb';
-const url = "mongodb://localhost:27017"; // Replace with your MongoDB URL
+const url = "mongodb://mongodb:27017"; // Replace with your MongoDB URL
 const dbName = "ProxiMap";
 const client = new MongoClient(url);
 const USERS_DATA = [

@@ -12,8 +12,8 @@ import useAuth from "../Hooks/useAuth";
 const ServiceItem = ({className, service, setHovered, setSelected, setSelectedPartner, isAsked }) => {
 
   
-
-  const [partner, setPartner] = useState(service?.partnerDetails?.[0] || service?.userDetails?.[0]);
+  
+  const [partner, setPartner] = useState(service?.partnerDetails?.[0] || service?.usersDetails?.[0]);
  // const [user, setUser] = useState(service?.userDetails?.[0]);
 
   const [category, setCategory] = useState(service?.categoryDetails?.[0]);
@@ -23,6 +23,7 @@ const ServiceItem = ({className, service, setHovered, setSelected, setSelectedPa
 
 
   useEffect(() => {
+    console.log("service", service);
     setCategory(service?.categoryDetails?.[0]);
     if (isAsked) {
         setIsSameUser(auth?.user?._id === service?.userId);

@@ -15,10 +15,10 @@ const useRefreshToken = () => {
         });
 
 
-        
+        console.log(auth !== null)
         if(auth !== null){
             setAuth(prev => {
-
+                console.log('user', response.data.user)
                 return {
                     ...prev,
                     user : response.data.user,

@@ -7,6 +7,7 @@ const useResource = (baseUrl) => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const axiosPrivate = useAxiosPrivate();
+    const [url, setURL] = useState(baseUrl);
 
     const handleResponse = (response, message, method, resource) => {
         if(method === 'post' || method === 'put') {
@@ -60,18 +61,20 @@ const useResource = (baseUrl) => {
     };
 
 
-    const getAll = () => makeRequest('get', baseUrl);
-    const getAllByUrl = (url) => makeRequest('get', url);
-    const create = (resource) => makeRequest('post', baseUrl, resource);
-    const update = (resource) => makeRequest('put', `${baseUrl}/${resource._id}`, resource);
-    const remove = (id) => makeRequest('delete', `${baseUrl}/${id}`);
-    const getOne = (id) => makeRequest('get', `${baseUrl}/${id}`);
-    const updateWithForm = (id, data) => makeRequest('put', `${baseUrl}/${id}`, data);
-    const updateMultiple = (data) => makeRequest('put', baseUrl, data);
-    const getAllWithBody = (data) => makeRequest('get', baseUrl, data);
+    const getAll = () => makeRequest('get', url);
+   // const getAllByUrl = (url) => makeRequest('get', url);
+    const create = (resource) => makeRequest('post', url, resource);
+    const update = (resource) => makeRequest('put', `${url}/${resource._id}`, resource);
+    const remove = (id) => makeRequest('delete', `${url}/${id}`);
+    const getOne = (id) => makeRequest('get', `${url}/${id}`);
+    const updateWithForm = (id, data) => makeRequest('put', `${url}/${id}`, data);
+    const updateMultiple = (data) => makeRequest('put', url, data);
+    const getAllWithBody = (data) => makeRequest('get', url, data);
 
 
-    return {getAllByUrl,getAllWithBody,updateMultiple, resources,setResources, loading, error, getAll, create, update, remove, getOne ,success ,setSuccess, setError, updateWithForm}
+    return {
+        setURL, url,
+        getAllWithBody,updateMultiple, resources,setResources, loading, error, getAll, create, update, remove, getOne ,success ,setSuccess, setError, updateWithForm}
 
 
 }

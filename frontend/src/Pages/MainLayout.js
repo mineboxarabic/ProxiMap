@@ -10,18 +10,14 @@ const MainLayout = () => {
     return (
         <Box  
             
-            sx={{
-                backgroundColor: 'dark.main',
-                height: '100vh',
-                width: '100%',
 
-            }}
             >
             <Header />
             <main
 
             className='App'>
-            <Outlet />
+            <Outlet 
+            />
 
             </main>
             

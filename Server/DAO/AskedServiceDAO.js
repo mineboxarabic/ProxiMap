@@ -46,13 +46,20 @@ class AskedServiceDAO {
     }
 
 
-    async findAskedServicesinMapView(swLat, swLng, neLat, neLng) {
+    async findAskedServicesinMapView(swLat, swLng, neLat, neLng, query) {
+        const swLat_p = parseFloat(swLat);
+        const swLng_p = parseFloat(swLng);
+        const neLat_p = parseFloat(neLat);
+        const neLng_p = parseFloat(neLng);
+
+        const { categoryId, priceRange, availability, minimumRating, serviceType, serviceStatus } = query;
+
+        console.log(parseFloat(priceRange.split(',')[0]), parseFloat(priceRange.split(',')[1]));
+
+
+
         try {
-            const swLat_p = parseFloat(swLat);
-            const swLng_p = parseFloat(swLng);
-            const neLat_p = parseFloat(neLat);
-            const neLng_p = parseFloat(neLng);
-           // console.log(swLat_p, swLng_p, neLat_p, neLng_p);
+
             const aggregationPipeline = [
                 {
                     $match: {
@@ -63,7 +70,30 @@ class AskedServiceDAO {
                                     [neLng_p, neLat_p]
                                 ]
                             }
-                        }
+                        },
+                   
+                        //Find by category
+                        ...(categoryId != '' && { categoryId: new ObjectId(categoryId) }),
+                        //Find by price range
+                        ...(priceRange && priceRange.includes(',') && {
+                            price: {
+                                $gte: parseFloat(priceRange.split(',')[0]),
+                                $lte: parseFloat(priceRange.split(',')[1])
+                            }
+                        }),
+                        //Find by availability
+                        //...(availability != '' && { availability: availability === 'true' }),
+                        //Find by status
+                        ...(serviceStatus != '' && { status: serviceStatus }),
+                        //Find by Service Type
+                        ...(serviceType != '' && {
+                            $or: [
+                                { name: { $regex: serviceType, $options: 'i' } },
+                                { description: { $regex: serviceType, $options: 'i' } }
+                            ]
+                        })
+
+
                     }
                 },
                 {
@@ -71,7 +101,7 @@ class AskedServiceDAO {
                         from: "users",        // Replace with your users collection name
                         localField: "userId",
                         foreignField: "_id",
-                        as: "partnerDetails"
+                        as: "usersDetails"
                     }
                 
                 },
@@ -86,13 +116,16 @@ class AskedServiceDAO {
             ];
 
     
-            const askedServices = await AskedService.aggregate(aggregationPipeline);
-            return askedServices;
+            const services = await AskedService.aggregate(aggregationPipeline);
+            console.log('ser',services.length);
+            return services;
         } catch (error) {
-            console.error("Error in findAskedServicesinMapView:", error);
-            return error;
+            console.log(swLat_p, swLng_p, neLat_p, neLng_p);
+            console.error("Error in findServicesinMapView:", error);
+            return [];
         }
     }
+
 
     async findAskedServicesinMapViewOfUser(swLat, swLng, neLat, neLng, id) {
         try {

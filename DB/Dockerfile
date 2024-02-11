@@ -1,13 +1,14 @@
-# Use the official MongoDB image
-FROM mongo:latest
+FROM node
+WORKDIR /app
 
-# Optional: Copy any custom scripts or configurations
-# COPY init-mongo.js /docker-entrypoint-initdb.d/
+COPY GenerateData.js ./
 
-#COPY ./init-mongo.js /docker-entrypoint-initdb.d/
-#      - ./USERS_DATA.js:/docker-entrypoint-initdb.d/USERS_DATA.js
- #     - ./CATEGORIES_DATA.js:/docker-entrypoint-initdb.d/CATEGORIES_DATA.js
- #     - ./SERVICES_DATA.js:/docker-entrypoint-initdb.d/SERVICES_DATA.js
-
-# Expose the default MongoDB port
-EXPOSE 27017
+RUN npm init -y
+RUN apt-get update && apt-get install -y jq
+RUN jq '. + {"type":"module"}' package.json > temp.json && mv temp.json package.json
+RUN npm install --save-dev @faker-js/faker
+RUN npm install mongodb
+RUN npm install mongoose
+RUN npm install -g nodemon
+RUN npm install express
+CMD ["node", "GenerateData.js"]

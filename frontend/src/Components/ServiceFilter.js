@@ -80,19 +80,18 @@ function ServiceFilter({ onFilterChange }) {
   return (
     <Box sx={{ 
       
-     padding: '20px' 
-      ,display: 'flex'
-      ,flexDirection: 'row'
-      ,justifyContent: 'space-between'
-      ,alignItems: 'center'
-      ,gap: '20px'
-      ,backgroundColor: 'light.main'
-      ,borderRadius: '10px'
+     padding: '20px' ,
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      gap: '20px',
+      backgroundColor: 'dark.main',
+      borderRadius: '10px 10px 0px 0px'
       }}>
       <FormControl fullWidth margin="normal">
         <InputLabel id="category-select-label">Category</InputLabel>
         <Select
-        
           labelId="category-select-label"
           id="category-select"
           value={categoryId}
@@ -114,6 +113,7 @@ function ServiceFilter({ onFilterChange }) {
         <Autocomplete 
         options={categories}
         getOptionLabel={(option) => option.name}
+       
 
         value={categories.find((o) => o.id === categoryId) ?? categories[0]}
         onChange={(event, newValue) => {
@@ -125,12 +125,12 @@ function ServiceFilter({ onFilterChange }) {
           
           }
         }}
-        renderInput={(params) => <TextField {...params} label="Category" variant="outlined" />}
+        renderInput={(params) => <TextField {...params} label="Category" variant="filled" />}
       />
 
       </FormControl>
 
-      <Typography id="price-range-slider" gutterBottom>
+      <Typography color={"light.main"} id="price-range-slider" gutterBottom>
         Price Range €
       </Typography>
       <Slider
@@ -140,27 +140,55 @@ function ServiceFilter({ onFilterChange }) {
         min={0}
         max={1000} // Assuming 100 is the maximum price possible
         margin="normal"
+        sx={{
+          width: '200px',
+        }}
       />
 
       <FormGroup>
-        <FormControlLabel control={<Checkbox checked={availability} onChange={handleAvailabilityChange} />} label="Available Only" />
+        <FormControlLabel control={<Checkbox sx={{
+          color: 'light.main'
+        
+        }}
+          checked={availability} onChange={handleAvailabilityChange} />}
+          sx={{
+          color: 'light.main'
+        
+        }}
+          label="Available Only" />
       </FormGroup>
 
-      <Typography component="legend">Minimum Rating</Typography>
+      <Typography sx={{
+          color: 'light.main'
+        
+        }} variant='filled' component="legend">Minimum Rating</Typography>
       <Rating
+      sx={{
+ 
+        color: 'primary.main'
+,
+        //make the border color of the rating stars white
+        '& .MuiRating-iconEmpty': {
+          borderColor: 'white',
+          color: 'light.main',
+
+        }
+
+      }}
         name="simple-controlled"
         value={minimumRating}
-        onChange={handleRatingChange}
+        disabled
+      //  onChange={handleRatingChange}
         margin="normal"
       />
 
       <TextField
         label="Service Type"
-        variant="outlined"
         value={serviceType}
         onChange={handleServiceTypeChange}
         fullWidth
         margin="normal"
+        variant="filled"
       />
 
       <FormControl fullWidth margin="normal">
@@ -171,6 +199,10 @@ function ServiceFilter({ onFilterChange }) {
           value={serviceStatus}
           label="Service Status"
           onChange={handleServiceStatusChange}
+          sx={{
+            color: 'dark.main',
+            backgroundColor: 'light.main'
+          }}
         >
           {statusOptions.map((status) => (
             <MenuItem key={status} value={status}>{status}</MenuItem>

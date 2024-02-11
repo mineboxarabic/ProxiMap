@@ -11,9 +11,9 @@ COPY . .
 EXPOSE 3001
 #install dependencies
 RUN npm install
-RUN npm rebuild bcrypt --build-from-source
+RUN npm rebuild bcrypt --build-from-source 
 #start app
-CMD ["npm", "start"]
+CMD ["npm", "run","dev"]
 
 
 

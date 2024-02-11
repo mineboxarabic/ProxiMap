@@ -11,13 +11,22 @@ services:
     ports:
       - 3001:3001
     environment:
-      MONGODB_URI: mongodb://database:27017
+      MONGODB_URI: mongodb://mongodb:27017
 
-  database:  
-    image: mongo
+  mongodb:
+    image: mongo:latest
+    container_name: proximap_mongodb
+
     ports:
-      - 27017:27017
+      - "27017:27017"
     volumes:
-      - ProxiMap:/data/db
+      - mongodb_data:/data/db
+  data-seeder:
+    build: ./DB
+    depends_on:
+      - mongodb
+
+
 volumes:
   ProxiMap:
+  mongodb_data:

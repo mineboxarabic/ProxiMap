@@ -24,6 +24,8 @@ const PersistLogin = () => {
         };
 
         // Check persist flag before deciding to refresh or not
+        console.log('persist', persist);
+        console.log('auth', auth);
         if (persist && !auth?.accessToken) {
             checkAuth();
         } else {

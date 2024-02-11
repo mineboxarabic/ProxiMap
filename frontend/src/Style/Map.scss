@@ -6,7 +6,8 @@ $height-map-mobile: 85vh;
 }
 
 #mapid {
-  @include full-size;
+  //@include full-size;
+  height: 80vh;
 }
 
 .main-container {

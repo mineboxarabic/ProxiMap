@@ -1,5 +1,6 @@
 import Service from "../Models/Service.js";
 import mongoose from "mongoose";
+import { ObjectId } from "mongodb";
 
 class ServiceDAO {
     async create(service) {
@@ -46,14 +47,20 @@ class ServiceDAO {
     }
 
 
-    async findServicesinMapView(swLat, swLng, neLat, neLng) {
+    async findServicesinMapView(swLat, swLng, neLat, neLng, query) {
         const swLat_p = parseFloat(swLat);
         const swLng_p = parseFloat(swLng);
         const neLat_p = parseFloat(neLat);
         const neLng_p = parseFloat(neLng);
+
+        const { categoryId, priceRange, availability, minimumRating, serviceType, serviceStatus } = query;
+
+       // console.log(parseFloat(priceRange.split(',')[0]), parseFloat(priceRange.split(',')[1]));
+
+
+
         try {
 
-           // console.log(swLat_p, swLng_p, neLat_p, neLng_p);
             const aggregationPipeline = [
                 {
                     $match: {
@@ -64,7 +71,30 @@ class ServiceDAO {
                                     [neLng_p, neLat_p]
                                 ]
                             }
-                        }
+                        },
+                   
+                        //Find by category
+                        ...(categoryId != '' && { categoryId: new ObjectId(categoryId) }),
+                        //Find by price range
+                        ...(priceRange && priceRange.includes(',') && {
+                            price: {
+                                $gte: parseFloat(priceRange.split(',')[0]),
+                                $lte: parseFloat(priceRange.split(',')[1])
+                            }
+                        }),
+                        //Find by availability
+                        ...(availability != '' && { availability: availability === 'true' }),
+                        //Find by status
+                        ...(serviceStatus != '' && { status: serviceStatus }),
+                        //Find by Service Type
+                        ...(serviceType != '' && {
+                            $or: [
+                                { name: { $regex: serviceType, $options: 'i' } },
+                                { description: { $regex: serviceType, $options: 'i' } }
+                            ]
+                        })
+
+
                     }
                 },
                 {
@@ -88,6 +118,7 @@ class ServiceDAO {
 
     
             const services = await Service.aggregate(aggregationPipeline);
+           // console.log('size:', services.length);
             return services;
         } catch (error) {
             console.log(swLat_p, swLng_p, neLat_p, neLng_p);
@@ -151,7 +182,7 @@ class ServiceDAO {
 
             // Execute the aggregation pipeline
             const services = await Service.aggregate(aggregationPipeline);
-
+            console.log('size:', services.length);
             return services;
         } catch (error) {
             console.error("Error in findServicesinMapViewOfUser:", error);

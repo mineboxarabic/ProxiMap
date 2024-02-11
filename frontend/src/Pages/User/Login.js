@@ -23,7 +23,6 @@ const LogIn = () =>
     const from = location?.state?.from?.pathname || '/home';
 
 
-    console.log(`from: ${from}`);
 
     const [email, setEmail] = useLocalStorage('email','');
     const [password, setPassword] = useState('');
@@ -48,7 +47,7 @@ const LogIn = () =>
 
     useEffect(() => {
         //if the user is already logged in go to back
-        if(auth?.accessToken){
+        if(auth?.accessToken && auth?.user){
             navigate(from, { replace: true });
         }
 
@@ -69,7 +68,6 @@ const LogIn = () =>
                     withCredentials: true,
                 }
             );
-            console.log(response.data);
             const accessToken = response?.data?.accessToken;
             const user = response?.data?.user;
             
@@ -85,7 +83,6 @@ const LogIn = () =>
                 setError('Something went wrong');
                 return;
             }
-            console.log(err.response.data.message);
             setError(err.response.data.message);
         }
     }

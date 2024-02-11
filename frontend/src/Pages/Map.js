@@ -27,9 +27,20 @@ import useGeneral from "../Hooks/useGeneral";
 import ServiceFilter from "../Components/ServiceFilter";
 
 const Map = () => {
-  const { services, isLoadingServices, updateBounds:updateServiceBounds , errorServices} = useInMapView(false);
-  const { services:askedServices, isLoadingServices:isLoadingAskedServices, updateBounds:updateAskedBounds , errorServices:errorAskedServices} = useInMapView(true);
-  const { oVServices,setOVServices, oVAskedServices, setOVAskedServices } = useGeneral();
+  const {
+    services,
+    isLoadingServices,
+    updateBounds: updateServiceBounds,
+    errorServices,
+  } = useInMapView(false);
+  const {
+    services: askedServices,
+    isLoadingServices: isLoadingAskedServices,
+    updateBounds: updateAskedBounds,
+    errorServices: errorAskedServices,
+  } = useInMapView(true);
+  const { oVServices, setOVServices, oVAskedServices, setOVAskedServices } =
+    useGeneral();
   const [isDrawerOpened, setIsDrawerOpened] = useState(false);
 
   const [position, setPosition] = useState(null);
@@ -48,7 +59,7 @@ const Map = () => {
   const updateBounds = (bounds) => {
     updateServiceBounds(bounds);
     updateAskedBounds(bounds);
-  }
+  };
 
   const currentUser = useCurrentUser();
   //When we search we execute this function
@@ -58,12 +69,9 @@ const Map = () => {
     setPosition({ lat, lng });
   };
 
-  useEffect(() => { 
+  useEffect(() => {
     console.log("services", services.length);
-
   }, [services]);
-
-
 
   useEffect(() => {
     if (selected) {
@@ -73,59 +81,45 @@ const Map = () => {
     }
   }, [selected]);
 
-  const onFilterChange = (filter) => {
-     /* const {categoryId, priceRange, minimumRating, serviceType, serviceStatus} = filter;
-    let filteredServices = services.filter(service => {
-      let isValid = true;
-      if(categoryId){
-        isValid = isValid && service.categoryId == categoryId;
-      }
-      return isValid;
+  const onFilterChange = (filter) => {};
 
-    });
-    console.log(filteredServices);
-    */
-
-
-
-  }
-  useEffect(() => {
-    console.log(oVServices);
-  } , [oVServices]);
   return (
-      <Box 
-        sx={{
-          backgroundColor: 'dark.main',
+    <Box
+      sx={{
+        backgroundColor: "dark.main",
+      }}
+    >
+      <ServiceFilter onFilterChange={onFilterChange} />
 
-        }}
-      >
-
-      <ServiceDetailsDrawer partner={selectedPartner} service={selected} open={isDrawerOpened} onClose={onCloseDrawer}/>
+      <ServiceDetailsDrawer
+        partner={selectedPartner}
+        service={selected}
+        open={isDrawerOpened}
+        onClose={onCloseDrawer}
+      />
       <Box
-      
         sx={{
           display: "flex",
-          flexDirection: { xs: "column", md: "row"},
-          height: { xs: "100vh", md: "90vh"},
-          padding: '0',
-          width: '96%',
-          margin: 'auto',
-          justifyContent: 'center',
-         // border: '10px solid white',
-          borderRadius: '10px',
-          backgroundColor: 'dark.main',
+          flexDirection: { xs: "column", md: "row" },
+          padding: "0",
+          width: "96%",
+          margin: "auto",
+          justifyContent: "center",
+          // border: '10px solid white',
+          borderRadius: "10px",
+          backgroundColor: "dark.main",
+        height: { xs: "100vh", md: "90vh" },
+
         }}
       >
-
-
-        <Box sx={{
-          width: { xs: '100%', md: '70%'},
-          height: { xs: '100%', md: '100%'},
-          
-        }}>
+        <Box
+          sx={{
+            width: { xs: "100%", md: "70%" },
+            height: { xs: "100%", md: "100%" },
+          }}
+        >
           {/*TODO:add in case of error */}
 
-        <ServiceFilter onFilterChange={onFilterChange}/>
           <MapContainer
             center={
               position
@@ -133,6 +127,8 @@ const Map = () => {
                 : [43.67248611471893, 4.632794385153891]
             }
             zoom={12}
+            minZoom={6}
+            maxZoom={18}
             scrollWheelZoom={true}
             id="mapid"
           >
@@ -140,65 +136,78 @@ const Map = () => {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution="&amp;copy OpenStreetMap contributors"
             />
-            <Box 
-            sx={{
-              position: 'absolute',
-              top: '5rem',
-            }}
+            <Box
+              sx={{
+                position: "absolute",
+                top: "5rem",
+              }}
             >
               <MapSearchBar onSearchSubmit={onSearchSubmit} />
             </Box>
 
+            {errorServices && (
+              <Box className={"error-container"}>
+                <Alert
+                  sx={{
+                    width: "100%",
+                    zIndex: 1000,
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    margin: "auto",
+                    height: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    fontSize: "2rem",
+                  }}
+                  severity="error"
+                >
+                  {errorServices}
+                </Alert>
+              </Box>
+            )}
 
-            {
-            errorServices && (
-            <Box className={"error-container"}>
-              <Alert 
-                 sx={{ width: '100%' , zIndex: 1000, position: 'absolute', top: 0, left: 0, right: 0, margin: 'auto', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '2rem'}}
-              severity="error">{errorServices}</Alert>
-            </Box>
-            )
-          
-            }
+            {errorAskedServices && (
+              <Box className={"error-container"}>
+                <Alert
+                  sx={{
+                    width: "100%",
+                    zIndex: 1000,
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    margin: "auto",
+                    height: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    fontSize: "2rem",
+                  }}
+                  severity="error"
+                >
+                  {errorAskedServices}
+                </Alert>
+              </Box>
+            )}
 
-            {
-            errorAskedServices && (
-            <Box className={"error-container"}>
-              <Alert 
-                 sx={{ width: '100%' , zIndex: 1000, position: 'absolute', top: 0, left: 0, right: 0, margin: 'auto', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '2rem'}}
-              severity="error">{errorAskedServices}</Alert>
-            </Box>
-            )
-          
-            }
-
-
-
-            {
-
-            oVServices?.length > 0 ? (
+            {oVServices?.length > 0 ? (
               oVServices.map((service, index) => {
-                return (
-                  <MarkerService service={service} isAsked={false}/>
-                );
+                return <MarkerService service={service} isAsked={false} />;
               })
-
-
             ) : (
               <h1>Loading...</h1>
             )}
 
-          {
-
-          oVAskedServices?.length > 0 ? (
-            oVAskedServices.map((service, index) => {
-              return (
-                <MarkerService service={service}  isAsked={true}/>
-              );
-            })
-          ) : (
-            <h1>Loading...</h1>
-          )}
+            {oVAskedServices?.length > 0 ? (
+              oVAskedServices.map((service, index) => {
+                return <MarkerService service={service} isAsked={true} />;
+              })
+            ) : (
+              <h1>Loading...</h1>
+            )}
             <MapEvents
               position={position}
               setBounds={updateBounds}
@@ -207,30 +216,21 @@ const Map = () => {
           </MapContainer>
         </Box>
 
-
-
-        <Box 
+        <Box
           sx={{
-            width: '30%',
-            overflow: 'auto',
-         
-                
-       
+            width: "30%",
+            overflow: "auto",
           }}
         >
           <ServiceList
-            
             //height={height}
             setSelectedPartner={setSelectedPartner}
             onCloseDrawer={onCloseDrawer}
             setSelected={setSelected}
             setHovered={setHovered}
-
           />
         </Box>
       </Box>
-
-
     </Box>
   );
 };

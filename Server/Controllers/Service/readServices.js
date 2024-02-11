@@ -13,13 +13,17 @@ const readServices = async (req, res) => {
 export const readServicesinMapView = async (req, res) => {
     
 
-
+    ///?categoryId=${filters.categoryId}&priceRange=${filters.priceRange}&availability=${filters.availability}&minimumRating=${filters.minimumRating}&serviceType=${filters.serviceType}&serviceStatus=${filters.serviceStatus}`);
 
 
     const serviceDAO = new ServiceDAO();
    
    
     const { swLat, swLng, neLat, neLng } = req.params;
+
+
+    const query = req.query;
+
     if(swLat == undefined || swLng == undefined || neLat == undefined || neLng == undefined){
         res.status(400).json({
             success: false,
@@ -27,7 +31,7 @@ export const readServicesinMapView = async (req, res) => {
         });
         return;
     }
-    const services = await serviceDAO.findServicesinMapView(swLat, swLng, neLat, neLng);
+    const services = await serviceDAO.findServicesinMapView(swLat, swLng, neLat, neLng, query);
 
     res.status(200).json(services);
 

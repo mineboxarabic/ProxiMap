@@ -32,6 +32,20 @@ ValidateRes,
 (req, res, next) => autherizeUserRole(req, res, next, serviceRoutes.read.allowedRoles),
 readService);
 
+      /*
+       categoryId,
+        priceRange,
+        availability,
+        minimumRating,
+        serviceType,
+        serviceStatus,
+      */
+
+
+
+
+
+
 
 
 serviceRouter.get('/services/in-map-view/:swLat/:swLng/:neLat/:neLng', readServicesinMapView);

@@ -2,25 +2,36 @@ import { useState, useEffect } from "react";
 import useResource from "../useResource";
 import useLocalStorage from "../useLocalStorage";
 import useGeneral from "../useGeneral";
+import useAxiosPrivate from "../useAxiosPrivate";
 
 const useInMapView = (isAsked) => {
     const [bounds, setBounds] = useState(null);
     const {oVServices, setOVServices , oVAskedServices, setOVAskedServices, filters} = useGeneral();
+    const axiosPrivate = useAxiosPrivate();
 
-    const [url, setURL] = useState(null);
-  
     const getURL = () => {
       if(!isAsked) return `/services/in-map-view/${bounds?._southWest?.lat || 0}/${bounds?._southWest?.lng || 0}/${bounds?._northEast?.lat || 0}/${bounds?._northEast?.lng || 0}` 
       return `/askedServices/in-map-view/${bounds?._southWest?.lat || 0}/${bounds?._southWest?.lng || 0}/${bounds?._northEast?.lat || 0}/${bounds?._northEast?.lng || 0}`;
-
     }
+
+    const [url, setURL] = useState(getURL());
+  
 
     const {
       resources: services,
       getAll: getAllServices,
       error: errorServices,
       loading: isLoadingServices,
-    } = useResource(getURL());
+      setURL: setURLServices
+    } = useResource(url);
+
+    useEffect(() => {
+  
+       // const url = getURL() + `?categoryId=${filters.categoryId}&priceRange=${filters.priceRange}&availability=${filters.availability}&minimumRating=${filters.minimumRating}&serviceType=${filters.serviceType}&serviceStatus=${filters.serviceStatus}`;
+       // console.log(url);
+        setURLServices(url);
+
+    }, [url]);
 
   
     const applayFiltersToServices = (services) => {
@@ -35,7 +46,6 @@ const useInMapView = (isAsked) => {
       */
       let filteredServices = services.filter(service => {
         let isValid = true;
-        console.log(service);
         if(filters.categoryId){
           isValid = isValid && service.categoryId == filters.categoryId;
         }
@@ -49,8 +59,10 @@ const useInMapView = (isAsked) => {
         if(filters.minimumRating){
           isValid = isValid && service.rating >= filters.minimumRating;
         }
-        if(filters.serviceType){
-          isValid = isValid && service.serviceType == filters.serviceType;
+        if(filters.serviceType && filters.serviceType.length > 0){
+      
+            isValid = isValid && service.name.toLowerCase().includes(filters.serviceType.toLowerCase()) || service.description.toLowerCase().includes(filters.serviceType.toLowerCase());
+  
         }
         if(filters.serviceStatus){
           isValid = isValid && service.status == filters.serviceStatus;
@@ -62,7 +74,11 @@ const useInMapView = (isAsked) => {
       return filteredServices;
     }
 
+
+
     useEffect(() => {
+      setURL(getURL() + `?categoryId=${filters.categoryId}&priceRange=${filters.priceRange}&availability=${filters.availability}&minimumRating=${filters.minimumRating}&serviceType=${filters.serviceType}&serviceStatus=${filters.serviceStatus}`);
+
       const delayDebounceFn = setTimeout(() => {
         if (bounds != null) {
             if (!isLoadingServices) {
@@ -78,12 +94,14 @@ const useInMapView = (isAsked) => {
       if(!isAsked){
 
         if (services ) {
-          setOVServices(applayFiltersToServices(services));
+          ///setOVServices(applayFiltersToServices(services));
+          setOVServices(services);
       }
       }
       else{
         if (services) {
-          setOVAskedServices(applayFiltersToServices(services));
+          //setOVAskedServices(applayFiltersToServices(services));
+          setOVAskedServices(services);
         }
       }
 
@@ -99,6 +117,21 @@ const useInMapView = (isAsked) => {
     const updateBounds = (bounds) => {
         setBounds(bounds);
     };
+
+    useEffect(() => {
+      //when the filters change, we need to reapply the filters to the services
+      setURL(getURL() + `?categoryId=${filters.categoryId}&priceRange=${filters.priceRange}&availability=${filters.availability}&minimumRating=${filters.minimumRating}&serviceType=${filters.serviceType}&serviceStatus=${filters.serviceStatus}`);
+      if (services) {
+        if(!isAsked){
+          //setOVServices(applayFiltersToServices(services));
+          setOVServices(services);
+        }
+        else{
+          //setOVAskedServices(applayFiltersToServices(services));
+          setOVAskedServices(services);
+        }
+      }
+    }, [filters]);
 
 
     return {services, isLoadingServices, errorServices, updateBounds};

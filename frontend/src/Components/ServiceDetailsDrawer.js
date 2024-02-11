@@ -3,11 +3,12 @@ import { Avatar, Box, Button, Divider, Drawer, Link } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
 import useCurrentUser from "../Hooks/useCurrentUser";
+import UserDetailsModal from "./UserDetailsModal";
 
 const ServiceDetailsDrawer = ({ service, open, onClose }) => {
   //IF the service has an attribute called userId then it's asked
   const isAsked = service?.userId ? true : false;
-  const partner = service?.partnerDetails[0] || service?.userDetails[0];
+  const partner = service?.partnerDetails?.[0] || service?.usersDetails?.[0];
 
   const currentUser = useCurrentUser();
 
@@ -34,6 +35,8 @@ const ServiceDetailsDrawer = ({ service, open, onClose }) => {
    
       }}
     >
+      
+
       {service && (
         <Box  p={2}>
           <Box className="drawer-user-detail-container" sx={{ display: "flex", marginBottom: "1rem" }}>
@@ -57,9 +60,13 @@ const ServiceDetailsDrawer = ({ service, open, onClose }) => {
                     href={`services/edit`}
                     underline="none"
                     color="inherit"
+                    sx={{
+                      display: "none",
+                    }}
                   >
                     @{partner?.username}
                   </Link>
+                  <UserDetailsModal user={partner} />
                 </Typography>
                 </Badge>
    
@@ -90,8 +97,55 @@ const ServiceDetailsDrawer = ({ service, open, onClose }) => {
               </Button>
             </Box>
           </Box>
-          <Divider />
+          <Box >
 
+            {
+              !isAsked &&
+           <Typography sx={{
+            marginTop: "0.1rem",
+            marginBottom: "0.1rem",
+            color: service?.availability ? "success.main" : "error.main",
+          
+          }} variant="h6" gutterBottom>
+            {service?.availability ? "Available" : "Not available"}
+          </Typography>
+            }
+ {
+  isAsked && (
+    //Render date
+    <Typography sx={{
+      marginTop: "0.1rem",
+      marginBottom: "0.1rem",
+      color: "dark.main",
+    }} variant="h6" gutterBottom>
+      {new Date(service?.date).toLocaleDateString()}
+    </Typography>
+  )
+ }
+
+            {
+              service?.status && (
+                <Typography sx={{
+                  marginTop: "0.1rem",
+                  marginBottom: "0.1rem",
+                  color: () => {
+                    if (service?.status === "pending") {
+                      return "warning.main";
+                    } else if (service?.status === "accepted") {
+                      return "success.main";
+                    } else if (service?.status === "rejected") {
+                      return "error.main";
+                    }
+                  }
+                }} variant="h6" gutterBottom>
+                  {service?.status}
+                </Typography>
+              )
+            }
+
+
+          </Box>
+          <Divider />
                 {
                   isAsked && (
                     <Typography sx={{
