@@ -9,7 +9,9 @@ import { Box } from '@mui/system';
 const MainLayout = () => {
     return (
         <Box  
-            
+            //Make the box the full height of the screen
+            sx={{height: '100vh'}}
+            backgroundColor='dark.main'
 
             >
             <Header />

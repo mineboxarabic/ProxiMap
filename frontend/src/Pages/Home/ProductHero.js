@@ -6,6 +6,8 @@ import backgroundImage from '../../assets/images/bg.jpg';
 
 
 import useCurrentUser from '../../Hooks/useCurrentUser';
+//import search from '../../assets/images/magnifying-glass.svg'
+
 const ProductHero = () =>{
     const currentUser = useCurrentUser();
     return (
