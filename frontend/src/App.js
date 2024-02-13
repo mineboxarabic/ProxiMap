@@ -39,7 +39,9 @@ function App() {
 
           <Route path='/register' element={<Register />} />
           <Route path='/about' element={<About />} />
-          <Route path='/home' element={<Home />} />
+          <Route path='/'  element={<Home />} />
+          <Route path='/home'  element={<Home />} />
+
           <Route path='/login' element={<LogIn />} />
 
           {/*Parnter only orutes */}

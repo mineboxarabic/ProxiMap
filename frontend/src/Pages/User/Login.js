@@ -1,10 +1,10 @@
-import { Alert, Box, Button, Card, Checkbox, Container, TextField } from '@mui/material';
+import { Alert, Box, Button,Link, Card, Checkbox, Container, TextField } from '@mui/material';
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import '../../Style/Login.scss';
 import useAuth from '../../Hooks/useAuth';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import useLocalStorage  from '../../Hooks/useLocalStorage';
 import { FormControlLabel, FormGroup } from '@mui/material';
 import LightTextField from '../../Components/MUI/LightTextField';
@@ -158,6 +158,11 @@ const LogIn = () =>
                             
                         </FormGroup>
                         {/*Do you need a an account*/}
+                        <Link 
+                       
+                        href="/register">
+                            Do you need an account
+                        </Link>
                         </Card>
 
 

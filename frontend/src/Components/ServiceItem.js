@@ -9,6 +9,7 @@ import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
 import { useEffect } from "react";
 import useAuth from "../Hooks/useAuth";
+import useGeneral from "../Hooks/useGeneral";
 const ServiceItem = ({className, service, setHovered, setSelected, setSelectedPartner, isAsked }) => {
 
   
@@ -23,7 +24,6 @@ const ServiceItem = ({className, service, setHovered, setSelected, setSelectedPa
 
 
   useEffect(() => {
-    console.log("service", service);
     setCategory(service?.categoryDetails?.[0]);
     if (isAsked) {
         setIsSameUser(auth?.user?._id === service?.userId);
@@ -48,8 +48,8 @@ const ServiceItem = ({className, service, setHovered, setSelected, setSelectedPa
 
 
     }else{
-        setColor("#78B9EB");
-       return "#78B9EB";
+        setColor("#329FB2");
+       return "#329FB2";
 
     }
 

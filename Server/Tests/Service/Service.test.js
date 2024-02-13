@@ -41,6 +41,7 @@ describe("Persistent Session Testing", () => {
   });
 
   it("Should create a service", async () => {
+  
     const response = await agent
       .post("/services")
       .send({
@@ -49,12 +50,19 @@ describe("Persistent Session Testing", () => {
         "name": "jwyse16",
         "description": "Corrosion of second degree of neck, initial encounter",
         "price": 64,
-        "position": { "lat": 30.6377274, "lng": 73.0947607 },
+        "position": {
+            "type":"Point",
+            "coordinates" :[ 30.6377274,  73.0947607 ]
+            },
         "range": 2,
         "ratings": ["659fba2a1f253e0e1d5147dd"],
         "availability": true,
         "status": "pending"
-      }).expect(201);
+      }).expect(201).catch(e =>{
+        console.log('creation: ',e);
+      })
+     
+      console.log('creation',response.body);
 
     expect(response.body).toHaveProperty("success");
     expect(response.body).toHaveProperty("message");
