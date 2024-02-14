@@ -197,6 +197,7 @@ export const askedServiceValidatorEdit = checkSchema({
         trim: true
     },
     position: {
+        optional: true,
         notEmpty: {
             errorMessage: "Position is required",
         },
@@ -216,6 +217,7 @@ export const askedServiceValidatorEdit = checkSchema({
         },
     },
     'position.type': {
+        optional: true,
         isString: {
             errorMessage: "Position type must be a string",
         },
@@ -231,6 +233,7 @@ export const askedServiceValidatorEdit = checkSchema({
         },
     },
     'position.coordinates': {
+        optional: true,
         isArray: {
             errorMessage: "Position coordinates must be an array",
         },
@@ -245,6 +248,7 @@ export const askedServiceValidatorEdit = checkSchema({
         },
     },
     date: {
+        optional: true,
         custom:{
             options: (value, { req }) => {
 

@@ -6,7 +6,7 @@ const updateService = async (req, res) => {
     const id = req.params.id;
     const serviceUpdates = req.body;
 
-    console.log('coordinates', serviceUpdates.position.coordinates);
+    
     const updatedService = await serviceDAO.updateById(id, serviceUpdates);
     if(!updatedService || updatedService.ok == 0){
         return res.status(500).json({success:false, message: "Something went wrong" });

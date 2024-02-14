@@ -1,31 +1,13 @@
 import { MongoClient } from 'mongodb';
 import { faker } from '@faker-js/faker';
 import { ObjectId } from 'mongodb';
-const url = "mongodb://mongodbs:27017"; // Replace with your MongoDB URL
+const url = "mongodb://mongodb:27017"; // Replace with your MongoDB URL
 const dbName = "ProxiMap";
 const client = new MongoClient(url);
-const USERS_DATA = [
-    {
-      _id: new ObjectId("60b5c5b4c7a3c0b4e4f0f8c2"),
-      username: "Yassin",
-      email: "mineboxarabic@gmail.com",
-      password: "$2b$10$eUxzAIF5hnapD56diZgioONFsYZt9tDy7N28oqRoD.ah/i56ye25S",
-      role: "Admin",
-      profile: {
-        address: 
-          {
-            street: 'no street',
-            city:  'no city',
-            state:  'no state',
-            zip:  'no zip'
-          },
-        bio: "I am the admin",
-        profilePicture:
-          "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F708613941184400862%2F&psig=AOvVaw2z9W4lq7QKQ6b8uN0jYh2a&ust=1622545559155000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMjBh7qj9_ACFQAAAAAdAAAAABAD",
-      },
-      createdAt: new Date(),
-    },
-  ];
+import USERS_DATA from './USERS_DATA.js';
+import CATEGORIES_DATA from './CATEGORIES_DATA.js';
+import SERVICES_DATA from './SERVICES_DATA.js';
+
 const createUsers = async (db, numberOfUsers) => {
     let users = [];
     const Roles = ['Admin', 'User', 'Partner', 'Manager', 'Staff'];
@@ -196,6 +178,8 @@ async function run() {
         // Clean up the categories collection before inserting new fake categories
 
       await db.collection('categories').deleteMany({});
+      await db.collection('categories').insertMany(CATEGORIES_DATA)
+
        await createCategories(db, 50); // This now properly awaits the asynchronous operation
 
         const users = await db.collection('users').find().toArray();
@@ -203,11 +187,13 @@ async function run() {
 
         // Clean up the services collection before inserting new fake services
         await db.collection('services').deleteMany({});
+        await db.collection('services').insertMany(SERVICES_DATA); // Make sure to await this operation
         await createServices(db, 100, users, categories); // This now properly awaits the asynchronous operation
 
 
         // Clean up the askedServices collection before inserting new fake askedServices
        await db.collection('askedservices').deleteMany({});
+       // await db.collection('askedservices').insertMany(SERVICES_DATA); // Make sure to await this operation
        await createAskedServices(db, 100, users, categories); // This now properly awaits the asynchronous operation
 
 

@@ -51,7 +51,6 @@ getUser);
 
 //Create a user
 userRouter.post('/users',
-
 userValidator, 
 //Here we check the password beacuase we ar not checking it in the userValidator,
 //Why we are not checking it in the userValidator? because we are using the same validator for the update user
