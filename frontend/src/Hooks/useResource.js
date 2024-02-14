@@ -1,0 +1,82 @@
+import useAxiosPrivate from "./useAxiosPrivate";
+import { useState } from "react";
+
+const useResource = (baseUrl) => {
+    const [resources, setResources] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+    const axiosPrivate = useAxiosPrivate();
+    const [url, setURL] = useState(baseUrl);
+
+    const handleResponse = (response, message, method, resource) => {
+        if(method === 'post' || method === 'put') {
+            setSuccess(message);
+            setLoading(false);  
+            return;
+        }
+        setResources(response.data);
+        setSuccess(message);
+        setLoading(false);
+    };
+
+    const handleError = (error) => {
+        setLoading(false);
+        setSuccess('');
+    
+        const status = error?.response?.status;
+        const message = error?.response?.data?.message;
+    
+        switch (status) {
+            case 400:
+                setError(message || "Bad request. Please check your input.");
+                break;
+            case 401:
+                setError(message || "Unauthorized. You need to log in.");
+                break;
+            case 403:
+                setError(message || "Forbidden. You don't have permission.");
+                break;
+            case 404:
+                setError(message || "Resource not found.");
+                break;
+            case 500:
+                setError(message || "Internal server error. Try again later.");
+                break;
+            default:
+                setError(message || "Something went wrong. Please try again.");
+        }
+    };
+    
+
+    const makeRequest = async (method, url, data) => {
+        try {
+            setLoading(true);
+            setError('');
+            const response = await axiosPrivate[method](url, data);
+            handleResponse(response, 'Operation successful', method, data);
+        } catch (error) {   
+            handleError(error);
+        }
+    };
+
+
+    const getAll = () => makeRequest('get', url);
+   // const getAllByUrl = (url) => makeRequest('get', url);
+    const create = (resource) => makeRequest('post', url, resource);
+    const update = (resource) => makeRequest('put', `${url}/${resource._id}`, resource);
+    const remove = (id) => makeRequest('delete', `${url}/${id}`);
+    const getOne = (id) => makeRequest('get', `${url}/${id}`);
+    const updateWithForm = (id, data) => makeRequest('put', `${url}/${id}`, data);
+    const updateMultiple = (data) => makeRequest('put', url, data);
+    const getAllWithBody = (data) => makeRequest('get', url, data);
+
+
+    return {
+        setURL, url,
+        getAllWithBody,updateMultiple, resources,setResources, loading, error, getAll, create, update, remove, getOne ,success ,setSuccess, setError, updateWithForm}
+
+
+}
+
+export default useResource;
