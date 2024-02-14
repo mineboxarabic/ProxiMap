@@ -131,6 +131,16 @@ const useInMapView = (isAsked) => {
           setOVAskedServices(services);
         }
       }
+      
+      const delayDebounceFn = setTimeout(() => {
+        if (bounds != null) {
+            if (!isLoadingServices) {
+                getAllServices();
+            }
+        }
+    }, 500); 
+
+    return () => clearTimeout(delayDebounceFn); 
     }, [filters]);
 
 

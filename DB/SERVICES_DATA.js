@@ -24,11 +24,13 @@
   "status": "pending",
   "ratings": []
 }*/
+
+import { ObjectId } from "mongodb";
 const SERVICES_DATA = [
   {
-    _id: ObjectId("65b8d148fc13ae7a5123494c"),
-    categoryId: ObjectId("65a9a3912f10d0a3fd7106c5"),
-    partnerId: ObjectId("60b5c5b4c7a3c0b4e4f0f8c4"),
+    _id: new ObjectId("65b8d148fc13ae7a5123494c"),
+    categoryId: new ObjectId("65a9a3912f10d0a3fd7106c5"),
+    partnerId: new ObjectId("60b5c5b4c7a3c0b4e4f0f8c6"),
     name: "rcleeton0",
     description: "Colles' fracture of right radius",
     price: 552,
@@ -44,9 +46,9 @@ const SERVICES_DATA = [
     status: "accepted",
   },
   {
-    _id: ObjectId("65b8d148fc13ae7a5123494d"),
-    categoryId: ObjectId("65a9a3912f10d0a3fd7106c5"),
-    partnerId: ObjectId("60b5c5b4c7a3c0b4e4f0f8c4"),
+    _id: new ObjectId("65b8d148fc13ae7a5123494d"),
+    categoryId: new ObjectId("65a9a3912f10d0a3fd7106c5"),
+    partnerId: new ObjectId("60b5c5b4c7a3c0b4e4f0f8c6"),
     name: "rkubu1",
     description: "Other specified disorders of arteries and arterioles",
     price: 150,
@@ -62,9 +64,9 @@ const SERVICES_DATA = [
     status: "accepted",
   },
   {
-    _id: ObjectId("65b8d148fc13ae7a5123494e"),
-    categoryId: ObjectId("65a9a3912f10d0a3fd7106c4"),
-    partnerId: ObjectId("60b5c5b4c7a3c0b4e4f0f8c5"),
+    _id: new ObjectId("65b8d148fc13ae7a5123494e"),
+    categoryId: new ObjectId("65a9a3912f10d0a3fd7106c4"),
+    partnerId: new ObjectId("60b5c5b4c7a3c0b4e4f0f8c6"),
     name: "wricart2",
     description:
       "Unspecified fracture of shaft of right radius, subsequent encounter for open fracture type IIIA, IIIB, or IIIC with routine healing",
@@ -82,9 +84,9 @@ const SERVICES_DATA = [
     status: "pending",
   },
   {
-    _id: ObjectId("65b8d148fc13ae7a5123494f"),
-    categoryId: ObjectId("65a9a3912f10d0a3fd7106c3"),
-    partnerId: ObjectId("60b5c5b4c7a3c0b4e4f0f824"),
+    _id: new ObjectId("65b8d148fc13ae7a5123494f"),
+    categoryId: new ObjectId("65a9a3912f10d0a3fd7106c3"),
+    partnerId: new ObjectId("60b5c5b4c7a3c0b4e4f0f8c6"),
     name: "wwattam3",
     description:
       "Other injury of other muscles, fascia and tendons at shoulder and upper arm level, right arm, initial encounter",
@@ -101,9 +103,9 @@ const SERVICES_DATA = [
     status: "pending",
   },
   {
-    _id: ObjectId("65b8d148fc13ae7a51234950"),
-    categoryId: ObjectId("65a9a3912f10d0a3fd7106c3"),
-    partnerId: ObjectId("60b5c5b4c7a3c0b4e4f0f8c4"),
+    _id: new ObjectId("65b8d148fc13ae7a51234950"),
+    categoryId: new ObjectId("65a9a3912f10d0a3fd7106c3"),
+    partnerId: new ObjectId("60b5c5b4c7a3c0b4e4f0f8c4"),
     name: "ieastcott4",
     description:
       "Traumatic rupture of unspecified ligament of right middle finger at metacarpophalangeal and interphalangeal joint, sequela",
@@ -120,9 +122,9 @@ const SERVICES_DATA = [
     status: "accepted",
   },
   {
-    _id: ObjectId("65b8d148fc13ae7a51234951"),
-    categoryId: ObjectId("65a9a3912f10d0a3fd7106c3"),
-    partnerId: ObjectId("60b5c5b4c7a3c0b4e4f0f8c3"),
+    _id: new ObjectId("65b8d148fc13ae7a51234951"),
+    categoryId: new ObjectId("65a9a3912f10d0a3fd7106c3"),
+    partnerId: new ObjectId("60b5c5b4c7a3c0b4e4f0f8c3"),
     name: "mvidgeon5",
     description: "Pressure ulcer of right elbow, stage 1",
     price: 56,
@@ -138,9 +140,9 @@ const SERVICES_DATA = [
     status: "pending",
   },
   {
-    _id: ObjectId("65b8d148fc13ae7a51234952"),
-    categoryId: ObjectId("65a9a3912f10d0a3fd7106c6"),
-    partnerId: ObjectId("60b5c5b4c7a3c0b4e4f0f8c3"),
+    _id: new ObjectId("65b8d148fc13ae7a51234952"),
+    categoryId: new ObjectId("65a9a3912f10d0a3fd7106c6"),
+    partnerId: new ObjectId("60b5c5b4c7a3c0b4e4f0f8c3"),
     name: "lpickering6",
     description: "Injury of unspecified nerves of neck",
     price: 412,
@@ -156,9 +158,9 @@ const SERVICES_DATA = [
     status: "pending",
   },
   {
-    _id: ObjectId("65b8d148fc13ae7a51234953"),
-    categoryId: ObjectId("65a9a3912f10d0a3fd7106c4"),
-    partnerId: ObjectId("60b5c5b4c7a3c0b4e4f0f824"),
+    _id: new ObjectId("65b8d148fc13ae7a51234953"),
+    categoryId: new ObjectId("65a9a3912f10d0a3fd7106c4"),
+    partnerId: new ObjectId("60b5c5b4c7a3c0b4e4f0f824"),
     name: "bbails7",
     description: "Chronic multifocal osteomyelitis, left femur",
     price: 87,
@@ -174,9 +176,9 @@ const SERVICES_DATA = [
     status: "accepted",
   },
   {
-    _id: ObjectId("65b8d148fc13ae7a51234954"),
-    categoryId: ObjectId("65a9a3912f10d0a3fd7106c5"),
-    partnerId: ObjectId("60b5c5b4c7a3c0b4e4f0f8c1"),
+    _id: new ObjectId("65b8d148fc13ae7a51234954"),
+    categoryId: new ObjectId("65a9a3912f10d0a3fd7106c5"),
+    partnerId: new ObjectId("60b5c5b4c7a3c0b4e4f0f8c1"),
     name: "kayer8",
     description:
       "Asphyxiation due to plastic bag, intentional self-harm, subsequent encounter",
@@ -193,9 +195,9 @@ const SERVICES_DATA = [
     status: "pending",
   },
   {
-    _id: ObjectId("65b8d148fc13ae7a51234955"),
-    categoryId: ObjectId("65a9a3912f10d0a3fd7106cb"),
-    partnerId: ObjectId("60b5c5b4c7a3c0b4e4f0f8c5"),
+    _id: new ObjectId("65b8d148fc13ae7a51234955"),
+    categoryId: new ObjectId("65a9a3912f10d0a3fd7106cb"),
+    partnerId: new ObjectId("60b5c5b4c7a3c0b4e4f0f8c5"),
     name: "tdiruggero9",
     description: "Thyrotoxicosis factitia without thyrotoxic crisis or storm",
     price: 609,
@@ -211,3 +213,6 @@ const SERVICES_DATA = [
     status: "rejected",
   },
 ];
+
+
+export default SERVICES_DATA;

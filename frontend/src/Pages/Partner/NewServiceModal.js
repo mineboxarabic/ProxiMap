@@ -73,7 +73,10 @@ const NewServiceModal = ({
             }}
           >
                   <Alert
-            className={error ? "show" : "offscreen"}
+          //  className={error ? "show" : "offscreen"}
+            sx={{
+              display: error ? "block" : "none",
+            }}
             onClose={handleClose}
             severity="error"
 

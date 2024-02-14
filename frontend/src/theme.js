@@ -75,7 +75,6 @@ const theme = createTheme({
         },
       },
     },
-
     MuiCard:{
       variants:[
         {

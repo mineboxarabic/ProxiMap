@@ -51,7 +51,8 @@ describe("Persistent Session Testing", () => {
         price: 50,
         position: {
             type: "Point",
-            coordinates: [4.568749743547676,46.0841182620497]},
+            coordinates: [4.568749743547676,46.0841182620497]
+          },
         status: "pending" }
         ).expect(201);
 
@@ -59,6 +60,7 @@ describe("Persistent Session Testing", () => {
     expect(response.body).toHaveProperty("message");
     expect(response.body).toHaveProperty("askedService");
     askedServiceId = response.body.askedService._id;
+    console.log(askedServiceId)
   });
 
   it("Should get a askedService by id", async () => {
@@ -76,7 +78,7 @@ describe("Persistent Session Testing", () => {
     const response = await agent
       .put("/askedServices/" + askedServiceId)
       .send({
-        name: "Test AskedService  updated",
+        name: "Test AskedService  updaddted",
       })
       .expect(200);
 

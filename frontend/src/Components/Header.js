@@ -19,7 +19,7 @@ import {axiosPrivate} from '../api/axios';
 import useLogout from '../Hooks/useLogout';
 import NavDropDown from './NavDropDown';
 import { useEffect } from 'react';
-
+import AddLocationIcon from '@mui/icons-material/AddLocation';
 import { ADMIN, USER, PARTNER, MANAGER, STAFF } from '../Helpers/Roles';
 import { Badge } from '@mui/material';
 const pages = ['Products', 'Pricing', 'Blog'];
@@ -96,7 +96,7 @@ function Header() {
     <AppBar position="static" color='dark'>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }
+          <AddLocationIcon sx={{ display: { xs: 'none', md: 'flex' }
           ,
           color: 'light.main'
           , mr: 1 }} />
@@ -115,7 +115,7 @@ function Header() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            ProxiMap
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -127,7 +127,10 @@ function Header() {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon />
+              <MenuIcon sx={{
+                color: 'light.main'
+              
+              }} />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -140,6 +143,7 @@ function Header() {
               transformOrigin={{
                 vertical: 'top',
                 horizontal: 'left',
+
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
@@ -147,16 +151,27 @@ function Header() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+
+              {
+                pagesNav.map((page) =>
+                {
+                  let allowed = false;
+                  if(page.allowedRoles.includes(role) || page.allowedRoles.includes('*'))  allowed = true;
+                  if(allowed)
+                  return <MenuItem key={page.path} onClick={()=>{ navigate(page.path, { replace: true });}}>
+                  <Typography textAlign="center">{page.label}</Typography>
                 </MenuItem>
-              ))}
+              }
+              )
+              }
+
+              <NavDropDown buttonText="CRUD panel" menuItems={crudPages} />
+              
             </Menu>
           </Box>
 
           
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' },
+          <AddLocationIcon sx={{ display: { xs: 'flex', md: 'none' },
           
           color: 'light.main',
           mr: 1 }} />
@@ -176,7 +191,7 @@ function Header() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            ProxiMap
           </Typography>
 
           {

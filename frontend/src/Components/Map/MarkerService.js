@@ -39,8 +39,8 @@ const MarkerService = ({ service, isAsked }) => {
 
 
         }else{
-            setColor("#78B9EB");
-           return "#78B9EB";
+            setColor("#329FB2");
+           return "#329FB2";
  
         }
 
