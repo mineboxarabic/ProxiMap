@@ -16,6 +16,9 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
     "axios": "^1.6.4",
     "js-cookie": "^3.0.5",
     "leaflet": "^1.9.4",
@@ -60,8 +63,11 @@
     ]
   },
   "devDependencies": {
+    "@types/node": "^20.11.19",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
-    "ts-migrate": "^0.1.35"
+    "@types/react-router-dom": "^5.3.3",
+    "ts-migrate": "^0.1.35",
+    "typescript": "^4.9.5"
   }
 }
