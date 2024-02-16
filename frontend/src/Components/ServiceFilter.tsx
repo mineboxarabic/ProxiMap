@@ -159,7 +159,7 @@ function ServiceFilter({
         valueLabelDisplay="auto"
         min={0}
         max={1000} // Assuming 100 is the maximum price possible
-        margin="normal"
+
         sx={{
           width: '200px',
         }}
@@ -199,11 +199,6 @@ function ServiceFilter({
         name="simple-controlled"
         value={minimumRating}
         disabled
-      //  onChange={handleRatingChange}
-
-
-        // @ts-expect-error TS(2322): Type '{ sx: { color: "primary.main"; '& .MuiRating... Remove this comment to see the full error message
-        margin="normal"
       />
 
       <TextField

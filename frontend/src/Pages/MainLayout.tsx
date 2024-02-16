@@ -13,7 +13,7 @@ const MainLayout = () => {
         <Box  
             //Make the box the full height of the screen
             sx={{height: '100vh'}}
-            backgroundColor='dark.main'
+           
 
             >
             <Header />

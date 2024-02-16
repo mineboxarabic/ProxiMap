@@ -209,7 +209,7 @@ const ServiceSettings = ({
                         />
 
             
-                        <TextareaAutosize id="outlined-basic" label="Description" variant="filled"
+                        <TextareaAutosize id="outlined-basic" 
                             value={description}
                             onChange={(e:any) => setDescription(e.target.value)}
                             minRows={3}
@@ -238,10 +238,6 @@ const ServiceSettings = ({
                             />
 
                             <FormControlLabel control={<Checkbox
-
-
-                               
-                                defaultValue={availability}
                                 checked={availability}
                                 onChange={(e) => setAvailability(e.target.checked)}
                             />} label="Availability" />

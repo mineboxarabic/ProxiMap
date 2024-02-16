@@ -89,7 +89,7 @@ const Register = () => {
                     // @ts-expect-error TS(2769): No overload matches this call.
                     // @ts-expect-error TS(2769): No overload matches this call.
                     // @ts-expect-error TS(2769): No overload matches this call.
-                    <Typography color={'light.main'} variant="p" component="p" gutterBottom>You have successfully registered!</Typography>
+                    <Typography color={'light.main'} component="p" gutterBottom>You have successfully registered!</Typography>
 
                     <a
                     style={{

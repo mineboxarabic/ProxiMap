@@ -1,11 +1,14 @@
 // src/theme.js
 
 import { createTheme } from '@mui/material/styles';
-declare module '@mui/material/Card' {
+
+declare module '@mui/material' {
   interface CardPropsVariantOverrides {
     form: true;
   }
 }
+
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -85,10 +88,7 @@ const theme = createTheme({
     MuiCard:{
       variants:[
         {
-
-
-          // @ts-expect-error TS(2322): Type '"form"' is not assignable to type '"outlined... Remove this comment to see the full error message
-          props: {variant: 'form'},
+          props: {variant: 'form' as any},
           style:{
             padding: '20px',
 

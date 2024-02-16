@@ -3,14 +3,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'js-c... Remove this comment to see the full error message
-import Cookies from 'js-cookie';
 import '../../Style/Login.scss';
 import useAuth from '../../Hooks/useAuth';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useLocalStorage  from '../../Hooks/useLocalStorage';
 import { FormControlLabel, FormGroup } from '@mui/material';
 import LightTextField from '../../Components/MUI/LightTextField';
+import FormCard from '../../Components/MUI/FormCard';
+
+
+
 
 const LogIn = () =>
 {
@@ -66,7 +68,6 @@ const LogIn = () =>
         {
 
 
-            // @ts-expect-error TS(2580): Cannot find name 'process'. Do you need to install... Remove this comment to see the full error message
             const response = await axios.post(process.env.REACT_APP_BASE_URL + 'login',
                 {
                     email: email,
@@ -85,18 +86,17 @@ const LogIn = () =>
             
             navigate(from, { replace: true });
         }
-        catch (err)
+        catch (err:any)
         {
 
 
-            // @ts-expect-error TS(2571): Object is of type 'unknown'.
             if(!err?.response){
                 setError('Something went wrong');
                 return;
             }
 
 
-            // @ts-expect-error TS(2571): Object is of type 'unknown'.
+
             setError(err.response.data.message);
         }
     }
@@ -116,9 +116,9 @@ const LogIn = () =>
                     }}
                 >
                   
-                    <Alert severity="error" className={!error ?"offScreen" : "error"} ref={errorRef}>{error}</Alert>
+                    <Alert severity="error" className={!error ?"offScreen" : "error"}>{error}</Alert>
                     
-                        <Card variant='form'>
+                        <FormCard>
                         <TextField
                             margin="normal"
                             required
@@ -178,7 +178,7 @@ const LogIn = () =>
                         href="/register">
                             Do you need an account
                         </Link>
-                        </Card>
+                        </FormCard>
 
 
                 

@@ -27,14 +27,12 @@ import {
   import MarkerService from "../../Components/Map/MarkerService";
 
 
-  // @ts-expect-error TS(2732): Cannot find module '../../data/france.json'. Consi... Remove this comment to see the full error message
   import countryGeoJSON from '../../data/france.json';
   import { Autocomplete } from "@mui/material";
   import TextField from "@mui/material/TextField";
 import useGeoAPI from "../../Hooks/useGeoAPI";
 
 
-// @ts-expect-error TS(2732): Cannot find module '../../data/allCountries.json'.... Remove this comment to see the full error message
 import getAllCountries from "../../data/allCountries.json";
 import { Container } from "@mui/material";
 import { ThemedAutocomplete } from "./ThemedAutocomplete";

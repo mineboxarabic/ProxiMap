@@ -74,10 +74,8 @@ const ServiceDetailsDrawer = ({
                 </Typography>
                 </Badge>
    
-              // @ts-expect-error TS(2769): No overload matches this call.
-              // @ts-expect-error TS(2769): No overload matches this call.
-              // @ts-expect-error TS(2769): No overload matches this call.
-              <Typography p={0} marginTop={-2} variant="p" gutterBottom>
+
+              <Typography p={0} marginTop={-2} gutterBottom>
                 {partner?.profile?.bio}
               </Typography>
             </Box>

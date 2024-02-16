@@ -38,14 +38,7 @@ const ViewUsers = () => {
 
                         // @ts-expect-error TS(2339): Property '_id' does not exist on type 'never'.
                         <tr key={user._id}>
-                            // @ts-expect-error TS(2339): Property 'username' does not exist on type 'never'... Remove this comment to see the full error message
-                            // @ts-expect-error TS(2339): Property 'username' does not exist on type 'never'... Remove this comment to see the full error message
-                            // @ts-expect-error TS(2339): Property 'username' does not exist on type 'never'... Remove this comment to see the full error message
-                            <td>{user.username}</td>
-                            // @ts-expect-error TS(2339): Property 'role' does not exist on type 'never'.
-                            // @ts-expect-error TS(2339): Property 'role' does not exist on type 'never'.
-                            // @ts-expect-error TS(2339): Property 'role' does not exist on type 'never'.
-                            <td>{user.role}</td>
+                            
                             <td>
                                 <button>Edit</button>
                                 <button>Delete</button>

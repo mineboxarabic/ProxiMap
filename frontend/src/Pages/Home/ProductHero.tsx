@@ -27,12 +27,10 @@ const ProductHero = () =>{
                 src={backgroundImage}
                 alt="increase priority"
             />
-            // @ts-expect-error TS(2769): No overload matches this call.
-            // @ts-expect-error TS(2769): No overload matches this call.
-            // @ts-expect-error TS(2769): No overload matches this call.
-            <Typography
+
+            <Typography 
             fontFamily={'"Impact"'}
-            color="inherit" align="center" variant="h2" marked="center">
+            color="inherit" align="center" variant="h2" >
                 Welcome to ProxiMap: Your Community's Service Hub!
             </Typography>
             <Typography

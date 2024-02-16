@@ -209,7 +209,6 @@ const DynamicFormModal = ({
   const handleSave = () => {
 
 
-    // @ts-expect-error TS(2550): Property 'values' does not exist on type 'ObjectCo... Remove this comment to see the full error message
     const allValid = Object.values(fieldErrors).every((e: any) => e === "");
     if (allValid) {
       handleSubmit(formData);

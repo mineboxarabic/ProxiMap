@@ -9,6 +9,7 @@ import Snackbar from '@mui/material/Snackbar';
 import useAxiosPrivate from '../Hooks/useAxiosPrivate';
 import Card from '@mui/material/Card';
 import styled from '@emotion/styled';
+import FormCard from '../Components/MUI/FormCard';
 
 const StyledTab = styled(Tab)(({ theme }) => ({
   width: '30%',
@@ -194,12 +195,7 @@ function ProfilePage() {
 
 
 
-        <Card
-
-
-          // @ts-expect-error TS(2769): No overload matches this call.
-          variant='form'
-        >
+        <FormCard>
         <Grid container spacing={2} >
 
           <Grid item xs={12} >
@@ -239,7 +235,7 @@ function ProfilePage() {
           </Grid>
             
         </Grid>
-        </Card>
+        </FormCard>
       </TabPanel>
 
 
