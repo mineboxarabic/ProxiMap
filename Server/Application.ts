@@ -20,7 +20,7 @@ const __dirname: string = path.resolve();
 
 
 mongoose.connect(process.env.MONGODB_URI!).then(() => {
-    console.log('Connected to database');
+    console.log('Connected to databases');
 }
 ).catch((err) => {
     console.log("the URI is " + process.env.MONGODB_URI);

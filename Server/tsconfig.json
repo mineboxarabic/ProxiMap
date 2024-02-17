@@ -7,20 +7,25 @@
  //   "skipLibCheck": true,
    // "outDir": "./dist",
     "rootDir": ".",
-    "target": "ESNext",
-    "module": "CommonJS",
+    "target": "ES6",
+    "module": "ESNext",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
+    //"skipLibCheck": true,
     "outDir": "./dist",
-    
+ 
   }
+
   ,
   "include": ["./**/*.ts"],
   "exclude": ["node_modules", "dist"]
-
+,
+"ts-node": {
+  "esm": true,
+  "experimentalSpecifierResolution": "node"
+}
   
 }

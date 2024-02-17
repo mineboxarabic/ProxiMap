@@ -1,25 +1,50 @@
-import AskedService from "../Models/AskedService.js";
+import AskedService, { AskedServiceInterface } from "../Models/AskedService.js";
 import mongoose from "mongoose";
 
-class AskedServiceDAO {
-    async create(askedService: any) {
+interface AskedServiceDAOInterface {
+    create(askedService: AskedServiceInterface): Promise<AskedServiceInterface>;
+    findById(id: string): Promise<AskedServiceInterface>;
+    findByPartnerId(id: string): Promise<AskedServiceInterface>;
+    deleteById(id: string): Promise<AskedServiceInterface>;
+    updateById(id: string, askedService: AskedServiceInterface): Promise<AskedServiceInterface>;
+    findAll(): Promise<AskedServiceInterface>;
+    findAskedServicesinMapView(swLat: string, swLng: string, neLat: string, neLng: string, query: any): Promise<AskedServiceInterface>;
+    findAskedServicesinMapViewOfUser(swLat: string, swLng: string, neLat: string, neLng: string, id: string): Promise<AskedServiceInterface>;
+    findAllByPartnerId(id: string): Promise<AskedServiceInterface>;
+    //Create a function to know if a asked service is exist
+    exists(id: string): Promise<boolean>;
+    isValidCoordinate(lat: GLfloat, lng: GLfloat): boolean;
+}
+
+class AskedServiceDAO  implements AskedServiceDAOInterface {
+    async create(askedService: AskedServiceInterface) : Promise<AskedServiceInterface>
+    {
         const newAskedService = new AskedService(askedService);
         return await newAskedService.save().catch((error) => { return error; });
     }
 
-    async findById(id: any) {
+    async findById(id: string) : Promise<AskedServiceInterface> 
+    {
         return await AskedService.findById(id).catch((error) => { return error; });
     }
 
-    async findByPartnerId(id: any) {
+    
+    async exists(id: string): Promise<boolean> {
+        return await AskedService.exists({ _id: id }) !== null;
+    }
+
+    async findByPartnerId(id: string) : Promise<AskedServiceInterface> 
+    {
         return await AskedService.find({partnerId: id}).catch((error) => { return error; });
     }
 
-    async deleteById(id: any) {
+    async deleteById(id: string) : Promise<AskedServiceInterface> 
+    {
         return await AskedService.findByIdAndDelete(id).catch((error) => { return error; });
     }
 
-    async updateById(id: any, askedService: any) {
+    async updateById(id: string, askedService: AskedServiceInterface) : Promise<AskedServiceInterface>
+    {
         return await AskedService.findByIdAndUpdate(id, askedService).catch((error) => { return error; });
     }
 
@@ -46,7 +71,8 @@ class AskedServiceDAO {
     }
 
 
-    async findAskedServicesinMapView(swLat: any, swLng: any, neLat: any, neLng: any, query: any) {
+    async findAskedServicesinMapView(swLat: string, swLng: string, neLat: string, neLng: string, query: any) : Promise<AskedServiceInterface> 
+     {
         const swLat_p = parseFloat(swLat);
         const swLng_p = parseFloat(swLng);
         const neLat_p = parseFloat(neLat);
@@ -117,18 +143,20 @@ class AskedServiceDAO {
             ];
 
     
-            const services = await AskedService.aggregate(aggregationPipeline);
+            const services :  any = await AskedService.aggregate(aggregationPipeline);
             console.log('ser',services.length);
             return services;
+
         } catch (error) {
             console.log(swLat_p, swLng_p, neLat_p, neLng_p);
             console.error("Error in findServicesinMapView:", error);
-            return [];
+            throw error; // Re-throw the error for handling at a higher level
         }
     }
 
 
-    async findAskedServicesinMapViewOfUser(swLat: any, swLng: any, neLat: any, neLng: any, id: any) {
+    async findAskedServicesinMapViewOfUser(swLat: string, swLng: string, neLat: string, neLng: string, id: string) : Promise<AskedServiceInterface>
+    {
         try {
             // Parse coordinates to floats
             const swLat_p = parseFloat(swLat);
@@ -182,7 +210,8 @@ class AskedServiceDAO {
             ];
 
             // Execute the aggregation pipeline
-            const askedServices = await AskedService.aggregate(aggregationPipeline);
+            const askedServices : any
+            = await AskedService.aggregate(aggregationPipeline);
 
             return askedServices;
         } catch (error) {
@@ -191,10 +220,12 @@ class AskedServiceDAO {
         }
     }
 
-    async findAllByPartnerId(id: any) {
+    async findAllByPartnerId(id: string)  : Promise<AskedServiceInterface>
+    {
         return await AskedService.find({userId: id}).catch((error) => { return error; });
     }
-    isValidCoordinate(lat: any, lng: any) {
+    isValidCoordinate(lat: GLfloat, lng: GLfloat) : boolean
+    {
         return isFinite(lat) && Math.abs(lat) <= 90 && isFinite(lng) && Math.abs(lng) <= 180;
     }
 } 

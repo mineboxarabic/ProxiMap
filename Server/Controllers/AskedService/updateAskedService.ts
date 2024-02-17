@@ -1,4 +1,5 @@
 import AskedServiceDAO from "../../DAO/AskedServiceDAO.js";
+import { AskedServiceInterface } from "../../Models/AskedService.js";
 import ValidateRes from "../../Validators/ValidateRes.js";
 
 const updateAskedService = async (req: any, res: any) => {
@@ -7,8 +8,9 @@ const updateAskedService = async (req: any, res: any) => {
     const askedAskedServiceUpdates = req.body;
 
 
-    const updatedAskedService = await askedAskedServiceDAO.updateById(id, askedAskedServiceUpdates);
-    if(!updatedAskedService || updatedAskedService.ok == 0){
+    const updatedAskedService : AskedServiceInterface= await askedAskedServiceDAO.updateById(id, askedAskedServiceUpdates);
+    
+    if(!updatedAskedService || updatedAskedService === null){
         return res.status(500).json({success:false, message: "Something went wrong" });
     }
 

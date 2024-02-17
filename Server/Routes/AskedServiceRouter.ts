@@ -9,7 +9,6 @@ import { askedServiceRoutes } from '../Config/AuthConfig.js';
 import ValidateRes from '../Validators/ValidateRes.js';
 import askedServiceValidator, { askedServiceValidatorEdit } from '../Validators/askedServiceValidator.js';
 import { autherizeUserRole } from '../Utilities/JWTUtil.js';
-import { checkSchema, param } from 'express-validator';
 import isAskedServiceExist from '../Validators/askedServiceValidator/isAskedServiceExist.js';
 
 const askedServiceRouter = express.Router();

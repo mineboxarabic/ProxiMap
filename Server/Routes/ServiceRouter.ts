@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Router } from 'express';
 import createService from '../Controllers/Service/createService.js';
 import readService from '../Controllers/Service/readService.js';
 import updateService, { updateMutilpleServices } from '../Controllers/Service/updateService.js';
@@ -10,11 +10,9 @@ import { serviceRoutes } from '../Config/AuthConfig.js';
 import ValidateRes from '../Validators/ValidateRes.js';
 import serviceValidator, { serviceValidatorEdit } from '../Validators/serviceValidator.js';
 import { autherizeUserRole } from '../Utilities/JWTUtil.js';
-import { checkSchema, param } from 'express-validator';
 import isServiceExist from '../Validators/serviceValidator/isServiceExist.js';
 
-const serviceRouter = express.Router();
-
+const serviceRouter : Router = express.Router();
 //Here we do the crud of the services
 
 //Create a service
@@ -31,23 +29,6 @@ isServiceExist,
 ValidateRes,
 (req: any, res: any, next: any) => autherizeUserRole(req, res, next, serviceRoutes.read.allowedRoles),
 readService);
-
-      /*
-       categoryId,
-        priceRange,
-        availability,
-        minimumRating,
-        serviceType,
-        serviceStatus,
-      */
-
-
-
-
-
-
-
-
 serviceRouter.get('/services/in-map-view/:swLat/:swLng/:neLat/:neLng', readServicesinMapView);
 
 

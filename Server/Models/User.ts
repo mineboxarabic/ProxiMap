@@ -1,6 +1,24 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
-const userSchema = new mongoose.Schema({
+interface UserInterface {
+  username: string;
+  email: string;
+  password: string;
+  role: string;
+  profile: {
+      address: {
+          street: string;
+          city: string;
+          state: string;
+          zip: string;
+      };
+      bio: string;
+      profilePicture: string;
+  };
+  createdAt: Date;
+}
+
+const userSchema : Schema<UserInterface> = new mongoose.Schema({
     username: { type: String, unique: true, default: 'no name'},
     email: { type: String, unique: true, default: 'no email'},
     password: { type: String, default: 'no password'},

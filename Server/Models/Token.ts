@@ -1,6 +1,10 @@
-import mongoose from 'mongoose';
+import mongoose, { ObjectId, Schema } from 'mongoose';
+interface TokenInterface {
+    token: string;
+    userId: ObjectId;
+}
 
-const tokenSchema = new mongoose.Schema({
+const tokenSchema : Schema<TokenInterface> = new mongoose.Schema({
     token: String,
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });

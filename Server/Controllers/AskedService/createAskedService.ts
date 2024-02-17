@@ -1,4 +1,5 @@
 import AskedServiceDAO from "../../DAO/AskedServiceDAO.js";
+import { AskedServiceInterface } from "../../Models/AskedService.js";
 import ValidateRes from "../../Validators/ValidateRes.js";
 
 const createAskedService = async (req: any, res: any) => {
@@ -6,15 +7,24 @@ const createAskedService = async (req: any, res: any) => {
     const askedAskedServiceDAO = new AskedServiceDAO();
     const askedAskedService = req.body;
 
-    const newAskedService = await askedAskedServiceDAO.create(askedAskedService);
+    const newAskedService : AskedServiceInterface = await askedAskedServiceDAO.create(askedAskedService);
     const coordinates = req.body.position.coordinates;
 
     if(coordinates){
-        newAskedService.position = {
+
+       /* newAskedService.position = {
             type: "Point",
             coordinates: [
                 coordinates[1],
                 coordinates[0]
+            ]
+        }*/
+
+        newAskedService.position = {
+            type: "Point",
+            coordinates: [
+                coordinates[0],
+                coordinates[1]
             ]
         }
     }

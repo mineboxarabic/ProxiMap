@@ -1,5 +1,24 @@
-import mongoose from 'mongoose';
-const AskedServiceSchema = new mongoose.Schema({
+import mongoose, { Schema } from 'mongoose';
+
+
+
+export interface AskedServiceInterface {
+    userId: mongoose.Schema.Types.ObjectId;
+    categoryId: mongoose.Schema.Types.ObjectId;
+    name: string;
+    description: string;
+    price: number;
+    position: {
+        type: string;
+        coordinates: [number, number];
+    };
+    date: Date;
+    status: string;
+}
+
+
+
+const AskedServiceSchema : Schema<AskedServiceInterface> = new mongoose.Schema({
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     categoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
     name: String,
