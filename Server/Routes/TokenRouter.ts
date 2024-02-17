@@ -11,7 +11,7 @@ import TokenDAO from '../DAO/TokenDAO.js';
 
 
 const tokenRouter = express.Router();
-const isUserExist = async (req, res, next) => {
+const isUserExist = async (req: any, res: any, next: any) => {
     const userDAO = new UserDAO();
     const id = req.body.userId;
 

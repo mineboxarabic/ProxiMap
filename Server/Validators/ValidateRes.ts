@@ -1,7 +1,7 @@
 import { validationResult } from "express-validator";
 
 
-const ValidateRes = (req,res,next) => {
+const ValidateRes = (req: any,res: any,next: any) => {
 
     const validateRes = validationResult(req);
     if(!validateRes.isEmpty()){

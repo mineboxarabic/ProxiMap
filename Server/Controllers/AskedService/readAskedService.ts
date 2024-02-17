@@ -1,7 +1,7 @@
 import AskedServiceDAO from "../../DAO/AskedServiceDAO.js";
 import ValidateRes from "../../Validators/ValidateRes.js";
 
-const readAskedService = async (req, res) => {
+const readAskedService = async (req: any, res: any) => {
     const askedAskedServiceDAO = new AskedServiceDAO();
     const id = req.params.id;
 

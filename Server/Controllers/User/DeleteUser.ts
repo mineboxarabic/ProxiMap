@@ -1,6 +1,6 @@
 import UserDAO from "../../DAO/UserDAO.js";
 import ValidateRes from "../../Validators/ValidateRes.js";
-const deleteUser = async (req, res) => {
+const deleteUser = async (req: any, res: any) => {
 
     const userDAO = new UserDAO();
     const id = req.params.id;

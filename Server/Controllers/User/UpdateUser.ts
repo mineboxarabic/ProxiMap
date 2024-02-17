@@ -2,7 +2,7 @@ import UserDAO from "../../DAO/UserDAO.js";
 
 
 
-const updateUser = async (req, res) => {
+const updateUser = async (req: any, res: any) => {
     const userDAO = new UserDAO();
     const id = req.params.id;
 

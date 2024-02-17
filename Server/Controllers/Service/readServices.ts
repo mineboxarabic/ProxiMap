@@ -1,7 +1,7 @@
 import ServiceDAO from "../../DAO/ServiceDAO.js";
 import ValidateRes from "../../Validators/ValidateRes.js";
 
-const readServices = async (req, res) => {
+const readServices = async (req: any, res: any) => {
     const serviceDAO = new ServiceDAO();
 
     const services = await serviceDAO.findAll();
@@ -10,7 +10,7 @@ const readServices = async (req, res) => {
 };
 
 
-export const readServicesinMapView = async (req, res) => {
+export const readServicesinMapView = async (req: any, res: any) => {
     
 
     ///?categoryId=${filters.categoryId}&priceRange=${filters.priceRange}&availability=${filters.availability}&minimumRating=${filters.minimumRating}&serviceType=${filters.serviceType}&serviceStatus=${filters.serviceStatus}`);
@@ -41,12 +41,13 @@ export const readServicesinMapView = async (req, res) => {
 
 }; 
 
-export const readServicesinMapViewOfUser = async (req, res) => {
+export const readServicesinMapViewOfUser = async (req: any, res: any) => {
     
     const id = req.params.id;
     const serviceDAO = new ServiceDAO();
     const services = await serviceDAO.findAllByPartnerId(id);
     if(services instanceof Error){
+        // @ts-expect-error TS(2554): Expected 3 arguments, but got 2.
         ValidateRes(res, services);
         return;
     }

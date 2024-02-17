@@ -1,9 +1,10 @@
 import TokenDAO from "../../DAO/TokenDAO.js";
 import UserDAO from "../../DAO/UserDAO.js";
 import { generateToken } from "../../Utilities/JWTUtil.js";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'json... Remove this comment to see the full error message
 import JWT from "jsonwebtoken";
 
-const RefreshToken = async (req, res) => {
+const RefreshToken = async (req: any, res: any) => {
     const cookie = req.cookies;
     console.log('cookie',cookie);
     //If there is no refresh token, return 401
@@ -16,7 +17,7 @@ const RefreshToken = async (req, res) => {
 
 
     try{
-    const decoded = JWT.verify(refreshToken, process.env.REFRESH_TOKEN, (err, decoded) => {
+    const decoded = JWT.verify(refreshToken, process.env.REFRESH_TOKEN, (err: any, decoded: any) => {
         if (err) {
            throw new Error("Invalid token");
         }

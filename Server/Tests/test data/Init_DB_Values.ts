@@ -17,6 +17,7 @@ async function run() {
     console.log("Connected to MongoDB server");
 
     const db = client.db(dbName);
+    // @ts-expect-error TS(2304): Cannot find name 'collectionName'.
     const collection = db.collection(collectionName);
 
     const services = await collection.find({}).toArray();

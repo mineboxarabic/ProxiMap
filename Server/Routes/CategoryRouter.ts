@@ -18,7 +18,7 @@ const categoryRoute = express.Router();
 categoryRoute.post('/categorys',
 categoryValidator,
 ValidateRes,
-(req, res, next) => autherizeUserRole(req, res, next, categoryRoutes.create.allowedRoles),
+(req: any, res: any, next: any) => autherizeUserRole(req, res, next, categoryRoutes.create.allowedRoles),
 createCategory);
 
 //Get a single service
@@ -26,12 +26,12 @@ categoryRoute.get('/categorys/:id',
 checkId,
 isCategoryExist,
 ValidateRes,
-(req, res, next) => autherizeUserRole(req, res, next, categoryRoutes.read.allowedRoles),
+(req: any, res: any, next: any) => autherizeUserRole(req, res, next, categoryRoutes.read.allowedRoles),
 readCategory);
 
 //Get the list of categorys (All categorys)
 categoryRoute.get('/categorys',
-(req, res, next) => autherizeUserRole(req, res, next, categoryRoutes.read.allowedRoles)
+(req: any, res: any, next: any) => autherizeUserRole(req, res, next, categoryRoutes.read.allowedRoles)
 ,readCategorys);
 
 
@@ -39,12 +39,12 @@ categoryRoute.get('/categorys',
 categoryRoute.put('/categorys/:id',checkId,
 categoryValidatorEdit,
 ValidateRes,
-(req, res, next) => autherizeUserRole(req, res, next, categoryRoutes.update.allowedRoles),
+(req: any, res: any, next: any) => autherizeUserRole(req, res, next, categoryRoutes.update.allowedRoles),
 updateCategory);
 
 //Delete a service
 categoryRoute.delete('/categorys/:id',checkId,
-(req, res, next) => autherizeUserRole(req, res, next, categoryRoutes.delete.allowedRoles),
+(req: any, res: any, next: any) => autherizeUserRole(req, res, next, categoryRoutes.delete.allowedRoles),
 deleteCategory);
 
 export default categoryRoute;

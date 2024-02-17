@@ -101,7 +101,7 @@ import CategoryDAO from "../DAO/CategoryDAO.js";
         custom: {
             options: (value, { req }) => {
                 // Example: Check if coordinates array has the correct length/format
-                if (value.length !== 2 || !value.every(num => typeof num === 'number')) {
+                if (value.length !== 2 || !value.every((num: any) => typeof num === 'number')) {
                     throw new Error("Coordinates must be an array of two numbers");
                 }
                 return true;
@@ -240,7 +240,7 @@ export const askedServiceValidatorEdit = checkSchema({
         custom: {
             options: (value, { req }) => {
                 // Example: Check if coordinates array has the correct length/format
-                if (value.length !== 2 || !value.every(num => typeof num === 'number')) {
+                if (value.length !== 2 || !value.every((num: any) => typeof num === 'number')) {
                     throw new Error("Coordinates must be an array of two numbers");
                 }
                 return true;
@@ -262,6 +262,7 @@ export const askedServiceValidatorEdit = checkSchema({
 
         },
         errorMessage: "Date must be xxvalid",
+        // @ts-expect-error TS(1117): An object literal cannot have multiple properties ... Remove this comment to see the full error message
         optional: true
     },
     status: {

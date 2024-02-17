@@ -2,7 +2,7 @@ import { validationResult } from "express-validator";
 import ServiceDAO from "../../DAO/ServiceDAO.js";
 import ValidateRes from "../../Validators/ValidateRes.js";
 
-const deleteService = async (req, res) => {
+const deleteService = async (req: any, res: any) => {
  
     const serviceDAO = new ServiceDAO();
     const id = req.params.id;

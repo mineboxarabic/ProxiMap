@@ -1,6 +1,7 @@
 import TokenDAO from "../../DAO/TokenDAO.js";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'json... Remove this comment to see the full error message
 import JWT from "jsonwebtoken";
-const LogOut = async (req, res) => {
+const LogOut = async (req: any, res: any) => {
 
     const refreshToken = req.cookies?.refreshToken;
     if (!refreshToken) {

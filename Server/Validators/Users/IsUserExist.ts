@@ -14,6 +14,7 @@ const isUserExist = checkSchema({
                 const userDAO = new UserDAO();
                 const user = await userDAO.findById(value);
 
+                // @ts-expect-error TS(2531): Object is possibly 'null'.
                 if(!user && value !== user._id.toString()){
                     throw new Error("User not found");
                 }

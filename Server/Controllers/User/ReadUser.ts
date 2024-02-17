@@ -2,7 +2,7 @@ import UserDAO from "../../DAO/UserDAO.js";
 import ValidateRes from "../../Validators/ValidateRes.js";
 
 
-const readUser = async (req, res) => {
+const readUser = async (req: any, res: any) => {
     const userDAO = new UserDAO();
     const id = req.params.id;
     const user = await userDAO.findById(id);

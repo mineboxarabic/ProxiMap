@@ -1,6 +1,6 @@
 import TokenDAO from "../../DAO/TokenDAO.js";
 
-const readTokens = async (req, res) => {
+const readTokens = async (req: any, res: any) => {
     const tokenDAO = new TokenDAO();
     const token = await tokenDAO.findAll();
 

@@ -1,9 +1,11 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import authenticateUser, { generateToken } from '../Utilities/JWTUtil.js';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'bcry... Remove this comment to see the full error message
 import bcrypt from 'bcrypt';
 import UserDAO from '../DAO/UserDAO.js';
 import User from '../Models/User.js';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'json... Remove this comment to see the full error message
 import JWT from 'jsonwebtoken';
 import TokenDAO from '../DAO/TokenDAO.js';
 import LogIn from '../Controllers/Auth/Login.js';
@@ -24,14 +26,14 @@ authenticationRouter.post('/refresh', RefreshToken)
 
 authenticationRouter.post('/logout',authenticateUser, LogOut)
 
-authenticationRouter.get('/cookie', async (req, res) => {
+authenticationRouter.get('/cookie', async (req: any, res: any) => {
     console.log('cookies: ', req.cookies)
     res.status(200).json({
         cookies: req.cookies
     })
 })
 
-authenticationRouter.post('/test', async (req, res) => {
+authenticationRouter.post('/test', async (req: any, res: any) => {
 
       // Extract user data from request
       const userDAO = new UserDAO();

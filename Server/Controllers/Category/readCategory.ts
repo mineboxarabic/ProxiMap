@@ -1,7 +1,7 @@
 import CategoryDAO from "../../DAO/CategoryDAO.js";
 import ValidateRes from "../../Validators/ValidateRes.js";
 
-const readCategory = async (req, res) => {
+const readCategory = async (req: any, res: any) => {
     const categoryDAO = new CategoryDAO();
     const id = req.params.id;
 

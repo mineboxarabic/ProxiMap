@@ -14,6 +14,7 @@ const isCategoryExist = checkSchema({
                 const categoryDAO = new CategoryDAO();
                 const category = await categoryDAO.findById(value);
 
+                // @ts-expect-error TS(2531): Object is possibly 'null'.
                 if(!category && value !== category._id.toString()){
                     throw new Error("Category not found");
                 }

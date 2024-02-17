@@ -21,7 +21,7 @@ const serviceRouter = express.Router();
 serviceRouter.post('/services',
 serviceValidator,
 ValidateRes,
-(req, res, next) => autherizeUserRole(req, res, next, serviceRoutes.create.allowedRoles),
+(req: any, res: any, next: any) => autherizeUserRole(req, res, next, serviceRoutes.create.allowedRoles),
 createService);
 
 //Get a single service
@@ -29,7 +29,7 @@ serviceRouter.get('/services/:id',
 checkId,
 isServiceExist,
 ValidateRes,
-(req, res, next) => autherizeUserRole(req, res, next, serviceRoutes.read.allowedRoles),
+(req: any, res: any, next: any) => autherizeUserRole(req, res, next, serviceRoutes.read.allowedRoles),
 readService);
 
       /*
@@ -53,13 +53,13 @@ serviceRouter.get('/services/in-map-view/:swLat/:swLng/:neLat/:neLng', readServi
 
 //Get the list of services (All services)
 serviceRouter.get('/services',
-(req, res, next) => autherizeUserRole(req, res, next, serviceRoutes.read.allowedRoles)
+(req: any, res: any, next: any) => autherizeUserRole(req, res, next, serviceRoutes.read.allowedRoles)
 ,readServices);
 
 serviceRouter.get('/services/partner/:id',
 checkId,
 ValidateRes,
-(req, res, next) => autherizeUserRole(req, res, next, serviceRoutes.read.allowedRoles),
+(req: any, res: any, next: any) => autherizeUserRole(req, res, next, serviceRoutes.read.allowedRoles),
 readServicesinMapViewOfUser);
 
 
@@ -71,17 +71,17 @@ serviceRouter.put('/services/:id',checkId,
 isServiceExist,
 serviceValidatorEdit,
 ValidateRes,
-(req, res, next) => autherizeUserRole(req, res, next, serviceRoutes.update.allowedRoles),
+(req: any, res: any, next: any) => autherizeUserRole(req, res, next, serviceRoutes.update.allowedRoles),
 updateService);
 
 //Update multiple services
 serviceRouter.put('/services',
-(req, res, next) => autherizeUserRole(req, res, next, serviceRoutes.update.allowedRoles),
+(req: any, res: any, next: any) => autherizeUserRole(req, res, next, serviceRoutes.update.allowedRoles),
 updateMutilpleServices);
 
 //Delete a service
 serviceRouter.delete('/services/:id',checkId,
-(req, res, next) => autherizeUserRole(req, res, next, serviceRoutes.delete.allowedRoles),
+(req: any, res: any, next: any) => autherizeUserRole(req, res, next, serviceRoutes.delete.allowedRoles),
 deleteService);
 
 export default serviceRouter;

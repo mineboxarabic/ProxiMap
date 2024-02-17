@@ -1,7 +1,7 @@
 import ServiceDAO from "../../DAO/ServiceDAO.js";
 import ValidateRes from "../../Validators/ValidateRes.js";
 
-const createService = async (req, res) => {
+const createService = async (req: any, res: any) => {
 
     const serviceDAO = new ServiceDAO();
     const service = req.body;

@@ -1,6 +1,6 @@
 import UserDAO from "../../DAO/UserDAO.js";
 
-const readUsers = async (req, res) => {
+const readUsers = async (req: any, res: any) => {
     const userDAO = new UserDAO();
     const user = await userDAO.findAll();
 

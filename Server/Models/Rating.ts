@@ -7,6 +7,7 @@ const RatingSchema = new mongoose.Schema({
 });
 
   
+// @ts-expect-error TS(2769): No overload matches this call.
 const Rating = mongoose.model('Category', RatingSchema, { collection: 'ratings'});
 
 export default Rating;

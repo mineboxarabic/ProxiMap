@@ -3,7 +3,7 @@ import User from "../Models/User.js";
 //Allowed characters are letters and numbers and @ and _ and - 
 
 class UserDAO {
-    async create(user) {
+    async create(user: any) {
         const newUser = new User(user);
         
         const result = await newUser.save().catch((err) => {
@@ -15,14 +15,14 @@ class UserDAO {
         return result;
     }
     //Read
-    async findById(id) {
+    async findById(id: any) {
         const user = await User.findById(id).catch((err) => { 
             return {error: err};
         });
         return user;
     }
     //Update
-    async updateById(id, user) {
+    async updateById(id: any, user: any) {
         return await User.findByIdAndUpdate(id, user).catch((err) => {
 
      
@@ -30,7 +30,7 @@ class UserDAO {
         });
     }
     //Delete
-    async deleteById(id) {
+    async deleteById(id: any) {
         return await User.findByIdAndDelete(id).catch((err) => {
             return null;
         });
@@ -41,17 +41,17 @@ class UserDAO {
         return await User.find();
     }
 
-    async findByUserNameAndPassword(username, password) {
+    async findByUserNameAndPassword(username: any, password: any) {
         return await User.findOne({ username: username, password: password });
     }
 
-    async findByEmail(email){
+    async findByEmail(email: any){
         return await User.findOne({email: email});
     }
-    async findByUserName(username){
+    async findByUserName(username: any){
          return await User.findOne({username: username});
     }
-    async updateAvatar(id, fileName){
+    async updateAvatar(id: any, fileName: any){
         //Update only the profilePicture field but keep the rest of the profile the same
         return await User.findByIdAndUpdate(id, {profile: {profilePicture: fileName}}).catch((err) => {
             return {error: err};

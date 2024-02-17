@@ -1,3 +1,4 @@
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'json... Remove this comment to see the full error message
 import JWT from "jsonwebtoken";
 import dotenv from "dotenv";
 import TokenDAO from "../DAO/TokenDAO.js";
@@ -5,13 +6,13 @@ dotenv.config();
 
 
 //Verify if the token is valid and not expired
-const verifyToken = (token) => {
+const verifyToken = (token: any) => {
     
     return JWT.verify(token, process.env.ACCESS_TOKEN);
 };
 
 //Generate a new token
-export const generateToken = (user) => {
+export const generateToken = (user: any) => {
     return JWT.sign({
     _id: user._id,
         username: user.username,
@@ -22,10 +23,10 @@ export const generateToken = (user) => {
 
 
 //Generate a new refresh token
-export const refreshToken = (token) => {
+export const refreshToken = (token: any) => {
 
     let newToken = '';
-    JWT.verify(token, process.env.REFRESH_TOKEN, (err, decoded) => {
+    JWT.verify(token, process.env.REFRESH_TOKEN, (err: any, decoded: any) => {
         if(err){
             throw new Error("Invalid token");
         }
@@ -36,12 +37,13 @@ export const refreshToken = (token) => {
             role: decoded.role
         }, process.env.ACCESS_TOKEN, { expiresIn: '15s' });
     });
+    // @ts-expect-error TS(2304): Cannot find name 'accessToken'.
     return accessToken;
 }
 
 
 //Verify if the user is authenticated by checking the token of the user
-const authenticateUser = (req, res, next) =>{
+const authenticateUser = (req: any, res: any, next: any) =>{
     const accessToken = req?.cookies?.accessToken;
     const refreshToken = req?.cookies?.refreshToken;
     if(!accessToken && !refreshToken){
@@ -60,6 +62,7 @@ const authenticateUser = (req, res, next) =>{
     }
     catch(err) {
         // Check if the error is due to token expiry and you have a refresh token
+        // @ts-expect-error TS(2571): Object is of type 'unknown'.
         if (err.name == 'TokenExpiredError') {
             try {
 
@@ -101,7 +104,7 @@ const authenticateUser = (req, res, next) =>{
 
 }
 
-export const autherizeUserRole = (req, res, next, allowedRoles) => {
+export const autherizeUserRole = (req: any, res: any, next: any, allowedRoles: any) => {
     const refreshToken = req.cookies?.refreshToken;
     const user = JWT.verify(refreshToken, process.env.REFRESH_TOKEN);
 

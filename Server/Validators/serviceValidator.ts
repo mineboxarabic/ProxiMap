@@ -103,7 +103,7 @@ const serviceValidator = checkSchema({
         custom: {
             options: (value, { req }) => {
                 // Example: Check if coordinates array has the correct length/format
-                if (value.length !== 2 || !value.every(num => typeof num === 'number')) {
+                if (value.length !== 2 || !value.every((num: any) => typeof num === 'number')) {
                     throw new Error("Coordinates must be an array of two numbers");
                 }
                 return true;
@@ -277,7 +277,7 @@ export const serviceValidatorEdit = checkSchema({
         custom: {
             options: (value, { req }) => {
                 // Example: Check if coordinates array has the correct length/format
-                if (value.length !== 2 || !value.every(num => typeof num === 'number')) {
+                if (value.length !== 2 || !value.every((num: any) => typeof num === 'number')) {
                     throw new Error("Coordinates must be an array of two numbers");
                 }
                 return true;

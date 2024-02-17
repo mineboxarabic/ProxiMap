@@ -2,24 +2,24 @@ import AskedService from "../Models/AskedService.js";
 import mongoose from "mongoose";
 
 class AskedServiceDAO {
-    async create(askedService) {
+    async create(askedService: any) {
         const newAskedService = new AskedService(askedService);
         return await newAskedService.save().catch((error) => { return error; });
     }
 
-    async findById(id) {
+    async findById(id: any) {
         return await AskedService.findById(id).catch((error) => { return error; });
     }
 
-    async findByPartnerId(id) {
+    async findByPartnerId(id: any) {
         return await AskedService.find({partnerId: id}).catch((error) => { return error; });
     }
 
-    async deleteById(id) {
+    async deleteById(id: any) {
         return await AskedService.findByIdAndDelete(id).catch((error) => { return error; });
     }
 
-    async updateById(id, askedService) {
+    async updateById(id: any, askedService: any) {
         return await AskedService.findByIdAndUpdate(id, askedService).catch((error) => { return error; });
     }
 
@@ -46,7 +46,7 @@ class AskedServiceDAO {
     }
 
 
-    async findAskedServicesinMapView(swLat, swLng, neLat, neLng, query) {
+    async findAskedServicesinMapView(swLat: any, swLng: any, neLat: any, neLng: any, query: any) {
         const swLat_p = parseFloat(swLat);
         const swLng_p = parseFloat(swLng);
         const neLat_p = parseFloat(neLat);
@@ -73,6 +73,7 @@ class AskedServiceDAO {
                         },
                    
                         //Find by category
+                        // @ts-expect-error TS(2552): Cannot find name 'ObjectId'. Did you mean 'Object'... Remove this comment to see the full error message
                         ...(categoryId != '' && { categoryId: new ObjectId(categoryId) }),
                         //Find by price range
                         ...(priceRange && priceRange.includes(',') && {
@@ -127,7 +128,7 @@ class AskedServiceDAO {
     }
 
 
-    async findAskedServicesinMapViewOfUser(swLat, swLng, neLat, neLng, id) {
+    async findAskedServicesinMapViewOfUser(swLat: any, swLng: any, neLat: any, neLng: any, id: any) {
         try {
             // Parse coordinates to floats
             const swLat_p = parseFloat(swLat);
@@ -190,10 +191,10 @@ class AskedServiceDAO {
         }
     }
 
-    async findAllByPartnerId(id) {
+    async findAllByPartnerId(id: any) {
         return await AskedService.find({userId: id}).catch((error) => { return error; });
     }
-    isValidCoordinate(lat, lng) {
+    isValidCoordinate(lat: any, lng: any) {
         return isFinite(lat) && Math.abs(lat) <= 90 && isFinite(lng) && Math.abs(lng) <= 180;
     }
 } 

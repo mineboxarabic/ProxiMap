@@ -1,7 +1,7 @@
 import Category from "../Models/Category.js";
 
 class CategoryDAO {
-    async create(category) {
+    async create(category: any) {
        console.log("category", category);
        const newCategory = new Category(category);
          const result = await newCategory.save().catch((err) => {
@@ -10,15 +10,15 @@ class CategoryDAO {
         return result;
     }
 
-    async findById(id) {
+    async findById(id: any) {
         return await Category.findById(id);
     }
 
-    async deleteById(id) {
+    async deleteById(id: any) {
         return await Category.findByIdAndDelete(id);
     }
 
-    async updateById(id, category) {
+    async updateById(id: any, category: any) {
         return await Category.findByIdAndUpdate(id, category);
     }
 

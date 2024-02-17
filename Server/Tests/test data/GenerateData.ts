@@ -8,7 +8,7 @@ import USERS_DATA from './USERS_DATA.js';
 import CATEGORIES_DATA from './CATEGORIES_DATA.js';
 import SERVICES_DATA from './SERVICES_DATA.js';
 
-const createUsers = async (db, numberOfUsers) => {
+const createUsers = async (db: any, numberOfUsers: any) => {
     let users = [];
     const Roles = ['Admin', 'User', 'Partner', 'Manager', 'Staff'];
     const usedUsernames = new Set(); // Keep track of used usernames
@@ -47,7 +47,7 @@ const createUsers = async (db, numberOfUsers) => {
 }
 
 
-const createCategories = async (db, numberOfCategories) => {
+const createCategories = async (db: any, numberOfCategories: any) => {
     const categories = new Set(); // Switch to a Set for simplicity
     const maxAttempts = numberOfCategories * 2; // Just a safeguard against infinite loops
 
@@ -100,7 +100,7 @@ const serviceSchema = new mongoose.Schema({
     status: { type: String, enum: ['pending', 'accepted', 'rejected'], default: 'pending' },
 
   }); */
-const createServices = async (db, numberOfServices, users, categories) => {
+const createServices = async (db: any, numberOfServices: any, users: any, categories: any) => {
     let services = [];
     for (let i = 0; i < numberOfServices; i++) {
         const user = users[Math.floor(Math.random() * users.length)];
@@ -134,7 +134,7 @@ const createServices = async (db, numberOfServices, users, categories) => {
 }
 
 
-const createAskedServices = async (db, numberOfServices, users, categories) => {
+const createAskedServices = async (db: any, numberOfServices: any, users: any, categories: any) => {
     let services = [];
     for (let i = 0; i < numberOfServices; i++) {
 

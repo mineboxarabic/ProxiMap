@@ -1,6 +1,6 @@
 import CategoryDAO from "../../DAO/CategoryDAO.js";
 
-const deleteCategory = async (req, res) => {
+const deleteCategory = async (req: any, res: any) => {
  
     const categoryDAO = new CategoryDAO();
     const id = req.params.id;

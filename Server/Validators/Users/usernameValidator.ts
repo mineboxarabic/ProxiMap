@@ -11,7 +11,9 @@ const usernameValidator = {
         },
         custom: 
         {
-            options:async (value, {req}) => {
+            options:async (value: any, {
+                req
+            }: any) => {
                 const userDAO = new UserDAO();
                 const user = await userDAO.findByUserName(value);
 

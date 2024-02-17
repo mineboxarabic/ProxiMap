@@ -20,7 +20,7 @@ const askedServiceRouter = express.Router();
 askedServiceRouter.post('/askedServices',
 askedServiceValidator,
 ValidateRes,
-(req, res, next) => autherizeUserRole(req, res, next, askedServiceRoutes.create.allowedRoles),
+(req: any, res: any, next: any) => autherizeUserRole(req, res, next, askedServiceRoutes.create.allowedRoles),
 createAskedService);
 
 //Get a single askedService
@@ -28,18 +28,18 @@ askedServiceRouter.get('/askedServices/:id',
 checkId,
 isAskedServiceExist,
 ValidateRes,
-(req, res, next) => autherizeUserRole(req, res, next, askedServiceRoutes.read.allowedRoles),
+(req: any, res: any, next: any) => autherizeUserRole(req, res, next, askedServiceRoutes.read.allowedRoles),
 readAskedService);
 
 //Get the list of askedServices (All askedServices)
 askedServiceRouter.get('/askedServices',
-(req, res, next) => autherizeUserRole(req, res, next, askedServiceRoutes.read.allowedRoles)
+(req: any, res: any, next: any) => autherizeUserRole(req, res, next, askedServiceRoutes.read.allowedRoles)
 ,readAskedServices);
 
 askedServiceRouter.get('/askedServices/partner/:id',
 checkId,
 ValidateRes,
-(req, res, next) => autherizeUserRole(req, res, next, askedServiceRoutes.read.allowedRoles),
+(req: any, res: any, next: any) => autherizeUserRole(req, res, next, askedServiceRoutes.read.allowedRoles),
 readAskedServicesinMapViewOfUser);
 
 
@@ -53,7 +53,7 @@ askedServiceRouter.put('/askedServices/:id',checkId,
 isAskedServiceExist,
 askedServiceValidatorEdit,
 ValidateRes,
-(req, res, next) => autherizeUserRole(req, res, next, askedServiceRoutes.update.allowedRoles),
+(req: any, res: any, next: any) => autherizeUserRole(req, res, next, askedServiceRoutes.update.allowedRoles),
 updateAskedService);
 
 
@@ -61,7 +61,7 @@ updateAskedService);
 
 //Delete a askedService
 askedServiceRouter.delete('/askedServices/:id',checkId,
-(req, res, next) => autherizeUserRole(req, res, next, askedServiceRoutes.delete.allowedRoles),
+(req: any, res: any, next: any) => autherizeUserRole(req, res, next, askedServiceRoutes.delete.allowedRoles),
 deleteAskedService);
 
 export default askedServiceRouter;

@@ -1,7 +1,7 @@
 import ServiceDAO from "../../DAO/ServiceDAO.js";
 import ValidateRes from "../../Validators/ValidateRes.js";
 
-const updateService = async (req, res) => {
+const updateService = async (req: any, res: any) => {
     const serviceDAO = new ServiceDAO();
     const id = req.params.id;
     const serviceUpdates = req.body;
@@ -14,7 +14,7 @@ const updateService = async (req, res) => {
 
     return res.status(200).json({success:true, message: "Service updated successfully", updatedService});
 };
-export const updateMutilpleServices = async (req, res) => {
+export const updateMutilpleServices = async (req: any, res: any) => {
     const serviceDAO = new ServiceDAO();
     const services = req.body;
     console.log('services', services[0].position.coordinates);

@@ -6,7 +6,9 @@ const emailValidator = {
         errorMessage: "Invalid email format",
         trim: true,
         custom: {
-            options:async (value, {req}) => {
+            options:async (value: any, {
+                req
+            }: any) => {
                 const userDAO = new UserDAO();
                 const user = await userDAO.findByEmail(value);
 

@@ -1,10 +1,9 @@
-import express from 'express';
+import express, { Express } from 'express';
+
 import mongoose from 'mongoose';
 import userRouter from './Routes/UserRouter.js';
 import serviceRouter from './Routes/ServiceRouter.js';
 import askedServiceRouter from './Routes/AskedServiceRouter.js';
-
-import { body } from 'express-validator';
 import dotenv from 'dotenv';
 import tokenRouter from './Routes/TokenRouter.js';
 import cookieParser from 'cookie-parser';
@@ -16,10 +15,11 @@ import path from 'path';
 
 dotenv.config();
 
-const application = express();
-const __dirname = path.resolve();
+const application: Express = express();
+const __dirname: string = path.resolve();
 
-mongoose.connect(process.env.MONGODB_URI).then(() => {
+
+mongoose.connect(process.env.MONGODB_URI!).then(() => {
     console.log('Connected to database');
 }
 ).catch((err) => {

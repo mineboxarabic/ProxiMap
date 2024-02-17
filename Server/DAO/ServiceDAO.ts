@@ -3,24 +3,24 @@ import mongoose from "mongoose";
 import { ObjectId } from "mongodb";
 
 class ServiceDAO {
-    async create(service) {
+    async create(service: any) {
         const newService = new Service(service);
         return await newService.save().catch((error) => { return error; });
     }
 
-    async findById(id) {
+    async findById(id: any) {
         return await Service.findById(id).catch((error) => { return error; });
     }
 
-    async findByPartnerId(id) {
+    async findByPartnerId(id: any) {
         return await Service.find({partnerId: id}).catch((error) => { return error; });
     }
 
-    async deleteById(id) {
+    async deleteById(id: any) {
         return await Service.findByIdAndDelete(id).catch((error) => { return error; });
     }
 
-    async updateById(id, service) {
+    async updateById(id: any, service: any) {
         return await Service.findByIdAndUpdate(id, service).catch((error) => { return error; });
     }
 
@@ -47,7 +47,7 @@ class ServiceDAO {
     }
 
 
-    async findServicesinMapView(swLat, swLng, neLat, neLng, query) {
+    async findServicesinMapView(swLat: any, swLng: any, neLat: any, neLng: any, query: any) {
         const swLat_p = parseFloat(swLat);
         const swLng_p = parseFloat(swLng);
         const neLat_p = parseFloat(neLat);
@@ -127,7 +127,7 @@ class ServiceDAO {
         }
     }
 
-    async findServicesinMapViewOfUser(swLat, swLng, neLat, neLng, id) {
+    async findServicesinMapViewOfUser(swLat: any, swLng: any, neLat: any, neLng: any, id: any) {
         try {
             // Parse coordinates to floats
             const swLat_p = parseFloat(swLat);
@@ -190,15 +190,15 @@ class ServiceDAO {
         }
     }
 
-    async findAllByPartnerId(id) {
+    async findAllByPartnerId(id: any) {
         return await Service.find({partnerId: id}).catch((error) => { return error; });
     
     }
-    isValidCoordinate(lat, lng) {
+    isValidCoordinate(lat: any, lng: any) {
         return isFinite(lat) && Math.abs(lat) <= 90 && isFinite(lng) && Math.abs(lng) <= 180;
     }
 
-    async updateMany(services) {
+    async updateMany(services: any) {
         return await Service.updateMany(services).catch((error) => { return error; });
     }
 } 
