@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import TokenDAO from "../../DAO/TokenDAO.js";
 import UserDAO from "../../DAO/UserDAO.js";
 import { generateToken } from "../../Utilities/JWTUtil.js";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'json... Remove this comment to see the full error message
 import JWT from "jsonwebtoken";
 const RefreshToken = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const cookie = req.cookies;
@@ -21,17 +20,12 @@ const RefreshToken = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
     const refreshToken = cookie === null || cookie === void 0 ? void 0 : cookie.refreshToken;
     try {
-        const decoded = JWT.verify(refreshToken, process.env.REFRESH_TOKEN, (err, decoded) => {
-            if (err) {
-                throw new Error("Invalid token");
-            }
-            return decoded;
-        });
+        const decoded = JWT.verify(refreshToken, process.env.REFRESH_TOKEN);
         const newAccessToken = generateToken(decoded);
         const tokenDAO = new TokenDAO();
         tokenDAO.create({ token: newAccessToken, userId: decoded._id });
         const userDAO = new UserDAO();
-        const user = yield userDAO.findById(decoded._id);
+        const user = yield userDAO.findById(decoded._id.toString());
         return res.cookie("accessToken", newAccessToken, {
             httpOnly: true,
             maxAge: 15 * 60 * 1000 // 15 minutes

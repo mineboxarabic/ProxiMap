@@ -6,7 +6,7 @@ import DatabaseError from "./DataBaseError/DatabaseError.js";
 
 
 interface UserDAOInterface {
-    create(user: UserInterface): Promise<UserResult>;
+    create(user: Partial<UserInterface>): Promise<UserResult>;
     findById(id: string): Promise<UserResult>;
     deleteById(id: string): Promise<UserResult>;
     updateById(id: string, user: UserInterface): Promise<UserResult>;
@@ -25,7 +25,7 @@ export type UserArrayResult = UserInterface[] | DatabaseError | null;
 
 class UserDAO implements UserDAOInterface
 {
-    async create(user: UserInterface) : Promise<UserResult>
+    async create(user: Partial<UserInterface>) : Promise<UserResult>
     
     {
         try{
@@ -114,9 +114,10 @@ class UserDAO implements UserDAOInterface
         }
     }
 
-    async exists(id: string) : Promise<boolean>{
-        const result = await User.exists({_id: id});
-        return result !== null;
+    async exists(id: string): Promise<boolean> {
+        console.log('idx', id);
+        return (await User.exists({ _id: id })) !== null;
+
     }
 
 }

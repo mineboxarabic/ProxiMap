@@ -8,7 +8,7 @@ const updateAskedService = async (req: any, res: any) => {
     const askedAskedServiceUpdates = req.body;
 
 
-    const updatedAskedService : AskedServiceInterface= await askedAskedServiceDAO.updateById(id, askedAskedServiceUpdates);
+    const updatedAskedService : AskedServiceInterface= await askedAskedServiceDAO.updateById(id, askedAskedServiceUpdates) as AskedServiceInterface;
     
     if(!updatedAskedService || updatedAskedService === null){
         return res.status(500).json({success:false, message: "Something went wrong" });

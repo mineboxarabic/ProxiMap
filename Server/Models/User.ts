@@ -2,22 +2,21 @@ import mongoose, { Schema } from 'mongoose';
 import { Document } from 'mongoose';
 
 export interface UserInterface extends Document{
-  
   username: string;
   email: string;
   password: string;
-  role: string;
-  profile: {
-      address: {
-          street: string;
-          city: string;
-          state: string;
-          zip: string;
+  role?: string;
+  profile?: {
+      address?: {
+          street?: string;
+          city?: string;
+          state?: string;
+          zip?: string;
       };
-      bio: string;
-      profilePicture: string;
+      bio?: string;
+      profilePicture?: string;
   };
-  createdAt: Date;
+  createdAt?: Date;
 }
 
 const userSchema : Schema<UserInterface> = new mongoose.Schema({

@@ -1,8 +1,8 @@
 import mongoose, { ObjectId, Schema } from 'mongoose';
 import { Document } from 'mongoose';
-export interface TokenInterface {
-    token: string;
-    userId: ObjectId;
+export interface TokenInterface extends Document{
+    token?: string;
+    userId?: ObjectId;
 }
 
 const tokenSchema : Schema<TokenInterface> = new mongoose.Schema({

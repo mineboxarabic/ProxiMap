@@ -26,7 +26,7 @@ declare module 'express-serve-static-core' {
     }
   }
 //Generate a new token
-export const generateToken = (user: UserInterface) : string => {
+export const generateToken = (user: UserInterface | UserPayLoad) : string => {
     return JWT.sign({
     _id: user._id,
         username: user.username,
@@ -87,12 +87,8 @@ const authenticateUser = async (req: Request, res: Response, next: NextFunction)
                 }, process.env.ACCESS_TOKEN!, { expiresIn: '15s' });
 
                 const tokenDAO = new TokenDAO();
-                const newTokenObj : TokenInterface = {
-                    token: newToken,
-                    userId: user._id
-                }
 
-                tokenDAO.create(newTokenObj);
+                tokenDAO.create({token: newToken,userId: user._id});
 
                 res.cookie('accessToken', newToken, { httpOnly: true }); // Set new token
                 next();

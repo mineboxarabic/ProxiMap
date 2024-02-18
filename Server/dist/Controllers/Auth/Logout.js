@@ -8,7 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import TokenDAO from "../../DAO/TokenDAO.js";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'json... Remove this comment to see the full error message
 import JWT from "jsonwebtoken";
 const LogOut = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
@@ -22,7 +21,7 @@ const LogOut = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
     const tokenDAO = new TokenDAO();
     //const tokens = await tokenDAO.findByUserIdAndToken(accessToken, user._id);
-    const deleted = yield tokenDAO.deleteByUserId(user._id);
+    const deleted = yield tokenDAO.deleteByUserId(user._id.toString());
     try {
         res.clearCookie("accessToken");
         res.clearCookie("refreshToken");

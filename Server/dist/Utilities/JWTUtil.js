@@ -65,11 +65,7 @@ const authenticateUser = (req, res, next) => __awaiter(void 0, void 0, void 0, f
                     role: user.role
                 }, process.env.ACCESS_TOKEN, { expiresIn: '15s' });
                 const tokenDAO = new TokenDAO();
-                const newTokenObj = {
-                    token: newToken,
-                    userId: user._id
-                };
-                tokenDAO.create(newTokenObj);
+                tokenDAO.create({ token: newToken, userId: user._id });
                 res.cookie('accessToken', newToken, { httpOnly: true }); // Set new token
                 next();
             }

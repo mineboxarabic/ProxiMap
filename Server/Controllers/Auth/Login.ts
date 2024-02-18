@@ -1,11 +1,10 @@
 import TokenDAO from "../../DAO/TokenDAO.js";
-import UserDAO from "../../DAO/UserDAO.js";
+import UserDAO, { UserResult } from "../../DAO/UserDAO.js";
 import UserDTO from "../../DTO/User.js";
 import { generateToken } from "../../Utilities/JWTUtil.js";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'bcry... Remove this comment to see the full error message
 import bcrypt from 'bcrypt';
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'json... Remove this comment to see the full error message
 import JWT from "jsonwebtoken";
+import { UserInterface } from "../../Models/User.js";
 
 
 const LogIn = async (req: any, res: any) => {
@@ -14,7 +13,7 @@ const LogIn = async (req: any, res: any) => {
     const { email, password } = req.body;
 
     try {
-        const user = await userDAO.findByEmail(email);
+        const user : UserInterface = await userDAO.findByEmail(email) as UserInterface;
         if (!user) {
             return res.status(401).json({success:false, message: "Invalid credentials" });
         }
@@ -33,7 +32,7 @@ const LogIn = async (req: any, res: any) => {
             email: user.email,
             role: user.role,
             profile: user.profile
-        }, process.env.REFRESH_TOKEN, { expiresIn: '1d' });
+        }, process.env.REFRESH_TOKEN!, { expiresIn: '1d' });
         
         const tokenDAO = new TokenDAO();
         tokenDAO.create({ token: refreshToken, userId: user._id });

@@ -3,7 +3,7 @@ import DatabaseError from "./DataBaseError/DatabaseError.js";
 
 
 interface TokenDAOInterface {
-    create(token: TokenInterface): Promise<TokenResult >;
+    create(token: Partial<TokenInterface>): Promise<TokenResult >;
     findById(id: string): Promise<TokenResult>;
     updateById(id: string, token: TokenInterface): Promise<TokenResult>;
     delete(id: string): Promise<TokenResult>;
@@ -20,7 +20,7 @@ type TokenResult = TokenInterface | DatabaseError | null;
 type TokenArrayResult = TokenInterface[] | DatabaseError | null;
 
 class TokenDAO implements TokenDAOInterface {
-    async create(tokenData: TokenInterface): Promise<TokenResult> {
+    async create(tokenData: Partial<TokenInterface>): Promise<TokenResult> {
         try {
             const newToken = new Token(tokenData);
             const result = await newToken.save();

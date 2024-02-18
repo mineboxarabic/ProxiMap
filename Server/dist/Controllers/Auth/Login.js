@@ -11,9 +11,7 @@ import TokenDAO from "../../DAO/TokenDAO.js";
 import UserDAO from "../../DAO/UserDAO.js";
 import UserDTO from "../../DTO/User.js";
 import { generateToken } from "../../Utilities/JWTUtil.js";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'bcry... Remove this comment to see the full error message
 import bcrypt from 'bcrypt';
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'json... Remove this comment to see the full error message
 import JWT from "jsonwebtoken";
 const LogIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // Extract user data from request
