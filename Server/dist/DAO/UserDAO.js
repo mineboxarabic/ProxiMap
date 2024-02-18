@@ -8,69 +8,112 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import User from "../Models/User.js";
-//Allowed characters are letters and numbers and @ and _ and - 
+import DatabaseError from "./DataBaseError/DatabaseError.js";
 class UserDAO {
     create(user) {
         return __awaiter(this, void 0, void 0, function* () {
-            const newUser = new User(user);
-            const result = yield newUser.save().catch((err) => {
-                console.log('\x1b[31m%s\x1b[0m', "Database Error: " + err);
-                return { error: err };
-            });
-            return result;
+            try {
+                const newUser = new User(user);
+                const result = yield newUser.save();
+                return result;
+            }
+            catch (error) {
+                return new DatabaseError('Error creating user', error);
+            }
         });
     }
     //Read
     findById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = yield User.findById(id).catch((err) => {
-                return { error: err };
-            });
-            return user;
+            try {
+                const user = yield User.findById(id);
+                return user;
+            }
+            catch (error) {
+                return new DatabaseError('Error finding user by ID', error);
+            }
         });
     }
     //Update
     updateById(id, user) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield User.findByIdAndUpdate(id, user).catch((err) => {
-                return { error: err };
-            });
+            try {
+                const updatedUser = yield User.findByIdAndUpdate(id, user);
+                return updatedUser;
+            }
+            catch (error) {
+                return new DatabaseError('Error updating user by ID', error);
+            }
         });
     }
     //Delete
     deleteById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield User.findByIdAndDelete(id).catch((err) => {
-                return null;
-            });
+            try {
+                const deletedUser = yield User.findByIdAndDelete(id);
+                return deletedUser;
+            }
+            catch (error) {
+                return new DatabaseError('Error deleting user', error);
+            }
         });
     }
+    //Read
     findAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield User.find();
+            try {
+                const users = yield User.find();
+                return users;
+            }
+            catch (error) {
+                return new DatabaseError('Error finding all users', error);
+            }
         });
     }
     findByUserNameAndPassword(username, password) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield User.findOne({ username: username, password: password });
+            try {
+                const user = yield User.findOne({ username: username, password: password });
+                return user;
+            }
+            catch (error) {
+                return new DatabaseError('Error finding user by username and password', error);
+            }
         });
     }
     findByEmail(email) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield User.findOne({ email: email });
+            try {
+                const user = yield User
+                    .findOne({ email: email });
+                return user;
+            }
+            catch (error) {
+                return new DatabaseError('Error finding user by email', error);
+            }
         });
     }
     findByUserName(username) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield User.findOne({ username: username });
+            try {
+                const user = yield User
+                    .findOne({ username: username });
+                return user;
+            }
+            catch (error) {
+                return new DatabaseError('Error finding user by username', error);
+            }
         });
     }
     updateAvatar(id, fileName) {
         return __awaiter(this, void 0, void 0, function* () {
-            //Update only the profilePicture field but keep the rest of the profile the same
-            return yield User.findByIdAndUpdate(id, { profile: { profilePicture: fileName } }).catch((err) => {
-                return { error: err };
-            });
+            try {
+                const updated = yield User.findByIdAndUpdate(id, { profile: { profilePicture: fileName } });
+                return updated;
+            }
+            catch (error) {
+                return new DatabaseError('Error updating user avatar', error);
+            }
         });
     }
 }

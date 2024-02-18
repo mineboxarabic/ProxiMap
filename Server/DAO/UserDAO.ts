@@ -1,61 +1,117 @@
-import User from "../Models/User.js";
+import { Error } from "mongoose";
+import User, { UserInterface } from "../Models/User.js";
+import DatabaseError from "./DataBaseError/DatabaseError.js";
 
 //Allowed characters are letters and numbers and @ and _ and - 
 
-class UserDAO {
-    async create(user: any) {
-        const newUser = new User(user);
-        
-        const result = await newUser.save().catch((err) => {
 
-            console.log('\x1b[31m%s\x1b[0m', "Database Error: " + err);
-            return {error: err};
-        });
+interface UserDAOInterface {
+    create(user: UserInterface): Promise<UserResult>;
+    findById(id: string): Promise<UserResult>;
+    deleteById(id: string): Promise<UserResult>;
+    updateById(id: string, user: UserInterface): Promise<UserResult>;
+    findAll(): Promise<UserArrayResult>;
+    findByUserNameAndPassword(username: string, password: string): Promise<UserResult>;
+    findByEmail(email: string): Promise<UserResult>;
+    findByUserName(username: string): Promise<UserResult>;
+    updateAvatar(id: string, fileName: string): Promise<UserResult>;
 
-        return result;
+
+}
+
+type UserResult = UserInterface | DatabaseError | null;
+
+type UserArrayResult = UserInterface[] | DatabaseError | null;
+
+class UserDAO implements UserDAOInterface
+{
+    async create(user: UserInterface) : Promise<UserResult>
+    
+    {
+        try{
+            const newUser = new User(user);
+            const result = await newUser.save();
+            return result;
+        }catch(error){
+            return new DatabaseError('Error creating user', error);
+        }
     }
     //Read
-    async findById(id: any) {
-        const user = await User.findById(id).catch((err) => { 
-            return {error: err};
-        });
-        return user;
+    async findById(id: string)  : Promise<UserResult>
+    {
+        try{
+            const user = await User.findById(id);
+            return user;
+        }catch(error){
+            return new DatabaseError('Error finding user by ID', error);
+        }
     }
     //Update
-    async updateById(id: any, user: any) {
-        return await User.findByIdAndUpdate(id, user).catch((err) => {
+    async updateById(id: string, user: UserInterface) : Promise<UserResult>{
+        try{
+            const updatedUser = await User.findByIdAndUpdate(id, user);
+            return updatedUser;
+        }catch(error){
+            return new DatabaseError('Error updating user by ID', error);
+        }
 
-     
-            return {error: err};
-        });
     }
     //Delete
-    async deleteById(id: any) {
-        return await User.findByIdAndDelete(id).catch((err) => {
-            return null;
-        });
+    async deleteById(id: string)  : Promise<UserResult>
+    {
+        try{
+            const deletedUser = await User.findByIdAndDelete(id);
+            return deletedUser;
+        }catch(error){
+            return new DatabaseError('Error deleting user', error);
+        }
+    }
+    //Read
+    async findAll() : Promise<UserArrayResult>{
+        try{
+            const users = await User.find();
+            return users;
+        }catch(error){
+            return new DatabaseError('Error finding all users', error);
+        }
+    }
+
+    async findByUserNameAndPassword(username: string, password: string) : Promise<UserResult>{
+        try{
+            const user = await User.findOne({username: username, password: password});
+            return user;
+        }catch(error){
+            return new DatabaseError('Error finding user by username and password', error);
+        }
+    }
+    async findByEmail(email: string) : Promise<UserResult>{
+        try{
+            const user = await User
+            .findOne({email: email});
+            return user;
+        }catch(error){
+            return new DatabaseError('Error finding user by email', error);
+        }
+    }
+
+    async findByUserName(username: string) : Promise<UserResult>{
+        try{
+            const user = await User
+            .findOne({username: username});
+            return user;
+        }catch(error){
+            return new DatabaseError('Error finding user by username', error);
+        }
     }
 
 
-    async findAll() {
-        return await User.find();
-    }
-
-    async findByUserNameAndPassword(username: any, password: any) {
-        return await User.findOne({ username: username, password: password });
-    }
-
-    async findByEmail(email: any){
-        return await User.findOne({email: email});
-    }
-    async findByUserName(username: any){
-         return await User.findOne({username: username});
-    }
-    async updateAvatar(id: any, fileName: any){
-        //Update only the profilePicture field but keep the rest of the profile the same
-        return await User.findByIdAndUpdate(id, {profile: {profilePicture: fileName}}).catch((err) => {
-            return {error: err};
-        });
+    async updateAvatar(id: string, fileName: string) : Promise<UserResult>{
+        try{
+            const updated = await User.findByIdAndUpdate(id, {profile: {profilePicture: fileName}});
+            return updated;
+        }catch(error){
+            return new DatabaseError('Error updating user avatar', error);
+        }
     }
 
 }

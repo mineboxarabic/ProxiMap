@@ -11,7 +11,6 @@ import Category from "../Models/Category.js";
 class CategoryDAO {
     create(category) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("category", category);
             const newCategory = new Category(category);
             const result = yield newCategory.save().catch((err) => {
                 return { error: err };
@@ -21,22 +20,40 @@ class CategoryDAO {
     }
     findById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Category.findById(id);
+            const category = yield Category.findById(id);
+            if (!category) {
+                throw new Error('Category not found');
+            }
+            return category;
         });
     }
     deleteById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Category.findByIdAndDelete(id);
+            const category = yield Category.findByIdAndDelete(id);
+            if (!category) {
+                throw new Error('Category not found');
+            }
+            return category;
         });
     }
     updateById(id, category) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Category.findByIdAndUpdate(id, category);
+            const updatedCategory = yield Category.findByIdAndUpdate(id, category);
+            if (!updatedCategory) {
+                throw new Error('Category not found');
+            }
+            return updatedCategory;
         });
     }
     findAll() {
         return __awaiter(this, void 0, void 0, function* () {
             return yield Category.find();
+        });
+    }
+    exists(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield Category.exists({ _id: id });
+            return result !== null;
         });
     }
 }

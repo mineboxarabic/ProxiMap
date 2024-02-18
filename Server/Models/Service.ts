@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-interface ServiceInterface {
+export interface ServiceInterface {
     partnerId: mongoose.Schema.Types.ObjectId;
     categoryId: mongoose.Schema.Types.ObjectId;
     name: string;

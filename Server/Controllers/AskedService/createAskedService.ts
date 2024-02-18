@@ -12,14 +12,6 @@ const createAskedService = async (req: any, res: any) => {
 
     if(coordinates){
 
-       /* newAskedService.position = {
-            type: "Point",
-            coordinates: [
-                coordinates[1],
-                coordinates[0]
-            ]
-        }*/
-
         newAskedService.position = {
             type: "Point",
             coordinates: [

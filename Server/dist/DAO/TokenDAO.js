@@ -8,66 +8,106 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import Token from "../Models/Token.js";
+import DatabaseError from "./DataBaseError/DatabaseError.js";
 class TokenDAO {
-    create(token) {
+    create(tokenData) {
         return __awaiter(this, void 0, void 0, function* () {
-            const newUser = new Token(token);
-            const result = yield newUser.save().catch((err) => {
-                return { error: err };
-            });
-            return result;
+            try {
+                const newToken = new Token(tokenData);
+                const result = yield newToken.save();
+                return result;
+            }
+            catch (error) {
+                return new DatabaseError('Error creating token', error);
+            }
         });
     }
     findById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const token = yield Token.findById(id).catch((err) => {
-                return { error: err };
-            });
-            return token;
+            try {
+                const token = yield Token.findById(id);
+                return token;
+            }
+            catch (error) {
+                return new DatabaseError('Error finding token by ID', error);
+            }
         });
     }
-    updateById(id, token) {
+    updateById(id, tokenData) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Token.findByIdAndUpdate(id, token).catch((err) => {
-                return { error: err };
-            });
+            try {
+                const updatedToken = yield Token.findByIdAndUpdate(id, tokenData, { new: true });
+                return updatedToken;
+            }
+            catch (error) {
+                return new DatabaseError('Error updating token by ID', error);
+            }
         });
     }
     delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Token.findByIdAndDelete(id).catch((err) => {
-                return null;
-            });
+            try {
+                yield Token.findByIdAndDelete(id);
+                return null; // Assuming deletion success returns no result
+            }
+            catch (error) {
+                return new DatabaseError('Error deleting token', error);
+            }
         });
     }
     deleteByUserId(userId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const tokens = yield Token.find({ userId: userId.toString() });
-            return yield Token.deleteMany({ userId: userId }).catch((err) => {
-                return null;
-            });
+            try {
+                const deletedUser = yield Token.deleteMany({ userId: userId });
+                return deletedUser; // Assuming deletion success returns no result
+            }
+            catch (error) {
+                return new DatabaseError('Error deleting tokens by user ID', error);
+            }
         });
     }
     deleteById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Token.findByIdAndDelete(id).catch((err) => {
-                return null;
-            });
+            try {
+                const deletedUser = yield Token.findByIdAndDelete(id);
+                return deletedUser; // Assuming deletion success returns no result
+            }
+            catch (error) {
+                return new DatabaseError('Error deleting token by ID', error);
+            }
         });
     }
     findAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Token.find();
+            try {
+                const tokens = yield Token.find();
+                return tokens;
+            }
+            catch (error) {
+                return new DatabaseError('Error finding all tokens', error);
+            }
         });
     }
     findByToken(token) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Token.findOne({ token: token });
+            try {
+                const tokens = yield Token.find({ token: token });
+                return tokens;
+            }
+            catch (error) {
+                return new DatabaseError('Error finding token by token string', error);
+            }
         });
     }
-    findByUserIdAndToken(token, userId) {
+    findByUserIdAndToken(userId, token) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Token.find({ token: token, userId: userId });
+            try {
+                const tokens = yield Token.find({ userId: userId, token: token });
+                return tokens;
+            }
+            catch (error) {
+                return new DatabaseError('Error finding token by user ID and token string', error);
+            }
         });
     }
 }

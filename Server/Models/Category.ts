@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 
 
-interface CategoryInterface {
+export interface CategoryInterface {
     name: string;
     description: string;
 }

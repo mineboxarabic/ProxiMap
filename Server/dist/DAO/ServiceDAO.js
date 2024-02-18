@@ -10,31 +10,73 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import Service from "../Models/Service.js";
 import mongoose from "mongoose";
 import { ObjectId } from "mongodb";
+import DatabaseError from "./DataBaseError/DatabaseError.js";
 class ServiceDAO {
+    exists(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return (yield Service.exists({ _id: id })) !== null;
+        });
+    }
     create(service) {
         return __awaiter(this, void 0, void 0, function* () {
-            const newService = new Service(service);
-            return yield newService.save().catch((error) => { return error; });
+            /* const newService = new Service(service);
+             return await newService.save().catch((error) => { return error; });*/
+            try {
+                const newService = new Service(service);
+                const result = yield newService.save();
+                return result;
+            }
+            catch (error) {
+                return new DatabaseError('Error creating service', error);
+            }
         });
     }
     findById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Service.findById(id).catch((error) => { return error; });
+            //return await Service.findById(id).catch((error) => { return error; });
+            try {
+                const service = yield Service.findById(id);
+                return service;
+            }
+            catch (error) {
+                return new DatabaseError('Error finding service by ID', error);
+            }
         });
     }
     findByPartnerId(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Service.find({ partnerId: id }).catch((error) => { return error; });
+            //return await Service.find({partnerId: id}).catch((error) => { return error; });
+            try {
+                const service = yield Service.find({ partnerId: id });
+                return service;
+            }
+            catch (error) {
+                return new DatabaseError('Error finding service by partner ID', error);
+            }
         });
     }
     deleteById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Service.findByIdAndDelete(id).catch((error) => { return error; });
+            // return await Service.findByIdAndDelete(id).catch((error) => { return error; });
+            try {
+                const service = yield Service.findByIdAndDelete(id);
+                return service;
+            }
+            catch (error) {
+                return new DatabaseError('Error deleting service by ID', error);
+            }
         });
     }
     updateById(id, service) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Service.findByIdAndUpdate(id, service).catch((error) => { return error; });
+            // return await Service.findByIdAndUpdate(id, service).catch((error) => { return error; });
+            try {
+                const updatedService = yield Service.findByIdAndUpdate(id, service, { new: true });
+                return updatedService;
+            }
+            catch (error) {
+                return new DatabaseError('Error updating service by ID', error);
+            }
         });
     }
     findAll() {
@@ -57,7 +99,14 @@ class ServiceDAO {
                     }
                 }
             ];
-            return yield Service.aggregate(aggregationPipeline).catch((error) => { return error; });
+            // return await Service.aggregate(aggregationPipeline).catch((error) => { return error; });
+            try {
+                const services = yield Service.aggregate(aggregationPipeline);
+                return services;
+            }
+            catch (error) {
+                return new DatabaseError('Error finding all services', error);
+            }
         });
     }
     findServicesinMapView(swLat, swLng, neLat, neLng, query) {
@@ -180,7 +229,13 @@ class ServiceDAO {
     }
     findAllByPartnerId(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Service.find({ partnerId: id }).catch((error) => { return error; });
+            try {
+                const services = yield Service.find({ partnerId: id });
+                return services;
+            }
+            catch (error) {
+                return new DatabaseError('Error finding all services by partner ID', error);
+            }
         });
     }
     isValidCoordinate(lat, lng) {
@@ -188,7 +243,14 @@ class ServiceDAO {
     }
     updateMany(services) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Service.updateMany(services).catch((error) => { return error; });
+            // return await Service.updateMany(services).catch((error) => { return error; });
+            try {
+                const updatedServices = yield Service.updateMany(services);
+                return updatedServices;
+            }
+            catch (error) {
+                return new DatabaseError('Error updating many services', error);
+            }
         });
     }
 }

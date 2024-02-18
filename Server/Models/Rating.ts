@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-interface RatingInterface {
+export interface RatingInterface {
     userId: mongoose.Schema.Types.ObjectId;
     serviceId: mongoose.Schema.Types.ObjectId;
     rating: number;
