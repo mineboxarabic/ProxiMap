@@ -8,6 +8,30 @@ declare module '@mui/material' {
   }
 }
 
+declare module '@mui/material/styles' {
+  interface Palette {
+    dark?: PaletteOptions['primary'];
+    bgForm?: PaletteOptions['primary'];
+    light?: PaletteOptions['primary'];
+    lighter?: PaletteOptions['primary'];
+    veryLight?: PaletteOptions['primary'];
+    ownService?: PaletteOptions['primary'];
+  }
+
+  interface PaletteOptions {
+    dark?: PaletteOptions['primary'];
+    bgForm?: PaletteOptions['primary'];
+    light?: PaletteOptions['primary'];
+    lighter?: PaletteOptions['primary'];
+    veryLight?: PaletteOptions['primary'];
+    ownService?: PaletteOptions['primary'];
+  }
+
+  // This is for extending CardProps to include your custom variant
+  interface CardPropsVariantOverrides {
+    form: true;
+  }
+}
 
 const theme = createTheme({
   palette: {
@@ -17,7 +41,6 @@ const theme = createTheme({
     },
 
 
-    // @ts-expect-error TS(2322): Type '{ primary: { main: string; }; dark: { main: ... Remove this comment to see the full error message
     dark:{
         main: '#303949',
 

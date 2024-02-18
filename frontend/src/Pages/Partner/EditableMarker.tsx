@@ -1,11 +1,9 @@
 
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'leaf... Remove this comment to see the full error message
 import { CircleMarker } from "leaflet";
 import { Circle, Marker, Popup } from "react-leaflet";
 
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'leaf... Remove this comment to see the full error message
 import L from "leaflet";
 import { useEffect, useState } from "react";
 import { useRef } from "react";
@@ -128,7 +126,6 @@ const EditableMarker = ({
     
 
 
-        // @ts-expect-error TS(2322): Type '{ children: Element; key: string; center: { ... Remove this comment to see the full error message
         <Circle key={key} center={position} radius={
                isServiceInHistory(service) ? getService(service)?.range : service?.range || 0
             } 
@@ -140,7 +137,6 @@ const EditableMarker = ({
             <Marker
 
 
-            // @ts-expect-error TS(2322): Type '{ children: never[]; draggable: boolean; eve... Remove this comment to see the full error message
             draggable={draggable}
             eventHandlers={eventHandlers}
             ref={markerRef}
@@ -161,7 +157,6 @@ const EditableMarker = ({
         <Marker
 
 
-        // @ts-expect-error TS(2322): Type '{ children: never[]; draggable: boolean; eve... Remove this comment to see the full error message
         draggable={draggable}
         eventHandlers={eventHandlers}
         ref={markerRef}

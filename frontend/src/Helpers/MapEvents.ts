@@ -6,7 +6,6 @@ import useBounds from '../Hooks/useBounds';
 import 'leaflet-search';
 
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'leaf... Remove this comment to see the full error message
 import L from 'leaflet';
   
 export default function MapEvents({

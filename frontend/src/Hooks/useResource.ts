@@ -1,15 +1,17 @@
 import useAxiosPrivate from "./useAxiosPrivate";
 import { useState } from "react";
+import { Response } from 'express';
+import { AxiosResponse, ResponseType } from "axios";
 
-const useResource = (baseUrl: any) => {
-    const [resources, setResources] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
+const useResource = <TResource, TResourceId = string>(baseUrl: string) => {
+    const [resources, setResources] = useState<TResource[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string>('');
+    const [success, setSuccess] = useState<string>('');
     const axiosPrivate = useAxiosPrivate();
-    const [url, setURL] = useState(baseUrl);
+    const [url, setURL] = useState<string>(baseUrl);
 
-    const handleResponse = (response: any, message: any, method: any, resource: any) => {
+    const handleResponse = (response: AxiosResponse, message: string, method: string, resource: any) => {
         if(method === 'post' || method === 'put') {
             setSuccess(message);
             setLoading(false);  
@@ -49,7 +51,7 @@ const useResource = (baseUrl: any) => {
     };
     
 
-    const makeRequest = async (method: any, url: any, data: any) => {
+    const makeRequest = async (method: string, url: string, data?: Partial<TResource> | TResourceId) => {
         try {
             setLoading(true);
             setError('');
@@ -66,18 +68,15 @@ const useResource = (baseUrl: any) => {
 
 
 
-    // @ts-expect-error TS(2554): Expected 3 arguments, but got 2.
     const getAll = () => makeRequest('get', url);
    // const getAllByUrl = (url) => makeRequest('get', url);
     const create = (resource: any) => makeRequest('post', url, resource);
     const update = (resource: any) => makeRequest('put', `${url}/${resource._id}`, resource);
 
 
-    // @ts-expect-error TS(2554): Expected 3 arguments, but got 2.
     const remove = (id: any) => makeRequest('delete', `${url}/${id}`);
 
 
-    // @ts-expect-error TS(2554): Expected 3 arguments, but got 2.
     const getOne = (id: any) => makeRequest('get', `${url}/${id}`);
     const updateWithForm = (id: any, data: any) => makeRequest('put', `${url}/${id}`, data);
     const updateMultiple = (data: any) => makeRequest('put', url, data);

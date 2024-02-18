@@ -123,17 +123,15 @@ const CRUDTable = ({
       {error && <Alert severity="error">{error}</Alert>}
 
       <DataGrid
-        rows={resources}
+        rows={resources as any[]}
         columns={tableColumns}
 
 
-        // @ts-expect-error TS(2322): Type '{ rows: never[]; columns: any[]; pageSize: n... Remove this comment to see the full error message
-        pageSize={5}
-        rowsPerPageOptions={[5, 10, 20]}
+        //pageSize={5}
+       // rowsPerPageOptions={[5, 10, 20]}
         loading={loading}
 
 
-        // @ts-expect-error TS(2339): Property '_id' does not exist on type 'never'.
         getRowId={(row) => row._id}
         sx={{
           '& .MuiDataGrid-row': {

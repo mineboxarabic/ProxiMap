@@ -1,7 +1,6 @@
 import { Circle, Marker, Popup } from 'react-leaflet';
 
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'leaf... Remove this comment to see the full error message
 import L from 'leaflet';
 import useCurrentUser from '../../Hooks/useCurrentUser';
 
@@ -146,10 +145,9 @@ const MarkerService = ({
             center={position} 
 
 
-            // @ts-expect-error TS(2322): Type '{ children: Element[]; key: any; center: { l... Remove this comment to see the full error message
             radius={service?.range || 0}
             
-            color={color}
+            //color={color}
             fillOpacity={0.2}
             weight={2}
            //className={'circle',"notSameUser"}
@@ -163,7 +161,6 @@ const MarkerService = ({
                 position={position} 
 
 
-                // @ts-expect-error TS(2322): Type '{ children: Element; position: { lat: any; l... Remove this comment to see the full error message
                 icon={customIcon}
     
            

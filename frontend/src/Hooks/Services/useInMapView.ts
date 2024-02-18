@@ -3,9 +3,9 @@ import useResource from "../useResource";
 import useLocalStorage from "../useLocalStorage";
 import useGeneral from "../useGeneral";
 import useAxiosPrivate from "../useAxiosPrivate";
-
-const useInMapView = (isAsked: any) => {
-    const [bounds, setBounds] = useState(null);
+import Service from "../../Classes/Service";
+const useInMapView = (isAsked: boolean) => {
+    const [bounds, setBounds] = useState<any>(null);
 
 
     // @ts-expect-error TS(2339): Property 'oVServices' does not exist on type '{}'.
@@ -15,31 +15,25 @@ const useInMapView = (isAsked: any) => {
     const getURL = () => {
 
 
-      // @ts-expect-error TS(2339): Property '_southWest' does not exist on type 'neve... Remove this comment to see the full error message
       if(!isAsked) return `/services/in-map-view/${bounds?._southWest?.lat || 0}/${bounds?._southWest?.lng || 0}/${bounds?._northEast?.lat || 0}/${bounds?._northEast?.lng || 0}` 
 
 
-      // @ts-expect-error TS(2339): Property '_southWest' does not exist on type 'neve... Remove this comment to see the full error message
       return `/askedServices/in-map-view/${bounds?._southWest?.lat || 0}/${bounds?._southWest?.lng || 0}/${bounds?._northEast?.lat || 0}/${bounds?._northEast?.lng || 0}`;
     }
 
-    const [url, setURL] = useState(getURL());
+    const [url, setURL] = useState<string>(getURL());
   
 
     const {
-      resources: services,
+      resources: services ,
       getAll: getAllServices,
       error: errorServices,
       loading: isLoadingServices,
       setURL: setURLServices
-    } = useResource(url);
+    } = useResource<Service>(url);
 
     useEffect(() => {
-  
-       // const url = getURL() + `?categoryId=${filters.categoryId}&priceRange=${filters.priceRange}&availability=${filters.availability}&minimumRating=${filters.minimumRating}&serviceType=${filters.serviceType}&serviceStatus=${filters.serviceStatus}`;
-       // console.log(url);
         setURLServices(url);
-
     }, [url]);
 
   

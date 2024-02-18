@@ -215,7 +215,6 @@ const MapEdit = ({
           <MapContainer
 
 
-            // @ts-expect-error TS(2322): Type '{ children: ("" | Element)[]; center: any[];... Remove this comment to see the full error message
             center={
               position
 
@@ -233,7 +232,6 @@ const MapEdit = ({
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 
 
-              // @ts-expect-error TS(2322): Type '{ url: string; attribution: string; }' is no... Remove this comment to see the full error message
               attribution="&amp;copy OpenStreetMap contributors"
             />
             <Box sx={{

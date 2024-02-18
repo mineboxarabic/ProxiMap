@@ -13,7 +13,6 @@ import useResource from "../Hooks/useResource";
 import { useEffect, useState } from "react";
 
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'leaf... Remove this comment to see the full error message
 import L from "leaflet";
 import "../Style/Map.scss";
 import MapEvents from "../Helpers/MapEvents";
@@ -132,7 +131,6 @@ const Map = () => {
           <MapContainer
 
 
-            // @ts-expect-error TS(2322): Type '{ children: any[]; center: any[]; zoom: numb... Remove this comment to see the full error message
             center={
               position
 
@@ -151,7 +149,6 @@ const Map = () => {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 
 
-              // @ts-expect-error TS(2322): Type '{ url: string; attribution: string; }' is no... Remove this comment to see the full error message
               attribution="&amp;copy OpenStreetMap contributors"
             />
             <Box

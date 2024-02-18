@@ -35,7 +35,6 @@ const ServiceModal = ({
     await getPartners();
 
 
-    // @ts-expect-error TS(2345): Argument of type '(partners: never[]) => { value: ... Remove this comment to see the full error message
     setPartners((partners) =>{
       return partners.map((partner) => {
 
@@ -53,7 +52,6 @@ const ServiceModal = ({
     await getCategorys();
 
 
-    // @ts-expect-error TS(2345): Argument of type '(categorys: never[]) => { value:... Remove this comment to see the full error message
     setCategorys((categorys) =>{
       return categorys.map((category) => {
 

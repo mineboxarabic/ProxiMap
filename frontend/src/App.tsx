@@ -87,9 +87,6 @@ const App = () => {
 
           {/* Catch all */}
           <Route path='/*' element={<NotFound />} />
-          // @ts-expect-error TS(2786): 'UnAutherized' cannot be used as a JSX component.
-          // @ts-expect-error TS(2786): 'UnAutherized' cannot be used as a JSX component.
-          // @ts-expect-error TS(2786): 'UnAutherized' cannot be used as a JSX component.
           <Route path='/unautherized' element={<UnAutherized />} />
         </Route>
       </Route>

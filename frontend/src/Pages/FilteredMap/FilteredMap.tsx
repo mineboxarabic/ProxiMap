@@ -13,7 +13,6 @@ import {
   import { useEffect, useState } from "react";
 
 
-  // @ts-expect-error TS(7016): Could not find a declaration file for module 'leaf... Remove this comment to see the full error message
   import L from "leaflet";
   import "../../Style/Map.scss";
   import MapEvents from "../../Helpers/MapEvents";
@@ -47,21 +46,7 @@ import { ThemedAutocomplete } from "./ThemedAutocomplete";
       }
   
       try {
-        const geoJsonLayer = L.geoJSON(countryGeoJSON).addTo(map);
-        map.fitBounds(geoJsonLayer.getBounds());
-        map.setMaxBounds(geoJsonLayer.getBounds());
-        map.setMinZoom(map.getZoom());
-        //remove blue outlines
-        map.getContainer().style.outline = 'none';
-
-
-        geoJsonLayer.setStyle({
-       //Remove the every color of the country
-          fillColor: 'transparent',
-          fillOpacity: 0,
-          color: 'transparent',
-          weight: 0,
-        });
+        const geoJsonLayer = L.geoJSON(countryGeoJSON as any).addTo(map);
     
             
     
@@ -170,8 +155,6 @@ import { ThemedAutocomplete } from "./ThemedAutocomplete";
       
           <MapContainer
 
-
-            // @ts-expect-error TS(2322): Type '{ children: Element[]; center: any[]; zoom: ... Remove this comment to see the full error message
             center={
               position
 
@@ -188,7 +171,6 @@ import { ThemedAutocomplete } from "./ThemedAutocomplete";
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 
 
-              // @ts-expect-error TS(2322): Type '{ url: string; attribution: string; }' is no... Remove this comment to see the full error message
               attribution="&amp;copy OpenStreetMap contributors"
             />
             <Box 
