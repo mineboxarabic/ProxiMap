@@ -1,5 +1,4 @@
 import UserDAO from "../../DAO/UserDAO.js";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'bcry... Remove this comment to see the full error message
 import bcrypt from 'bcrypt';
 
 const Register = async (req: any, res: any) => {
@@ -8,6 +7,7 @@ const Register = async (req: any, res: any) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
         const userDAO = new UserDAO();
+        
         const user = await userDAO.create({ username, password: hashedPassword, email });
 
         // @ts-expect-error TS(2339): Property 'error' does not exist on type '(Document... Remove this comment to see the full error message

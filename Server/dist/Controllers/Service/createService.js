@@ -13,7 +13,7 @@ const createService = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     const service = req.body;
     const newService = yield serviceDAO.create(service);
     const coordinates = req.body.coordinates;
-    if (coordinates) {
+    if (coordinates && newService != null) {
         newService.position = {
             type: "Point",
             coordinates: [

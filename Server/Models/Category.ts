@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
+import { Document } from 'mongoose';
 
-
-export interface CategoryInterface {
+export interface CategoryInterface extends Document {
     name: string;
     description: string;
 }

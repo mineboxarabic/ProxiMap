@@ -1,4 +1,12 @@
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'json... Remove this comment to see the full error message
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 import JWT from "jsonwebtoken";
 import dotenv from "dotenv";
 import TokenDAO from "../DAO/TokenDAO.js";
@@ -18,23 +26,16 @@ export const generateToken = (user) => {
 };
 //Generate a new refresh token
 export const refreshToken = (token) => {
-    let newToken = '';
-    JWT.verify(token, process.env.REFRESH_TOKEN, (err, decoded) => {
-        if (err) {
-            throw new Error("Invalid token");
-        }
-        newToken = JWT.sign({
-            _id: decoded._id,
-            username: decoded.username,
-            email: decoded.email,
-            role: decoded.role
-        }, process.env.ACCESS_TOKEN, { expiresIn: '15s' });
-    });
-    // @ts-expect-error TS(2304): Cannot find name 'accessToken'.
-    return accessToken;
+    const decoded = JWT.verify(token, process.env.REFRESH_TOKEN);
+    return JWT.sign({
+        _id: decoded._id,
+        username: decoded.username,
+        email: decoded.email,
+        role: decoded.role
+    }, process.env.ACCESS_TOKEN, { expiresIn: '15s' });
 };
 //Verify if the user is authenticated by checking the token of the user
-const authenticateUser = (req, res, next) => {
+const authenticateUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;
     const accessToken = (_a = req === null || req === void 0 ? void 0 : req.cookies) === null || _a === void 0 ? void 0 : _a.accessToken;
     const refreshToken = (_b = req === null || req === void 0 ? void 0 : req.cookies) === null || _b === void 0 ? void 0 : _b.refreshToken;
@@ -64,7 +65,11 @@ const authenticateUser = (req, res, next) => {
                     role: user.role
                 }, process.env.ACCESS_TOKEN, { expiresIn: '15s' });
                 const tokenDAO = new TokenDAO();
-                tokenDAO.create({ token: newToken, userId: user._id });
+                const newTokenObj = {
+                    token: newToken,
+                    userId: user._id
+                };
+                tokenDAO.create(newTokenObj);
                 res.cookie('accessToken', newToken, { httpOnly: true }); // Set new token
                 next();
             }
@@ -78,7 +83,7 @@ const authenticateUser = (req, res, next) => {
             return res.status(403).json({ message: 'Invalid token' });
         }
     }
-};
+});
 export const autherizeUserRole = (req, res, next, allowedRoles) => {
     var _a;
     const refreshToken = (_a = req.cookies) === null || _a === void 0 ? void 0 : _a.refreshToken;

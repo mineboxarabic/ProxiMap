@@ -25,13 +25,18 @@ const usernameValidator = {
                     }
                 }
                 else if(requestType === "PUT"){
-                    const idFromFoundUser = user && user._id.toString();
+                   // const idFromFoundUser = user && user._id.toString();
                     const idFromRequest = req.params.id;
-                    if(user){
+                    const idFromFoundUser = userDAO.exists(value)
+
+                    if(idFromFoundUser !== idFromRequest){
+                        throw new Error("Username already exists");
+                    }
+                    /*if(user){
                         if(idFromFoundUser !== idFromRequest){
                             throw new Error("Username already exists");
                         }
-                    }
+                    }*/
                 }
 
                 return true;

@@ -17,9 +17,9 @@ interface ServiceDAOInterface {
     exists(id: string): Promise<boolean>;
     updateMany(services: any): Promise<ServiceArrayResult>; // Specify the type more precisely if possible
 }
-type ServiceResult = ServiceInterface | DatabaseError | null;
+export type ServiceResult = ServiceInterface | DatabaseError | null;
 
-type ServiceArrayResult = ServiceInterface[] | DatabaseError | null;
+export type ServiceArrayResult = ServiceInterface[] | DatabaseError | null;
 
 class ServiceDAO  implements ServiceDAOInterface{
     async exists(id: string): Promise<boolean> {
@@ -269,7 +269,7 @@ class ServiceDAO  implements ServiceDAOInterface{
     async updateMany(services: any)  : Promise<ServiceArrayResult>{
        // return await Service.updateMany(services).catch((error) => { return error; });
         try {
-            const updatedServices = await Service.updateMany(services);
+            const updatedServices:any = await Service.updateMany(services);
             return updatedServices;
         } catch (error) {
             return new DatabaseError('Error updating many services', error);

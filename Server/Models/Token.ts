@@ -1,4 +1,5 @@
 import mongoose, { ObjectId, Schema } from 'mongoose';
+import { Document } from 'mongoose';
 export interface TokenInterface {
     token: string;
     userId: ObjectId;

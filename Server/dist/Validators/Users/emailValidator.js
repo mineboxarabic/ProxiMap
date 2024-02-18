@@ -23,7 +23,7 @@ const emailValidator = {
                 }
             }
             else if (requestMethod === "PUT") {
-                const idFromFoundUser = user && user._id.toString();
+                const idFromFoundUser = userDAO.exists(value);
                 const idFromRequest = req.params.id;
                 if (user) {
                     if (idFromFoundUser !== idFromRequest) {

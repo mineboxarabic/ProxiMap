@@ -18,10 +18,14 @@ const isServiceExist = checkSchema({
         custom: {
             options: (value) => __awaiter(void 0, void 0, void 0, function* () {
                 const serviceDAO = new ServiceDAO();
-                const service = yield serviceDAO.findById(value);
-                if (!service && value !== service._id.toString()) {
+                const service = yield serviceDAO.exists(value);
+                if (!service) {
                     throw new Error("Service not found");
                 }
+                /*if(!service && value !== service._id.toString()){
+                    throw new Error("Service not found");
+                }
+*/
                 return true;
             }),
             errorMessage: "Service not found"

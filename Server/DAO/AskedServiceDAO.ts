@@ -41,9 +41,9 @@ interface AskedServiceDAOInterface {
     isValidCoordinate(lat: GLfloat, lng: GLfloat): boolean;
 }
 
-type AskedServiceResult = AskedServiceInterface | DatabaseError | null;
+export type AskedServiceResult = AskedServiceInterface | DatabaseError | null;
 
-type AskedServiceArrayResult = AskedServiceInterface[] | DatabaseError | null;
+export type AskedServiceArrayResult = AskedServiceInterface[] | DatabaseError | null;
 
 class AskedServiceDAO implements AskedServiceDAOInterface {
     async create(

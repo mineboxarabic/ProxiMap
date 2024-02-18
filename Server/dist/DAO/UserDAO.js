@@ -116,5 +116,11 @@ class UserDAO {
             }
         });
     }
+    exists(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield User.exists({ _id: id });
+            return result !== null;
+        });
+    }
 }
 export default UserDAO;

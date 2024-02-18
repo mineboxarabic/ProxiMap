@@ -15,13 +15,13 @@ interface UserDAOInterface {
     findByEmail(email: string): Promise<UserResult>;
     findByUserName(username: string): Promise<UserResult>;
     updateAvatar(id: string, fileName: string): Promise<UserResult>;
-
+    exists(id: string): Promise<boolean>;
 
 }
 
-type UserResult = UserInterface | DatabaseError | null;
+export type UserResult = UserInterface | DatabaseError | null;
 
-type UserArrayResult = UserInterface[] | DatabaseError | null;
+export type UserArrayResult = UserInterface[] | DatabaseError | null;
 
 class UserDAO implements UserDAOInterface
 {
@@ -112,6 +112,11 @@ class UserDAO implements UserDAOInterface
         }catch(error){
             return new DatabaseError('Error updating user avatar', error);
         }
+    }
+
+    async exists(id: string) : Promise<boolean>{
+        const result = await User.exists({_id: id});
+        return result !== null;
     }
 
 }

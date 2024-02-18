@@ -1,6 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
+import { Document } from 'mongoose';
 
-export interface ServiceInterface {
+export interface ServiceInterface extends Document {
     partnerId: mongoose.Schema.Types.ObjectId;
     categoryId: mongoose.Schema.Types.ObjectId;
     name: string;

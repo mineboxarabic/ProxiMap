@@ -1,11 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import authenticateUser, { generateToken } from '../Utilities/JWTUtil.js';
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'bcry... Remove this comment to see the full error message
 import bcrypt from 'bcrypt';
-import UserDAO from '../DAO/UserDAO.js';
-import User from '../Models/User.js';
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'json... Remove this comment to see the full error message
+import UserDAO, { UserResult } from '../DAO/UserDAO.js';
+import User, { UserInterface } from '../Models/User.js';
 import JWT from 'jsonwebtoken';
 import TokenDAO from '../DAO/TokenDAO.js';
 import LogIn from '../Controllers/Auth/Login.js';
@@ -13,6 +11,7 @@ import Register from '../Controllers/Auth/Register.js';
 import RefreshToken from '../Controllers/Auth/RefreshToken.js';
 import LogOut from '../Controllers/Auth/Logout.js';
 import UserDTO from '../DTO/User.js';
+import DatabaseError from '../DAO/DataBaseError/DatabaseError.js';
 
 dotenv.config();
 const authenticationRouter = express.Router();
@@ -40,30 +39,35 @@ authenticationRouter.post('/test', async (req: any, res: any) => {
       const { email, password } = {email:'mineboxarabic@gmail.com',password:'Zaqwe123'};
   
       try {
-          const user = await userDAO.findByEmail(email)        
-          if (!user) {
-              return res.status(401).json({ message: "Invalid credentials" });
-          }
-          const validPassword = await bcrypt.compare(password, user.password);
-          if(!validPassword){
-              return res.status(401).json({ message: "Invalid credentials" });
-          }
-  
-          const accessToken = generateToken(user);
-          console.log(validPassword);
-  
-  
-          const refreshToken = JWT.sign({
-              _id: user._id,
-              username: user.username,
-              email: user.email,
-              role: user.role
-          }, process.env.REFRESH_TOKEN, { expiresIn: '1d' });
-          
-          const tokenDAO = new TokenDAO();
-          tokenDAO.create({ token: refreshToken, userId: user._id });
-  
-          const userDTO = new UserDTO(user.username, user.email, user.role);
+        const user: UserResult = await userDAO.findByEmail(email);
+        
+        if(user instanceof DatabaseError){
+            return res.status(500).json({ message: "Something went wrong" });
+        }
+
+
+        if (!user) {
+            return res.status(401).json({ message: "Invalid credentials" });
+        }
+        const validPassword = await bcrypt.compare(password, user.password);
+        if (!validPassword) {
+            return res.status(401).json({ message: "Invalid credentials" });
+        }
+
+        const accessToken = generateToken(user);
+        console.log(validPassword);
+
+        const refreshToken = JWT.sign({
+            id: user._id,
+            username: user.username,
+            email: user.email,
+            role: user.role
+        }, process.env.REFRESH_TOKEN!, { expiresIn: '1d' });
+
+        const tokenDAO = new TokenDAO();
+        tokenDAO.create({ token: refreshToken, userId: user.id });
+
+        const userDTO = new UserDTO(user.username, user.email, user.role);
   
 
           res.cookie("refreshToken", 'fa', {

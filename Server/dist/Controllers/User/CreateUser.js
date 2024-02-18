@@ -8,7 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import UserDAO from "../../DAO/UserDAO.js";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'bcry... Remove this comment to see the full error message
 import bcrypt from 'bcrypt';
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     //TODO:Create a function to check if the user is valid or not

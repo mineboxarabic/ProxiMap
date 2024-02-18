@@ -12,11 +12,16 @@ const isServiceExist = checkSchema({
             options: async (value) => {
                 
                 const serviceDAO = new ServiceDAO();
-                const service = await serviceDAO.findById(value);
+                const service = await serviceDAO.exists(value);
 
-                if(!service && value !== service._id.toString()){
+                if(!service){
                     throw new Error("Service not found");
                 }
+
+                /*if(!service && value !== service._id.toString()){
+                    throw new Error("Service not found");
+                }
+*/
 
                 return true;
             },

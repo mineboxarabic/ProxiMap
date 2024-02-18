@@ -1,6 +1,5 @@
 import UserDAO from "../../DAO/UserDAO.js";
 import ValidateRes from "../../Validators/ValidateRes.js";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'bcry... Remove this comment to see the full error message
 import bcrypt from 'bcrypt';
 const createUser = async (req: any, res: any) => {
     //TODO:Create a function to check if the user is valid or not

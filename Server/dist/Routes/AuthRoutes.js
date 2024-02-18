@@ -10,10 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import express from 'express';
 import dotenv from 'dotenv';
 import authenticateUser, { generateToken } from '../Utilities/JWTUtil.js';
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'bcry... Remove this comment to see the full error message
 import bcrypt from 'bcrypt';
 import UserDAO from '../DAO/UserDAO.js';
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'json... Remove this comment to see the full error message
 import JWT from 'jsonwebtoken';
 import TokenDAO from '../DAO/TokenDAO.js';
 import LogIn from '../Controllers/Auth/Login.js';
@@ -21,6 +19,7 @@ import Register from '../Controllers/Auth/Register.js';
 import RefreshToken from '../Controllers/Auth/RefreshToken.js';
 import LogOut from '../Controllers/Auth/Logout.js';
 import UserDTO from '../DTO/User.js';
+import DatabaseError from '../DAO/DataBaseError/DatabaseError.js';
 dotenv.config();
 const authenticationRouter = express.Router();
 authenticationRouter.post('/login', LogIn);
@@ -39,6 +38,9 @@ authenticationRouter.post('/test', (req, res) => __awaiter(void 0, void 0, void 
     const { email, password } = { email: 'mineboxarabic@gmail.com', password: 'Zaqwe123' };
     try {
         const user = yield userDAO.findByEmail(email);
+        if (user instanceof DatabaseError) {
+            return res.status(500).json({ message: "Something went wrong" });
+        }
         if (!user) {
             return res.status(401).json({ message: "Invalid credentials" });
         }
@@ -49,13 +51,13 @@ authenticationRouter.post('/test', (req, res) => __awaiter(void 0, void 0, void 
         const accessToken = generateToken(user);
         console.log(validPassword);
         const refreshToken = JWT.sign({
-            _id: user._id,
+            id: user._id,
             username: user.username,
             email: user.email,
             role: user.role
         }, process.env.REFRESH_TOKEN, { expiresIn: '1d' });
         const tokenDAO = new TokenDAO();
-        tokenDAO.create({ token: refreshToken, userId: user._id });
+        tokenDAO.create({ token: refreshToken, userId: user.id });
         const userDTO = new UserDTO(user.username, user.email, user.role);
         res.cookie("refreshToken", 'fa', {
             httpOnly: true,
