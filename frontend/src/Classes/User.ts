@@ -10,8 +10,9 @@
     },
     createdAt: { type: Date, default: Date.now }*/
 
+import { ObjectInterface } from "./Object";
+
     export interface UserInterface{
-        _id: string;
         username: string;
         email: string;
         password: string;
@@ -29,7 +30,7 @@
         createdAt?: Date;
       }
       
-class User implements UserInterface{
+class User implements UserInterface, ObjectInterface{
 
     
     username: string;
@@ -46,7 +47,7 @@ class User implements UserInterface{
             zip: string;
         }
 
-    }
+    };
 
     _id: string;
     createdAt: Date;
@@ -56,7 +57,57 @@ class User implements UserInterface{
 
 
     //Default constructor
-    constructor(){
+    constructor(user?: User){
+        this.username = user?.username ?? '';
+        this.email = user?.email ?? '';
+        this.password = user?.password ?? '';
+        this.role = user?.role ?? '';
+        this.profile = {
+            bio: user?.profile?.bio ?? '',
+            profilePicture: user?.profile?.profilePicture ?? '',
+            address: {
+                street: user?.profile?.address?.street ?? '',
+                city: user?.profile?.address?.city ?? '',
+                state: user?.profile?.address?.state ?? '',
+                zip: user?.profile?.address?.zip ?? ''
+            }
+        }
+        this._id = user?._id ?? '';
+        this.createdAt = user?.createdAt ?? new Date();
+    }
+
+    //get id
+    getId(): string {
+        return this._id;
+    }
+
+    //get role
+    getRole() : string{
+        return this.role;
+    }
+
+    //get username
+    getUsername() : string{
+        return this.username;
+    }
+
+    //get email
+    getEmail() : string{
+        return this.email;
+    }
+
+    //get profile
+    getProfile() : { bio: string; profilePicture: string; address: { street: string; city: string; state: string; zip: string; }; }{
+        return this.profile;
+    }
+
+    //get createdAt
+    getCreatedAt() : Date{
+        return this.createdAt;
+    }
+
+
+    reset(){
         this.username = '';
         this.email = '';
         this.password = '';
@@ -70,41 +121,7 @@ class User implements UserInterface{
                 state: '',
                 zip: ''
             }
-        }
-
-        this.reset = this.reset.bind(this);
-    }
-
-    setAttributesFromRow(row: any){
-        this._id = row._id;
-        this.username = row.username;
-        this.email = row.email;
-        this.role = row.role;
-    }
-
-
-    setAttributes(username = '', email = '', password = '', role = '', profile = {bio: '', profilePicture: ''}){
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-        this.profile = profile;
-
-    }
-
-    static getRole(){
-        return ['Admin', 'User', 'Partner', 'Manager', 'Staff'];
-    }
-
-    reset(){
-        this.username = '';
-        this.email = '';
-        this.password = '';
-        this.role = '';
-        this.profile = {
-            bio: '',
-            profilePicture: ''
-        }
+        };
     }
 }
 

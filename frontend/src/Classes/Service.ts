@@ -1,7 +1,7 @@
 import exp from "constants";
-export interface ServiceInterface 
+import { ObjectInterface } from "./Object";
+export interface ServiceInterface
 {
-    _id : string;
     partnerId: string;
     categoryId: string;
     name: string;
@@ -16,7 +16,7 @@ export interface ServiceInterface
     ratings: string[];
     status: string;
 }
-class Service implements ServiceInterface {
+class Service implements ServiceInterface, ObjectInterface  {
   partnerId: string;
   categoryId: string;
   name: string;
@@ -29,19 +29,19 @@ class Service implements ServiceInterface {
   status: string;
   _id: string;
 
-  constructor(service: Service) {
+  constructor(service?: Service) {
 
-        this.partnerId = service.partnerId;
-        this.categoryId = service.categoryId;
-        this.name = service.name;
-        this.description = service.description;
-        this.price = service.price;
-        this.position = service.position;
-        this.range = service.range;
-        this.availability = service.availability;
-        this.ratings = service.ratings;
-        this.status = service.status;
-        this._id = service._id; // Assigned '_id' property
+        this.partnerId = service?.partnerId ?? '';
+        this.categoryId = service?.categoryId ?? '';
+        this.name = service?.name ?? '';
+        this.description = service?.description?? '';
+        this.price = service?.price ?? 0;
+        this.position = service?.position ?? { type: '', coordinates: [0, 0] };
+        this.range = service?.range ?? 0;
+        this.availability = service?.availability ?? false;
+        this.ratings = service?.ratings ?? [];
+        this.status = service?.status ?? '';
+        this._id = service?._id ?? '';
   }
 
 
@@ -158,7 +158,6 @@ class Service implements ServiceInterface {
   //get all data
   getData(): ServiceInterface {
     return {
-      _id: this._id,
       partnerId: this.partnerId,
       categoryId: this.categoryId,
       name: this.name,
