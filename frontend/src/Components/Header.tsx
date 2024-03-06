@@ -13,7 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link, useNavigate } from 'react-router-dom';
-
+import MessageIcon from '@mui/icons-material/Message';
 
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'js-c... Remove this comment to see the full error message
 import Cookies from 'js-cookie';
@@ -242,12 +242,39 @@ function Header() {
          <Box sx={{ flexGrow: 0 }}>
             
             <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
-              
+
+
+
+              <Button variant='outlined' 
+              sx={{color: 'light.main', borderColor: 'light.main',
+              mr: 2,
+              display: { xs: 'none', md: 'flex' }, 
+              //center every thing inside
+              justifyContent: 'center',
+              alignItems: 'center',
+              }}
+
+          
+              >
+                <Link
+                  style={{ color: 'inherit',
+                  textDecoration: 'none' 
+                  //center 
+                    
+
+                
+                }}
+                to='/chat'>
+                  <MessageIcon />
+                </Link>
+              </Button>
+
+
             <Typography sx={{ display: { xs: 'none', md: 'block' },
             mr: 2,
           
             color: 'light.main'
-          }} variant="h6" noWrap component="div">
+             }} variant="h6" noWrap component="div">
               {auth?.user?.username}
             </Typography>
             
