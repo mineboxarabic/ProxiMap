@@ -106,6 +106,10 @@ class User implements UserInterface, ObjectInterface{
         return this.createdAt;
     }
 
+    //set id
+    setId(id: string): void {
+        this._id = id;
+    }
 
     reset(){
         this.username = '';

@@ -7,10 +7,9 @@ import Cookies from 'js-cookie';
 const useLogout = () => {
 
 
-    // @ts-expect-error TS(2339): Property 'setAuth' does not exist on type '{}'.
     const {setAuth} = useAuth();
     const handleLogout =async () => {
-        setAuth(null)
+        setAuth({ user: null, accessToken: '' })
         //Clear cookies
         Cookies.remove('refreshToken');
         Cookies.remove('accessToken');

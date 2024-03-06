@@ -10,6 +10,7 @@ import useAxiosPrivate from '../Hooks/useAxiosPrivate';
 import Card from '@mui/material/Card';
 import styled from '@emotion/styled';
 import FormCard from '../Components/MUI/FormCard';
+import User, { UserInterface } from '../Classes/User';
 
 const StyledTab = styled(Tab)(({ theme }) => ({
   width: '30%',
@@ -52,7 +53,7 @@ function ProfilePage() {
     setTabIndex(newValue);
   };
 
-  const currentUser = useCurrentUser();
+  const currentUser: User = useCurrentUser();
 
 
   const {update: updateUser

@@ -22,7 +22,6 @@ const LogIn = () =>
 
 
 
-    // @ts-expect-error TS(2339): Property 'auth' does not exist on type '{}'.
     const {auth, setAuth} = useAuth();
     const [persist, setPersist] = useLocalStorage('persist', false);
 

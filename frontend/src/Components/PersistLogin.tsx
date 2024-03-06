@@ -8,7 +8,6 @@ import useLocalStorage from "../Hooks/useLocalStorage";
 const PersistLogin = () => {
 
 
-    // @ts-expect-error TS(2339): Property 'auth' does not exist on type '{}'.
     const { auth } = useAuth();
     const refresh = useRefreshToken();
     const [isLoading, setIsLoading] = useState(true);

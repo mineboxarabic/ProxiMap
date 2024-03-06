@@ -27,7 +27,6 @@ const ServiceItem = ({
   const [category, setCategory] = useState(service?.categoryDetails?.[0]);
 
 
-  // @ts-expect-error TS(2339): Property 'auth' does not exist on type '{}'.
   const {auth} = useAuth();
   const [isSameUser, setIsSameUser] = useState(false);
   const [color, setColor] = useState(null);
@@ -106,7 +105,7 @@ const ServiceItem = ({
           width: "95%",
           padding: "10px",
           backgroundColor: color,
-          boxShadow:  auth?.user?._id === partner?._id ?'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px' :  'rgb(38, 57, 77) 0px 20px 30px -10px;',
+          boxShadow:  auth?.user?.getId() === partner?.getId() ?'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px' :  'rgb(38, 57, 77) 0px 20px 30px -10px;',
 
           borderRadius: "10px",
         }}  

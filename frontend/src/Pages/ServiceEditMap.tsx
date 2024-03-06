@@ -5,7 +5,7 @@ const ServiceEditMap = () =>{
     const nameOfClass = 'services';
     const currentUser = useCurrentUser();
     const deafultService = {
-        partnerId: currentUser._id,
+        partnerId: currentUser,
         categoryId: '',
         name: '',
         description: '',

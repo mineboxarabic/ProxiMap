@@ -7,7 +7,6 @@ const useAxiosPrivate = () => {
     const refresh = useRefreshToken();
 
 
-    // @ts-expect-error TS(2339): Property 'auth' does not exist on type '{}'.
     const { auth } = useAuth();
 
     useEffect(() => {

@@ -1,11 +1,12 @@
+import User from "../Classes/User";
 import useAuth from "./useAuth";
 
-const useCurrentUser = () => {
-
-
-    // @ts-expect-error TS(2339): Property 'auth' does not exist on type '{}'.
+const useCurrentUser = () : User => {
     const {auth} = useAuth();
-    return auth?.user;
+
+    const user: User = auth?.user as User;
+
+    return user;
 };
 
 export default useCurrentUser;

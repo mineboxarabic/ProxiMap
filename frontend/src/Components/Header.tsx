@@ -70,9 +70,8 @@ function Header() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
 
-  // @ts-expect-error TS(2339): Property 'auth' does not exist on type '{}'.
   const {auth,setAuth} = useAuth();
-  const role = auth?.user?.role;
+  const role = auth?.user?.role || 'User';
   const navigate = useNavigate();
   const logout = useLogout();
   useEffect(() => {
