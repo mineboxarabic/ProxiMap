@@ -2,7 +2,6 @@
 import { useEffect } from 'react';
 import { useMap } from 'react-leaflet';
 import useLocalStorage from '../Hooks/useLocalStorage';
-import useBounds from '../Hooks/useBounds';
 import 'leaflet-search';
 
 
