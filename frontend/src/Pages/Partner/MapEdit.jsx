@@ -18,7 +18,7 @@ import { Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import SdStorage from "@mui/icons-material/SdStorage";
 import NavigationIcon from "@mui/icons-material/Navigation";
-import NewServiceModal from "./NewServiceModal.js";
+import NewServiceModal from "./NewServiceModal.jsx";
 import useServicesHistory from "../../Hooks/useServicesHistory.js";
 import useResource from "../../Hooks/useResource.js";
 
