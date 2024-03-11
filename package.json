@@ -2,10 +2,10 @@
   "type": "module",
   "scripts": {
     "startDB": "cd ./DB && docker-compose up --build",
-
     "startBE": "cd ./Server && npm run dev",
     "startFE": "cd ./frontend && npm run start",
-    "start": "docker-compose up --build",
+    "start" : "startDB && startBE && startFE",
+    "compose": "docker-compose up --build",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "dependencies": {
@@ -14,7 +14,8 @@
   },
   "devDependencies": {
     "dotenv": "^16.4.1",
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "ts-migrate": "^0.1.35"
   },
   "jest": {
     "transform": {},
