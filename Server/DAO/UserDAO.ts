@@ -116,7 +116,9 @@ class UserDAO implements UserDAOInterface
 
     async exists(id: string): Promise<boolean> {
         console.log('idx', id);
-        return (await User.exists({ _id: id })) !== null;
+       
+        //return false;
+         return (await User.exists({ _id: id })) !== null;
 
     }
 

@@ -95,7 +95,8 @@ function ProfilePage() {
         }
       }
     }
-    
+
+    console.log(updatedUser);
     updateUser(updatedUser);
 
 

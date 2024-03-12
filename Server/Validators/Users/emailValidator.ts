@@ -1,4 +1,5 @@
-import  UserDAO  from "../../DAO/UserDAO.js";
+import  UserDAO, { UserResult }  from "../../DAO/UserDAO.js";
+import { UserInterface } from "../../Models/User.js";
 
 
 const emailValidator = {
@@ -9,8 +10,11 @@ const emailValidator = {
             options:async (value: any, {
                 req
             }: any) => {
+
                 const userDAO = new UserDAO();
-                const user = await userDAO.findByEmail(value);
+                
+       
+                const user: UserInterface = await userDAO.findByEmail(value) as UserInterface;
 
                 const requestMethod = req.method;
 
@@ -20,14 +24,15 @@ const emailValidator = {
                     }
                 }
                 else if(requestMethod === "PUT"){
-                    const idFromFoundUser = userDAO.exists(value);
-                    const idFromRequest = req.params.id;
                     if(user){
+                        const idFromFoundUser = user && user._id.toString();
+                        const idFromRequest = req.params.id;
                         if(idFromFoundUser !== idFromRequest){
                             throw new Error("Email already exists");
                         }
                     }
                 }
+
 
                 return true;
             },

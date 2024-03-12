@@ -1,4 +1,6 @@
 Server/node_modules
+Server/dist
 frontend/node_modules
+
 node_modules
 coverage

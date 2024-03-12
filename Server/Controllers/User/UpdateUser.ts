@@ -6,6 +6,7 @@ const updateUser = async (req: any, res: any) => {
     const userDAO = new UserDAO();
     const id = req.params.id;
 
+
     const user = await userDAO.updateById(id, req.body);
 
     if (!user) {

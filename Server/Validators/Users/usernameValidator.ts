@@ -1,4 +1,5 @@
 import UserDAO from "../../DAO/UserDAO.js";
+import { UserInterface } from "../../Models/User.js";
 
 const usernameValidator = {
         isString: true,
@@ -15,7 +16,7 @@ const usernameValidator = {
                 req
             }: any) => {
                 const userDAO = new UserDAO();
-                const user = await userDAO.findByUserName(value);
+                const user: UserInterface = await userDAO.findByUserName(value) as UserInterface;
 
                 const requestType = req.method;
 
@@ -25,21 +26,13 @@ const usernameValidator = {
                     }
                 }
                 else if(requestType === "PUT"){
-                   // const idFromFoundUser = user && user._id.toString();
-                    const idFromRequest = req.params.id;
-    
-                    const idFromFoundUser = await userDAO.exists(idFromRequest)
-                    console.log('idFromFoundUser2', idFromFoundUser);
-
-
-                    if(!idFromFoundUser && idFromRequest){
-                        throw new Error("Username already exists");
-                    }
-                    /*if(user){
+                    if(user){
+                        const idFromFoundUser = user && user._id.toString();
+                        const idFromRequest = req.params.id;
                         if(idFromFoundUser !== idFromRequest){
                             throw new Error("Username already exists");
                         }
-                    }*/
+                    }
                 }
 
                 return true;
