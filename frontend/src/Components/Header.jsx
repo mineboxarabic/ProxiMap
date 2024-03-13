@@ -22,6 +22,7 @@ import { useEffect } from 'react';
 import AddLocationIcon from '@mui/icons-material/AddLocation';
 import { ADMIN, USER, PARTNER, MANAGER, STAFF } from '../Helpers/Roles';
 import { Badge } from '@mui/material';
+import MessageIcon from '@mui/icons-material/Message';
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = [ 'Account', 'Dashboard', 'Logout'];
 
@@ -235,6 +236,17 @@ function Header() {
             
             <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
               
+
+            <IconButton onClick={()=>{ navigate('/chat', { replace: true });}} sx={{ p: 0 
+            }}>
+              <MessageIcon sx={{ color: 'light.main', 
+              fontSize: 25,
+              marginRight: 1,
+              marginLeft: 1,
+              mb: 1
+            }} />
+            </IconButton>
+
             <Typography sx={{ display: { xs: 'none', md: 'block' },
             mr: 2,
           

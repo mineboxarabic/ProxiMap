@@ -25,6 +25,7 @@ import ServiceEditMap from './Pages/ServiceEditMap';
 import AskedServiceEditMap from './Pages/AskedServicesEditMap';
 import FilteredMap from './Pages/FilteredMap/FilteredMap';
 import CRUDAskedService from './Pages/Admin/CRUD/CRUDAskedService';
+import Chat from './Pages/Chat';
 
 
 
@@ -43,7 +44,7 @@ function App() {
           <Route path='/home'  element={<Home />} />
 
           <Route path='/login' element={<LogIn />} />
-
+          <Route path='/chat' element={<Chat />} />
           {/*Parnter only orutes */}
           <Route element={<RequireAuth allowedRoles={[PARTNER, ADMIN]} />}>
             <Route path='/services/edit' element={<ServiceEditMap />} />

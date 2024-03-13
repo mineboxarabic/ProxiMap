@@ -62,3 +62,32 @@ export const categoryRoutes ={
     }
 }
 
+export const chatRoutes ={
+    create: {
+        allowedRoles: ['Admin', 'Manager', 'Staff', 'User', 'Partner']
+    },
+    read: {
+        allowedRoles: ['Admin', 'Manager', 'Staff', 'User', 'Partner']
+    },
+    update: {
+        allowedRoles: ['Admin', 'Manager', 'Staff', 'User', 'Partner']
+    },
+    delete: {
+        allowedRoles: ['Admin', 'Manager', 'Staff', 'User', 'Partner']
+    }
+}
+
+export const messageRoutes ={
+    create: {
+        allowedRoles: ['Admin', 'Manager', 'Staff', 'User', 'Partner']
+    },
+    read: {
+        allowedRoles: ['Admin', 'Manager', 'Staff', 'User', 'Partner']
+    },
+    update: {
+        allowedRoles: ['Admin', 'Manager', 'Staff', 'User', 'Partner']
+    },
+    delete: {
+        allowedRoles: ['Admin', 'Manager', 'Staff', 'User', 'Partner']
+    }
+}
