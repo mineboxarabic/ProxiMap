@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
 import createMessage from '../Controllers/Message/createMessage.js';
 import readMessage from '../Controllers/Message/readMessage.js';
-import readMessages from '../Controllers/Message/readMessages.js';
+import readMessages, { readMessagesInChat } from '../Controllers/Message/readMessages.js';
 import deleteMessage from '../Controllers/Message/deleteMessage.js';
 import checkId from '../Validators/CheckMongoId.js';
 import { messageRoutes } from '../Config/AuthConfig.js';
@@ -27,10 +27,9 @@ readMessage);
 
 // Get the list of messages in a chat
 messageRouter.get('/messages/chat/:chatId',
-checkId,
 ValidateRes,
 (req:Request, res:Response, next:NextFunction)  => autherizeUserRole(req, res, next, messageRoutes.read.allowedRoles),
-readMessages);
+readMessagesInChat);
 
 // Delete a message
 messageRouter.delete('/messages/:id',

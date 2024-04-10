@@ -26,7 +26,6 @@ authenticationRouter.post('/refresh', RefreshToken)
 authenticationRouter.post('/logout',authenticateUser, LogOut)
 
 authenticationRouter.get('/cookie', async (req: any, res: any) => {
-    console.log('cookies: ', req.cookies)
     res.status(200).json({
         cookies: req.cookies
     })

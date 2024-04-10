@@ -1,6 +1,7 @@
-import { Error } from "mongoose";
+import { Error, mongo } from "mongoose";
 import Message, { MessageInterface } from "../Models/Message.js";
 import DatabaseError from "./DataBaseError/DatabaseError.js";
+import { ObjectId } from "mongodb";
 
 interface MessageDAOInterface {
     create(message: Partial<MessageInterface>): Promise<MessageResult>;
@@ -10,12 +11,23 @@ interface MessageDAOInterface {
     findAllByChatId(chatId: string): Promise<MessageArrayResult>;
     exists(id: string): Promise<boolean>;
     findAll(): Promise<MessageArrayResult>;
+    findAllById(id:string): Promise<MessageArrayResult>;
 }
 
 export type MessageResult = MessageInterface | DatabaseError | null;
 export type MessageArrayResult = MessageInterface[] | DatabaseError | null;
 
 class MessageDAO implements MessageDAOInterface {
+
+    async findAllById(id:string): Promise<MessageArrayResult> {
+        try {
+            const messages = await Message.find({ 'chatId': id }).exec();
+            return messages;
+        } catch (error) {
+            return new DatabaseError('Error finding all messages', error);
+        }
+    }
+
     async create(message: Partial<MessageInterface>): Promise<MessageResult> {
         try {
             const newMessage = new Message(message);

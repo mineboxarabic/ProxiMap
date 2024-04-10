@@ -1,8 +1,9 @@
 import mongoose, { Schema, Document } from 'mongoose';
+import { ObjectId } from 'mongoose';
 
 export interface MessageInterface extends Document {
-  chatId: mongoose.Schema.Types.ObjectId;
-  sender: mongoose.Schema.Types.ObjectId;
+  chatId: ObjectId;
+  sender: ObjectId;
   text: string;
   createdAt: Date;
 }

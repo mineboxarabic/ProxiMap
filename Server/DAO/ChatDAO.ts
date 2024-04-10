@@ -1,4 +1,4 @@
-import { Error } from "mongoose";
+import mongoose, { Error } from "mongoose";
 import Chat, { ChatInterface } from "../Models/Chat.js";
 import DatabaseError from "./DataBaseError/DatabaseError.js";
 
@@ -9,12 +9,31 @@ interface ChatDAOInterface {
     updateById(id: string, chat: ChatInterface): Promise<ChatResult>;
     findAll(): Promise<ChatArrayResult>;
     exists(id: string): Promise<boolean>;
+    findByUserId(userId: string): Promise<ChatArrayResult>;
 }
 
 export type ChatResult = ChatInterface | DatabaseError | null;
 export type ChatArrayResult = ChatInterface[] | DatabaseError | null;
 
 class ChatDAO implements ChatDAOInterface {
+
+    async findByUserId(userId: string): Promise<ChatArrayResult> {
+        try {
+
+            const objectId = new mongoose.Types.ObjectId(userId);
+  
+
+            const chats = await Chat.find({ participants:{ $in: [objectId]}});
+                        
+           // console.log(`${chats.length} chats found for userId ${objectId}`);
+
+            return chats;
+        } catch (error) {
+            return new DatabaseError('Error finding chat by user ID', error);
+        }
+    }
+
+
     async create(chat: Partial<ChatInterface>): Promise<ChatResult> {
         try {
             const newChat = new Chat(chat);

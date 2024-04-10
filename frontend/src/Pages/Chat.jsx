@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box } from '@mui/system';
+import ChatList from '../Components/chat/ChatList';
+import { useState } from 'react';
+import ChatPage from '../Components/chat/ChatPage';
+
 
 const Chat = () => {
+
+
+
+    const [selectedChat, setSelectedChat] = useState(null);
+
+    useEffect(() => {
+        console.log(selectedChat);
+    }, [selectedChat]);
+
     return (
         <Box
             sx={{
@@ -22,7 +35,7 @@ const Chat = () => {
                 width: '30%',
             }}
             >
-           
+           <ChatList setSelectedChat={setSelectedChat}/>
             </Box>
 
             <Box
@@ -31,7 +44,7 @@ const Chat = () => {
                     width: '70%',
                 }}
             >
-
+                <ChatPage selectedChat={selectedChat} />
             </Box>
 
 

@@ -19,5 +19,23 @@ const readMessage = async (req:Request, res:Response) => {
         });
     }
 };
+export const readMessagesInChat =async (req:Request, res:Response) => {
+    const messageDAO = new MessageDAO();
+    const id = req.params.chatId;
+    console.log("Finding all messages", id);
 
+    const message = await messageDAO.findAllById(id);
+
+    if(message) {
+        res.status(200).json({
+            success: true,
+            message: message
+        });
+    } else {
+        res.status(404).json({
+            success: false,
+            message: "Message not found"
+        });
+    }
+}; 
 export default readMessage;

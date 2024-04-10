@@ -11,6 +11,8 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import categoryRoute from './Routes/CategoryRouter.js';
 import path from 'path';
+import chatRouter from './Routes/ChatRouter.js';
+import messageRouter from './Routes/MessageRouter.js';
 dotenv.config();
 const application = express();
 const __dirname = path.resolve();
@@ -37,6 +39,8 @@ application.use(askedServiceRouter);
 application.use(tokenRouter);
 application.use(authenticationRouter);
 application.use(categoryRoute);
+application.use(chatRouter);
+application.use(messageRouter);
 console.log(process.env.BASE_URL);
 //Type this in the terminal to create an infinite JWT token:
 export default application;

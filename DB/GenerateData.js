@@ -7,6 +7,8 @@ const client = new MongoClient(url);
 import USERS_DATA from './USERS_DATA.js';
 import CATEGORIES_DATA from './CATEGORIES_DATA.js';
 import SERVICES_DATA from './SERVICES_DATA.js';
+import CHATS_DATA from './CHATS_DATA.js';
+import MESSAGES_DATA from './MESSAGES_DATA.js';
 
 const createUsers = async (db, numberOfUsers) => {
     let users = [];
@@ -162,6 +164,43 @@ const createAskedServices = async (db, numberOfServices, users, categories) => {
 
 }
 
+
+const createChats = async (db, numberOfChats, users) => {
+    let chats = [];
+    for (let i = 0; i < numberOfChats; i++) {
+        const participants = [users[Math.floor(Math.random() * users.length)]._id, users[Math.floor(Math.random() * users.length)]._id];
+        chats.push({
+            participants: participants,
+            createdAt: faker.date.recent(),
+            updatedAt: faker.date.recent()
+        });
+    }
+
+    await db.collection('chats').insertMany(chats); // Make sure to await this operation
+
+
+};
+
+const createMessages = async (db, numberOfMessages, chats, users) => {
+    /*chatId: ObjectId;
+  sender: ObjectId;
+  text: string;
+  createdAt: Date; */
+
+    let messages = [];
+    for (let i = 0; i < numberOfMessages; i++) {
+        const chat = chats[Math.floor(Math.random() * chats.length)];
+        const sender = chat.participants[Math.floor(Math.random() * chat.participants.length)];
+        messages.push({
+            chatId: chat._id,
+            sender: sender,
+            text: faker.lorem.sentence(),
+            createdAt: faker.date.recent()
+        });
+    }
+
+    await db.collection('messages').insertMany(messages); // Make sure to await this operation
+}
 async function run() {
     try {
         await client.connect();
@@ -169,31 +208,40 @@ async function run() {
 
         const db = client.db(dbName);
 
-        // Clean up the users collection before inserting new fake users
+        //_ Users
         await db.collection('users').deleteMany({});
         await createUsers(db, 1000); // This now properly awaits the asynchronous operation
-
         await db.collection('users').insertMany(USERS_DATA); // Make sure to await this operation
 
-        // Clean up the categories collection before inserting new fake categories
+        //_ Categories
+        await db.collection('categories').deleteMany({});
+        await db.collection('categories').insertMany(CATEGORIES_DATA)
+        await createCategories(db, 50); // This now properly awaits the asynchronous operation
 
-      await db.collection('categories').deleteMany({});
-      await db.collection('categories').insertMany(CATEGORIES_DATA)
-
-       await createCategories(db, 50); // This now properly awaits the asynchronous operation
 
         const users = await db.collection('users').find().toArray();
         const categories = await db.collection('categories').find().toArray();
 
-        // Clean up the services collection before inserting new fake services
+        //_ Chats
+        await db.collection('chats').deleteMany({});
+        await db.collection('chats').insertMany(CHATS_DATA); // Make sure to await this operation
+        await createChats(db, 100, users); // This now properly awaits the asynchronous operation
+
+
+        const chats = await db.collection('chats').find().toArray();
+        //_ Messages
+        await db.collection('messages').deleteMany({});
+        await db.collection('messages').insertMany(MESSAGES_DATA); // Make sure to await this operation
+        await createMessages(db, 100, chats, users); // This now properly awaits the asynchronous operation
+
+        //_ Services
         await db.collection('services').deleteMany({});
         await db.collection('services').insertMany(SERVICES_DATA); // Make sure to await this operation
         await createServices(db, 100, users, categories); // This now properly awaits the asynchronous operation
 
 
-        // Clean up the askedServices collection before inserting new fake askedServices
+        //_ AskedServices
        await db.collection('askedservices').deleteMany({});
-       // await db.collection('askedservices').insertMany(SERVICES_DATA); // Make sure to await this operation
        await createAskedServices(db, 100, users, categories); // This now properly awaits the asynchronous operation
 
 

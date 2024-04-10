@@ -9,6 +9,7 @@ import { chatRoutes } from '../Config/AuthConfig.js';
 import ValidateRes from '../Validators/ValidateRes.js';
 import { autherizeUserRole } from '../Utilities/JWTUtil.js';
 import isChatExist from '../Validators/chatValidator/isChatExist.js';
+import readUsersChats from '../Controllers/Chat/readUsersChats.js';
 
 const chatRouter: Router = express.Router();
 
@@ -24,6 +25,11 @@ isChatExist,
 ValidateRes,
 (req:Request, res:Response, next:NextFunction) => autherizeUserRole(req, res, next, chatRoutes.read.allowedRoles),
 readChat);
+
+// Get the list of chats of a user
+chatRouter.get('/chats/user/:id',
+(req:Request, res:Response, next:NextFunction) => autherizeUserRole(req, res, next, chatRoutes.read.allowedRoles),
+readUsersChats);
 
 // Get the list of chats
 chatRouter.get('/chats',

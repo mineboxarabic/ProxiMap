@@ -5,6 +5,8 @@ COPY GenerateData.js ./
 COPY USERS_DATA.js ./
 COPY CATEGORIES_DATA.js ./
 COPY SERVICES_DATA.js ./
+COPY CHATS_DATA.js ./
+COPY MESSAGES_DATA.js ./
 
 RUN npm init -y
 RUN apt-get update && apt-get install -y jq
