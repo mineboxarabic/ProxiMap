@@ -7,7 +7,7 @@ ProxiMap is an interactive service map application designed to connect users wit
 ## Features
 
 - **User Account Management:** Secure registration and login, profile customization, and user management by admins.
-  ![](https://i.ibb.co/QMnWVQs/ProxiMap.gif)
+  ![](https://github.com/mineboxarabic/ProxiMap/blob/main/SreenShots/ProxiMap.gif?raw=true)
 - **Communication and Interaction:** In-app chat, a report and complaint system, and service quality oversight by admins.
 - **Service Management:** Posting/viewing offers, advanced search functionality, list view with filters, and partner-specific features.
 - **Category and Content Management:** CRUD operations for service categories, customizable content for admins.
