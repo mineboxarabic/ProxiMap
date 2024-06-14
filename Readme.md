@@ -11,13 +11,9 @@ ProxiMap is an interactive service map application designed to connect users wit
 - **Communication and Interaction:** In-app chat, a report and complaint system, and service quality oversight by admins.
   ![](https://github.com/mineboxarabic/ProxiMap/blob/main/SreenShots/ProxiMap.gif?raw=true)
 - **Service Management:** Posting/viewing offers, advanced search functionality, list view with filters, and partner-specific features.
+  ![](https://github.com/mineboxarabic/ProxiMap/blob/main/SreenShots/Filter.gif?raw=true)
 - **Category and Content Management:** CRUD operations for service categories, customizable content for admins.
-- **Regional and Language Features:** Services filtered by regions, multi-language support.
-- **Ratings and Feedback:** User rating system, achievement system for active and quality participation.
-- **Security and Compliance:** Banning system, data protection, and security measures.
-- **Financial Transactions:** Secure payment system integration.
-- **Technical and Operational:** Performance optimization, efficient database management, Jest for testing, CI/CD using Docker.
-
+![](https://github.com/mineboxarabic/ProxiMap/blob/main/SreenShots/CRUD.gif?raw=true)
 ## Installation
 
 1. **Clone the Repository**
