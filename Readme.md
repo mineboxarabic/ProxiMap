@@ -14,6 +14,8 @@ ProxiMap is an interactive service map application designed to connect users wit
   ![](https://github.com/mineboxarabic/ProxiMap/blob/main/SreenShots/Filter.gif?raw=true)
 - **Category and Content Management:** CRUD operations for service categories, customizable content for admins.
 ![](https://github.com/mineboxarabic/ProxiMap/blob/main/SreenShots/CRUD.gif?raw=true)
+
+![](https://github.com/mineboxarabic/ProxiMap/blob/main/SreenShots/ProxiMap%20(online-video-cutter.com).gif?raw=true)
 ## Installation
 
 1. **Clone the Repository**
