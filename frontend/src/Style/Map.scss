@@ -6,8 +6,115 @@ $height-map-mobile: 85vh;
 }
 
 #mapid {
-  //@include full-size;
   height: 80vh;
+  border-radius: 16px;
+  overflow: hidden;
+  
+  // Modern Leaflet Controls
+  .leaflet-control-container {
+    .leaflet-control-zoom {
+      border: none;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(50, 159, 178, 0.2);
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+      
+      a {
+        border: none;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(50, 159, 178, 0.05) 100%);
+        backdrop-filter: blur(20px);
+        color: #329FB2;
+        font-weight: 700;
+        font-size: 18px;
+        transition: all 0.3s ease-in-out;
+        border: 1px solid rgba(50, 159, 178, 0.2);
+        
+        &:hover {
+          background: linear-gradient(135deg, #329FB2 0%, #40E0D0 100%);
+          color: white;
+          transform: scale(1.05);
+          box-shadow: 0 4px 16px rgba(50, 159, 178, 0.4);
+        }
+        
+        &:first-child {
+          border-radius: 16px 16px 0 0;
+        }
+        
+        &:last-child {
+          border-radius: 0 0 16px 16px;
+        }
+      }
+    }
+    
+    .leaflet-control-attribution {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(50, 159, 178, 0.05) 100%);
+      backdrop-filter: blur(20px);
+      border-radius: 12px;
+      border: 1px solid rgba(50, 159, 178, 0.2);
+      box-shadow: 0 4px 16px rgba(50, 159, 178, 0.1);
+      font-size: 11px;
+      font-weight: 500;
+      margin: 8px;
+      padding: 4px 8px;
+      color: #329FB2;
+      
+      a {
+        color: #329FB2;
+        text-decoration: none;
+        font-weight: 600;
+        
+        &:hover {
+          color: #40E0D0;
+        }
+      }
+    }
+  }
+  
+  // Custom marker animations
+  .leaflet-marker-icon {
+    transition: all 0.3s ease-in-out;
+    filter: drop-shadow(0 4px 8px rgba(50, 159, 178, 0.3));
+    
+    &:hover {
+      transform: scale(1.2);
+      filter: drop-shadow(0 8px 16px rgba(50, 159, 178, 0.5));
+    }
+  }
+  
+  // Popup styling
+  .leaflet-popup {
+    .leaflet-popup-content-wrapper {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(50, 159, 178, 0.05) 100%);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      border: 1px solid rgba(50, 159, 178, 0.2);
+      box-shadow: 0 8px 32px rgba(50, 159, 178, 0.2);
+      color: #1F4256;
+      
+      .leaflet-popup-content {
+        margin: 16px;
+        font-family: "Inter", "Roboto", "Helvetica", "Arial", sans-serif;
+      }
+    }
+    
+    .leaflet-popup-tip {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(50, 159, 178, 0.2);
+    }
+    
+    .leaflet-popup-close-button {
+      color: #329FB2;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 8px;
+      
+      &:hover {
+        color: #40E0D0;
+        background: rgba(50, 159, 178, 0.1);
+        border-radius: 50%;
+      }
+    }
+  }
 }
 
 .main-container {
@@ -165,9 +272,6 @@ $height-map-mobile: 85vh;
 
 
     }
-    .drawer-buttons{
-
-    }
   }
 
 }
@@ -175,29 +279,45 @@ $height-map-mobile: 85vh;
 
 
 .circle {
-  //"#1077EF" : "#78B9EB"
-  fill: #78B9EB;
-  stroke: #1077EF;
-  transition: 0.1s ease; // Assuming you can transition the stroke color
+  fill: #4FB3C5; // Using theme primary light
+  stroke: #329FB2; // Using theme primary main
+  stroke-width: 3;
+  filter: drop-shadow(0 4px 8px rgba(50, 159, 178, 0.4));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 
   &:hover {
-
-      stroke: #1077EF; // Changes the border color of the circle on hover
-      fill: #1077EF; // Changes the fill color of the circle on hover
-    }
+    stroke: #2A8396; // Using theme primary dark
+    fill: #329FB2; // Using theme primary main
+    filter: drop-shadow(0 8px 16px rgba(50, 159, 178, 0.6));
+    transform: scale(1.15);
+    stroke-width: 4;
+  }
+  
+  &:active {
+    transform: scale(1.05);
+  }
 }
 
-.same-user{
-  fill: #599965;
-  stroke: #4a7a32;
-  transition: 0.1s ease; // Assuming you can transition the stroke color
+.same-user {
+  fill: #6EE6D9; // Using theme secondary light
+  stroke: #40E0D0; // Using theme secondary main
+  stroke-width: 3;
+  filter: drop-shadow(0 4px 8px rgba(64, 224, 208, 0.4));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 
   &:hover {
-
-      stroke: #4a7a32; // Changes the border color of the circle on hover
-      fill: #4a7a32; // Changes the fill color of the circle on hover
-    }
-
+    stroke: #36C2B4; // Using theme secondary dark
+    fill: #40E0D0; // Using theme secondary main
+    filter: drop-shadow(0 8px 16px rgba(64, 224, 208, 0.6));
+    transform: scale(1.15);
+    stroke-width: 4;
+  }
+  
+  &:active {
+    transform: scale(1.05);
+  }
 }
 .asked{
   display: none;

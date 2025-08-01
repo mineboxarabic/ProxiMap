@@ -1,5 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Box, FormControl, InputLabel, Select, MenuItem, Typography, Slider, FormGroup, FormControlLabel, Checkbox, TextField } from '@mui/material';
+import { 
+  Box, 
+  FormControl, 
+  InputLabel, 
+  Select, 
+  MenuItem, 
+  Typography, 
+  Slider, 
+  FormGroup, 
+  FormControlLabel, 
+  Checkbox, 
+  TextField,
+  Grid,
+  Chip,
+  Stack,
+  Divider
+} from '@mui/material';
+import { useTheme, alpha } from '@mui/material/styles';
 import Rating from '@mui/material/Rating';
 import useAxiosPrivate from '../Hooks/useAxiosPrivate';
 import useGeneral from '../Hooks/useGeneral';
@@ -8,6 +25,7 @@ import { Autocomplete } from '@mui/material';
 function ServiceFilter({
   onFilterChange
 }: any) {
+  const theme = useTheme();
   const [categoryId, setCategoryId] = useState('');
   const [priceRange, setPriceRange] = useState([0, 10]);
   const [availability, setAvailability] = useState(false);
