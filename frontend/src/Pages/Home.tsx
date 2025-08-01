@@ -64,11 +64,11 @@ const slideInUp = keyframes`
 const HeroSection = styled(Box)(({ theme }) => ({
   minHeight: '100vh',
   background: `linear-gradient(135deg, 
-    ${alpha(theme.palette.primary.main, 0.1)} 0%, 
-    ${alpha(theme.palette.secondary.main, 0.05)} 25%, 
-    ${alpha(theme.palette.primary.main, 0.05)} 50%, 
-    ${alpha(theme.palette.secondary.main, 0.1)} 75%, 
-    ${alpha(theme.palette.primary.main, 0.05)} 100%)`,
+    ${alpha(theme.palette.background.default, 1)} 0%, 
+    ${alpha(theme.palette.primary.main, 0.03)} 25%, 
+    ${alpha(theme.palette.secondary.main, 0.02)} 50%, 
+    ${alpha(theme.palette.primary.main, 0.05)} 75%, 
+    ${alpha(theme.palette.background.default, 1)} 100%)`,
   backgroundSize: '400% 400%',
   animation: `${gradientShift} 20s ease infinite`,
   display: 'flex',
@@ -82,32 +82,33 @@ const HeroSection = styled(Box)(({ theme }) => ({
     left: 0,
     right: 0,
     bottom: 0,
-    background: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23329FB2' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+    background: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23329FB2' fill-opacity='0.02'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
   },
 }));
 
 const FloatingCard = styled(Card)(({ theme }) => ({
   animation: `${float} 6s ease-in-out infinite`,
-  background: `linear-gradient(135deg, ${alpha(theme.palette.common.white, 0.95)} 0%, ${alpha(theme.palette.grey[100], 0.8)} 100%)`,
+  background: `linear-gradient(135deg, ${alpha(theme.palette.common.white, 0.95)} 0%, ${alpha(theme.palette.primary.main, 0.02)} 100%)`,
   backdropFilter: 'blur(20px)',
-  border: `1px solid ${alpha(theme.palette.grey[300], 0.3)}`,
+  border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
   borderRadius: theme.spacing(3),
   transition: 'all 0.3s ease-in-out',
   '&:hover': {
     transform: 'translateY(-10px) scale(1.02)',
     boxShadow: `0 20px 40px ${alpha(theme.palette.primary.main, 0.15)}`,
+    border: `1px solid ${alpha(theme.palette.primary.main, 0.2)}`,
   },
 }));
 
 const GlassCard = styled(Card)(({ theme }) => ({
-  background: `linear-gradient(135deg, ${alpha(theme.palette.common.white, 0.4)} 0%, ${alpha(theme.palette.grey[50], 0.2)} 100%)`,
+  background: `linear-gradient(135deg, ${alpha(theme.palette.common.white, 0.6)} 0%, ${alpha(theme.palette.primary.main, 0.03)} 100%)`,
   backdropFilter: 'blur(10px)',
-  border: `1px solid ${alpha(theme.palette.grey[300], 0.2)}`,
+  border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
   borderRadius: theme.spacing(2),
   transition: 'all 0.3s ease-in-out',
   '&:hover': {
     transform: 'translateY(-5px)',
-    background: `linear-gradient(135deg, ${alpha(theme.palette.common.white, 0.6)} 0%, ${alpha(theme.palette.grey[100], 0.3)} 100%)`,
+    background: `linear-gradient(135deg, ${alpha(theme.palette.common.white, 0.8)} 0%, ${alpha(theme.palette.primary.main, 0.05)} 100%)`,
     border: `1px solid ${alpha(theme.palette.primary.main, 0.2)}`,
     boxShadow: `0 8px 32px ${alpha(theme.palette.primary.main, 0.1)}`,
   },
@@ -154,13 +155,13 @@ const Home = () => {
       icon: <Security sx={{ fontSize: 40 }} />,
       title: 'Trusted Providers',
       description: 'All service providers are verified and rated by our community for your peace of mind.',
-      color: theme.palette.info.main
+      color: theme.palette.secondary.main
     },
     {
       icon: <Speed sx={{ fontSize: 40 }} />,
       title: 'Instant Booking',
       description: 'Book services instantly with real-time availability and immediate confirmation.',
-      color: theme.palette.warning.main
+      color: theme.palette.info.main
     },
     {
       icon: <Star sx={{ fontSize: 40 }} />,
@@ -186,7 +187,7 @@ const Home = () => {
   ];
 
   return (
-    <Box sx={{ overflow: 'hidden' }}>
+    <Box sx={{ overflow: 'hidden', pt: { xs: 8, md: 9 } }}>
       {/* Hero Section */}
       <HeroSection>
         <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
@@ -199,7 +200,7 @@ const Home = () => {
                     sx={{
                       fontSize: { xs: '2.5rem', md: '4rem' },
                       fontWeight: 800,
-                      background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+                      background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
                       backgroundClip: 'text',
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
@@ -313,8 +314,26 @@ const Home = () => {
       </HeroSection>
 
       {/* Stats Section */}
-      <AnimatedSection sx={{ py: 8, background: theme.palette.grey[900] }}>
-        <Container maxWidth="lg">
+      <AnimatedSection sx={{ 
+        py: 8, 
+        background: `linear-gradient(135deg, 
+          ${theme.palette.primary.dark} 0%, 
+          ${theme.palette.primary.main} 50%, 
+          ${theme.palette.secondary.dark} 100%)`,
+        position: 'relative',
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: `linear-gradient(45deg, ${alpha(theme.palette.primary.light, 0.1)} 25%, transparent 25%, transparent 75%, ${alpha(theme.palette.secondary.light, 0.05)} 75%)`,
+          backgroundSize: '60px 60px',
+          animation: 'move 3s linear infinite',
+        },
+      }}>
+        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
           <Grid container spacing={4}>
             {stats.map((stat, index) => (
               <Grid item xs={6} md={3} key={index}>
@@ -325,11 +344,18 @@ const Home = () => {
                       fontWeight: 800,
                       color: theme.palette.common.white,
                       mb: 1,
+                      textShadow: `2px 2px 4px ${alpha(theme.palette.common.black, 0.3)}`,
                     }}
                   >
                     {stat.number}
                   </Typography>
-                  <Typography variant="body1" sx={{ color: theme.palette.grey[300] }} fontWeight={500}>
+                  <Typography 
+                    variant="body1" 
+                    sx={{ 
+                      color: alpha(theme.palette.common.white, 0.9),
+                      fontWeight: 500
+                    }}
+                  >
                     {stat.label}
                   </Typography>
                 </Box>
@@ -393,7 +419,13 @@ const Home = () => {
       </AnimatedSection>
 
       {/* Categories Section */}
-      <AnimatedSection sx={{ py: 12, background: theme.palette.grey[50] }}>
+      <AnimatedSection sx={{ 
+        py: 12, 
+        background: `linear-gradient(135deg, 
+          ${alpha(theme.palette.background.default, 1)} 0%, 
+          ${alpha(theme.palette.primary.main, 0.02)} 50%, 
+          ${alpha(theme.palette.secondary.main, 0.01)} 100%)`
+      }}>
         <Container maxWidth="lg">
           <Box sx={{ textAlign: 'center', mb: 8 }}>
             <Typography
@@ -420,12 +452,14 @@ const Home = () => {
                     textAlign: 'center',
                     cursor: 'pointer',
                     transition: 'all 0.3s ease-in-out',
-                    background: `linear-gradient(135deg, ${theme.palette.common.white} 0%, ${theme.palette.grey[50]} 100%)`,
-                    border: `1px solid ${theme.palette.grey[200]}`,
+                    background: `linear-gradient(135deg, ${theme.palette.common.white} 0%, ${alpha(theme.palette.primary.main, 0.02)} 100%)`,
+                    border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
+                    borderRadius: theme.spacing(2),
                     '&:hover': {
                       transform: 'translateY(-8px)',
-                      boxShadow: `0 16px 40px ${alpha(theme.palette.primary.main, 0.1)}`,
+                      boxShadow: `0 16px 40px ${alpha(theme.palette.primary.main, 0.15)}`,
                       background: `linear-gradient(135deg, ${theme.palette.common.white} 0%, ${alpha(theme.palette.primary.main, 0.05)} 100%)`,
+                      border: `1px solid ${alpha(theme.palette.primary.main, 0.2)}`,
                     },
                   }}
                 >
@@ -465,7 +499,7 @@ const Home = () => {
       <AnimatedSection
         sx={{
           py: 12,
-          background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+          background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
           position: 'relative',
           overflow: 'hidden',
           '&::before': {
@@ -475,7 +509,7 @@ const Home = () => {
             left: 0,
             right: 0,
             bottom: 0,
-            background: `linear-gradient(45deg, ${alpha(theme.palette.primary.light, 0.1)} 25%, transparent 25%, transparent 75%, ${alpha(theme.palette.primary.light, 0.1)} 75%)`,
+            background: `linear-gradient(45deg, ${alpha(theme.palette.primary.light, 0.1)} 25%, transparent 25%, transparent 75%, ${alpha(theme.palette.secondary.light, 0.1)} 75%)`,
             backgroundSize: '60px 60px',
             animation: 'move 3s linear infinite',
           },
