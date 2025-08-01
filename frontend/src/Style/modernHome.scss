@@ -1,0 +1,237 @@
+// Modern Home Page Styles - Using ProxiMap Color Palette
+
+$primary: #329FB2;
+$primary-dark: #2C8A9B;
+$dark: #303949;
+$bg-form: #425463;
+$light: #dfdfdf;
+$lighter: #4BC3D0;
+$very-light: #91F1F6;
+$own-service: #82E184;
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(50, 159, 178, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(50, 159, 178, 0.6);
+  }
+}
+
+// Smooth scrolling
+html {
+  scroll-behavior: smooth;
+}
+
+// Custom scrollbar using ProxiMap colors
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $light;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $primary;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $primary-dark;
+}
+
+// Glassmorphism effect using ProxiMap colors
+.glass-effect {
+  background: rgba(223, 223, 223, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(50, 159, 178, 0.2);
+  border-radius: 16px;
+}
+
+// Gradient text effect using ProxiMap colors
+.gradient-text {
+  background: linear-gradient(135deg, $primary 0%, $dark 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// Hover animations
+.hover-lift {
+  transition: all 0.3s ease-in-out;
+  
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.hover-scale {
+  transition: all 0.3s ease-in-out;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+// Animated background patterns using ProxiMap colors
+.animated-bg {
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(50, 159, 178, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(75, 195, 208, 0.1) 0%, transparent 50%);
+  background-size: 400px 400px;
+  animation: bgMove 20s ease infinite;
+}
+
+@keyframes bgMove {
+  0%, 100% {
+    background-position: 0% 0%, 100% 100%;
+  }
+  50% {
+    background-position: 100% 100%, 0% 0%;
+  }
+}
+
+// Modern button styles
+.modern-button {
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+  
+  &:hover::before {
+    left: 100%;
+  }
+}
+
+// Floating animation for cards
+.floating {
+  animation: floating 6s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+// Shimmer effect
+.shimmer {
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+// Responsive utilities
+@media (max-width: 768px) {
+  .mobile-center {
+    text-align: center !important;
+  }
+  
+  .mobile-stack {
+    flex-direction: column !important;
+  }
+}
+
+// Dark mode support with ProxiMap colors
+@media (prefers-color-scheme: dark) {
+  .glass-effect {
+    background: rgba(48, 57, 73, 0.3);
+    border: 1px solid rgba(75, 195, 208, 0.2);
+  }
+}
+
+// Performance optimizations
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+// Smooth transitions for all interactive elements
+* {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+// Remove default focus outline and add custom one
+*:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(50, 159, 178, 0.3);
+}
+
+// Enhanced accessibility
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

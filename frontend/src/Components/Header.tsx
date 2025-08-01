@@ -100,13 +100,12 @@ function Header() {
   return (
 
 
-    // @ts-expect-error TS(2769): No overload matches this call.
-    <AppBar position="static" color='dark'>
+    <AppBar position="static" color="primary">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AddLocationIcon sx={{ display: { xs: 'none', md: 'flex' }
           ,
-          color: 'light.main'
+          color: 'primary.contrastText'
           , mr: 1 }} />
           <Typography
             variant="h6"
@@ -119,7 +118,7 @@ function Header() {
               fontWeight: 700,
               letterSpacing: '.3rem',
               //color: 'inherit',
-              color: 'light.main',
+              color: 'primary.contrastText',
               textDecoration: 'none',
             }}
           >
@@ -136,7 +135,7 @@ function Header() {
               color="inherit"
             >
               <MenuIcon sx={{
-                color: 'light.main'
+                color: 'primary.contrastText'
               
               }} />
             </IconButton>
@@ -181,7 +180,7 @@ function Header() {
           
           <AddLocationIcon sx={{ display: { xs: 'flex', md: 'none' },
           
-          color: 'light.main',
+          color: 'primary.contrastText',
           mr: 1 }} />
           <Typography
             variant="h5"
@@ -195,7 +194,7 @@ function Header() {
               fontWeight: 700,
               letterSpacing: '.3rem',
               //color: 'inherit',
-              color: 'light.main',
+              color: 'primary.contrastText',
               textDecoration: 'none',
             }}
           >
@@ -217,7 +216,7 @@ function Header() {
 
                   key={page.path}
                   onClick={()=>{ navigate(page.path, { replace: true });}}
-                  sx={{ my: 2, color: 'light.main', display: 'block'
+                  sx={{ my: 2, color: 'primary.contrastText', display: 'block'
                 }}
                   
                 >
@@ -246,7 +245,7 @@ function Header() {
 
 
               <Button variant='outlined' 
-              sx={{color: 'light.main', borderColor: 'light.main',
+              sx={{color: 'primary.contrastText', borderColor: 'primary.contrastText',
               mr: 2,
               display: { xs: 'none', md: 'flex' }, 
               //center every thing inside
@@ -273,7 +272,7 @@ function Header() {
             <Typography sx={{ display: { xs: 'none', md: 'block' },
             mr: 2,
           
-            color: 'light.main'
+            color: 'primary.contrastText'
              }} variant="h6" noWrap component="div">
               {auth?.user?.username}
             </Typography>

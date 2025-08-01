@@ -8,8 +8,6 @@ import { BrowserRouter, Routes,Route, Link } from 'react-router-dom';
 import { AuthProvider } from './Context/AuthProvider';
 import { GeneralProvider } from './Context/GeneralProvider';
 
-import theme from './theme';
-import { ThemeProvider } from '@mui/material/styles'; // Correct import for MUI ThemeProvider
 
 import {GlobalStyles} from '@mui/material';
 
@@ -21,8 +19,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <GlobalStyles styles={{ body: { backgroundColor: "#fff" } }} />
+      {/* ThemeProvider removed: using Material-UI defaults */}
+        <GlobalStyles styles={{ body: { backgroundColor: "white" } }} />
         <AuthProvider>
           <GeneralProvider>
             <Routes>
@@ -30,7 +28,7 @@ root.render(
             </Routes>
           </GeneralProvider>
         </AuthProvider>
-      </ThemeProvider>
+      {/* End ThemeProvider removed */}
     </BrowserRouter>
   </React.StrictMode>
 );
