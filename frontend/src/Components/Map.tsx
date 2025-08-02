@@ -15,19 +15,22 @@ const Map = () => {
 
   // @ts-expect-error TS(2554): Expected 1 arguments, but got 0.
   const { services, isLoadingServices, errorServices, updateBounds} = useInMapView();
-  const [positions, setPositions] = useState<Position[]>([]);
+  const [servicesWithPositions, setServicesWithPositions] = useState<any[]>([]);
   const [height, setHeight] = useState('95vh');
 
 
   useEffect(() => {
     if (!isLoadingServices && services.length > 0) {
-      const positions = services.map((service) => {
-
-        return { lat: service.position.coordinates[1], lng: service.position.coordinates[0] };
+      const newServicesWithPositions = services.map((service) => {
+        return {
+          ...service,
+          position: {
+            lat: service.position.coordinates[1],
+            lng: service.position.coordinates[0],
+          },
+        };
       });
-
-
-      setPositions(positions);
+      setServicesWithPositions(newServicesWithPositions);
     }
   }, [services]);
 
@@ -52,14 +55,14 @@ const Map = () => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
 
-          {positions.length > 0 ? (
-            positions.map((position, index) => {
+          {servicesWithPositions.length > 0 ? (
+            servicesWithPositions.map((service) => {
               return (
                 <Marker
-                  key={`${index}`}
+                  key={service._id}
 
                 
-                  position={[position.lat, position.lng]}
+                  position={[service.position.lat, service.position.lng]}
 
 
                   icon={L.icon({
