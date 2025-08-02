@@ -10,7 +10,7 @@ const useInMapView = (isAsked: boolean) => {
 
     // @ts-expect-error TS(2339): Property 'oVServices' does not exist on type '{}'.
     const {oVServices, setOVServices , oVAskedServices, setOVAskedServices, filters} = useGeneral();
-    const [allServices, setAllServices] = useState<any[]>([]);
+    const [accumulatedServices, setAccumulatedServices] = useState<any[]>([]);
     const axiosPrivate = useAxiosPrivate();
 
     const getURL = () => {
@@ -95,20 +95,19 @@ const useInMapView = (isAsked: boolean) => {
     }, [bounds]);
 
     useEffect(() => {
-      if(!isAsked){
-
-        if (services ) {
-          setAllServices((prevServices) => [...prevServices, ...services]);
-          setOVServices(allServices);
+      if (services && services.length > 0) {
+        setAccumulatedServices(prevServices => {
+          const serviceMap = new Map(prevServices.map(s => [s._id, s]));
+          services.forEach(service => serviceMap.set(service._id, service));
+          const newServices = Array.from(serviceMap.values());
+          if(!isAsked){
+            setOVServices(newServices);
+          } else {
+            setOVAskedServices(newServices);
+          }
+          return newServices;
+        });
       }
-      }
-      else{
-        if (services) {
-          setAllServices((prevServices) => [...prevServices, ...services]);
-          setOVAskedServices(allServices);
-        }
-      }
-
     }, [services]);
 
     useEffect(() => {
@@ -148,7 +147,7 @@ const useInMapView = (isAsked: boolean) => {
     }, [filters]);
 
 
-    return {services, isLoadingServices, errorServices, updateBounds};
+    return {services: accumulatedServices, isLoadingServices, errorServices, updateBounds};
 }
 
 export default useInMapView;

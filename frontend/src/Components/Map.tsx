@@ -1,8 +1,8 @@
-import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, useMap, Marker, Popup, Circle } from "react-leaflet";
 import { Box } from "@mui/system";
 import "leaflet/dist/leaflet.css";
 import useResource from "../Hooks/useResource";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 import L from "leaflet";
 import '../Style/Map.scss';
 import MapEvents from "../Helpers/MapEvents";
@@ -13,16 +13,14 @@ const Map = () => {
 
 
 
-  // @ts-expect-error TS(2554): Expected 1 arguments, but got 0.
-  const { services, isLoadingServices, errorServices, updateBounds} = useInMapView();
-  const { oVServices } = useGeneral();
+  const { services, isLoadingServices, errorServices, updateBounds} = useInMapView(false);
   const [servicesWithPositions, setServicesWithPositions] = useState<any[]>([]);
   const [height, setHeight] = useState('95vh');
 
 
   useEffect(() => {
-    if (!isLoadingServices && oVServices.length > 0) {
-      const newServicesWithPositions = oVServices.map((service) => {
+    if (!isLoadingServices && services.length > 0) {
+      const newServicesWithPositions = services.map((service: any) => {
         return {
           ...service,
           position: {
@@ -33,7 +31,7 @@ const Map = () => {
       });
       setServicesWithPositions(newServicesWithPositions);
     }
-  }, [oVServices]);
+  }, [services]);
 
   return (
 
@@ -58,27 +56,30 @@ const Map = () => {
 
           {servicesWithPositions.length > 0 ? (
             servicesWithPositions.map((service) => {
-              return (
-                <Marker
-                  key={service._id}
-
-                
-                  position={[service.position.lat, service.position.lng]}
-
-
-                  icon={L.icon({
-                    iconUrl:
-                      "https://cdn.iconscout.com/icon/free/png-256/free-location-3079544-2561454.png",
-                    iconSize: [25, 25],
-                    iconAnchor: [12.5, 25],
-                    popupAnchor: [0, -25],
-                  })}
-                >
-                  <Popup>
-                    A pretty CSS3 popup. <br /> Easily customizable.
-                  </Popup>
-                </Marker>
-              );
+              const circleStyle = { color: '#329FB2', fillColor: '#329FB2', fillOpacity: 0.2, weight: 1 };
+                  return (
+                    <Fragment key={service._id}>
+                      <Marker
+                        position={[service.position.lat, service.position.lng]}
+                        icon={L.icon({
+                          iconUrl:
+                            "https://cdn.iconscout.com/icon/free/png-256/free-location-3079544-2561454.png",
+                          iconSize: [25, 25],
+                          iconAnchor: [12.5, 25],
+                          popupAnchor: [0, -25],
+                        })}
+                      >
+                        <Popup>
+                          A pretty CSS3 popup. <br /> Easily customizable.
+                        </Popup>
+                      </Marker>
+                      <Circle
+                        center={[service.position.lat, service.position.lng]}
+                        radius={service.range}
+                        pathOptions={circleStyle}
+                      />
+                    </Fragment>
+                  );
             })
           ) : (
             <h1>Loading...</h1>
