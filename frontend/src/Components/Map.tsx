@@ -7,7 +7,7 @@ import L from "leaflet";
 import '../Style/Map.scss';
 import MapEvents from "../Helpers/MapEvents";
 import useInMapView from "../Hooks/Services/useInMapView";
-import { Position } from "../Classes/Interfaces";
+import useGeneral from "../Hooks/useGeneral";
 
 const Map = () => {
 
@@ -15,13 +15,14 @@ const Map = () => {
 
   // @ts-expect-error TS(2554): Expected 1 arguments, but got 0.
   const { services, isLoadingServices, errorServices, updateBounds} = useInMapView();
+  const { oVServices } = useGeneral();
   const [servicesWithPositions, setServicesWithPositions] = useState<any[]>([]);
   const [height, setHeight] = useState('95vh');
 
 
   useEffect(() => {
-    if (!isLoadingServices && services.length > 0) {
-      const newServicesWithPositions = services.map((service) => {
+    if (!isLoadingServices && oVServices.length > 0) {
+      const newServicesWithPositions = oVServices.map((service) => {
         return {
           ...service,
           position: {
@@ -32,7 +33,7 @@ const Map = () => {
       });
       setServicesWithPositions(newServicesWithPositions);
     }
-  }, [services]);
+  }, [oVServices]);
 
   return (
 

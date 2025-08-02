@@ -10,6 +10,7 @@ const useInMapView = (isAsked: boolean) => {
 
     // @ts-expect-error TS(2339): Property 'oVServices' does not exist on type '{}'.
     const {oVServices, setOVServices , oVAskedServices, setOVAskedServices, filters} = useGeneral();
+    const [allServices, setAllServices] = useState<any[]>([]);
     const axiosPrivate = useAxiosPrivate();
 
     const getURL = () => {
@@ -97,14 +98,14 @@ const useInMapView = (isAsked: boolean) => {
       if(!isAsked){
 
         if (services ) {
-          ///setOVServices(applayFiltersToServices(services));
-          setOVServices(services);
+          setAllServices((prevServices) => [...prevServices, ...services]);
+          setOVServices(allServices);
       }
       }
       else{
         if (services) {
-          //setOVAskedServices(applayFiltersToServices(services));
-          setOVAskedServices(services);
+          setAllServices((prevServices) => [...prevServices, ...services]);
+          setOVAskedServices(allServices);
         }
       }
 
