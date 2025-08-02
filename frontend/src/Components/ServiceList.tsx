@@ -29,15 +29,35 @@ const ServiceList = ({
 
   return (
     <Box
-      
+      sx={{
+        height: '100%',
+        overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'column'
+      }}
     >
       <List
         sx={{
-          //center the list
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-
+          overflow: "auto",
+          height: "100%",
+          padding: 1,
+          '&::-webkit-scrollbar': {
+            width: '8px',
+          },
+          '&::-webkit-scrollbar-track': {
+            background: 'rgba(0,0,0,0.1)',
+            borderRadius: '10px',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            background: 'rgba(50, 159, 178, 0.3)',
+            borderRadius: '10px',
+            '&:hover': {
+              background: 'rgba(50, 159, 178, 0.5)',
+            },
+          },
         }}
       >
         {oVServices?.length > 0 && (

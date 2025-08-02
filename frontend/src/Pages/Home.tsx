@@ -84,6 +84,31 @@ const HeroSection = styled(Box)(({ theme }) => ({
     bottom: 0,
     background: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23329FB2' fill-opacity='0.02'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
   },
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    top: '10%',
+    right: '5%',
+    width: '500px',
+    height: '500px',
+    background: `url("data:image/svg+xml,%3Csvg width='500' height='500' viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3CradialGradient id='globeGrad' cx='50%25' cy='30%25' r='70%25'%3E%3Cstop offset='0%25' style='stop-color:%23329FB2;stop-opacity:0.1'/%3E%3Cstop offset='100%25' style='stop-color:%2340E0D0;stop-opacity:0.05'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='250' cy='250' r='200' fill='url(%23globeGrad)' stroke='%23329FB2' stroke-width='2' stroke-opacity='0.1'/%3E%3Cpath d='M 250,50 Q 350,150 250,250 Q 150,350 250,450' stroke='%23329FB2' stroke-width='1.5' stroke-opacity='0.15' fill='none'/%3E%3Cpath d='M 250,50 Q 150,150 250,250 Q 350,350 250,450' stroke='%23329FB2' stroke-width='1.5' stroke-opacity='0.15' fill='none'/%3E%3Cellipse cx='250' cy='250' rx='200' ry='100' stroke='%23329FB2' stroke-width='1.5' stroke-opacity='0.15' fill='none'/%3E%3Cellipse cx='250' cy='250' rx='200' ry='60' stroke='%2340E0D0' stroke-width='1' stroke-opacity='0.1' fill='none'/%3E%3Cline x1='50' y1='250' x2='450' y2='250' stroke='%23329FB2' stroke-width='1' stroke-opacity='0.1'/%3E%3Cg stroke='%2340E0D0' stroke-width='1' stroke-opacity='0.08' fill='none'%3E%3Cpath d='M 100,200 L 150,180 L 200,190 L 250,170 L 300,185' /%3E%3Cpath d='M 120,320 L 170,300 L 220,310 L 270,290 L 320,305' /%3E%3Cpath d='M 180,150 L 230,130 L 280,140 L 330,120 L 380,135' /%3E%3C/g%3E%3Cg fill='%23329FB2' fill-opacity='0.08'%3E%3Ccircle cx='150' cy='180' r='2'/%3E%3Ccircle cx='200' cy='190' r='1.5'/%3E%3Ccircle cx='300' cy='185' r='2'/%3E%3Ccircle cx='170' cy='300' r='1.5'/%3E%3Ccircle cx='270' cy='290' r='2'/%3E%3Ccircle cx='230' cy='130' r='1.5'/%3E%3Ccircle cx='330' cy='120' r='2'/%3E%3C/g%3E%3C/svg%3E")`,
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat',
+    opacity: 0.6,
+    zIndex: 0,
+    [theme.breakpoints.down('md')]: {
+      width: '350px',
+      height: '350px',
+      top: '15%',
+      right: '-10%',
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: '250px',
+      height: '250px',
+      top: '20%',
+      right: '-15%',
+    },
+  },
 }));
 
 const FloatingCard = styled(Card)(({ theme }) => ({
